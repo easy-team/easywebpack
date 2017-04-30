@@ -1,5 +1,5 @@
 {
-  "extends": "eslint-config-egg",
+  "extends": "eslint",
   "rules": {
     "array-bracket-spacing": "off",
     "comma-dangle": ["error", "never"]
