@@ -1,2 +1,3 @@
-# webpack-tool
+# easy-webpack
+
 programming instead of configuration, webpack is no longer complex

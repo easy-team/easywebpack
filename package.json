@@ -1,0 +1,44 @@
+{
+  "name": "easy-webpack",
+  "version": "0.0.1",
+  "description": "programming instead of configuration, webpack is no longer complex",
+  "keywords": [
+    "webpack",
+    "webpack-tool",
+    "webpack-generator"
+  ],
+  "dependencies": {
+    "webpack": "^2.4.1",
+    "webpack-merge": "^2.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.18.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov"
+  },
+  "files": [
+    "index.js",
+    "config",
+    "utils",
+    "lib"
+  ],
+  "ci": {
+    "version": "6, 7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hubcarl/easy-webpack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hubcarl/easy-webpack/issues"
+  },
+  "homepage": "https://github.com/hubcarl/easy-webpack#readme",
+  "author": "hubcarl@126.com",
+  "license": "MIT"
+}
