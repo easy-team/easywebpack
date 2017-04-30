@@ -1,8 +1,7 @@
 'use strict';
 const path = require('path');
 const merge = require('webpack-merge');
-const WebpackTool = require('../../webpack-tool');
-const Utils = WebpackTool.Utils;
+const Utils = require('../utils/utils');
 const ConfigBase = require('./base');
 
 class ConfigOption extends ConfigBase {

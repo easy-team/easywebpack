@@ -5,6 +5,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const chalk = require('chalk');
+const Utils = require('../utils/utils');
 const ConfigBase = require('./base');
 
 class ConfigPlugin extends ConfigBase {
@@ -20,6 +21,7 @@ class ConfigPlugin extends ConfigBase {
         fileName: '../config/manifest.json',
         basePath: '/'
       },
+      ExtractTextPlugin: Utils.assetsPath(config, 'css/[name].css'),
       CommonsChunkPlugin: {
         names: config.build.commonsChunk
       },
@@ -43,6 +45,14 @@ class ConfigPlugin extends ConfigBase {
         server: true,
         env: ['dev', 'test', 'prod'],
         clazz: webpack.NoEmitOnErrorsPlugin
+      },
+      {
+        enable: true,
+        client: true,
+        server: false,
+        env: ['dev', 'test', 'prod'],
+        args: 'string',
+        clazz: ExtractTextPlugin
       },
       {
         enable: true,

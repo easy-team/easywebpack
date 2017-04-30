@@ -35,7 +35,7 @@ loader.getLoaderString = (options, name) => {
   return optionStr;
 };
 
-loader.getLoaderOption = config => {
+loader.getStyleLoaderOption = config => {
   return {
     postcss: [
       require('autoprefixer')({
