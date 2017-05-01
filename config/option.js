@@ -8,15 +8,10 @@ class ConfigOption extends ConfigBase {
 
   constructor(config) {
     super(config);
-    this.options = this.client ? this.initClient() : this.initServer();
   }
 
-  getOption() {
-    return this.options;
-  }
-
-  setOption(option) {
-    this.options = merge(this.options, option);
+  getOption(options) {
+    return this.config.isServer ? this.initServer(options) : this.initClient(options);
   }
 
   initBase(options) {
@@ -34,8 +29,8 @@ class ConfigOption extends ConfigBase {
       output: {
         path: path.isAbsolute(buildPath) ? buildPath : path.join(this.config.baseDir, buildPath),
         publicPath: this.config.build.publicPath,
-        filename: Utils.assetsPath(this.config, 'js/[name].[hash:7].js'),
-        chunkFilename: Utils.assetsPath(this.config, 'js/[id].[hash:7].js')
+        filename: this.filename,
+        chunkFilename: this.chunkFilename
       }
     }, options);
   }

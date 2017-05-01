@@ -10,3 +10,4 @@ exports.WebpackOption = require('./lib/option');
 exports.WebpackLoader = require('./lib/loader');
 exports.WebpackPlugin = require('./lib/plugin');
 exports.WebpackBuilder = require('./lib/builder');
+exports.build = require('./tool/build');

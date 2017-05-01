@@ -43,6 +43,17 @@ utils.assetsPath = (config, filepath) => {
   return path.join(config.build.prefix, filepath);
 };
 
+
+utils.loadNodeModules = () => {
+  const nodeModules = {};
+  fs.readdirSync('node_modules').filter(x => {
+    return ['.bin'].indexOf(x) === -1;
+  }).forEach(mod => {
+    nodeModules[mod] = 'commonjs2 ' + mod;
+  });
+  return nodeModules;
+};
+
 utils.readWebpackMemoryFile = (compiler, filePath) => {
   const filerCompiler = compiler.compilers.filter(item => {
     return item.outputFileSystem.existsSync(filePath);

@@ -96,14 +96,4 @@ loader.styleLoaders = config => {
   return output;
 };
 
-loader.loadNodeModules = () => {
-  const nodeModules = {};
-  fs.readdirSync('node_modules').filter(x => {
-    return ['.bin'].indexOf(x) === -1;
-  }).forEach(mod => {
-    nodeModules[mod] = 'commonjs2 ' + mod;
-  });
-  return nodeModules;
-};
-
 module.exports = loader;

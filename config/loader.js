@@ -1,7 +1,6 @@
 'use strict';
 const merge = require('webpack-merge');
 const Loader = require('../utils/loader');
-const Utils = require('../utils/utils');
 const ConfigBase = require('./base');
 
 class ConfigLoader extends ConfigBase {
@@ -11,7 +10,7 @@ class ConfigLoader extends ConfigBase {
       {
         enable: true,
         client: true,
-        server: false,
+        server: true,
         env: ['dev', 'test', 'prod'],
         loader: {
           test: /\.(js)$/,
@@ -39,7 +38,7 @@ class ConfigLoader extends ConfigBase {
           loader: require.resolve('url-loader'),
           query: {
             limit: 1024,
-            name: Utils.assetsPath(this.config, 'img/[name].[hash:7].[ext]')
+            name: this.imageName
           }
         }
       }
@@ -52,6 +51,14 @@ class ConfigLoader extends ConfigBase {
         env: ['dev', 'test', 'prod']
       }, { loader }));
     });
+  }
+
+  useExtract(isExtract) {
+    this.config.webpack.pluginOption = merge(this.config.webpack.pluginOption, {
+      ExtractTextPlugin: {
+        extract: isExtract
+      }
+    })
   }
 
   setLoaderEnable(name, enable) {
@@ -98,7 +105,7 @@ class ConfigLoader extends ConfigBase {
 
   getLoader() {
     return this.configLoaders.filter(loader => {
-      return loader.enable && (this.client ? loader.client : loader.server) && loader.env.includes(this.env);
+      return loader.enable && (this.isServer ? loader.server : loader.client) && loader.env.includes(this.env);
     }).map(item => {
       return item.loader;
     });
