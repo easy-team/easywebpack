@@ -1,5 +1,5 @@
 {
-  "name": "oo-webpack",
+  "name": "easywebpack",
   "version": "0.0.1",
   "description": "programming instead of configuration, webpack is no longer complex",
   "keywords": [
@@ -69,12 +69,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hubcarl/easy-webpack.git"
+    "url": "git+https://github.com/hubcarl/easywebpack.git"
   },
   "bugs": {
-    "url": "https://github.com/hubcarl/easy-webpack/issues"
+    "url": "https://github.com/hubcarl/easywebpack/issues"
   },
-  "homepage": "https://github.com/hubcarl/easy-webpack#readme",
+  "homepage": "https://github.com/hubcarl/easywebpack#readme",
   "author": "hubcarl@126.com",
   "license": "MIT"
 }
