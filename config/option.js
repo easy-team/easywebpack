@@ -1,14 +1,11 @@
 'use strict';
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const Utils = require('../utils/utils');
 const ConfigBase = require('./base');
 
 class ConfigOption extends ConfigBase {
-
-  constructor(config) {
-    super(config);
-  }
 
   getOption(options) {
     return this.config.isServer ? this.initServer(options) : this.initClient(options);
@@ -18,8 +15,13 @@ class ConfigOption extends ConfigBase {
     return merge({
       entry: Utils.getEntry(this.config.build.entry),
       resolve: {
-        extensions: ['.js', '.css', '.scss']
-      }
+        extensions: ['.js']
+      },
+      plugins: [
+        new webpack.DefinePlugin({
+          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+        })
+      ]
     }, options);
   }
 

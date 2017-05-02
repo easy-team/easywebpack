@@ -53,8 +53,6 @@ loader.getLoader = (loadersOption, loaderName) => {
 
 loader.generateLoaders = (config, loaders) => {
   const loaderOption = config.webpack.loaderOption;
-  const pluginOption = config.webpack.pluginOption;
-
   const styleLoaderName = config.webpack.styleLoader || 'style-loader';
   const styleLoaderOption = loaderOption[styleLoaderName] || loaderOption[styleLoaderName.replace(/-loader/, '')];
   const styleLoader = loader.getLoaderString(styleLoaderOption, require.resolve(styleLoaderName));
@@ -64,7 +62,7 @@ loader.generateLoaders = (config, loaders) => {
     return loader.getLoaderString(option, require.resolve(item));
   }).join('!');
 
-  if (pluginOption.ExtractTextPlugin && pluginOption.ExtractTextPlugin.extract) {
+  if (config.extract) {
     return ExtractTextPlugin.extract({
       fallback: styleLoader,
       use: sourceLoader

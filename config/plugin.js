@@ -36,14 +36,6 @@ class ConfigPlugin extends ConfigBase {
         client: true,
         server: true,
         env: ['dev', 'test', 'prod'],
-        args: 'object',
-        clazz: webpack.DefinePlugin
-      },
-      {
-        enable: true,
-        client: true,
-        server: true,
-        env: ['dev', 'test', 'prod'],
         clazz: webpack.NoEmitOnErrorsPlugin
       },
       {
@@ -57,7 +49,7 @@ class ConfigPlugin extends ConfigBase {
       {
         enable: true,
         client: true,
-        server: true,
+        server: false,
         env: ['dev', 'test', 'prod'],
         args: 'object',
         clazz: webpack.optimize.CommonsChunkPlugin
@@ -79,7 +71,7 @@ class ConfigPlugin extends ConfigBase {
         clazz: ManifestPlugin
       },
       {
-        enable: true,
+        enable: false,
         client: false,
         server: true,
         env: ['dev', 'test', 'prod'],
@@ -120,10 +112,6 @@ class ConfigPlugin extends ConfigBase {
     ];
   }
 
-  setExtractTextPluginEnable(isEnable) {
-    this.setPluginEnable(ExtractTextPlugin, isEnable)
-  }
-
   getPluginByName(name) {
     return this.defaultPluginList.filter(item => {
       return item.clazz === name;
@@ -139,7 +127,7 @@ class ConfigPlugin extends ConfigBase {
   getPlugin() {
     const plugins = [];
     this.defaultPluginList.filter(plugin => {
-      return plugin.enable && (this.isServer ? plugin.server : plugin.client) && plugin.env.includes(this.env);
+      return plugin.enable && (this.config.isServer ? plugin.server : plugin.client) && plugin.env.includes(this.env);
     }).forEach(plugin => {
       if (plugin.clazz) {
         const args = this.defaultPluginOption[plugin.clazz.name];

@@ -47,18 +47,10 @@ class ConfigLoader extends ConfigBase {
       this.configLoaders.push(merge({
         enable: true,
         client: true,
-        server: false,
+        server: true,
         env: ['dev', 'test', 'prod']
       }, { loader }));
     });
-  }
-
-  useExtract(isExtract) {
-    this.config.webpack.pluginOption = merge(this.config.webpack.pluginOption, {
-      ExtractTextPlugin: {
-        extract: isExtract
-      }
-    })
   }
 
   setLoaderEnable(name, enable) {
@@ -105,7 +97,7 @@ class ConfigLoader extends ConfigBase {
 
   getLoader() {
     return this.configLoaders.filter(loader => {
-      return loader.enable && (this.isServer ? loader.server : loader.client) && loader.env.includes(this.env);
+      return loader.enable && (this.config.isServer ? loader.server : loader.client) && loader.env.includes(this.env);
     }).map(item => {
       return item.loader;
     });

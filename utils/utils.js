@@ -8,6 +8,7 @@ const utils = {};
 
 utils.getEntry = (dirs, excludeRegex) => {
   const entries = {};
+  let entryDir = '';
   const walk = (dir, exclude) => {
     const dirList = fs.readdirSync(dir);
     dirList.forEach(item => {
@@ -17,7 +18,7 @@ utils.getEntry = (dirs, excludeRegex) => {
       } else {
         if (!utils.isMatch(exclude, filePath)) {
           if (/\.js$/.test(filePath)) {
-            const fileName = filePath.replace(dir, '').replace(/^\//, '').replace(/\.js$/, '');
+            const fileName = filePath.replace(entryDir, '').replace(/^\//, '').replace(/\.js$/, '');
             entries[fileName] = filePath;
           }
         }
@@ -26,6 +27,7 @@ utils.getEntry = (dirs, excludeRegex) => {
   };
   dirs = Array.isArray(dirs) ? dirs : [dirs];
   dirs.forEach(dir => {
+    entryDir = dir;
     walk(dir, excludeRegex);
   });
   return entries;
@@ -153,8 +155,8 @@ utils.getPublicPath = (webpackConfig, config, env) => {
   return publicPath;
 };
 
-utils.saveBuildConfig = (dir, webpackConfig, config, env) => {
-  utils.writeFile(dir, 'config/buildConfig.json', {
+utils.saveBuildConfig = (config, webpackConfig, env) => {
+  utils.writeFile(config.baseDir, 'config/buildConfig.json', {
     publicPath: utils.getPublicPath(webpackConfig, config, env),
     cdnDynamicDir: config.build.cdnDynamicDir,
     commonsChunk: config.build.commonsChunk
