@@ -61,8 +61,7 @@ loader.generateLoaders = (config, loaders) => {
     const option = loaderOption[item] || loaderOption[item.replace(/-loader/, '')];
     return loader.getLoaderString(option, require.resolve(item));
   }).join('!');
-
-  if (config.extract) {
+  if (config.webpack.extractCss) {
     return ExtractTextPlugin.extract({
       fallback: styleLoader,
       use: sourceLoader

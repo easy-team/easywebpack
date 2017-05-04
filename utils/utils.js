@@ -147,17 +147,17 @@ utils.readFile = (dir, fileName) => {
   return null;
 };
 
-utils.getPublicPath = (webpackConfig, config, env) => {
+utils.getPublicPath = (config, webpackConfig) => {
   let publicPath = webpackConfig.output.publicPath;
-  if (env !== 'dev' && config.build.cdnDynamicDir && /^(https?|\/\/)/.test(publicPath)) {
+  if (config.env !== 'dev' && config.build.cdnDynamicDir && /^(https?|\/\/)/.test(publicPath)) {
     publicPath = publicPath.replace(/\/$/, '') + '/' + config.build.cdnDynamicDir + '/';
   }
   return publicPath;
 };
 
-utils.saveBuildConfig = (config, webpackConfig, env) => {
+utils.saveBuildConfig = (config, webpackConfig) => {
   utils.writeFile(config.baseDir, 'config/buildConfig.json', {
-    publicPath: utils.getPublicPath(webpackConfig, config, env),
+    publicPath: utils.getPublicPath(config, webpackConfig),
     cdnDynamicDir: config.build.cdnDynamicDir,
     commonsChunk: config.build.commonsChunk
   });

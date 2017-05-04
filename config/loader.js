@@ -33,12 +33,18 @@ class ConfigLoader extends ConfigBase {
         client: true,
         server: true,
         env: ['dev', 'test', 'prod'],
+        dynamic: () => {
+          return {
+            query: {
+              name: this.imageName
+            }
+          }
+        },
         loader: {
           test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
           loader: require.resolve('url-loader'),
           query: {
-            limit: 1024,
-            name: this.imageName
+            limit: 1024
           }
         }
       }
@@ -95,11 +101,11 @@ class ConfigLoader extends ConfigBase {
     });
   }
 
-  getLoader() {
+  getWebpackLoader() {
     return this.configLoaders.filter(loader => {
-      return loader.enable && (this.config.isServer ? loader.server : loader.client) && loader.env.includes(this.env);
+      return loader.enable && (this.config.isServer ? loader.server : loader.client) && loader.env.includes(this.config.env);
     }).map(item => {
-      return item.loader;
+      return item.dynamic ? merge(item.loader, item.dynamic()) : item.loader;
     });
   }
 }

@@ -10,27 +10,7 @@ const ConfigBase = require('./base');
 class ConfigPlugin extends ConfigBase {
   constructor(config) {
     super(config);
-    this.defaultPluginOption = {
-      ProgressBarPlugin: {
-        width: 100,
-        format: 'webpack build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
-        clear: false
-      },
-      ManifestPlugin: {
-        fileName: '../config/manifest.json',
-        basePath: '/'
-      },
-      ExtractTextPlugin: this.cssName,
-      CommonsChunkPlugin: {
-        names: config.build.commonsChunk
-      },
-      LoaderOptionsPlugin: {
-        minimize: true
-      },
-      NormalModuleReplacementPlugin: [/\.css$/, 'node-noop']
-    };
-
-    this.defaultPluginList = [
+    this.configPlugins = [
       {
         enable: true,
         client: true,
@@ -43,7 +23,9 @@ class ConfigPlugin extends ConfigBase {
         client: true,
         server: false,
         env: ['dev', 'test', 'prod'],
-        args: 'string',
+        args: () => {
+          return this.cssName
+        },
         clazz: ExtractTextPlugin
       },
       {
@@ -51,7 +33,11 @@ class ConfigPlugin extends ConfigBase {
         client: true,
         server: false,
         env: ['dev', 'test', 'prod'],
-        args: 'object',
+        args: () => {
+          return {
+            names: this.config.build.commonsChunk
+          }
+        },
         clazz: webpack.optimize.CommonsChunkPlugin
       },
       {
@@ -59,7 +45,11 @@ class ConfigPlugin extends ConfigBase {
         client: true,
         server: true,
         env: ['dev', 'test', 'prod'],
-        args: 'object',
+        args: {
+          width: 100,
+          format: 'webpack build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+          clear: false
+        },
         clazz: ProgressBarPlugin
       },
       {
@@ -67,23 +57,26 @@ class ConfigPlugin extends ConfigBase {
         client: true,
         server: false,
         env: ['dev', 'test', 'prod'],
-        args: 'object',
+        args: {
+          fileName: '../config/manifest.json',
+          basePath: '/'
+        },
         clazz: ManifestPlugin
       },
       {
-        enable: false,
+        enable: true,
         client: false,
         server: true,
         env: ['dev', 'test', 'prod'],
-        args: 'array',
+        args: [/\.css$/, 'node-noop'],
         clazz: webpack.NormalModuleReplacementPlugin
       },
       {
         enable: true,
-        client: true,
+        client: false,
         server: true,
         env: ['dev', 'test', 'prod'],
-        args: 'string',
+        args: /\.(css|less|scss|sass)$/,
         clazz: webpack.IgnorePlugin
       },
       {
@@ -91,7 +84,11 @@ class ConfigPlugin extends ConfigBase {
         client: true,
         server: false,
         env: ['dev', 'test', 'prod'],
-        args: 'object',
+        args: () => {
+          return {
+            minimize: this.minimize
+          }
+        },
         clazz: webpack.LoaderOptionsPlugin
       },
       {
@@ -99,7 +96,16 @@ class ConfigPlugin extends ConfigBase {
         client: true,
         server: true,
         env: ['test', 'prod'],
-        args: 'object',
+        args: () => {
+          return {
+            compress: {
+              warnings: false,
+              dead_code: true,
+              drop_console: true,
+              drop_debugger: true
+            }
+          }
+        },
         clazz: webpack.optimize.UglifyJsPlugin
       },
       {
@@ -113,7 +119,7 @@ class ConfigPlugin extends ConfigBase {
   }
 
   getPluginByName(name) {
-    return this.defaultPluginList.filter(item => {
+    return this.configPlugins.filter(item => {
       return item.clazz === name;
     });
   }
@@ -124,14 +130,14 @@ class ConfigPlugin extends ConfigBase {
     });
   }
 
-  getPlugin() {
+  getWebpackPlugin() {
     const plugins = [];
-    this.defaultPluginList.filter(plugin => {
-      return plugin.enable && (this.config.isServer ? plugin.server : plugin.client) && plugin.env.includes(this.env);
+    this.configPlugins.filter(plugin => {
+      return plugin.enable && (this.config.isServer ? plugin.server : plugin.client) && plugin.env.includes(this.config.env);
     }).forEach(plugin => {
       if (plugin.clazz) {
-        const args = this.defaultPluginOption[plugin.clazz.name];
-        if (plugin.args && args) {
+        if (plugin.args) {
+          const args = typeof plugin.args === 'function' ? plugin.args() : plugin.args;
           plugins.push(new (Function.prototype.bind.apply(plugin.clazz, [null].concat(args)))());
         } else if (!plugin.args) {
           plugins.push(new plugin.clazz());

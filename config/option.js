@@ -7,8 +7,23 @@ const ConfigBase = require('./base');
 
 class ConfigOption extends ConfigBase {
 
-  getOption(options) {
+  constructor(config) {
+    super(config);
+    this.setFileNameHash(this.PROD);
+  }
+
+  getWebpackOption(options) {
     return this.config.isServer ? this.initServer(options) : this.initClient(options);
+  }
+
+  setFileNameHash(isHash, len = 7) {
+    if (isHash) {
+      this.filename = Utils.assetsPath(this.config, `js/[name].[hash:${len}].js`);
+      this.chunkFilename = Utils.assetsPath(this.config, `js/[id].[chunkhash:${len}].js`);
+    } else {
+      this.filename = Utils.assetsPath(this.config, 'js/[name].js');
+      this.chunkFilename = Utils.assetsPath(this.config, 'js/[id].js');
+    }
   }
 
   initBase(options) {
