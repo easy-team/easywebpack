@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "programming instead of configuration, webpack is no longer complex",
   "keywords": [
     "webpack",
@@ -60,9 +60,10 @@
   },
   "files": [
     "index.js",
-    "config",
     "utils",
-    "lib"
+    "lib",
+    "builder",
+    "tool"
   ],
   "ci": {
     "version": "6, 7"
