@@ -1,9 +1,9 @@
 'use strict';
+exports.webpack = require('webpack');
+exports.merge = require('webpack-merge');
+exports.build = require('./tool/build');
 exports.Utils = require('./utils/utils');
 exports.Loader = require('./utils/loader');
-exports.ConfigBase = require('./config/base');
-exports.ConfigOption = require('./config/option');
-exports.ConfigLoader = require('./config/loader');
-exports.ConfigPlugin = require('./config/plugin');
-exports.WebpackBuilder = require('./lib/builder');
-exports.build = require('./tool/build');
+exports.WebpackBaseBuilder = require('./builder/base');
+exports.WebpackClientBuilder = require('./builder/client');
+exports.WebpackServerBuilder = require('./builder/server');

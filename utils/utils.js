@@ -56,26 +56,6 @@ utils.loadNodeModules = () => {
   return nodeModules;
 };
 
-utils.readWebpackMemoryFile = (compiler, filePath) => {
-  const filerCompiler = compiler.compilers.filter(item => {
-    return item.outputFileSystem.existsSync(filePath);
-  });
-  if (filerCompiler && filerCompiler.length) {
-    return filerCompiler[0].outputFileSystem.readFileSync(filePath).toString('utf-8');
-  }
-  return '';
-};
-
-utils.getCompilerPublicPath = (compiler, filePath) => {
-  const filerCompiler = compiler.compilers.filter(item => {
-    return item.outputFileSystem.existsSync(filePath);
-  });
-  if (filerCompiler && filerCompiler.length) {
-    return filerCompiler[0].output.publicPath;
-  }
-  return '';
-};
-
 utils.getIp = position => {
   const os = require('os');
   const interfaces = os.networkInterfaces();
@@ -110,18 +90,6 @@ utils.getHost = (config, position, isServer) => {
 
 utils.getDevPublicPath = (config, position) => {
   return utils.getHost(config, position) + config.build.publicPath;
-};
-
-utils.getUglifyJsConfig = (config = {}, options) => {
-  return new webpack.optimize.UglifyJsPlugin(merge({
-    compress: {
-      warnings: false,
-      dead_code: true,
-      drop_console: true,
-      drop_debugger: true,
-      global_defs: options.globalDefs
-    }
-  }, config.uglifyJsConfig));
 };
 
 utils.writeFile = (dir, fileName, content) => {
@@ -161,17 +129,6 @@ utils.saveBuildConfig = (config, webpackConfig) => {
     cdnDynamicDir: config.build.cdnDynamicDir,
     commonsChunk: config.build.commonsChunk
   });
-};
-
-utils.saveManifest = (compiler, projectDir) => {
-  const dir = path.join(projectDir, 'config');
-  const fileName = 'manifest.json';
-  const content = utils.readWebpackMemoryFile(compiler, path.join(dir, fileName));
-  utils.writeFile(dir, fileName, content);
-};
-
-utils.getBuildConfig = dir => {
-  return utils.readFile(dir, 'config/buildConfig.json');
 };
 
 module.exports = utils;
