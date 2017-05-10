@@ -148,7 +148,7 @@ module.exports = WebpackServerBuilder;
 
 - custom engine, please see custom plugin [egg-webpack-vue](https://github.com/hubcarl/egg-webpack-vue) for easywebpack + vue
 
-- more detail, please see [WebpackClientBuilder](https://github.com/hubcarl/easywebpack/clent) and [WebpackServerBuilder](https://github.com/hubcarl/easywebpack/clent)
+- more detail, please see [WebpackClientBuilder](https://github.com/hubcarl/easywebpack/blob/master/builder/client.js) and [WebpackServerBuilder](https://github.com/hubcarl/easywebpack/blob/master/builder/server.js)
 
 
 ## Questions & Suggestions
