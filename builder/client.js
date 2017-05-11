@@ -11,6 +11,7 @@ class WebpackClientBuilder extends WebpackBaseBuilder {
     this.initClientOption();
     this.initClientConfigPlugin();
     this.initHotEntry();
+    this.setCssExtract(this.prod);
   }
 
   initHotEntry() {

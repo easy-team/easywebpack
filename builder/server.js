@@ -9,6 +9,7 @@ class WebpackServerBuilder extends WebpackBaseBuilder {
     super(config, options);
     this.initServerOption();
     this.initServerConfigPlugin();
+    this.setCssExtract(false);
   }
 
   initServerOption() {

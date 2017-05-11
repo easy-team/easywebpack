@@ -8,6 +8,7 @@ const Loader = require('../utils/loader');
 class WebpackBaseBuilder {
   constructor(config, options) {
     this.config = config;
+    this.options = options;
     this.initConfig();
     this.initOption();
     this.initConfigLoader();
@@ -22,6 +23,7 @@ class WebpackBaseBuilder {
     this.setFileNameHash(this.prod);
     this.setImageHash(this.prod);
     this.setCssHash(this.prod);
+    this.setCssExtract(false);
   }
 
   initOption() {
@@ -103,6 +105,41 @@ class WebpackBaseBuilder {
 
   setOption(option) {
     this.options = merge(this.options, option);
+  }
+
+  setPublicPath(publicPath) {
+    this.options = merge(this.options, { output: { publicPath } });
+  }
+
+  setEggWebpackPublicPath() {
+    if (!this.prod) {
+      this.setPublicPath(Utils.getDevPublicPath(this.config, 2));
+    }
+  }
+
+  setDevTool(devtool, force) {
+    if (!this.prod || force) {
+      this.options = merge(this.options, { devtool });
+    }
+  }
+
+  setConfigLoader(loader, isHead) {
+    if (isHead) {
+      const tempLoader = Array.isArray(loader) ? loader : [loader];
+      this.configLoaders = tempLoader.concat(this.configLoaders);
+    } else {
+      this.configLoaders = this.configLoaders.concat(loader);
+    }
+  }
+
+
+  setConfigPlugin(plugin, isHead) {
+    if (isHead) {
+      const tempPlugin = Array.isArray(plugin) ? plugin : [plugin];
+      this.configPlugins = tempPlugin.concat(this.configPlugins);
+    } else {
+      this.configPlugins = this.configPlugins.concat(plugin);
+    }
   }
 
   setLoader(loader, isHead) {
@@ -196,6 +233,10 @@ class WebpackBaseBuilder {
     } else {
       this.cssName = Utils.assetsPath(this.config, `img/[name].css`);
     }
+  }
+
+  setCssExtract(isExtract) {
+    this.config.extractCss = isExtract;
   }
 
   addLoader(test, loader, option) {
