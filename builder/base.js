@@ -205,6 +205,10 @@ class WebpackBaseBuilder {
       this.options);
   }
 
+  setMiniCss(isMiniCss) {
+    this.isMiniCss = isMiniCss;
+  }
+
   setUglifyJs(isUglifyJS) {
     this.isUglifyJS = isUglifyJS
   }
@@ -243,6 +247,16 @@ class WebpackBaseBuilder {
     this.loaders.push(merge({
       test, loader
     }, option));
+  }
+
+  ignoreCSS() {
+    this.configPlugins.unshift({
+      clazz: webpack.NormalModuleReplacementPlugin,
+      args: [/\.css$/, require.resolve('node-noop')],
+    }, {
+      clazz: webpack.IgnorePlugin,
+      args: /\.(css|less|scss|sass)$/
+    });
   }
 }
 

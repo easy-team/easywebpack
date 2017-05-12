@@ -1,6 +1,5 @@
 'use strict';
 const path = require('path');
-const webpack = require('webpack');
 const WebpackBaseBuilder = require('./base');
 const Utils = require('../utils/utils');
 
@@ -8,7 +7,6 @@ class WebpackServerBuilder extends WebpackBaseBuilder {
   constructor(config, options) {
     super(config, options);
     this.initServerOption();
-    this.initServerConfigPlugin();
     this.setCssExtract(false);
   }
 
@@ -25,16 +23,6 @@ class WebpackServerBuilder extends WebpackBaseBuilder {
         __dirname: false
       },
       externals: Utils.loadNodeModules()
-    });
-  }
-
-  initServerConfigPlugin() {
-    this.configPlugins.unshift({
-      clazz: webpack.NormalModuleReplacementPlugin,
-      args: [/\.css$/, require.resolve('node-noop')],
-    }, {
-      clazz: webpack.IgnorePlugin,
-      args: /\.(css|less|scss|sass)$/
     });
   }
 }

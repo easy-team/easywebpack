@@ -12,6 +12,7 @@ class WebpackClientBuilder extends WebpackBaseBuilder {
     this.initClientConfigPlugin();
     this.initHotEntry();
     this.setCssExtract(this.prod);
+    this.setMiniCss(this.prod);
   }
 
   initHotEntry() {
@@ -57,6 +58,9 @@ class WebpackClientBuilder extends WebpackBaseBuilder {
     });
     this.configPlugins.push({
       clazz: ExtractTextPlugin,
+      enable: () => {
+        return this.config.extractCss;
+      },
       args: () => {
         return this.cssName
       }
@@ -66,6 +70,14 @@ class WebpackClientBuilder extends WebpackBaseBuilder {
         return !this.prod;
       },
       clazz: webpack.HotModuleReplacementPlugin
+    });
+    this.configPlugins.push({
+      clazz: webpack.LoaderOptionsPlugin,
+      args: ()=> {
+        return {
+          minimize: this.isMiniCss
+        }
+      }
     });
   }
 }

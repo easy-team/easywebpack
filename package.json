@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "programming instead of configuration, webpack is no longer complex",
   "keywords": [
     "webpack",
