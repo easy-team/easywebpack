@@ -44,8 +44,8 @@ $ npm i easywebpack --save-dev
 ```js
 const EasyWebpack = require('easywebpack');
 class WebpackClientBuilder extends EasyWebpack.WebpackClientBuilder {
-  constructor(config, options) {
-    super(config, options);
+  constructor(config) {
+    super(config);
     // call below api custom server builder
   }
 }
@@ -60,8 +60,8 @@ webpack client config: `new ClientDevBuilder(config).create()`
 ```js
 const EasyWebpack = require('easywebpack');
 class WebpackServerBuilder extends EasyWebpack.WebpackServerBuilder {
-  constructor(config, options) {
-    super(config, options);
+  constructor(config) {
+    super(config);
     // call below api custom server builder
   }
 }
@@ -88,7 +88,7 @@ webpack server config: `new WebpackServerBuilder(config).create()`
 
 - `config` (Object)  WebpackServerBuilder extends WebpackBaseBuilder argument config.
 
-- `options` (Object) WebpackServerBuilder extends WebpackBaseBuilder argument options.
+- `options` (Object) webpack config, call `setOption` set.
 
 - `configLoaders` (Array) when you need dynamic create loader with process.env.NODE_ENV, custom condition, and so on.
 
@@ -304,8 +304,8 @@ const EasyWebpack = require('easywebpack');
 const baseConfig = require('./config');
 const Utils = require('./utils');
 class WebpackClientBuilder extends EasyWebpack.WebpackClientBuilder {
-  constructor(config, options) {
-    super(config, options);
+  constructor(config) {
+    super(config);
     this.setOption(baseConfig.initClient());
     this.setConfigLoader(baseConfig.getLoader(this.config), true);
   }
@@ -320,8 +320,8 @@ module.exports = WebpackClientBuilder;
 const EasyWebpack = require('easywebpack');
 const baseConfig = require('./config');
 class WebpackServerBuilder extends EasyWebpack.WebpackServerBuilder {
-  constructor(config, options) {
-    super(config, options);
+  constructor(config) {
+    super(config);
     this.setOption(baseConfig.initServer());
     this.setConfigLoader(baseConfig.getLoader(this.config), true);
   }

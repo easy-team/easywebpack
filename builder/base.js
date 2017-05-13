@@ -6,9 +6,8 @@ const chalk = require('chalk');
 const Utils = require('../utils/utils');
 const Loader = require('../utils/loader');
 class WebpackBaseBuilder {
-  constructor(config, options) {
+  constructor(config) {
     this.config = config;
-    this.options = options;
     this.initConfig();
     this.initOption();
     this.initConfigLoader();
@@ -17,6 +16,7 @@ class WebpackBaseBuilder {
 
   initConfig() {
     this.prod = process.env.NODE_ENV === 'production';
+    this.options = {};
     this.loaders = [];
     this.plugins = [];
     this.setUglifyJs(this.prod);

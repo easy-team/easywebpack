@@ -6,8 +6,8 @@ const WebpackBaseBuilder = require('./base');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 class WebpackClientBuilder extends WebpackBaseBuilder {
-  constructor(config, options) {
-    super(config, options);
+  constructor(config) {
+    super(config);
     this.initClientOption();
     this.initClientConfigPlugin();
     this.initHotEntry();

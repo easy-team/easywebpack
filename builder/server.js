@@ -4,8 +4,8 @@ const WebpackBaseBuilder = require('./base');
 const Utils = require('../utils/utils');
 
 class WebpackServerBuilder extends WebpackBaseBuilder {
-  constructor(config, options) {
-    super(config, options);
+  constructor(config) {
+    super(config);
     this.initServerOption();
     this.setCssExtract(false);
   }
