@@ -1,7 +1,34 @@
 {
   "extends": "eslint",
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
   "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    "guard-for-in": "off",
+    "no-console": "off",
+    "no-undefined": "off",
     "array-bracket-spacing": "off",
-    "comma-dangle": ["error", "never"]
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": true
+      }
+    ],
+    "func-style": [
+      "error",
+      "expression"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ]
   }
 }

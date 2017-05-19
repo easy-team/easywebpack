@@ -48,7 +48,8 @@
     "webpack-merge": "^2.4.0"
   },
   "devDependencies": {
-    "eslint": "^3.18.0"
+    "eslint": "^3.18.0",
+    "eslint-config-eslint": "^4.0.0"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -63,7 +64,6 @@
     "index.js",
     "utils",
     "lib",
-    "builder",
     "tool"
   ],
   "ci": {

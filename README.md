@@ -102,6 +102,10 @@ npm run build-dev
 npm run build-prod
 ```
 
+## Configuration
+
+see [builder/config.js](builder/config.js) for more detail.
+
 ## easywebpack extend solution and project boilerplate
 
 - more detail, please see [WebpackClientBuilder](https://github.com/hubcarl/easywebpack/blob/master/builder/client.js) and [WebpackServerBuilder](https://github.com/hubcarl/easywebpack/blob/master/builder/server.js)

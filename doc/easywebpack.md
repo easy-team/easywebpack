@@ -173,13 +173,12 @@ const config = {
     port: 8090, // webpack-hot-middleware port
     path: 'public', // webpack compile result dir, support absolution path
     publicPath: '/public/', // router prefix
-    prefix: 'static', // webpack static resource prefix
+    staticPrefix: 'static', // webpack static resource prefix
     entry: [path.join(baseDir, 'app/web/page')], // webpack entry dir
     commonsChunk: ['vendor'] // webpack.optimize.CommonsChunkPlugin
   },
   webpack: {
-    styleLoader: 'vue-style-loader', // file process loader, default style-loader
-    extractCss: true, // false: css inline html , otherwise extract style in css file
+    styleLoader: 'style-loader', // file process loader, default style-loader
     loaderOption: {  // loader custom option or query
       sass: {
         includePaths: [path.join(baseDir, 'app/web/asset/style')] // sass @import search dir
