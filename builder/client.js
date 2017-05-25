@@ -32,7 +32,6 @@ class WebpackClientBuilder extends WebpackBaseBuilder {
     this.setOption({
       output: {
         path: path.isAbsolute(buildPath) ? buildPath : path.join(this.config.baseDir, buildPath),
-        publicPath: this.config.build.publicPath,
         filename: this.filename,
         chunkFilename: this.chunkFilename
       }
