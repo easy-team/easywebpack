@@ -38,13 +38,13 @@ loader.getLoaderString = (options, name) => {
   return optionStr;
 };
 
-loader.getStyleLoaderOption = config => ({
+loader.getStyleLoaderOption = styleConfig => ({
   postcss: [
     require("autoprefixer")({
       browsers: ["last 2 versions", "Firefox ESR", "> 1%", "ie >= 8"]
     })
   ],
-  loaders: loader.cssLoaders(config)
+  loaders: loader.cssLoaders(styleConfig)
 });
 
 loader.getLoader = (loadersOption, loaderName) => {
@@ -53,9 +53,9 @@ loader.getLoader = (loadersOption, loaderName) => {
   return loader.getLoaderString(styleOption, require.resolve(loaderName));
 };
 
-loader.generateLoaders = (config, loaders) => {
-  const loaderOption = config.webpack.loaderOption;
-  const styleLoaderName = config.webpack.styleLoader || "style-loader";
+loader.generateLoaders = (styleConfig, loaders) => {
+  const loaderOption = styleConfig.styleLoaderOption || {};
+  const styleLoaderName = styleConfig.styleLoaderName || "style-loader";
   const styleLoaderOption = loaderOption[styleLoaderName] || loaderOption[styleLoaderName.replace(/-loader/, "")];
   const styleLoader = loader.getLoaderString(styleLoaderOption, require.resolve(styleLoaderName));
 
@@ -65,7 +65,7 @@ loader.generateLoaders = (config, loaders) => {
     return loader.getLoaderString(option, require.resolve(item));
   }).join("!");
 
-  if (config.extractCss) {
+  if (styleConfig.extractCss) {
     return ExtractTextPlugin.extract({
       fallback: styleLoader,
       use: sourceLoader
@@ -75,16 +75,16 @@ loader.generateLoaders = (config, loaders) => {
   return [styleLoader, sourceLoader].join("!");
 };
 
-loader.cssLoaders = config => ({
-  css: loader.generateLoaders(config, ["css-loader", "postcss-loader"]),
-  less: loader.generateLoaders(config, ["css-loader", "postcss-loader", "less-loader"]),
-  scss: loader.generateLoaders(config, ["css-loader", "postcss-loader", "sass-loader"]),
-  sass: loader.generateLoaders(config, ["css-loader", "postcss-loader", "sass-loader"])
+loader.cssLoaders = styleConfig => ({
+  css: loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader"]),
+  less: loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader", "less-loader"]),
+  scss: loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader", "sass-loader"]),
+  sass: loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader", "sass-loader"])
 });
 
-loader.styleLoaders = config => {
+loader.styleLoaders = styleConfig => {
   const output = [];
-  const loaders = loader.cssLoaders(config);
+  const loaders = loader.cssLoaders(styleConfig);
 
   for (const extension in loaders) {
     const loaderInfo = loaders[extension];
