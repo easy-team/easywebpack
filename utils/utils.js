@@ -42,7 +42,7 @@ utils.isMatch = (regexArray, strMatch) => {
 
 
 utils.assetsPath = (config, filepath) => {
-  return path.join(config.build.prefix, filepath);
+  return path.posix.join(config.build.prefix, filepath);
 };
 
 
@@ -92,21 +92,19 @@ utils.getDevPublicPath = (config, position) => {
   return utils.getHost(config, position) + config.build.publicPath;
 };
 
-utils.writeFile = (dir, fileName, content) => {
+utils.writeFile = (filepath, content) => {
   try {
-    mkdirp.sync(dir);
-    const filePath = path.join(dir, fileName);
-    fs.writeFileSync(filePath, typeof content === 'string' ? content : JSON.stringify(content), 'utf8');
+    mkdirp.sync(path.dirname(filepath));
+    fs.writeFileSync(filepath, typeof content === 'string' ? content : JSON.stringify(content), 'utf8');
   } catch (e) {
-    console.error(`writeFile ${dir}/${fileName} err`, e);
+    console.error(`writeFile ${filepath} err`, e);
   }
 };
 
-utils.readFile = (dir, fileName) => {
-  const filePath = path.join(dir, fileName);
+utils.readFile = (filepath) => {
   try {
-    if (fs.existsSync(dir)) {
-      const content = fs.readFileSync(filePath, 'utf8');
+    if (fs.existsSync(filepath)) {
+      const content = fs.readFileSync(filepath, 'utf8');
       return JSON.parse(content);
     }
   } catch (e) {
@@ -124,11 +122,35 @@ utils.getPublicPath = (config, webpackConfig) => {
 };
 
 utils.saveBuildConfig = (config, webpackConfig) => {
-  utils.writeFile(config.baseDir, 'config/buildConfig.json', {
+  const filepath = path.join(config.baseDir, 'config/buildConfig.json');
+  utils.writeFile(filepath, {
     publicPath: utils.getPublicPath(config, webpackConfig),
     cdnDynamicDir: config.build.cdnDynamicDir,
     commonsChunk: config.build.commonsChunk
   });
+};
+
+utils.saveManifestFile = (filepath, content) => {
+  const manifest = typeof content === 'string' ? JSON.parse(content) : content;
+  const normalizeManifest = utils.normalizeManifest(manifest);
+  utils.writeFile(filepath, normalizeManifest);
+};
+
+utils.normalizeManifestFile = (filepath) => {
+  const manifest = utils.readFile(filepath);
+  if (manifest) {
+    utils.saveManifestFile(filepath, manifest);
+  }
+};
+
+utils.normalizeManifest = (manifest) => {
+  const normalizeManifest = {};
+  Object.keys(manifest).forEach(key => {
+    const normalizeKey = key.replace(/^\\/g, '').replace(/\\/g, '/');
+    const normalizeValue = manifest[key].replace(/\\/g, '/').replace(/\/\//g, '/');
+    normalizeManifest[normalizeKey] = normalizeValue;
+  });
+  return normalizeManifest;
 };
 
 module.exports = utils;
