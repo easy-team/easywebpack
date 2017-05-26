@@ -38,14 +38,35 @@ loader.getLoaderString = (options, name) => {
   return optionStr;
 };
 
-loader.getStyleLoaderOption = styleConfig => ({
-  postcss: [
-    require("autoprefixer")({
-      browsers: ["last 2 versions", "Firefox ESR", "> 1%", "ie >= 8"]
-    })
-  ],
-  loaders: loader.cssLoaders(styleConfig)
-});
+loader.getStyleLoaderOption = styleConfig => {
+  const loaderOption = {
+    loaders: loader.cssLoaders(styleConfig)
+  };
+  const styleLoaderOption = styleConfig.styleLoaderOption || {};
+  if (styleLoaderOption.autoprefixer !== false) {
+    loaderOption.postcss = [
+      require("autoprefixer")({
+        browsers: typeof Array.isArray(styleLoaderOption.autoprefixer) ? styleLoaderOption.autoprefixer : ["last 2 versions", "Firefox ESR", "> 1%", "ie >= 8"]
+      })
+    ];
+  }
+  return loaderOption;
+};
+
+loader.getStyleLoaderOption = styleConfig => {
+  const loaderOption = {
+    loaders: loader.cssLoaders(styleConfig)
+  };
+  const styleLoaderOption = styleConfig.styleLoaderOption || {};
+  if (styleLoaderOption.autoprefixer !== false) {
+    loaderOption.postcss = [
+      require("autoprefixer")({
+        browsers: typeof Array.isArray(styleLoaderOption.autoprefixer) ? styleLoaderOption.autoprefixer : ["last 2 versions", "Firefox ESR", "> 1%", "ie >= 8"]
+      })
+    ];
+  }
+  return loaderOption;
+};
 
 loader.getLoader = (loadersOption, loaderName) => {
   const styleOption = loadersOption[loaderName] || loadersOption[loaderName.replace(/-loader/, "")];
@@ -54,14 +75,13 @@ loader.getLoader = (loadersOption, loaderName) => {
 };
 
 loader.generateLoaders = (styleConfig, loaders) => {
-  const loaderOption = styleConfig.styleLoaderOption || {};
+  const styleLoaderOption = styleConfig.styleLoaderOption || {};
   const styleLoaderName = styleConfig.styleLoaderName || "style-loader";
-  const styleLoaderOption = loaderOption[styleLoaderName] || loaderOption[styleLoaderName.replace(/-loader/, "")];
-  const styleLoader = loader.getLoaderString(styleLoaderOption, require.resolve(styleLoaderName));
+  const styleLoaderConfig = styleLoaderOption[styleLoaderName] || styleLoaderOption[styleLoaderName.replace(/-loader/, "")];
+  const styleLoader = loader.getLoaderString(styleLoaderConfig, require.resolve(styleLoaderName));
 
   const sourceLoader = loaders.map(item => {
-    const option = loaderOption[item] || loaderOption[item.replace(/-loader/, "")];
-
+    const option = styleLoaderOption[item] || styleLoaderOption[item.replace(/-loader/, "")];
     return loader.getLoaderString(option, require.resolve(item));
   }).join("!");
 
@@ -75,12 +95,22 @@ loader.generateLoaders = (styleConfig, loaders) => {
   return [styleLoader, sourceLoader].join("!");
 };
 
-loader.cssLoaders = styleConfig => ({
-  css: loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader"]),
-  less: loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader", "less-loader"]),
-  scss: loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader", "sass-loader"]),
-  sass: loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader", "sass-loader"])
-});
+loader.cssLoaders = styleConfig => {
+  const loaderOption = styleConfig.styleLoaderOption || {};
+  const cssLoaders = { css: loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader"]) };
+  if (loaderOption.less !== false) {
+    cssLoaders['less'] = loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader", "less-loader"]);
+  }
+
+  if (loaderOption.scss !== false) {
+    cssLoaders['scss'] = loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader", "sass-loader"]);
+  }
+
+  if (loaderOption.sass !== false) {
+    cssLoaders['sass'] = loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader", "sass-loader"]);
+  }
+  return cssLoaders;
+};
 
 loader.styleLoaders = styleConfig => {
   const output = [];

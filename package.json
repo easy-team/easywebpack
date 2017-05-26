@@ -40,6 +40,7 @@
     "progress-bar-webpack-plugin": "^1.9.0",
     "sass-loader": "^6.0.3",
     "shelljs": "^0.7.4",
+    "stats-webpack-plugin": "^0.6.0",
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.4.1",
