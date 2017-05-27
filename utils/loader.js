@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const loader = {};
 
@@ -21,19 +21,19 @@ loader.getLoaderString = (options, name) => {
       value.forEach(item => {
         kvArray.push(`${key}[]=${item}`);
       });
-    } else if (typeof value === "object") {
+    } else if (typeof value === 'object') {
 
       // TODO:
-    } else if (typeof value === "boolean") {
+    } else if (typeof value === 'boolean') {
       kvArray.push(value === true ? `+${key}` : `-${key}`);
     } else {
       kvArray.push(`${key}=${value}`);
     }
   });
-  const optionStr = kvArray.join(",");
+  const optionStr = kvArray.join(',');
 
   if (name) {
-    return /\?/.test(name) ? `${name},${optionStr}` : name + (optionStr ? `?${optionStr}` : "");
+    return /\?/.test(name) ? `${name},${optionStr}` : name + (optionStr ? `?${optionStr}` : '');
   }
   return optionStr;
 };
@@ -43,25 +43,11 @@ loader.getStyleLoaderOption = styleConfig => {
     loaders: loader.cssLoaders(styleConfig)
   };
   const styleLoaderOption = styleConfig.styleLoaderOption || {};
-  if (styleLoaderOption.autoprefixer !== false) {
-    loaderOption.postcss = [
-      require("autoprefixer")({
-        browsers: typeof Array.isArray(styleLoaderOption.autoprefixer) ? styleLoaderOption.autoprefixer : ["last 2 versions", "Firefox ESR", "> 1%", "ie >= 8"]
-      })
-    ];
-  }
-  return loaderOption;
-};
 
-loader.getStyleLoaderOption = styleConfig => {
-  const loaderOption = {
-    loaders: loader.cssLoaders(styleConfig)
-  };
-  const styleLoaderOption = styleConfig.styleLoaderOption || {};
   if (styleLoaderOption.autoprefixer !== false) {
     loaderOption.postcss = [
-      require("autoprefixer")({
-        browsers: typeof Array.isArray(styleLoaderOption.autoprefixer) ? styleLoaderOption.autoprefixer : ["last 2 versions", "Firefox ESR", "> 1%", "ie >= 8"]
+      require('autoprefixer')({
+        browsers: Array.isArray(styleLoaderOption.autoprefixer) ? styleLoaderOption.autoprefixer : ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8']
       })
     ];
   }
@@ -69,21 +55,22 @@ loader.getStyleLoaderOption = styleConfig => {
 };
 
 loader.getLoader = (loadersOption, loaderName) => {
-  const styleOption = loadersOption[loaderName] || loadersOption[loaderName.replace(/-loader/, "")];
+  const styleOption = loadersOption[loaderName] || loadersOption[loaderName.replace(/-loader/, '')];
 
   return loader.getLoaderString(styleOption, require.resolve(loaderName));
 };
 
 loader.generateLoaders = (styleConfig, loaders) => {
   const styleLoaderOption = styleConfig.styleLoaderOption || {};
-  const styleLoaderName = styleConfig.styleLoaderName || "style-loader";
-  const styleLoaderConfig = styleLoaderOption[styleLoaderName] || styleLoaderOption[styleLoaderName.replace(/-loader/, "")];
+  const styleLoaderName = styleConfig.styleLoaderName || 'style-loader';
+  const styleLoaderConfig = styleLoaderOption[styleLoaderName] || styleLoaderOption[styleLoaderName.replace(/-loader/, '')];
   const styleLoader = loader.getLoaderString(styleLoaderConfig, require.resolve(styleLoaderName));
 
   const sourceLoader = loaders.map(item => {
-    const option = styleLoaderOption[item] || styleLoaderOption[item.replace(/-loader/, "")];
+    const option = styleLoaderOption[item] || styleLoaderOption[item.replace(/-loader/, '')];
+
     return loader.getLoaderString(option, require.resolve(item));
-  }).join("!");
+  }).join('!');
 
   if (styleConfig.extractCss) {
     return ExtractTextPlugin.extract({
@@ -92,22 +79,23 @@ loader.generateLoaders = (styleConfig, loaders) => {
     });
   }
 
-  return [styleLoader, sourceLoader].join("!");
+  return [styleLoader, sourceLoader].join('!');
 };
 
 loader.cssLoaders = styleConfig => {
   const loaderOption = styleConfig.styleLoaderOption || {};
-  const cssLoaders = { css: loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader"]) };
+  const cssLoaders = { css: loader.generateLoaders(styleConfig, ['css-loader', 'postcss-loader']) };
+
   if (loaderOption.less !== false) {
-    cssLoaders['less'] = loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader", "less-loader"]);
+    cssLoaders.less = loader.generateLoaders(styleConfig, ['css-loader', 'postcss-loader', 'less-loader']);
   }
 
   if (loaderOption.scss !== false) {
-    cssLoaders['scss'] = loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader", "sass-loader"]);
+    cssLoaders.scss = loader.generateLoaders(styleConfig, ['css-loader', 'postcss-loader', 'sass-loader']);
   }
 
   if (loaderOption.sass !== false) {
-    cssLoaders['sass'] = loader.generateLoaders(styleConfig, ["css-loader", "postcss-loader", "sass-loader"]);
+    cssLoaders.sass = loader.generateLoaders(styleConfig, ['css-loader', 'postcss-loader', 'sass-loader']);
   }
   return cssLoaders;
 };

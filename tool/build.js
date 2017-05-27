@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -23,6 +23,7 @@ module.exports = (buildConfig, options, callback) => {
       }, options && options.stat))}\n`);
     });
     const filepath = path.join(compiler.compilers[0].context, 'config/manifest.json');
+
     utils.normalizeManifestFile(filepath);
     callback && callback();
   });
