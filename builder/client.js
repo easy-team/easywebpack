@@ -18,7 +18,7 @@ class WebpackClientBuilder extends WebpackBaseBuilder {
     if (!this.prod) {
       const hotMiddleware = require.resolve('webpack-hot-middleware').split(path.sep);
       hotMiddleware.pop();
-      const hotConfig = path.join(hotMiddleware.join(path.sep),`client?path=http://${Utils.getIp()}:${this.config.build.port}/__webpack_hmr&noInfo=false&reload=false&quiet=false`);
+      const hotConfig = `${path.posix.join(hotMiddleware.join(path.sep))}/client?path=http://${Utils.getIp()}:${this.config.build.port}/__webpack_hmr&noInfo=false&reload=false&quiet=false`;
       Object.keys(this.options.entry).forEach(name => {
         if (!/\./.test(name)) {
           this.options.entry[name] = [hotConfig].concat(this.options.entry[name]);
