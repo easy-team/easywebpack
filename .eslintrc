@@ -2,7 +2,8 @@
   "extends": "eslint",
   "env": {
     "node": true,
-    "es6": true
+    "es6": true,
+    "mocha": true
   },
   "parserOptions": {
     "ecmaVersion": 6
@@ -12,6 +13,8 @@
       "error",
       2
     ],
+    "no-invalid-this": "off",
+    "quotes": ["error", "single"],
     "guard-for-in": "off",
     "no-console": "off",
     "no-undefined": "off",

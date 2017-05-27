@@ -51,63 +51,6 @@ webpack server config: `new WebpackServerBuilder(config).create()`
 
 - `options` (Object) webpack config, call `setOption` set.
 
-- `configLoaders` (Array) when you need dynamic create loader with process.env.NODE_ENV, custom condition, and so on.
-
-       custom loader pattern, default babel-loader, json-loader, url-loader, css-loader, sass-loader, less-loader.
-
-       the one plugin pattern support `dynamic` and loader config property, see the normal and dynamic loader example, dynamic will merge self loader
-
-       {
-         test: /\.json$/,
-         loader: require.resolve('json-loader')
-       },
-       {
-         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-         loader: require.resolve('url-loader'),
-         query: {
-           limit: 1024
-         },
-         dynamic: () => {
-           return {
-             query: {
-               name: this.imageName
-             }
-           }
-         },
-       }
-
-
-- `configPlugins` (Array) when you need dynamic create plugin with process.env.NODE_ENV, custom condition, and so on.
-
-        custom plugin pattern, default NoEmitOnErrorsPlugin, ProgressBarPlugin, UglifyJsPlugin.
-
-        the one plugin pattern support `enable`, `clazz`, `args` config property, see the normal and dynamic plugin example
-
-        {
-            clazz: ProgressBarPlugin,
-            args: {
-              width: 100,
-              format: 'webpack build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
-              clear: false
-            },
-        },
-        {
-            enable: () => { // enable not must need, default enable true
-              return this.isUglifyJS;
-            },
-            clazz: webpack.optimize.UglifyJsPlugin, // clazz must need, and support contructor create object
-            args: () => { // args not must need
-              return {
-                compress: {
-                  warnings: false,
-                  dead_code: true,
-                  drop_console: true,
-                  drop_debugger: true
-                }
-              }
-            }
-        }
-
 - `loaders` (Array) webpack config loader, webpack module rules loader, default empty, when call `create` method after, you can get webpack loaders
 
 - `plugins` (Array) webpack config plugin, webpack plugins, default empty, when call `create` method after, you can get webpack plugins
@@ -128,24 +71,21 @@ webpack server config: `new WebpackServerBuilder(config).create()`
 
 - `setCssExtract(boolean)` :  whether extract css file, default `this.prod===true` mode, extract css.
 
+- `setExtensions(string|array)` : webpack resolve extensions config. ex: `this.setExtensions('.vue')`
+
+- `setAlias(name, value)` : webpack resolve alias. ex: `this.setAlias('vue','vue/dist/vue.common.js')`
+
 - `setOption(option)`  : when the basic API provided does not meet the requirements, you can set the webpack configuration by calling the setOption method
 
-- `setConfigLoader(loader, isHead) `  : add custom config loader, support single and multiple, argument `isHead` make sure config loader is added to the head or the end.
+- `addLoader(test, loader, option, isHead)`  : add webpack module rules loader, argument `isHead` make sure loader is added to the head or the end
 
-- `setConfigPlugin(plugin, isHead)`  : add custom config plugin, support single and multiple,  argument `isHead` make sure config plugin is added to the head or the end
+- `addPlugin(clazz, args, isHead)`  : add webpack plugins item, argument `isHead` make sure loader is added to the head or the end
 
-- `setLoader(loader, isHead)`  : add webpack module rules loader, support single and multiple, argument `isHead` make sure loader is added to the head or the end
+- `createWebpackLoader()`  : configuring the webpack loader configuration based on the configuration of the `loaders`
 
-- `setPlugin(plugin, isHead)`  : add webpack plugins item, support single and multiple, argument `isHead` make sure loader is added to the head or the end
-
-- `createWebpackLoader()`  : configuring the webpack loader configuration based on the configuration of the `configLoaders`
-
-- `createWebpackPlugin()`  : configuring the webpack plugin configuration based on the configuration of the `configPlugins`
+- `createWebpackPlugin()`  : configuring the webpack plugin configuration based on the configuration of the `plugins`
 
 - `create()`  : call the `createWebpackLoader()` and `createWebpackPlugin()` methods to construct webpack loader and plugin, and merge the options by setOption constructed, the loaders by setLoader constructed, the plugin by setPlugin constructed to return the configuration of the full webpack
-
-- `getWebpackConfig()` : return the configuration of the full webpack
-
 
 
 ### `WebpackClientBuilder`
@@ -154,7 +94,7 @@ webpack server config: `new WebpackServerBuilder(config).create()`
 
 - set default output config
 
-- `configPlugins` add default config plugin
+- `plugins` add default config plugin
 
         default ManifestPlugin, CommonsChunkPlugin, ExtractTextPlugin, HotModuleReplacementPlugin, LoaderOptionsPlugin.
 
@@ -166,7 +106,9 @@ webpack server config: `new WebpackServerBuilder(config).create()`
 
 ## WebpackClientBuilder and WebpackServerBuilder arguments [config]
 
+
 ```js
+// default arguments config
 const config = {
   baseDir, // project root dir
   build: {
@@ -176,15 +118,6 @@ const config = {
     staticPrefix: 'static', // webpack static resource prefix
     entry: [path.join(baseDir, 'app/web/page')], // webpack entry dir
     commonsChunk: ['vendor'] // webpack.optimize.CommonsChunkPlugin
-  },
-  webpack: {
-    styleLoader: 'style-loader', // file process loader, default style-loader
-    loaderOption: {  // loader custom option or query
-      sass: {
-        includePaths: [path.join(baseDir, 'app/web/asset/style')] // sass @import search dir
-      }
-    },
-    pluginOption: {} // plugin custom option
   }
 };
 ```
@@ -195,79 +128,46 @@ const config = {
 
 ### extend `egg-wepback-vue` webpack build solution
 
-- default common config `config.js`
+- default common config `base.js`
 
 ```js
-'use strict';
 const EasyWebpack = require('easywebpack');
-const webpack = EasyWebpack.webpack;
+const defaultWebpackConfig = require('./config');
 const merge = EasyWebpack.merge;
-
-exports.getLoader = config => {
-  return [
-    {
-      test: /\.vue$/,
-      loader: require.resolve('vue-loader'),
-      dynamic: () => {
-        return {
-          options: EasyWebpack.Loader.getStyleLoaderOption(config)
-        };
-      }
-    },
-    {
-      test: /\.html$/,
-      loader: require.resolve('vue-html-loader')
-    }
-  ];
+const WebpackBaseBuilder = WebpackBuilder => class extends WebpackBuilder {
+  constructor(config) {
+    super(merge(defaultWebpackConfig, config));
+    this.setExtensions('.vue');
+    this.setStyleLoaderName('vue-style-loader');
+    this.addLoader(/\.vue$/, 'vue-loader', () => {
+      return {
+        options: EasyWebpack.Loader.getStyleLoaderOption(this.getStyleConfig())
+      };
+    });
+    this.addLoader(/\.html$/, 'vue-html-loader');
+  }
 };
-
-exports.initBase = options => {
-  return merge({
-    resolve: {
-      extensions: ['.vue']
-    }
-  }, options);
-};
-
-exports.initClient = options => {
-  return merge(exports.initBase(options), {
-    resolve: {
-      alias: {
-        vue: 'vue/dist/vue.common.js'
-      }
-    }
-  }, options);
-};
-
-exports.initServer = options => {
-  return merge(exports.initBase(options), {
-    resolve: {
-      alias: {
-        vue: 'vue/dist/vue.runtime.common.js'
-      }
-    },
-    plugins: [
-      // 配置 vue 的环境变量，告诉 vue 是服务端渲染，就不会做耗性能的 dom-diff 操作了
-      new webpack.DefinePlugin({
-        'process.env.VUE_ENV': '"server"'
-      })
-    ]
-  }, options);
-};
+module.exports = WebpackBaseBuilder;
 
 ```
 
 - extends `EasyWebpack.WebpackClientBuilder` create vue WebpackClientBuilder
 
 ```js
+'use strict';
 const EasyWebpack = require('easywebpack');
-const baseConfig = require('./config');
-const Utils = require('./utils');
-class WebpackClientBuilder extends EasyWebpack.WebpackClientBuilder {
+const WebpackBaseBuilder = require('./base');
+
+class WebpackClientBuilder extends WebpackBaseBuilder(EasyWebpack.WebpackClientBuilder) {
   constructor(config) {
     super(config);
-    this.setOption(baseConfig.initClient());
-    this.setConfigLoader(baseConfig.getLoader(this.config), true);
+    this.setAlias('vue', 'vue/dist/vue.common.js');
+  }
+
+  create() {
+    const webpackConfig = super.create();
+    EasyWebpack.Utils.saveBuildConfig(this.config, webpackConfig);
+    return webpackConfig;
   }
 }
 module.exports = WebpackClientBuilder;
@@ -277,13 +177,13 @@ module.exports = WebpackClientBuilder;
 - extends `EasyWebpack.WebpackServerBuilder` create vue WebpackServerBuilder
 
 ```js
+'use strict';
 const EasyWebpack = require('easywebpack');
-const baseConfig = require('./config');
-class WebpackServerBuilder extends EasyWebpack.WebpackServerBuilder {
+const WebpackBaseBuilder = require('./base');
+class WebpackServerBuilder extends WebpackBaseBuilder(EasyWebpack.WebpackServerBuilder) {
   constructor(config) {
     super(config);
-    this.setOption(baseConfig.initServer());
-    this.setConfigLoader(baseConfig.getLoader(this.config), true);
+    this.setAlias('vue', 'vue/dist/vue.runtime.common.js');
   }
 }
 module.exports = WebpackServerBuilder;

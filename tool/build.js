@@ -1,11 +1,13 @@
-"use strict";
-const webpack = require("webpack");
-const merge = require("webpack-merge");
+'use strict';
+const path = require('path');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const utils = require('../utils/utils');
 
 module.exports = (buildConfig, options, callback) => {
   const webpackBuildConfig = Array.isArray(buildConfig) ? buildConfig : [buildConfig];
 
-  webpack(webpackBuildConfig, (err, compilation) => {
+  const compiler = webpack(webpackBuildConfig, (err, compilation) => {
     if (err) {
       throw err;
     }
@@ -20,6 +22,9 @@ module.exports = (buildConfig, options, callback) => {
         chunkModules: false
       }, options && options.stat))}\n`);
     });
+    const filepath = path.join(compiler.compilers[0].context, 'config/manifest.json');
+
+    utils.normalizeManifestFile(filepath);
     callback && callback();
   });
 };
