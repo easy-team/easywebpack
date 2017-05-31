@@ -13,18 +13,14 @@
       "error",
       2
     ],
+    "newline-after-var": "off",
     "no-invalid-this": "off",
     "quotes": ["error", "single"],
     "guard-for-in": "off",
     "no-console": "off",
     "no-undefined": "off",
     "array-bracket-spacing": "off",
-    "no-unused-expressions": [
-      "error",
-      {
-        "allowShortCircuit": true
-      }
-    ],
+    "no-unused-expressions": "off",
     "func-style": [
       "error",
       "expression"
