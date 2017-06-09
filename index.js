@@ -1,6 +1,10 @@
 'use strict';
 exports.webpack = require('webpack');
 exports.merge = require('webpack-merge');
+exports.ProgressBarPlugin = require('progress-bar-webpack-plugin');
+exports.StatsPlugin = require('stats-webpack-plugin');
+exports.ManifestPlugin = require('webpack-manifest-plugin');
+exports.ExtractTextPlugin = require('extract-text-webpack-plugin');
 exports.build = require('./tool/build');
 exports.Utils = require('./utils/utils');
 exports.Loader = require('./utils/loader');

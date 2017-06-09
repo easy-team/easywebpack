@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const WebpackBaseBuilder = require('../lib/base');
-
+const Loader = require('../utils/loader');
 // http://chaijs.com/api/bdd/
 
 describe('base.test.js', () => {
@@ -101,7 +101,6 @@ describe('base.test.js', () => {
       expect(expectLoader.query.limit).to.equal(1024);
       expect(expectLoader.fn().query.name).to.equal('font-url-loader');
     });
-
   });
 
   describe('#webpack plugin test', () => {
@@ -112,23 +111,20 @@ describe('base.test.js', () => {
       expect(this.builder.plugins.length).to.equal(count + 1);
       expect(expectPlugin).to.have.property('clazz');
       expect(expectPlugin.clazz.name).to.equal('LoaderOptionsPlugin');
-
-      this.builder.addPlugin(webpack.LoaderOptionsPlugin, () => ({ minimize: false }), true);
-      expect(this.builder.plugins[0].clazz.name).to.equal('LoaderOptionsPlugin');
-
     });
 
-    it('should createWebpackPlugin test', () => {
-      const webpackPlugins = this.builder.createWebpackPlugin();
-      expect(webpackPlugins.filter(plugin => typeof plugin === 'object').length).to.equal(webpackPlugins.length);
+    it('should createWebpackPlugin enable false test', () => {
+      const builder = new WebpackBaseBuilder();
+      const webpackPlugins = builder.createWebpackPlugin();
       expect(webpackPlugins.some(plugin => plugin.constructor.name === 'UglifyJsPlugin')).to.be.false;
       expect(webpackPlugins.some(plugin => plugin.constructor.name === 'StatsPlugin')).to.be.false;
     });
 
     it('should createWebpackPlugin UglifyJs and StatToJson test', () => {
-      this.builder.setUglifyJs(true);
-      this.builder.setStatToJson(true);
-      const webpackPlugins = this.builder.createWebpackPlugin();
+      const builder = new WebpackBaseBuilder();
+      builder.setUglifyJs(true);
+      builder.setStatToJson(true);
+      const webpackPlugins = builder.createWebpackPlugin();
       expect(webpackPlugins.some(plugin => plugin.constructor.name === 'UglifyJsPlugin')).to.be.true;
       expect(webpackPlugins.some(plugin => plugin.constructor.name === 'StatsPlugin')).to.be.true;
     });
@@ -141,6 +137,56 @@ describe('base.test.js', () => {
       expect(webpackConfig.module.rules).to.be.an('array');
       expect(webpackConfig.plugins).to.be.an('array');
       expect(webpackConfig.resolve.extensions).to.be.an('array').that.includes('.js');
+    });
+  });
+
+  describe('#webpack loader change test', () => {
+    it('should updateLoader', () => {
+      this.builder.setStyleLoaderName('vue-style-loader');
+      this.builder.addLoader(/\.vue$/, 'vue-loader', () => {
+        return {
+          options: Loader.getStyleLoaderOption(this.builder.getStyleConfig())
+        }
+      });
+      this.builder.updateLoader({
+        loader: 'vue-loader',
+        options: {
+          compilerModules: [{
+            postTransformNode: el => {
+              el.staticStyle = `$processStyle(${el.staticStyle})`;
+              el.styleBinding = `$processStyle(${el.styleBinding})`;
+            }
+          }]
+        }
+      });
+
+      const newLoaderIndex = this.builder.findLoaderIndex('vue-loader');
+      const newLoader = this.builder.loaders[newLoaderIndex];
+      expect(typeof newLoader.fn === 'function').to.be.true;
+      expect(newLoader.options).to.have.property('compilerModules');
+
+      const webpackConfig = this.builder.create();
+      const rules = webpackConfig.module.rules;
+      const vueLoaderIndex = rules.findIndex(rule => {
+        return rule.loader.includes('vue-loader');
+      });
+      const vueLoader = rules[vueLoaderIndex];
+      expect(vueLoader.options).to.have.property('loaders');
+      expect(vueLoader.options).to.have.property('compilerModules');
+    });
+  });
+
+
+  describe('#webpack plugin change test', () => {
+    const pluginBuilder = new WebpackBaseBuilder();
+    it('should findPluginIndex', () => {
+      expect(pluginBuilder.findPluginIndex(webpack.NoEmitOnErrorsPlugin) > -1).to.be.true;
+      expect(pluginBuilder.findPluginIndex(new webpack.NoEmitOnErrorsPlugin()) > -1).to.be.true;
+    });
+    it('should deletePlugin', () => {
+      pluginBuilder.deletePlugin(webpack.NoEmitOnErrorsPlugin);
+      expect(pluginBuilder.findPluginIndex(webpack.NoEmitOnErrorsPlugin) > -1).to.be.false;
+      expect(pluginBuilder.findPluginIndex(new webpack.NoEmitOnErrorsPlugin()) > -1).to.be.false;
     });
   });
 
