@@ -108,7 +108,7 @@ see [builder/config.js](builder/config.js) for more detail.
 
 ## easywebpack extend solution and project boilerplate
 
-- more detail, please see [WebpackClientBuilder](https://github.com/hubcarl/easywebpack/blob/master/builder/client.js) and [WebpackServerBuilder](https://github.com/hubcarl/easywebpack/blob/master/builder/server.js)
+- more detail, please see [WebpackClientBuilder](https://github.com/hubcarl/easywebpack/blob/master/lib/client.js) and [WebpackServerBuilder](https://github.com/hubcarl/easywebpack/blob/master/lib/server.js)
 
 - custom webpack build solution base on easywebpack, please see custom plugin [egg-webpack-vue](https://github.com/hubcarl/egg-webpack-vue) for easywebpack + vue
 
