@@ -45,7 +45,7 @@ utils.isMatch = (regexArray, strMatch) => {
 };
 
 
-utils.assetsPath = (config, filepath) => path.posix.join(config.build.staticPrefix, filepath);
+utils.assetsPath = (prefix, filepath) => path.posix.join(prefix, filepath);
 
 
 utils.loadNodeModules = () => {

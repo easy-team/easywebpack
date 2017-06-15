@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const WebpackBaseBuilder = require('../lib/base');
 const Loader = require('../utils/loader');
+
 // http://chaijs.com/api/bdd/
 
 describe('base.test.js', () => {
@@ -143,11 +144,9 @@ describe('base.test.js', () => {
   describe('#webpack loader change test', () => {
     it('should updateLoader', () => {
       this.builder.setStyleLoaderName('vue-style-loader');
-      this.builder.addLoader(/\.vue$/, 'vue-loader', () => {
-        return {
-          options: Loader.getStyleLoaderOption(this.builder.getStyleConfig())
-        }
-      });
+      this.builder.addLoader(/\.vue$/, 'vue-loader', () => ({
+        options: Loader.getStyleLoaderOption(this.builder.getStyleConfig())
+      }));
       this.builder.updateLoader({
         loader: 'vue-loader',
         options: {
@@ -167,9 +166,7 @@ describe('base.test.js', () => {
 
       const webpackConfig = this.builder.create();
       const rules = webpackConfig.module.rules;
-      const vueLoaderIndex = rules.findIndex(rule => {
-        return rule.loader.includes('vue-loader');
-      });
+      const vueLoaderIndex = rules.findIndex(rule => rule.loader.includes('vue-loader'));
       const vueLoader = rules[vueLoaderIndex];
       expect(vueLoader.options).to.have.property('loaders');
       expect(vueLoader.options).to.have.property('compilerModules');

@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>webpack编译文件导航</title>
+    <meta name="keywords" :content="keywords">
+    <meta name="description" :content="description">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", Georgia, tahoma, arial, simsun, "\5B8B\4F53";
+        }
+
+        .header {
+            height: 80px;
+            line-height: 80px;
+            background-color: #20a0ff;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+        }
+
+        .main {
+            margin-top: -80px;
+            padding: 80px 0 120px;
+            box-sizing: border-box;
+        }
+
+        .page-component {
+            padding-bottom: 95px;
+            box-sizing: border-box;
+        }
+
+        .page-container {
+            width: 1140px;
+            padding: 0 30px;
+            margin: 36px auto;
+        }
+
+        .main ul {
+            text-align: left;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
+        .main ul li {
+            display: block;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .main a {
+            color: #18bc9c;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>webpack编译文件导航</h1>
+</div>
+<div class="main">
+    <div class="page-container page-component">
+        {{each buildFiles}}
+            <div style="float: left; width: 50%;"><h2>{{$value.name}}</h2>
+                <ul>
+                    {{each $value.files item}}
+                        <li><a href="{{item.url}}" target="_blank">{{item.name}}</a></li>
+                    {{/each}}
+                </ul>
+           </div>
+        {{/each}}
+    </div>
+</div>
+</body>
+</html>

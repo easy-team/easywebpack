@@ -28,7 +28,9 @@ programming instead of configuration, webpack is no longer complex. [API Documen
 
 - Support development and production build mode, you can set `process.env.NODE_ENV=development` development or `process.env.NODE_ENV=production`.
 
-- Support call `EasyWebpack.build([clientConfig, serverConfig], {}, callback)` direct compiler file.
+- Support call `EasyWebpack.build({ webpackConfig: [clientConfig, serverConfig]}, callback)` direct compiler file.
+
+- Support call `EasyWebpack.server({ webpackConfig: [clientConfig, serverConfig]})` start webpack dev server.
 
 
 ## Install
@@ -36,6 +38,8 @@ programming instead of configuration, webpack is no longer complex. [API Documen
 ```bash
 $ npm i easywebpack --save-dev
 ```
+
+webpack solution: [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) and [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git)
 
 ## Usage
 
