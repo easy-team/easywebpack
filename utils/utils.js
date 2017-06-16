@@ -134,31 +134,4 @@ utils.saveBuildConfig = (config, webpackConfig) => {
   });
 };
 
-utils.saveManifestFile = (filepath, content) => {
-  const manifest = typeof content === 'string' ? JSON.parse(content) : content;
-  const normalizeManifest = utils.normalizeManifest(manifest);
-
-  utils.writeFile(filepath, normalizeManifest);
-};
-
-utils.normalizeManifestFile = filepath => {
-  const manifest = utils.readFile(filepath);
-
-  if (manifest) {
-    utils.saveManifestFile(filepath, manifest);
-  }
-};
-
-utils.normalizeManifest = manifest => {
-  const normalizeManifest = {};
-
-  Object.keys(manifest).forEach(key => {
-    const normalizeKey = key.replace(/^\\/g, '').replace(/\\/g, '/');
-    const normalizeValue = manifest[key].replace(/\\/g, '/').replace(/\/\//g, '/');
-
-    normalizeManifest[normalizeKey] = normalizeValue;
-  });
-  return normalizeManifest;
-};
-
 module.exports = utils;

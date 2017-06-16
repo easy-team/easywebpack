@@ -1,23 +1,27 @@
 'use strict';
+const path = require('path');
 const webpack = require('webpack');
 const koa = require('koa');
 const cors = require('kcors');
 const open = require('opn');
 const artTemplate = require('art-template');
 const merge = require('webpack-merge');
+const Manifest = require('webpack-manifest-normalize');
+const utils = require('../utils/utils');
 const app = koa();
 app.use(cors());
 
 class WebpackTool {
   constructor(config) {
     this.artTemplate = artTemplate;
-    this.config = merge({ port: 8888, debugTemplate: `${__dirname}/index.html` }, config);
+    this.config = merge({ port: 8090, debugTemplate: `${__dirname}/index.html` }, config);
     this.webpackConfig = Array.isArray(this.config.webpackConfig) ? this.config.webpackConfig : [this.config.webpackConfig];
     this.publicPath = this.config.publicPath || this.webpackConfig[0].output.publicPath;
+    this.isServerStart = false;
   }
 
   build(callback) {
-    webpack(this.webpackConfig, (err, compilation) => {
+    const compiler = webpack(this.webpackConfig, (err, compilation) => {
       if (err) {
         throw err;
       }
@@ -32,8 +36,14 @@ class WebpackTool {
           chunkModules: false
         }, this.config && this.config.stat))}\n`);
       });
+      this.normalizeManifestFile(compiler);
       callback && callback();
     });
+  }
+
+  normalizeManifestFile(compiler) {
+    const filepath = path.join(compiler.compilers[0].context, 'config/manifest.json');
+    Manifest.normalizeFile(filepath);
   }
 
   server() {
@@ -50,17 +60,21 @@ class WebpackTool {
           files: Object.keys(stat.compilation.assets)
         });
       });
-      setTimeout(() => {
-        app.listen(this.config.port, err => {
-          if (!err) {
-            const url = `http://127.0.0.1:${this.config.port}`;
-            console.info(`start webpack dev server: ${url}`);
-            if (this.config.openBrowser === undefined || this.config.openBrowser) {
-              open(`${url}/debug`);
+      if (!this.isServerStart) {
+        this.isServerStart = true;
+        setTimeout(() => {
+          app.listen(this.config.port, err => {
+            if (!err) {
+              const ip = utils.getIp();
+              const url = `http://${ip}:${this.config.port}`;
+              console.info(`start webpack dev server: ${url}`);
+              if (this.config.openBrowser === undefined || this.config.openBrowser) {
+                open(`${url}/debug`);
+              }
             }
-          }
-        });
-      }, 200);
+          });
+        }, 200);
+      }
     });
 
     const devMiddleware = require('koa-webpack-dev-middleware')(compiler, {
