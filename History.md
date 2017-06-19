@@ -1,4 +1,10 @@
 
+0.4.1 / 2017-06-19
+==================
+
+  * feat:support manifest and buildconfig can config
+  * feat:support html plugin
+
 0.4.0 / 2017-06-15
 ==================
 
