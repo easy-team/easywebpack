@@ -1,4 +1,10 @@
 
+0.5.1 / 2017-06-21
+==================
+
+  * feat:support weex
+  * refactor:seperate weboack build
+
 0.4.1 / 2017-06-19
 ==================
 
