@@ -1,5 +1,6 @@
 'use strict';
-const WebpackTool = require('./tool');
+
+const WebpackTool = require('webpack-tool');
 exports.WebpackTool = WebpackTool;
 exports.webpack = require('webpack');
 exports.merge = require('webpack-merge');
@@ -13,9 +14,11 @@ exports.WebpackBaseBuilder = require('./lib/base');
 exports.WebpackClientBuilder = require('./lib/client');
 exports.WebpackServerBuilder = require('./lib/server');
 exports.getConfig = config => require('./lib/config')(config);
-exports.build = (config, callback) => {
-  new WebpackTool(config).build(callback);
+
+const webpackTool = new WebpackTool();
+exports.build = (webpackConfig, callback) => {
+  webpackTool.build(webpackConfig, callback);
 };
-exports.server = config => {
-  new WebpackTool(config).server();
+exports.server = webpackConfig => {
+  webpackTool.server(webpackConfig);
 };
