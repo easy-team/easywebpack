@@ -1,5 +1,5 @@
 'use strict';
-
+const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const loader = {};
@@ -11,9 +11,9 @@ const loader = {};
  * @param {string}  name  loader name or loader entry filepath
  * @returns {string} format loader option str
  */
-loader.getLoaderString = (options, name) => {
+loader.getLoaderString = (styleLoaderOption, name) => {
   const kvArray = [];
-
+  const options = styleLoaderOption && styleLoaderOption.options;
   options && Object.keys(options).forEach(key => {
     const value = options[key];
 
@@ -55,7 +55,7 @@ loader.getStyleLoaderOption = styleConfig => {
 };
 
 loader.getLoader = (loadersOption, loaderName) => {
-  const styleOption = loadersOption[loaderName] || loadersOption[loaderName.replace(/-loader/, '')];
+  const styleOption = loadersOption[loaderName] || loadersOption[loaderName.replace(/-loader/, '')] || {};
 
   return loader.getLoaderString(styleOption, require.resolve(loaderName));
 };
@@ -63,13 +63,12 @@ loader.getLoader = (loadersOption, loaderName) => {
 loader.generateLoaders = (styleConfig, loaders) => {
   const styleLoaderOption = styleConfig.styleLoaderOption || {};
   const styleLoaderName = styleConfig.styleLoaderName || 'style-loader';
-  const styleLoaderConfig = styleLoaderOption[styleLoaderName] || styleLoaderOption[styleLoaderName.replace(/-loader/, '')];
-  const styleLoader = loader.getLoaderString(styleLoaderConfig, require.resolve(styleLoaderName));
+  const styleLoaderNameOption = styleLoaderOption[styleLoaderName] || styleLoaderOption[styleLoaderName.replace(/-loader/, '')];
+  const styleLoader = loader.getLoaderString(styleLoaderNameOption, require.resolve(styleLoaderName));
 
   const sourceLoader = loaders.map(item => {
-    const option = styleLoaderOption[item] || styleLoaderOption[item.replace(/-loader/, '')];
-
-    return loader.getLoaderString(option, require.resolve(item));
+    const itemStyleLoaderOption = styleLoaderOption[item] || styleLoaderOption[item.replace(/-loader/, '')] || {};
+    return loader.getLoaderString(itemStyleLoaderOption, require.resolve(item));
   }).join('!');
 
   if (styleConfig.extractCss) {
@@ -82,21 +81,83 @@ loader.generateLoaders = (styleConfig, loaders) => {
   return [styleLoader, sourceLoader].join('!');
 };
 
+loader.isTrue = value => {
+  return value !== false;
+};
+
 loader.cssLoaders = styleConfig => {
-  const loaderOption = styleConfig.styleLoaderOption || {};
-  const cssLoaders = { css: loader.generateLoaders(styleConfig, ['css-loader', 'postcss-loader']) };
+  const loaderOption = merge({
+    css: {
+      deps: {
+        postcss: true
+      }
+    },
+    less: {
+      deps: {
+        css: true,
+        postcss: true
+      }
+    },
+    scss: {
+      deps: {
+        css: true,
+        postcss: true
+      }
+    },
+    sass: {
+      deps: {
+        css: true,
+        postcss: true
+      }
+    }
+  }, styleConfig.styleLoaderOption);
 
-  if (loaderOption.less !== false) {
-    cssLoaders.less = loader.generateLoaders(styleConfig, ['css-loader', 'postcss-loader', 'less-loader']);
+  const cssLoaders = {};
+
+  if (loaderOption.css) {
+    const extendCssLoader = ['css-loader'];
+    if (loaderOption.css.deps.postcss) {
+      extendCssLoader.push('postcss-loader');
+    }
+    cssLoaders.css = loader.generateLoaders(styleConfig, extendCssLoader);
   }
 
-  if (loaderOption.scss !== false) {
-    cssLoaders.scss = loader.generateLoaders(styleConfig, ['css-loader', 'postcss-loader', 'sass-loader']);
+  if (loaderOption.less) {
+    const extendLessLoader = [];
+    if (loaderOption.less.deps.css) {
+      extendLessLoader.push('css-loader');
+    }
+    if (loaderOption.less.deps.postcss) {
+      extendLessLoader.push('postcss-loader');
+    }
+    extendLessLoader.push('less-loader');
+    cssLoaders.less = loader.generateLoaders(styleConfig, extendLessLoader);
   }
 
-  if (loaderOption.sass !== false) {
-    cssLoaders.sass = loader.generateLoaders(styleConfig, ['css-loader', 'postcss-loader', 'sass-loader']);
+  if (loaderOption.scss) {
+    const extendScssLoader = [];
+    if (loaderOption.scss.deps.css) {
+      extendScssLoader.push('css-loader');
+    }
+    if (loaderOption.scss.deps.postcss) {
+      extendScssLoader.push('postcss-loader');
+    }
+    extendScssLoader.push('sass-loader');
+    cssLoaders.scss = loader.generateLoaders(styleConfig, extendScssLoader);
   }
+
+  if (loaderOption.sass) {
+    const extendSassLoader = [];
+    if (loaderOption.sass.deps.css) {
+      extendSassLoader.push('css-loader');
+    }
+    if (loaderOption.sass.deps.postcss) {
+      extendSassLoader.push('postcss-loader');
+    }
+    extendSassLoader.push('sass-loader');
+    cssLoaders.sass = loader.generateLoaders(styleConfig, extendSassLoader);
+  }
+
   return cssLoaders;
 };
 
