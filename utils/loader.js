@@ -84,7 +84,7 @@ loader.generateLoaders = (styleConfig, loaders) => {
 loader.getLoaderConfig = (loaderName, styleConfig) => {
   const loadersOption = styleConfig.styleLoaderOption || {};
   const styleOption = loadersOption[loaderName] || loadersOption[loaderName.replace(/-loader/, '')] || {};
-  return merge({ loader: require.resolve(loaderName) }, styleOption)
+  return merge({ loader: loaderName }, styleOption)
 };
 
 loader.getCssLoader = (styleConfig) =>{
