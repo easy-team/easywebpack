@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "0.5.1",
+  "version": "0.5.4",
   "description": "programming instead of configuration, webpack is no longer complex",
   "keywords": [
     "webpack",
@@ -46,7 +46,7 @@
     "webpack-manifest-normalize": "^0.1.0",
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-merge": "^2.4.0",
-    "webpack-tool": "0.0.2"
+    "webpack-tool": "^0.1.4"
   },
   "devDependencies": {
     "chai": "^4.0.0",

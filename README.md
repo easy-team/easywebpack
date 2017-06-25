@@ -28,9 +28,9 @@ programming instead of configuration, webpack is no longer complex. [API Documen
 
 - Support development and production build mode, you can set `process.env.NODE_ENV=development` development or `process.env.NODE_ENV=production`.
 
-- Support call `EasyWebpack.build({ webpackConfig: [clientConfig, serverConfig]}, callback)` direct compiler file.
+- Support call `EasyWebpack.build(webpackConfig, callback)` direct compiler file.
 
-- Support call `EasyWebpack.server({ webpackConfig: [clientConfig, serverConfig]})` start webpack dev server.
+- Support call `EasyWebpack.server(webpackConfig)` start webpack dev server.
 
 
 ## Install

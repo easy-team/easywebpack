@@ -81,6 +81,24 @@ loader.generateLoaders = (styleConfig, loaders) => {
   return [styleLoader, sourceLoader].join('!');
 };
 
+loader.getLoaderConfig = (loaderName, styleConfig) => {
+  const loadersOption = styleConfig.styleLoaderOption || {};
+  const styleOption = loadersOption[loaderName] || loadersOption[loaderName.replace(/-loader/, '')] || {};
+  return merge({ loader: require.resolve(loaderName) }, styleOption)
+};
+
+loader.getCssLoader = (styleConfig) =>{
+  return loader.getLoaderConfig('css-loader', styleConfig);
+};
+
+loader.getLessLoader = (styleConfig) =>{
+  return loader.getLoaderConfig('less-loader', styleConfig);
+};
+
+loader.getSassLoader = (styleConfig) =>{
+  return loader.getLoaderConfig('sass-loader', styleConfig);
+};
+
 loader.isTrue = value => {
   return value !== false;
 };
