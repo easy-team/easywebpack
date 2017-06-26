@@ -83,7 +83,7 @@ webpack server config: `new WebpackServerBuilder(config).create()`
 const EggWebpack = require('easywebpack');
 const clientConfig = require('./build/client');
 const serverConfig = require('./build/server');
-EggWebpack.build([clientConfig, serverConfig], {}, () => {
+EggWebpack.build([clientConfig, serverConfig], () => {
   console.log('wepback vue build finished');
 });
 ```
