@@ -87,8 +87,7 @@ utils.getIp = position => {
 
 utils.getHost = (config, position, isServer) => {
   const ip = utils.getIp(position);
-
-  return `http://${ip}:${isServer ? config.build.port + 1 : config.build.port}`;
+  return `http://${ip}:${isServer ? config.build.port + 2 : config.build.port + 1}`;
 };
 
 utils.getDevPublicPath = (config, position) => utils.getHost(config, position) + config.build.publicPath;
