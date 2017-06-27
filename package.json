@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "programming instead of configuration, webpack is no longer complex",
   "keywords": [
     "webpack",
@@ -27,6 +27,7 @@
     "fs": "0.0.2",
     "html-webpack-plugin": "^2.21.0",
     "http-proxy-middleware": "^0.17.2",
+    "imagemin-webpack-plugin": "^1.4.4",
     "json-loader": "^0.5.4",
     "less": "^2.7.1",
     "less-loader": "^4.0.3",

@@ -4,6 +4,22 @@ const fs = require('fs');
 const mkdirp = require('mkdirp');
 const utils = {};
 
+utils.isFunction = value =>{
+  return typeof value === 'function';
+};
+
+utils.isObject = value =>{
+  return typeof value === 'object';
+};
+
+utils.isString = value =>{
+  return typeof value === 'string';
+};
+
+utils.isBoolean = value =>{
+  return typeof value === 'boolean';
+};
+
 utils.getEntry = (dirs, excludeRegex) => {
   const entries = {};
   let entryDir = '';
