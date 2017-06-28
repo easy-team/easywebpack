@@ -4,20 +4,24 @@ const fs = require('fs');
 const mkdirp = require('mkdirp');
 const utils = {};
 
-utils.isFunction = value =>{
+utils.isFunction = value => {
   return typeof value === 'function';
 };
 
-utils.isObject = value =>{
+utils.isObject = value => {
   return typeof value === 'object';
 };
 
-utils.isString = value =>{
+utils.isString = value => {
   return typeof value === 'string';
 };
 
-utils.isBoolean = value =>{
+utils.isBoolean = value => {
   return typeof value === 'boolean';
+};
+
+utils.normalizePath = (filepath, baseDir) => {
+  return path.isAbsolute(filepath) ? filepath : path.join(baseDir, filepath);
 };
 
 utils.getEntry = (dirs, excludeRegex) => {

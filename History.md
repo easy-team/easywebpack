@@ -1,4 +1,12 @@
 
+0.5.7 / 2017-06-27
+==================
+
+  * feat:image crompress
+  * publish:0.5.6
+  * fix:webpack build server port
+  * Update README.md
+
 0.5.5 / 2017-06-25
 ==================
 
