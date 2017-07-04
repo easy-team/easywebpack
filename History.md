@@ -1,4 +1,9 @@
 
+0.5.13 / 2017-07-04
+===================
+
+  * fix:server build image path error and support cdn
+
 0.5.10 / 2017-06-28
 ===================
 
