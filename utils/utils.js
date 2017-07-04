@@ -4,24 +4,24 @@ const fs = require('fs');
 const mkdirp = require('mkdirp');
 const utils = {};
 
-utils.isFunction = value => {
-  return typeof value === 'function';
-};
+utils.isFunction = value => typeof value === 'function';
 
-utils.isObject = value => {
-  return typeof value === 'object';
-};
+utils.isObject = value => typeof value === 'object';
 
-utils.isString = value => {
-  return typeof value === 'string';
-};
+utils.isString = value => typeof value === 'string';
 
-utils.isBoolean = value => {
-  return typeof value === 'boolean';
-};
+utils.isBoolean = value => typeof value === 'boolean';
 
-utils.normalizePath = (filepath, baseDir) => {
-  return path.isAbsolute(filepath) ? filepath : path.join(baseDir, filepath);
+utils.normalizePath = (filepath, baseDir) => path.isAbsolute(filepath) ? filepath : path.join(baseDir, filepath);
+
+utils.joinPath = function() {
+  return [].slice.call(arguments, 0).map((arg, index) => {
+    let tempArg = arg.replace(/\/$/, '');
+    if (index > 0) {
+      tempArg = arg.replace(/^\//, '');
+    }
+    return tempArg;
+  }).join('/');
 };
 
 utils.getEntry = (dirs, excludeRegex) => {
@@ -134,21 +134,11 @@ utils.readFile = filepath => {
   return null;
 };
 
-utils.getPublicPath = (config, webpackConfig) => {
-  let publicPath = webpackConfig.output.publicPath;
-
-  if (config.env !== 'dev' && config.build.cdnDynamicDir && /^(https?|\/\/)/.test(publicPath)) {
-    publicPath = `${publicPath.replace(/\/$/, '')}/${config.build.cdnDynamicDir}/`;
-  }
-  return publicPath;
-};
 
 utils.saveBuildConfig = (config, webpackConfig) => {
   const filepath = path.join(config.baseDir, 'config/buildConfig.json');
-
   utils.writeFile(filepath, {
-    publicPath: utils.getPublicPath(config, webpackConfig),
-    cdnDynamicDir: config.build.cdnDynamicDir,
+    publicPath: webpackConfig.output.publicPath,
     commonsChunk: config.build.commonsChunk
   });
 };

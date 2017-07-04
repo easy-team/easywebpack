@@ -32,7 +32,7 @@ loader.generateLoaders = (styleConfig, loaders) => {
   return [styleLoader].concat(sourceLoader);
 };
 
-loader.createPostCssLoader = (styleConfig) => {
+loader.createPostCssLoader = styleConfig => {
   if (styleConfig.styleLoaderOption.postcss) {
     styleConfig.styleLoaderOption.postcss = [
       require('autoprefixer')({
@@ -42,18 +42,14 @@ loader.createPostCssLoader = (styleConfig) => {
   }
   return loader.generateLoaders(styleConfig, [{
     loader: 'postcss-loader'
-  }])
+  }]);
 };
 
-loader.createRuleStyleLoader = (styles, styleConfig) => {
-  return styles.map(style => {
-    return {
-      test: new RegExp(`\\.${style}$`),
-      use: loader.generateLoaders(styleConfig, [{
-        loader: `${style}-loader`
-      }])
-    }
-  });
-};
+loader.createRuleStyleLoader = (styles, styleConfig) => styles.map(style => ({
+  test: new RegExp(`\\.${style}$`),
+  use: loader.generateLoaders(styleConfig, [{
+    loader: `${style}-loader`
+  }])
+}));
 
 module.exports = loader;

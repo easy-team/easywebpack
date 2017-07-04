@@ -7,7 +7,7 @@ const loader = {};
 /**
  * {[ '/app/web/asset/style','/app/web/framework' ],c: '1',d: 'test',a: true,b: false }
  * => includePaths[]=/app/web/asset/style,includePaths[]=/app/web/framework,c=1,d=test,+a,-b
- * @param {Object}  options  json config
+ * @param {Object}  styleLoaderOption  json config
  * @param {string}  name  loader name or loader entry filepath
  * @returns {string} format loader option str
  */
@@ -84,24 +84,16 @@ loader.generateLoaders = (styleConfig, loaders) => {
 loader.getLoaderConfig = (loaderName, styleConfig) => {
   const loadersOption = styleConfig.styleLoaderOption || {};
   const styleOption = loadersOption[loaderName] || loadersOption[loaderName.replace(/-loader/, '')] || {};
-  return merge({ loader: loaderName }, styleOption)
+  return merge({ loader: loaderName }, styleOption);
 };
 
-loader.getCssLoader = (styleConfig) =>{
-  return loader.getLoaderConfig('css-loader', styleConfig);
-};
+loader.getCssLoader = styleConfig => loader.getLoaderConfig('css-loader', styleConfig);
 
-loader.getLessLoader = (styleConfig) =>{
-  return loader.getLoaderConfig('less-loader', styleConfig);
-};
+loader.getLessLoader = styleConfig => loader.getLoaderConfig('less-loader', styleConfig);
 
-loader.getSassLoader = (styleConfig) =>{
-  return loader.getLoaderConfig('sass-loader', styleConfig);
-};
+loader.getSassLoader = styleConfig => loader.getLoaderConfig('sass-loader', styleConfig);
 
-loader.isTrue = value => {
-  return value !== false;
-};
+loader.isTrue = value => value !== false;
 
 loader.cssLoaders = styleConfig => {
   const loaderOption = merge({
