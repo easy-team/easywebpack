@@ -70,7 +70,6 @@ loader.generateLoaders = (styleConfig, loaders) => {
     const itemStyleLoaderOption = styleLoaderOption[item] || styleLoaderOption[item.replace(/-loader/, '')] || {};
     return loader.getLoaderString(itemStyleLoaderOption, require.resolve(item));
   }).join('!');
-
   if (styleConfig.extractCss) {
     return ExtractTextPlugin.extract({
       fallback: styleLoader,

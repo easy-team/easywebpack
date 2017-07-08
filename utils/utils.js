@@ -32,7 +32,6 @@ utils.getEntry = (dirs, excludeRegex) => {
 
     dirList.forEach(item => {
       const filePath = path.join(dir, item);
-
       if (fs.statSync(filePath).isDirectory()) {
         walk(filePath, exclude);
       } else {
@@ -105,12 +104,10 @@ utils.getIp = position => {
 
 };
 
-utils.getHost = (config, position, isServer) => {
-  const ip = utils.getIp(position);
-  return `http://${ip}:${isServer ? config.build.port + 2 : config.build.port + 1}`;
+utils.getHost = (port, isServer) => {
+  const ip = utils.getIp();
+  return `http://${ip}:${isServer ? port + 2 : port + 1}`;
 };
-
-utils.getDevPublicPath = (config, position) => utils.getHost(config, position) + config.build.publicPath;
 
 utils.writeFile = (filepath, content) => {
   try {
@@ -135,12 +132,8 @@ utils.readFile = filepath => {
 };
 
 
-utils.saveBuildConfig = (config, webpackConfig) => {
-  const filepath = path.join(config.baseDir, 'config/buildConfig.json');
-  utils.writeFile(filepath, {
-    publicPath: webpackConfig.output.publicPath,
-    commonsChunk: config.build.commonsChunk
-  });
+utils.saveBuildConfig = (filepath, buildConfig) => {
+  utils.writeFile(filepath, buildConfig);
 };
 
 module.exports = utils;

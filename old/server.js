@@ -3,12 +3,11 @@ const WebpackBaseBuilder = require('./base');
 const Utils = require('../utils/utils');
 
 class WebpackServerBuilder extends WebpackBaseBuilder {
-  constructor(baseDir) {
-    super(baseDir);
+  constructor(config) {
+    super(config);
     this.setPrefix('server');
-    this.setHot(false);
+    this.initServerOption();
     this.setCssExtract(false);
-    this.setFileNameHash(false);
     this.setMiniImage(false);
   }
 
@@ -16,7 +15,8 @@ class WebpackServerBuilder extends WebpackBaseBuilder {
     this.setOption({
       target: 'node',
       output: {
-        libraryTarget: 'commonjs2'
+        libraryTarget: 'commonjs2',
+        filename: Utils.assetsPath(this.prefix, '[name].js')
       },
       context: __dirname,
       node: {
@@ -28,8 +28,11 @@ class WebpackServerBuilder extends WebpackBaseBuilder {
   }
 
   create() {
-    this.filename = Utils.assetsPath(this.prefix, '[name].js');
-    this.initServerOption();
+    this.setOption({
+      output: {
+        filename: Utils.assetsPath(this.prefix, '[name].js')
+      }
+    });
     return super.create();
   }
 }
