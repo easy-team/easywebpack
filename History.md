@@ -1,4 +1,11 @@
 
+0.6.0 / 2017-07-11
+==================
+
+  * refacotr:support cli
+  * feat:cli
+  * refactor:support html and pack
+
 0.5.15 / 2017-07-07
 ===================
 
