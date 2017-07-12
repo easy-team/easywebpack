@@ -1,4 +1,11 @@
 
+0.6.3 / 2017-07-12
+==================
+
+  * refactor:support config
+  * feat:add build path in buildConfig
+  * feat:support local test
+
 0.6.1 / 2017-07-11
 ==================
 
