@@ -10,7 +10,11 @@ function createBuilder(){
   const builder = new WebpackBaseBuilder();
   builder.setBuildPath(path.join(__dirname, 'test'));
   builder.setPublicPath('/public');
-  builder.setEntry(path.join(__dirname, 'test'));
+  builder.setEntry({
+    entry:{
+      include: path.join(__dirname, 'test')
+    }
+  });
   return builder;
 }
 
@@ -134,8 +138,8 @@ describe('base.test.js', () => {
 
     it('should createWebpackPlugin UglifyJs and StatToJson test', () => {
       const builder = createBuilder();
-      builder.createMiniJsPlugin(true);
-      builder.createStatPlugin(true);
+      builder.setMiniJs(true);
+      builder.addStat(true);
       const webpackPlugins = builder.createWebpackPlugin();
       expect(webpackPlugins.length === 2);
       expect(webpackPlugins.some(plugin => plugin.constructor.name === 'UglifyJsPlugin')).to.be.true;
@@ -144,10 +148,10 @@ describe('base.test.js', () => {
 
     it('should createWebpackPlugin createMiniCssPlugin/createMiniImagePlugin/createMiniJsPlugin test', () => {
       const builder = createBuilder();
-      builder.createMiniCssPlugin(true);
-      builder.createMiniImagePlugin(true);
-      builder.createMiniJsPlugin(true);
-      builder.createStatPlugin(true);
+      builder.setMiniCss(true);
+      builder.setMiniImage(true);
+      builder.setMiniJs(true);
+      builder.addStat(true);
       const webpackPlugins = builder.createWebpackPlugin();
       expect(webpackPlugins.length === 4);
       expect(webpackPlugins.some(plugin => plugin.constructor.name === 'UglifyJsPlugin')).to.be.true;
@@ -171,7 +175,7 @@ describe('base.test.js', () => {
     it('should create webpack config', () => {
       const builder = createBuilder();
       const webpackConfig = builder.create();
-      expect(webpackConfig).to.include.all.keys('entry', 'module', 'output', 'resolve', 'plugins');
+      expect(webpackConfig).to.include.all.keys('module', 'output', 'resolve', 'plugins');
       expect(webpackConfig.module.rules).to.be.an('array');
       expect(webpackConfig.plugins).to.be.an('array');
       expect(webpackConfig.resolve.extensions).to.be.an('array').that.includes('.js');

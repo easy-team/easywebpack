@@ -10,7 +10,11 @@ function createBuilder(){
   const builder = new WebpackServerBuilder();
   builder.setBuildPath(path.join(__dirname, 'test'));
   builder.setPublicPath('/public');
-  builder.setEntry(path.join(__dirname, 'test'));
+  builder.setEntry({
+    entry:{
+      include: path.join(__dirname, 'test')
+    }
+  });
   return builder;
 }
 
@@ -31,7 +35,7 @@ describe('server.test.js', () => {
     it('should create webpack config', () => {
       const builder = createBuilder();
       const webpackConfig = builder.create();
-      expect(webpackConfig).to.include.all.keys('entry', 'module', 'output', 'resolve', 'plugins');
+      expect(webpackConfig).to.include.all.keys('module', 'output', 'resolve', 'plugins');
       expect(webpackConfig.module.rules).to.be.an('array');
       expect(webpackConfig.plugins).to.be.an('array');
       expect(webpackConfig.resolve.extensions).to.be.an('array').that.includes('.js');
