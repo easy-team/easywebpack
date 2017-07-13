@@ -42,15 +42,15 @@ loader.getStyleLoaderOption = styleConfig => {
   const loaderOption = {
     loaders: loader.cssLoaders(styleConfig)
   };
-  const styleLoaderOption = styleConfig.styleLoaderOption || {};
-
-  if (styleLoaderOption.autoprefixer !== false) {
-    loaderOption.postcss = [
-      require('autoprefixer')({
-        browsers: Array.isArray(styleLoaderOption.autoprefixer) ? styleLoaderOption.autoprefixer : ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8']
-      })
-    ];
-  }
+  //const styleLoaderOption = styleConfig.styleLoaderOption || {};
+  //
+  //if (styleLoaderOption.autoprefixer !== false) {
+  //  loaderOption.postcss = [
+  //    require('autoprefixer')({
+  //      browsers: Array.isArray(styleLoaderOption.autoprefixer) ? styleLoaderOption.autoprefixer : ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8']
+  //    })
+  //  ];
+  //}
   return loaderOption;
 };
 

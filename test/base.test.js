@@ -131,7 +131,7 @@ describe('base.test.js', () => {
       const builder = createBuilder();
       const count = builder.plugins.length;
       builder.addPlugin(webpack.LoaderOptionsPlugin, () => ({ minimize: false }));
-      expect(builder.plugins.length).to.equal(count);
+      expect(builder.plugins.length).to.equal(count + 1);
       const webpackPlugins = builder.createWebpackPlugin();
       expect(webpackPlugins.some(plugin => plugin.constructor.name === 'LoaderOptionsPlugin')).to.be.true;
     });
