@@ -1,4 +1,11 @@
 
+0.7.2 / 2017-07-18
+==================
+
+  * fix:dev mode port
+  * refactor: default env config
+  * feat: static resource proxy
+
 0.7.0 / 2017-07-18
 ==================
 
