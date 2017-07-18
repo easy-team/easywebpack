@@ -104,9 +104,9 @@ utils.getIp = position => {
 
 };
 
-utils.getHost = (port, isServer) => {
+utils.getHost = port => {
   const ip = utils.getIp();
-  return `http://${ip}:${isServer ? port + 2 : port + 1}`;
+  return `http://${ip}:${port}`;
 };
 
 utils.writeFile = (filepath, content) => {

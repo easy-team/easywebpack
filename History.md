@@ -1,4 +1,10 @@
 
+0.7.0 / 2017-07-18
+==================
+
+  * refactor: default env config
+  * feat: static resource proxy
+
 0.6.5 / 2017-07-14
 ==================
 
