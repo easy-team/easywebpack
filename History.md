@@ -1,4 +1,11 @@
 
+0.8.1 / 2017-07-25
+==================
+
+  * fix:weex html
+  * feat:support cli
+  * fix:hot port mapping egg-webpack
+
 0.7.2 / 2017-07-18
 ==================
 
