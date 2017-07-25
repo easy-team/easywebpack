@@ -35,7 +35,6 @@ describe('client.test.js', () => {
     it('should create webpack config', () => {
       const builder = createBuilder();
       const webpackConfig = builder.create();
-      console.log(webpackConfig);
       expect(webpackConfig).to.include.all.keys('module', 'output', 'resolve', 'plugins');
       expect(webpackConfig.module.rules).to.be.an('array');
       expect(webpackConfig.plugins).to.be.an('array');
