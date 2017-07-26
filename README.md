@@ -20,7 +20,7 @@
 [download-image]: https://img.shields.io/npm/dm/easywebpack.svg?style=flat-square
 [download-url]: https://npmjs.org/package/easywebpack
 
-programming instead of configuration, webpack is no longer complex. [API Document And Example](https://github.com/hubcarl/easywebpack/blob/master/doc/easywebpack.md).
+programming instead of configuration, webpack is no longer complex. 
 
 - Support server and client webpack general compiler configuration.
 
@@ -32,6 +32,7 @@ programming instead of configuration, webpack is no longer complex. [API Documen
 
 - Support call `EasyWebpack.server(webpackConfig)` start webpack dev server.
 
+- [API Document](http://hubcarl.github.io/easywebpack/webpack/api/) [Example](http://hubcarl.github.io/easywebpack/vue/easywebpack-vue-project/) [配置参数](http://hubcarl.github.io/easywebpack/webpack/config/)
 
 ## Install
 
