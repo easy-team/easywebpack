@@ -29,7 +29,10 @@ utils.createEntry = (config, type) => {
   if (configEntry && configEntry.include) {
     const entryDirs = Array.isArray(configEntry.include) ? configEntry.include : [configEntry.include];
     const normalizeEntryDirs = entryDirs.map(entryDir => utils.normalizePath(entryDir, config.baseDir));
-    const entryLoader = configEntry.loader && configEntry.loader[type];
+    let entryLoader = configEntry.loader && configEntry.loader[type];
+    if(entryLoader){
+      entryLoader = utils.normalizePath(entryLoader, config.baseDir);
+    }
     return utils.getEntry(normalizeEntryDirs, configEntry.exclude, configEntry.extMatch, entryLoader);
   }
   return {};
@@ -47,7 +50,7 @@ utils.getEntry = (dirs, excludeRegex, extMatch = '.js', entryLoader) => {
       } else {
         if (!utils.isMatch(exclude, filePath)) {
           if (filePath.endsWith(extMatch)) {
-            const fileName = filePath.replace(entryDir, '').replace(/^\//, '').replace(/\.js$/, '');
+            const fileName = filePath.replace(entryDir, '').replace(/^\//, '').replace(extMatch, '');
             if (entryLoader) {
               entries[fileName] = ['babel-loader', entryLoader, filePath].join('!');
             } else {
