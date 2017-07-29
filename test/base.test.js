@@ -6,14 +6,12 @@ const WebpackBaseBuilder = require('../lib/base');
 const Loader = require('../utils/loader');
 const path = require('path');
 // http://chaijs.com/api/bdd/
-function createBuilder(){
+function createBuilder() {
   const builder = new WebpackBaseBuilder();
   builder.setBuildPath(path.join(__dirname, 'test'));
   builder.setPublicPath('/public');
   builder.setEntry({
-    entry:{
-      include: path.join(__dirname, 'test')
-    }
+    include: path.join(__dirname, 'test')
   });
   return builder;
 }
@@ -39,7 +37,7 @@ describe('base.test.js', () => {
 
       builder.setOption({
         resolve: {
-          extensions: ['.vue', '.jsx']
+          extensions: ['.vue']
         },
         output: {
           path: __dirname,

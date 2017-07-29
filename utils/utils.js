@@ -24,22 +24,35 @@ utils.joinPath = function() {
   }).join('/');
 };
 
-utils.getEntry = (dirs, excludeRegex) => {
+utils.createEntry = (config, type) => {
+  const configEntry = config.entry;
+  if (configEntry && configEntry.include) {
+    const entryDirs = Array.isArray(configEntry.include) ? configEntry.include : [configEntry.include];
+    const normalizeEntryDirs = entryDirs.map(entryDir => utils.normalizePath(entryDir, config.baseDir));
+    const entryLoader = configEntry.loader && configEntry.loader[type];
+    return utils.getEntry(normalizeEntryDirs, configEntry.exclude, configEntry.extMatch, entryLoader);
+  }
+  return {};
+};
+
+utils.getEntry = (dirs, excludeRegex, extMatch = '.js', entryLoader) => {
   const entries = {};
   let entryDir = '';
   const walk = (dir, exclude) => {
     const dirList = fs.readdirSync(dir);
-
     dirList.forEach(item => {
       const filePath = path.join(dir, item);
       if (fs.statSync(filePath).isDirectory()) {
         walk(filePath, exclude);
       } else {
         if (!utils.isMatch(exclude, filePath)) {
-          if (/\.js$/.test(filePath)) {
+          if (filePath.endsWith(extMatch)) {
             const fileName = filePath.replace(entryDir, '').replace(/^\//, '').replace(/\.js$/, '');
-
-            entries[fileName] = filePath;
+            if (entryLoader) {
+              entries[fileName] = ['babel-loader', entryLoader, filePath].join('!');
+            } else {
+              entries[fileName] = filePath;
+            }
           }
         }
       }

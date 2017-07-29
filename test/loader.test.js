@@ -11,9 +11,7 @@ function createBuilder() {
   builder.setBuildPath(path.join(__dirname, 'test'));
   builder.setPublicPath('/public');
   builder.setEntry({
-    entry: {
-      include: path.join(__dirname, 'test')
-    }
+    include: path.join(__dirname, 'test')
   });
   return builder;
 }
@@ -98,8 +96,8 @@ describe('loader.test.js', () => {
       const builder = createBuilder();
       builder.addLoader(imageLoader);
       builder.addLoader(fontLoader);
-      const imageLoaderIndex = builder.findLoaderIndex(imageLoader);
-      const fontLoaderIndex = builder.findLoaderIndex(fontLoader);
+      const imageLoaderIndex = builder.findLoaderIndex(imageLoader, 'all');
+      const fontLoaderIndex = builder.findLoaderIndex(fontLoader, 'all');
 
       expect(imageLoaderIndex > -1);
       expect(builder.loaders[imageLoaderIndex].test.toString()).to.equal(imageLoader.test.toString());
@@ -111,7 +109,7 @@ describe('loader.test.js', () => {
     it('should addLoader#test_loader_option_function', () => {
       const builder = createBuilder();
       builder.addLoader(fontLoader);
-      builder.addLoader(fontLoader.test, fontLoader.loader, () => merge({ query: fontLoader.query }, { query: { name: 'font-url-loader' } }));
+      builder.addLoader(fontLoader.test, fontLoader.loader, () => merge({ query: fontLoader.query }, { query: { name: 'font-url-loader' } }), null, 'replace');
 
       const urlLoaders = () => builder.loaders.filter(item => item.test.toString() === fontLoader.test.toString());
       expect(urlLoaders().length).to.equal(1);
@@ -122,6 +120,20 @@ describe('loader.test.js', () => {
       expect(expectLoader).to.have.property('fn');
       expect(expectLoader.fn().query.limit).to.equal(2048);
       expect(expectLoader.fn().query.name).to.equal('font-url-loader');
+    });
+
+    it('should addLoader#test_loader_merge', () => {
+      const builder = createBuilder();
+      builder.addLoader({
+        test: /\.jsx$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      });
+      builder.addLoader({
+        test: /\.jsx$/,
+        loader: 'json-loader'
+      }, null, null, null, 'merge');
+      console.log(builder.loaders[0]);
     });
   });
 });
