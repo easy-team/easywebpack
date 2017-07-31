@@ -1,4 +1,12 @@
 
+0.9.3 / 2017-07-31
+==================
+
+  * deps:upgrade all npm package
+  * fix:auto entry loader path error
+  * feat:auto entry loader
+  * doc:update guild link
+
 0.8.1 / 2017-07-25
 ==================
 
