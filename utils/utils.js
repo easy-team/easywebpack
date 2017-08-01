@@ -83,12 +83,18 @@ utils.isMatch = (regexArray, strMatch) => {
 utils.assetsPath = (prefix, filepath) => path.posix.join(prefix, filepath);
 
 
-utils.loadNodeModules = () => {
-  const nodeModules = {};
-
+utils.loadNodeModules = (isCache) => {
+  let nodeModules = {};
+  const cacheFile = path.join(__dirname, '../temp/cache.json');
+  if(isCache && fs.existsSync(cacheFile)){
+    return require(cacheFile);
+  }
   fs.readdirSync('node_modules').filter(x => ['.bin'].indexOf(x) === -1).forEach(mod => {
     nodeModules[mod] = `commonjs2 ${mod}`;
   });
+  if(isCache){
+    utils.writeFile(cacheFile, nodeModules);
+  }
   return nodeModules;
 };
 
