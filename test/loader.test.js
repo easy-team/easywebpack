@@ -86,10 +86,12 @@ describe('loader.test.js', () => {
 
     it('should addLoader#test_loader_replace_and_update', () => {
       const builder = createBuilder();
-      builder.addImageLoader({ query: { limit: 2048 } });
+      builder.setConfig({loaderOption:{
+        imageUrl: { query: { limit: 2048 } }
+      }});
       const loaderIndex = builder.findLoaderIndex(imageLoader);
       expect(loaderIndex > -1);
-      expect(builder.loaders[loaderIndex].query.limit).to.equal(2048);
+      expect(builder.loaders[loaderIndex].fn().query.limit).to.equal(2048);
     });
 
     it('should addLoader#test_same_loader_name_add', () => {
@@ -108,32 +110,18 @@ describe('loader.test.js', () => {
 
     it('should addLoader#test_loader_option_function', () => {
       const builder = createBuilder();
-      builder.addLoader(fontLoader);
+      builder.addLoader(fontLoader, null, null, null, 'replace');
       builder.addLoader(fontLoader.test, fontLoader.loader, () => merge({ query: fontLoader.query }, { query: { name: 'font-url-loader' } }), null, 'replace');
 
       const urlLoaders = () => builder.loaders.filter(item => item.test.toString() === fontLoader.test.toString());
       expect(urlLoaders().length).to.equal(1);
 
-      const fontLoaderIndex = builder.findLoaderIndex(fontLoader);
+      const fontLoaderIndex = builder.findLoaderIndex(fontLoader, 'all');
       const expectLoader = builder.loaders[fontLoaderIndex];
       
       expect(expectLoader).to.have.property('fn');
       expect(expectLoader.fn().query.limit).to.equal(2048);
       expect(expectLoader.fn().query.name).to.equal('font-url-loader');
-    });
-
-    it('should addLoader#test_loader_merge', () => {
-      const builder = createBuilder();
-      builder.addLoader({
-        test: /\.jsx$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      });
-      builder.addLoader({
-        test: /\.jsx$/,
-        loader: 'json-loader'
-      }, null, null, null, 'merge');
-      console.log(builder.loaders[0]);
     });
   });
 });
