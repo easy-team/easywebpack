@@ -24,13 +24,19 @@ programming instead of configuration, webpack is no longer complex.
 
 - Support server and client webpack general compiler configuration.
 
-- Support custom components such as Vue or React by extending the WebpackClientBuilder or WebpackServerBuilder extension.
+- Support Multi-page and Single-page webpack build.
 
-- Support development and production build mode, you can set `process.env.NODE_ENV=development` development or `process.env.NODE_ENV=production`.
+- Support auto build webpack entry by `.vue` and `.jsx`.
+
+- Support hot-reload and  javascript/css/image `compress`, `mini`, `hash`. 
+
+- Support `dev`, `test`, `prod` build mode, you can call `setEnv(evn)` set.
 
 - Support call `EasyWebpack.build(webpackConfig, callback)` direct compiler file.
 
 - Support call `EasyWebpack.server(webpackConfig)` start webpack dev server.
+
+- Support custom components such as Vue or React by extending the WebpackClientBuilder or WebpackServerBuilder extension.
 
 - [API Document](http://hubcarl.github.io/easywebpack/webpack/api/) [Example](http://hubcarl.github.io/easywebpack/vue/easywebpack-vue-project/) [配置参数](http://hubcarl.github.io/easywebpack/webpack/config/)
 
@@ -39,8 +45,6 @@ programming instead of configuration, webpack is no longer complex.
 ```bash
 $ npm i easywebpack --save-dev
 ```
-
-webpack solution: [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) and [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git)
 
 ## Usage
 
@@ -107,17 +111,29 @@ npm run build-dev
 npm run build-prod
 ```
 
+## Build Solution
+
+- [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) 
+- [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git)
+- [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git)
+
+## Project Boilerplate
+
+- [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) support vue server side render and client render
+
+- [egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate) support react server side render and client render
+
+- [easywebpack-weex-boilerplate](https://github.com/hubcarl/easywebpack-weex-boilerplate) support weex native build and web build
+
+## Webpack Command Tool
+
+[easywebpack-cli](https://github.com/hubcarl/easywebpack.git) Webpack Building Command Line And Boilerplate Init Tool for easywebpack
+
 ## Configuration
 
-see [builder/config.js](builder/config.js) for more detail.
-
-## easywebpack extend solution and project boilerplate
+- see [builder/config.js](builder/config.js) for more detail.
 
 - more detail, please see [WebpackClientBuilder](https://github.com/hubcarl/easywebpack/blob/master/lib/client.js) and [WebpackServerBuilder](https://github.com/hubcarl/easywebpack/blob/master/lib/server.js)
-
-- custom webpack build solution base on easywebpack, please see custom plugin [egg-webpack-vue](https://github.com/hubcarl/egg-webpack-vue) for easywebpack + vue
-
-- webpack+vue project boilerplate [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) base on egg-webpack-vue and egg-webpack.
 
 
 ## Questions & Suggestions
