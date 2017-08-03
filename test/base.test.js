@@ -54,6 +54,25 @@ describe('base.test.js', () => {
       expect(builder.options.resolve.extensions).to.have.lengthOf(3);
       expect(builder.options.plugins).to.have.lengthOf(optionPluginCount);
     });
+
+    it('should option method test', () => {
+      const builder = createBuilder();
+      builder.setExternals({ $: 'window.jquery' });
+      builder.setAlias('component', 'app/web/component');
+      builder.setAlias('asset', 'app/web/asset', false);
+      builder.setAlias({
+        'widget': 'app/web/widget'
+      });
+      builder.setDefine('process.env.system', 'web');
+
+      const webpackConfig = builder.create();
+      expect(builder.options.resolve.alias).to.have.property('component');
+      expect(builder.options.resolve.alias).to.have.property('widget');
+      expect(webpackConfig.resolve.alias).to.have.property('component');
+      expect(webpackConfig.resolve.alias).to.have.property('widget');
+      expect(webpackConfig.resolve.alias['component']).to.not.equal('app/web/component');
+      expect(webpackConfig.resolve.alias['asset']).to.equal('app/web/asset');
+    });
   });
 
   describe('#webpack public method test', () => {
@@ -137,7 +156,7 @@ describe('base.test.js', () => {
     it('should createWebpackPlugin UglifyJs and StatToJson test', () => {
       const builder = createBuilder();
       builder.setMiniJs(true);
-      builder.addStat(true);
+      builder.setConfig({ pluginOption: {stat: true} });
       const webpackPlugins = builder.createWebpackPlugin();
       expect(webpackPlugins.length === 2);
       expect(webpackPlugins.some(plugin => plugin.constructor.name === 'UglifyJsPlugin')).to.be.true;
@@ -149,7 +168,7 @@ describe('base.test.js', () => {
       builder.setMiniCss(true);
       builder.setMiniImage(true);
       builder.setMiniJs(true);
-      builder.addStat(true);
+      builder.setConfig({ pluginOption: {stat: true} });
       const webpackPlugins = builder.createWebpackPlugin();
       expect(webpackPlugins.length === 4);
       expect(webpackPlugins.some(plugin => plugin.constructor.name === 'UglifyJsPlugin')).to.be.true;

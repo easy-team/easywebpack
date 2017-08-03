@@ -50,7 +50,7 @@ describe('loader.test.js', () => {
         }
       });
 
-      const newLoaderIndex = builder.findLoaderIndex('vue-loader');
+      const newLoaderIndex = builder.findLoaderIndex('vue-loader', 'loader');
 
       const newLoader = builder.loaders[newLoaderIndex];
 
@@ -64,6 +64,42 @@ describe('loader.test.js', () => {
       expect(vueLoader.options).to.have.property('loaders');
       expect(vueLoader.options).to.have.property('compilerModules');
     });
+  });
+
+  describe('#webpack loader delete test', () => {
+    const imageLoader = {
+      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+      loader: 'url-loader',
+      query: {
+        limit: 2048
+      }
+    };
+    const builder = createBuilder();
+    expect(builder.findLoaderIndex(imageLoader) > -1);
+
+    builder.deleteLoader(imageLoader);
+    expect(builder.findLoaderIndex(imageLoader) === -1);
+
+    builder.addLoader(imageLoader);
+    expect(builder.findLoaderIndex(imageLoader) > -1);
+    builder.deleteLoader('url-loader');
+    expect(builder.findLoaderIndex(imageLoader) === -1);
+
+    builder.addLoader(imageLoader);
+    expect(builder.findLoaderIndex(imageLoader) > -1);
+    builder.deleteLoader({loader: 'url-loader'}, 'loader');
+    expect(builder.findLoaderIndex(imageLoader) === -1);
+
+    builder.addLoader(imageLoader);
+    expect(builder.findLoaderIndex(imageLoader) > -1);
+    builder.deleteLoader({test: /\.(png|jpe?g|gif|svg)(\?.*)?$/}, 'test');
+    expect(builder.findLoaderIndex(imageLoader) === -1);
+
+    expect(builder.deleteLoader({test: /\.(png|jpe?g|gif|svg)(\?.*)?$/}) === null );
+  });
+
+  describe('#webpack loader find test', () => {
+
   });
 
   describe('#webpack loader add test', () => {
@@ -86,9 +122,11 @@ describe('loader.test.js', () => {
 
     it('should addLoader#test_loader_replace_and_update', () => {
       const builder = createBuilder();
-      builder.setConfig({loaderOption:{
-        imageUrl: { query: { limit: 2048 } }
-      }});
+      builder.setConfig({
+        loaderOption: {
+          imageUrl: { query: { limit: 2048 } }
+        }
+      });
       const loaderIndex = builder.findLoaderIndex(imageLoader);
       expect(loaderIndex > -1);
       expect(builder.loaders[loaderIndex].fn().query.limit).to.equal(2048);
@@ -118,7 +156,7 @@ describe('loader.test.js', () => {
 
       const fontLoaderIndex = builder.findLoaderIndex(fontLoader, 'all');
       const expectLoader = builder.loaders[fontLoaderIndex];
-      
+
       expect(expectLoader).to.have.property('fn');
       expect(expectLoader.fn().query.limit).to.equal(2048);
       expect(expectLoader.fn().query.name).to.equal('font-url-loader');

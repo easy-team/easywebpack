@@ -6,12 +6,10 @@ const WebpackServerBuilder = require('../lib/server');
 const Loader = require('../utils/loader');
 const path = require('path');
 // http://chaijs.com/api/bdd/
-function createBuilder(){
-  const builder = new WebpackServerBuilder();
-  builder.setBuildPath(path.join(__dirname, 'test'));
-  builder.setPublicPath('/public');
+function createBuilder(config) {
+  const builder = new WebpackServerBuilder(config);
   builder.setEntry({
-    include: path.join(__dirname, 'test')
+    include: path.join(__dirname, '../test')
   });
   return builder;
 }
@@ -29,6 +27,15 @@ describe('server.test.js', () => {
   afterEach(() => {
   });
 
+  describe('#webpack base config test', () => {
+    it('should server egg config', () => {
+      const builder = createBuilder({ egg: true });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.path).to.equal(path.join(builder.config.baseDir, 'app/view'));
+      expect(webpackConfig.output.publicPath).to.include('/public/client/');
+    });
+  });
+
   describe('#webpack create test', () => {
     it('should create webpack config', () => {
       const builder = createBuilder();
@@ -38,6 +45,15 @@ describe('server.test.js', () => {
       expect(webpackConfig.plugins).to.be.an('array');
       expect(webpackConfig.resolve.extensions).to.be.an('array').that.includes('.js');
     });
+    it('should create ignoreCSS config', () => {
+      const builder = createBuilder();
+      builder.ignoreCSS();
+      const webpackConfig = builder.create();
+      expect(webpackConfig.plugins.some(p => {
+        return p.constructor.name === 'IgnorePlugin';
+      })).to.be.true;
+    });
+
   });
 
   describe('#webpack loader change test', () => {
@@ -48,6 +64,7 @@ describe('server.test.js', () => {
       builder.addLoader(/\.vue$/, 'vue-loader', () => ({
         options: Loader.getStyleLoaderOption(builder.getStyleConfig())
       }));
+
       builder.updateLoader({
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -61,7 +78,14 @@ describe('server.test.js', () => {
         }
       });
 
-      const newLoaderIndex = builder.findLoaderIndex('vue-loader');
+      const updateLoader = builder.updateLoader({
+        test: /\.vue1$/,
+        loader: 'vue-loader'
+      });
+
+      expect(updateLoader === null);
+
+      const newLoaderIndex = builder.findLoaderIndex('vue-loader', 'loader');
       const newLoader = builder.loaders[newLoaderIndex];
       expect(typeof newLoader.fn === 'function').to.be.true;
       expect(newLoader.options).to.have.property('compilerModules');

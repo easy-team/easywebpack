@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "programming instead of configuration, webpack is no longer complex",
   "keywords": [
     "webpack",
@@ -51,11 +51,14 @@
   },
   "devDependencies": {
     "chai": "^4.0.0",
+    "coveralls": "^2.13.1",
     "eslint": "^4.3.0",
     "eslint-config-eslint": "^4.0.0",
     "mocha": "^3.4.2",
+    "nyc": "^11.1.0",
     "url-loader": "^0.5.9",
-    "vue-loader": "^13.0.2"
+    "vue-loader": "^13.0.2",
+    "vue-template-compiler": "^2.4.2"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -64,8 +67,8 @@
     "start": "node index.js",
     "lint": "eslint .",
     "fix": "eslint --fix .",
-    "test": "mocha test",
-    "ci": "npm run lint && npm run cov"
+    "test": "nyc --reporter=html --reporter=text mocha",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "files": [
     "index.js",
@@ -73,8 +76,17 @@
     "lib",
     "tool"
   ],
+  "nyc": {
+    "exclude": [
+      "**/*.spec.js",
+      "lib/logger.js",
+      "utils/*.js",
+      "test/*.test.js",
+      "build"
+    ]
+  },
   "ci": {
-    "version": "6, 7"
+    "version": "6, 7, 8"
   },
   "repository": {
     "type": "git",

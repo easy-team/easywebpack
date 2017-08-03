@@ -10,3 +10,4 @@ run/
 *.iml
 config
 temp
+.nyc_output
