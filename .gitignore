@@ -12,3 +12,4 @@ run/
 config
 temp
 .nyc_output
+.coverage.lcov

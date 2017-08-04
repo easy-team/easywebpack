@@ -69,8 +69,7 @@
     "lint": "eslint .",
     "fix": "eslint --fix .",
     "test": "nyc --reporter=html --reporter=text mocha",
-
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "cov": "nyc report --reporter=lcov > coverage.lcov && codecov --token=e8eba710-8df2-4a1c-bb50-ccd15a2079e6"
   },
   "files": [
     "index.js",
