@@ -10,14 +10,16 @@
 [npm-url]: https://npmjs.org/package/easywebpack
 [travis-image]: https://img.shields.io/travis/hubcarl/easywebpack.svg?style=flat-square
 [travis-url]: https://travis-ci.org/hubcarl/easywebpack
-[codecov-image]: https://img.shields.io/codecov/c/github/hubcarl/easywebpack.svg?style=flat-square
-[codecov-url]: https://codecov.io/github/hubcarl/easywebpack?branch=master
+[codecov-image]: https://codecov.io/gh/hubcarl/easywebpack/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/hubcarl/easywebpack
 [david-image]: https://img.shields.io/david/hubcarl/easywebpack.svg?style=flat-square
 [david-url]: https://david-dm.org/hubcarl/easywebpack
 [snyk-image]: https://snyk.io/test/npm/easywebpack/badge.svg?style=flat-square
 [snyk-url]: https://snyk.io/test/npm/easywebpack
 [download-image]: https://img.shields.io/npm/dm/easywebpack.svg?style=flat-square
 [download-url]: https://npmjs.org/package/easywebpack
+
+[![codecov](https://codecov.io/gh/hubcarl/easywebpack/branch/master/graph/badge.svg)](https://codecov.io/gh/hubcarl/easywebpack)
 
 programming instead of configuration, webpack is no longer complex. 
 
@@ -126,11 +128,11 @@ npm run build-prod
 
 ## Webpack Command Tool
 
-[easywebpack-cli](https://github.com/hubcarl/easywebpack.git) Webpack Building Command Line And Boilerplate Init Tool for easywebpack
+[easywebpack-cli](https://github.com/hubcarl/easywebpack-cli.git) Webpack Building Command Line And Boilerplate Init Tool for easywebpack
 
 ## Configuration
 
-- see [builder/config.js](builder/config.js) for more detail.
+- see [lib/config.js](lib/config.js) for more detail.
 
 - more detail, please see [WebpackClientBuilder](https://github.com/hubcarl/easywebpack/blob/master/lib/client.js) and [WebpackServerBuilder](https://github.com/hubcarl/easywebpack/blob/master/lib/server.js)
 
