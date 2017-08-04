@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "chai": "^4.0.0",
+    "codecov": "^2.3.0",
     "coveralls": "^2.13.1",
     "eslint": "^4.3.0",
     "eslint-config-eslint": "^4.0.0",
@@ -68,6 +69,7 @@
     "lint": "eslint .",
     "fix": "eslint --fix .",
     "test": "nyc --reporter=html --reporter=text mocha",
+
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "files": [

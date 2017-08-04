@@ -19,7 +19,6 @@
 [download-image]: https://img.shields.io/npm/dm/easywebpack.svg?style=flat-square
 [download-url]: https://npmjs.org/package/easywebpack
 
-[![codecov](https://codecov.io/gh/hubcarl/easywebpack/branch/master/graph/badge.svg)](https://codecov.io/gh/hubcarl/easywebpack)
 
 programming instead of configuration, webpack is no longer complex. 
 
