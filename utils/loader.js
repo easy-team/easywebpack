@@ -26,6 +26,8 @@ loader.getLoaderString = (styleLoaderOption, name) => {
       // TODO:
     } else if (typeof value === 'boolean') {
       kvArray.push(value === true ? `+${key}` : `-${key}`);
+    } else if (value === 'required') {
+      kvArray.push(`${key}`);
     } else {
       kvArray.push(`${key}=${value}`);
     }
@@ -167,15 +169,15 @@ loader.cssLoaders = styleConfig => {
 
 loader.styleLoaders = styleConfig => {
   const output = [];
+  const styleLoaderOption = styleConfig.styleLoaderOption || {};
   const loaders = loader.cssLoaders(styleConfig);
-
   for (const extension in loaders) {
     const loaderInfo = loaders[extension];
-
-    output.push({
+    const config = styleLoaderOption[extension] && styleLoaderOption[extension].config;
+    output.push(merge({
       test: new RegExp(`\\.${extension}$`),
       loader: loaderInfo
-    });
+    }, config));
   }
   return output;
 };
