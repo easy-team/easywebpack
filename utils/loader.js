@@ -39,19 +39,14 @@ loader.getLoaderString = (styleLoaderOption, name) => {
 };
 
 loader.getStyleLoaderOption = styleConfig => {
-  const loaderOption = {
-    loaders: loader.cssLoaders(styleConfig)
+  return {
+    loaders: loader.cssLoaders(styleConfig),
+    preLoaders: {
+      less: 'less-loader',
+      scss: 'sass-loader',
+      sass: 'sass-loader'
+    }
   };
-  //const styleLoaderOption = styleConfig.styleLoaderOption || {};
-  //
-  //if (styleLoaderOption.autoprefixer !== false) {
-  //  loaderOption.postcss = [
-  //    require('autoprefixer')({
-  //      browsers: Array.isArray(styleLoaderOption.autoprefixer) ? styleLoaderOption.autoprefixer : ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8']
-  //    })
-  //  ];
-  //}
-  return loaderOption;
 };
 
 loader.getLoader = (loadersOption, loaderName) => {
