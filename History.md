@@ -1,4 +1,15 @@
 
+0.9.6 / 2017-08-07
+==================
+
+  * fix:less sass style build error
+  * test: add cov image
+  * test:ci codecov
+  * test:cov
+  * test: add test for 1.0.0
+  * fix:load replace
+  * doc:update readme
+
 0.9.4 / 2017-08-02
 ==================
 
