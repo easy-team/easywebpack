@@ -1,5 +1,5 @@
 'use strict';
-const path = require('path').posix;
+const path = require('path');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const utils = {};
@@ -50,7 +50,7 @@ utils.getEntry = (dirs, excludeRegex, extMatch = '.js', entryLoader) => {
       } else {
         if (!utils.isMatch(exclude, filePath)) {
           if (filePath.endsWith(extMatch)) {
-            const fileName = filePath.replace(entryDir, '').replace(/^\//, '').replace(extMatch, '');
+            const fileName = path.relative(entryDir, filePath).replace(/\\/g, '/').replace(extMatch, '')
             if (entryLoader) {
               entries[fileName] = ['babel-loader', entryLoader, filePath].join('!');
             } else {
