@@ -46,7 +46,8 @@ loader.getStyleLoaderOption = styleConfig => {
     preLoaders: {
       less: 'less-loader',
       scss: 'sass-loader',
-      sass: 'sass-loader'
+      sass: 'sass-loader',
+      stylus: 'stylus-loader'
     }
   };
 };
@@ -89,6 +90,8 @@ loader.getLessLoader = styleConfig => loader.getLoaderConfig('less-loader', styl
 
 loader.getSassLoader = styleConfig => loader.getLoaderConfig('sass-loader', styleConfig);
 
+loader.getSassLoader = styleConfig => loader.getLoaderConfig('stylus-loader', styleConfig);
+
 loader.isTrue = value => value !== false;
 
 loader.cssLoaders = styleConfig => {
@@ -111,6 +114,12 @@ loader.cssLoaders = styleConfig => {
       }
     },
     sass: {
+      deps: {
+        css: true,
+        postcss: true
+      }
+    },
+    stylus: {
       deps: {
         css: true,
         postcss: true
@@ -162,6 +171,18 @@ loader.cssLoaders = styleConfig => {
     }
     extendSassLoader.push('sass-loader');
     cssLoaders.sass = loader.generateLoaders(styleConfig, extendSassLoader);
+  }
+
+  if (loaderOption.stylus) {
+    const extendSassLoader = [];
+    if (loaderOption.stylus.deps.css) {
+      extendSassLoader.push('css-loader');
+    }
+    if (loaderOption.stylus.deps.postcss) {
+      extendSassLoader.push('postcss-loader');
+    }
+    extendSassLoader.push('stylus-loader');
+    cssLoaders.stylus = loader.generateLoaders(styleConfig, extendSassLoader);
   }
 
   return cssLoaders;
