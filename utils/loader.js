@@ -16,16 +16,10 @@ loader.getLoaderString = (styleLoaderOption, name) => {
   const options = styleLoaderOption && styleLoaderOption.options;
   options && Object.keys(options).forEach(key => {
     const value = options[key];
-
     if (Array.isArray(value)) {
       value.forEach(item => {
         kvArray.push(`${key}[]=${item}`);
       });
-    } else if (typeof value === 'object') {
-
-      // TODO:
-    } else if (typeof value === 'boolean') {
-      kvArray.push(value === true ? `+${key}` : `-${key}`);
     } else if (value === 'required') {
       kvArray.push(`${key}`);
     } else {
@@ -46,7 +40,8 @@ loader.getStyleLoaderOption = styleConfig => {
     preLoaders: {
       less: 'less-loader',
       scss: 'sass-loader',
-      sass: 'sass-loader'
+      sass: 'sass-loader?indentedSyntax',
+      stylus: 'stylus-loader'
     }
   };
 };
@@ -115,6 +110,12 @@ loader.cssLoaders = styleConfig => {
         css: true,
         postcss: true
       }
+    },
+    stylus: {
+      deps: {
+        css: true,
+        postcss: true
+      }
     }
   }, styleConfig.styleLoaderOption);
 
@@ -149,7 +150,9 @@ loader.cssLoaders = styleConfig => {
       extendScssLoader.push('postcss-loader');
     }
     extendScssLoader.push('sass-loader');
-    cssLoaders.scss = loader.generateLoaders(styleConfig, extendScssLoader);
+    const scssStyleConfig = merge({}, styleConfig);
+    delete scssStyleConfig.styleLoaderOption.sass.options.indentedSyntax;
+    cssLoaders.scss = loader.generateLoaders(scssStyleConfig, extendScssLoader);
   }
 
   if (loaderOption.sass) {
@@ -162,6 +165,18 @@ loader.cssLoaders = styleConfig => {
     }
     extendSassLoader.push('sass-loader');
     cssLoaders.sass = loader.generateLoaders(styleConfig, extendSassLoader);
+  }
+
+  if (loaderOption.stylus) {
+    const extendSassLoader = [];
+    if (loaderOption.stylus.deps.css) {
+      extendSassLoader.push('css-loader');
+    }
+    if (loaderOption.stylus.deps.postcss) {
+      extendSassLoader.push('postcss-loader');
+    }
+    extendSassLoader.push('stylus-loader');
+    cssLoaders.stylus = loader.generateLoaders(styleConfig, extendSassLoader);
   }
 
   return cssLoaders;
