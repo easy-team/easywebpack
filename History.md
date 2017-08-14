@@ -1,4 +1,9 @@
 
+0.5.16 / 2017-08-14
+===================
+
+  * fix:imagemin-webpack-plugin not install in some machine,remove install
+
 0.5.15 / 2017-07-07
 ===================
 
