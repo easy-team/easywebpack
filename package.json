@@ -24,7 +24,6 @@
     "eventsource-polyfill": "^0.9.6",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
-    "fs": "0.0.2",
     "html-webpack-plugin": "^2.30.0",
     "http-proxy-middleware": "^0.17.2",
     "imagemin-webpack-plugin": "^1.4.4",
