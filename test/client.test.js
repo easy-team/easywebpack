@@ -157,7 +157,7 @@ describe('client.test.js', () => {
       const webpackConfig = builder.create();
       builder.webpackConfig = webpackConfig;
       expect(webpackConfig.output.publicPath).to.equal('/public/');
-      expect(webpackConfig.output.filename).to.include('js/[name].[hash:8].js');
+      expect(webpackConfig.output.filename).to.include('js/[name].[chunkhash:8].js');
       expect(webpackConfig.output.chunkFilename).to.include('js/chunk/[name].[chunkhash:8].js');
       expect(builder.hasPlugin('ImageminPlugin')).to.be.true;
       expect(builder.hasPlugin('UglifyJsPlugin')).to.be.true;
