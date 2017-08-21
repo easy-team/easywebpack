@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const webpack = require('webpack');
 const WebpackBaseBuilder = require('../lib/base');
 const Utils = require('../utils/utils');
-const path = require('path');
+const path = require('path').posix;
 // http://chaijs.com/api/bdd/
 function createBuilder() {
   const builder = new WebpackBaseBuilder();

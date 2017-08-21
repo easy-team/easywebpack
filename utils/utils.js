@@ -1,5 +1,5 @@
 'use strict';
-const path = require('path');
+const path = require('path').posix;
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const utils = {};

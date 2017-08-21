@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const WebpackServerBuilder = require('../lib/server');
 const Loader = require('../utils/loader');
-const path = require('path');
+const path = require('path').posix;
 // http://chaijs.com/api/bdd/
 function createBuilder(config) {
   const builder = new WebpackServerBuilder(config);
