@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "programming instead of configuration, webpack is no longer complex",
   "keywords": [
     "webpack",
@@ -40,6 +40,7 @@
     "shelljs": "^0.7.4",
     "stats-webpack-plugin": "^0.6.0",
     "style-loader": "^0.18.2",
+    "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.4.1",
