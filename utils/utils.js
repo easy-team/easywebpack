@@ -85,7 +85,7 @@ utils.assetsPath = (prefix, filepath) => path.posix.join(prefix, filepath);
 
 utils.loadNodeModules = (isCache) => {
   let nodeModules = {};
-  const cacheFile = path.join(__dirname, '../temp/cache.json');
+  const cacheFile = path.resolve(__dirname, '../temp/cache.json');
   if(isCache && fs.existsSync(cacheFile)){
     return require(cacheFile);
   }
