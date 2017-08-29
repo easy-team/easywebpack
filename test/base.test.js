@@ -33,7 +33,7 @@ describe('base.test.js', () => {
     it('should setOption', () => {
       const builder = createBuilder();
 
-      const optionPluginCount = builder.options.plugins && builder.options.plugins.length || 1;
+      const optionPluginCount = builder.options.configPlugin && builder.options.configPlugin.length || 1;
 
       builder.setOption({
         resolve: {
@@ -43,7 +43,7 @@ describe('base.test.js', () => {
           path: __dirname,
           publicPath: __dirname
         },
-        plugins: [
+        configPlugin: [
           new webpack.DefinePlugin({
             'process.env.VUE_ENV': 'server'
           })
@@ -52,7 +52,7 @@ describe('base.test.js', () => {
       expect(builder.options.output.path).to.equal(__dirname);
       expect(builder.options.output.publicPath).to.equal(__dirname);
       expect(builder.options.resolve.extensions).to.have.lengthOf(3);
-      expect(builder.options.plugins).to.have.lengthOf(optionPluginCount);
+      expect(builder.options.configPlugin).to.have.lengthOf(optionPluginCount);
     });
 
     it('should option method test', () => {
@@ -106,7 +106,7 @@ describe('base.test.js', () => {
     it('should addLoader#test_loader_option', () => {
       const builder = createBuilder();
       builder.addLoader(test, loader, option);
-      const expectLoader = builder.loaders[builder.loaders.length - 1];
+      const expectLoader = builder.configLoader[builder.configLoader.length - 1];
       expect(expectLoader.test).to.equal(test);
       expect(expectLoader.loader).to.equal(require.resolve(loader));
       expect(expectLoader.query.limit).to.equal(1024);
@@ -114,10 +114,10 @@ describe('base.test.js', () => {
 
     it('should addLoader#test_loader_option_function', () => {
       const builder = createBuilder();
-      const urlLoaders = () => builder.loaders.filter(item => item.test === test);
+      const urlLoaders = () => builder.configLoader.filter(item => item.test === test);
 
       builder.addLoader(test, loader, () => merge(option, { query: { name: 'font-url-loader' } }));
-      const expectLoader = builder.loaders[builder.loaders.length - 1];
+      const expectLoader = builder.configLoader[builder.configLoader.length - 1];
       expect(urlLoaders().length).to.equal(1);
       expect(expectLoader).to.have.property('fn');
       expect(expectLoader.fn().query.limit).to.equal(1024);
@@ -126,7 +126,7 @@ describe('base.test.js', () => {
 
     it('should addLoader#object', () => {
       const builder = createBuilder();
-      const urlLoaders = () => builder.loaders.filter(item => item.test === test);
+      const urlLoaders = () => builder.configLoader.filter(item => item.test === test);
 
       builder.addLoader(merge({
         test,
@@ -134,7 +134,7 @@ describe('base.test.js', () => {
         fn: () => ({ query: { name: 'font-url-loader' } })
       }, option));
 
-      const expectLoader = builder.loaders[builder.loaders.length - 1];
+      const expectLoader = builder.configLoader[builder.configLoader.length - 1];
       expect(urlLoaders().length).to.equal(1);
       expect(expectLoader).to.have.property('fn');
       expect(expectLoader.query.limit).to.equal(1024);
@@ -146,9 +146,9 @@ describe('base.test.js', () => {
 
     it('should addPlugin', () => {
       const builder = createBuilder();
-      const count = builder.plugins.length;
+      const count = builder.configPlugin.length;
       builder.addPlugin(webpack.LoaderOptionsPlugin, () => ({ minimize: false }));
-      expect(builder.plugins.length).to.equal(count);
+      expect(builder.configPlugin.length).to.equal(count);
       const webpackPlugins = builder.createWebpackPlugin();
       expect(webpackPlugins.some(plugin => plugin.constructor.name === 'LoaderOptionsPlugin')).to.be.true;
     });
@@ -194,7 +194,7 @@ describe('base.test.js', () => {
       const webpackConfig = builder.create();
       expect(webpackConfig).to.include.all.keys('module', 'output', 'resolve', 'plugins');
       expect(webpackConfig.module.rules).to.be.an('array');
-      expect(webpackConfig.plugins).to.be.an('array');
+      expect(webpackConfig.configPlugin).to.be.an('array');
       expect(webpackConfig.resolve.extensions).to.be.an('array').that.includes('.js');
     });
   });

@@ -36,7 +36,7 @@ loader.getLoaderString = (styleLoaderOption, name) => {
 
 loader.getStyleLoaderOption = styleConfig => {
   return {
-    loaders: loader.cssLoaders(styleConfig),
+    configLoader: loader.cssLoaders(styleConfig),
     preLoaders: {
       less: 'less-loader',
       scss: 'sass-loader',

@@ -52,7 +52,7 @@ describe('loader.test.js', () => {
 
       const newLoaderIndex = builder.findLoaderIndex('vue-loader', 'loader');
 
-      const newLoader = builder.loaders[newLoaderIndex];
+      const newLoader = builder.configLoader[newLoaderIndex];
 
       expect(typeof newLoader.fn === 'function').to.be.true;
       expect(newLoader.options).to.have.property('compilerModules');
@@ -129,7 +129,7 @@ describe('loader.test.js', () => {
       });
       const loaderIndex = builder.findLoaderIndex(imageLoader);
       expect(loaderIndex > -1);
-      expect(builder.loaders[loaderIndex].fn().query.limit).to.equal(2048);
+      expect(builder.configLoader[loaderIndex].fn().query.limit).to.equal(2048);
     });
 
     it('should addLoader#test_same_loader_name_add', () => {
@@ -140,10 +140,10 @@ describe('loader.test.js', () => {
       const fontLoaderIndex = builder.findLoaderIndex(fontLoader, 'all');
 
       expect(imageLoaderIndex > -1);
-      expect(builder.loaders[imageLoaderIndex].test.toString()).to.equal(imageLoader.test.toString());
+      expect(builder.configLoader[imageLoaderIndex].test.toString()).to.equal(imageLoader.test.toString());
 
       expect(fontLoaderIndex > -1);
-      expect(builder.loaders[fontLoaderIndex].test.toString()).to.equal(fontLoader.test.toString());
+      expect(builder.configLoader[fontLoaderIndex].test.toString()).to.equal(fontLoader.test.toString());
     });
 
     it('should addLoader#test_loader_option_function', () => {
@@ -151,11 +151,11 @@ describe('loader.test.js', () => {
       builder.addLoader(fontLoader, null, null, null, 'replace');
       builder.addLoader(fontLoader.test, fontLoader.loader, () => merge({ query: fontLoader.query }, { query: { name: 'font-url-loader' } }), null, 'replace');
 
-      const urlLoaders = () => builder.loaders.filter(item => item.test.toString() === fontLoader.test.toString());
+      const urlLoaders = () => builder.configLoader.filter(item => item.test.toString() === fontLoader.test.toString());
       expect(urlLoaders().length).to.equal(1);
 
       const fontLoaderIndex = builder.findLoaderIndex(fontLoader, 'all');
-      const expectLoader = builder.loaders[fontLoaderIndex];
+      const expectLoader = builder.configLoader[fontLoaderIndex];
 
       expect(expectLoader).to.have.property('fn');
       expect(expectLoader.fn().query.limit).to.equal(2048);

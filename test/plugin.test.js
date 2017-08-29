@@ -56,7 +56,7 @@ describe('plugin.test.js', () => {
     expect(builder.findPluginIndex(plugin) > -1);
     builder.updatePlugin(plugin, { minimize: true });
     const webpackConfig = builder.create();
-    const newPlugin = webpackConfig.plugins.filter(p =>{
+    const newPlugin = webpackConfig.configPlugin.filter(p =>{
       return p.constructor.name === 'LoaderOptionsPlugin';
     });
     expect(newPlugin[0].options.minimize);
@@ -67,13 +67,13 @@ describe('plugin.test.js', () => {
     const builder = createBuilder();
     builder.updatePlugin(new webpack.LoaderOptionsPlugin({ minimize: false }));
     const webpackConfig = builder.create();
-    const newPlugin = webpackConfig.plugins.filter(p =>{
+    const newPlugin = webpackConfig.configPlugin.filter(p =>{
       return p.constructor.name === 'LoaderOptionsPlugin';
     });
     expect(newPlugin[0].options.minimize === false);
 
     builder.updatePlugin(new webpack.LoaderOptionsPlugin({ minimize: true }));
-    const newPlugin2 = webpackConfig.plugins.filter(p =>{
+    const newPlugin2 = webpackConfig.configPlugin.filter(p =>{
       return p.constructor.name === 'LoaderOptionsPlugin';
     });
     expect(newPlugin2[0].options.minimize === true);

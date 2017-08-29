@@ -14,7 +14,18 @@ utils.isBoolean = value => typeof value === 'boolean';
 
 utils.normalizePath = (filepath, baseDir) => path.isAbsolute(filepath) ? filepath : path.join(baseDir, filepath);
 
-utils.joinPath = function() {
+utils.isTrue = value => !!value || value === undefined;
+
+utils.mixin = (target, source) => {
+  const mixinProperty = utils.isObject(source) ? Object.getOwnPropertyNames(source) : Object.getOwnPropertyNames(source.prototype);
+  mixinProperty.forEach(property => {
+    if (property !== 'constructor') {
+      target[property] = source.prototype[property];
+    }
+  });
+};
+
+utils.joinPath = function () {
   return [].slice.call(arguments, 0).map((arg, index) => {
     let tempArg = arg.replace(/\/$/, '');
     if (index > 0) {
@@ -30,7 +41,7 @@ utils.createEntry = (config, type) => {
     const entryDirs = Array.isArray(configEntry.include) ? configEntry.include : [configEntry.include];
     const normalizeEntryDirs = entryDirs.map(entryDir => utils.normalizePath(entryDir, config.baseDir));
     let entryLoader = configEntry.loader && configEntry.loader[type];
-    if(entryLoader){
+    if (entryLoader) {
       entryLoader = utils.normalizePath(entryLoader, config.baseDir);
     }
     return utils.getEntry(normalizeEntryDirs, configEntry.exclude, configEntry.extMatch, entryLoader);
@@ -86,13 +97,13 @@ utils.assetsPath = (prefix, filepath) => path.posix.join(prefix, filepath);
 utils.loadNodeModules = (isCache) => {
   let nodeModules = {};
   const cacheFile = path.resolve(__dirname, '../temp/cache.json');
-  if(isCache && fs.existsSync(cacheFile)){
+  if (isCache && fs.existsSync(cacheFile)) {
     return require(cacheFile);
   }
   fs.readdirSync('node_modules').filter(x => ['.bin'].indexOf(x) === -1).forEach(mod => {
     nodeModules[mod] = `commonjs2 ${mod}`;
   });
-  if(isCache){
+  if (isCache) {
     utils.writeFile(cacheFile, nodeModules);
   }
   return nodeModules;
