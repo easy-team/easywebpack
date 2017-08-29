@@ -1,4 +1,9 @@
 
+1.0.2 / 2017-08-29
+==================
+
+  * fix: windows loader not find , must set resolveLoader for node_modules
+
 1.0.4 / 2017-08-21
 ==================
 
