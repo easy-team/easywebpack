@@ -1,7 +1,8 @@
 'use strict';
 const expect = require('chai').expect;
-const webpack = require('webpack');
-const merge = require('webpack-merge');
+const WebpackTool = require('webpack-tool');
+const webpack = WebpackTool.webpack;
+const merge = WebpackTool.merge;
 const WebpackServerBuilder = require('../lib/server');
 const Loader = require('../utils/loader');
 const path = require('path').posix;
