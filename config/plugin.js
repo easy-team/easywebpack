@@ -3,7 +3,8 @@ const path = require('path').posix;
 const WebpackTool = require('webpack-tool');
 const webpack = WebpackTool.webpack;
 const chalk = require('chalk');
-const Utils = require('../utils/utils');
+const utils = require('../utils/utils');
+
 exports.module = {
   name: webpack.optimize.ModuleConcatenationPlugin
 };
@@ -75,7 +76,7 @@ exports.buildfile = {
   args() {
     return {
       baseDir: this.config.baseDir,
-      host: Utils.getHost(this.config.port),
+      host: utils.getHost(this.config.port),
       proxy: this.config.proxy,
       commonsChunk: this.config.commonsChunk,
       buildPath: this.buildPath,
@@ -109,7 +110,7 @@ exports.extract = {
   env: ['test', 'prod'],
   name: 'extract-text-webpack-plugin',
   enable() {
-    return !this.dev && Utils.isTrue(this.config.extract);
+    return !this.dev && utils.isTrue(this.config.cssExtract);
   },
   args() {
     return { filename: this.config.cssName };
@@ -127,3 +128,4 @@ exports.ignore = {
   name: webpack.IgnorePlugin,
   args: /\.(css|less|scss|sass)$/
 };
+

@@ -1,5 +1,4 @@
 'use strict';
-
 exports.babel = {
   enable: true,
   test: /\.jsx?$/,
@@ -14,36 +13,46 @@ exports.babel = {
 exports.css = {
   test: /\.css$/,
   exclude: /node_modules/,
-  use: ['style-loader', 'css-loader', 'postcss-loader']
+  use: ['style-loader', 'css-loader'],
+  postcss: true,
+  framework: true
 };
 
 exports.scss = {
   test: /\.scss/,
   exclude: /node_modules/,
-  use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+  use: ['style-loader', 'css-loader', 'sass-loader'],
+  postcss: true,
+  framework: true
 };
 
 exports.sass = {
   test: /\.sass/,
   exclude: /node_modules/,
-  use: ['style-loader', 'css-loader', 'postcss-loader', {
+  use: ['style-loader', 'css-loader', {
     loader: 'sass-loader',
     options: {
       indentedSyntax: true
     }
-  }]
+  }],
+  postcss: true,
+  framework: true
 };
 
 exports.less = {
   test: /\.less/,
   exclude: /node_modules/,
-  use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+  use: ['style-loader', 'css-loader', 'less-loader'],
+  postcss: true,
+  framework: true
 };
 
 exports.stylus = {
   test: /\.stylus/,
   exclude: /node_modules/,
-  use: ['style-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
+  use: ['style-loader', 'css-loader', 'stylus-loader'],
+  postcss: true,
+  framework: true
 };
 
 exports.urlimage = {

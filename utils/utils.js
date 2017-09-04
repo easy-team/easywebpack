@@ -26,7 +26,6 @@ utils.mixin = (target, source) => {
     }
   });
 };
-
 utils.joinPath = function () {
   return [].slice.call(arguments, 0).map((arg, index) => {
     let tempArg = arg.replace(/\/$/, '');
