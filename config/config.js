@@ -8,14 +8,21 @@ exports.defaultConfig = {
   cdn: {},
   hot: false,
   hash: true,
-  cssExtract: true,
-  cssModule: true,
   miniJs: true,
   miniCss: true,
   miniImage: true,
-  plugin: {
-    provide: {},
-    define: { 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production') }
+  cssExtract: true,
+  loaders: {},
+  loaderOptions: {
+    css: {
+      minimize: true
+    }
+  },
+  plugins: {
+    define: {
+      args: { 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production') }
+    },
+    manifest: {}
   }
 };
 
@@ -26,8 +33,12 @@ exports.devConfig = {
   miniCss: false,
   miniImage: false,
   cssExtract: false,
-  plugin: {
-    define: { 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development') }
+  plugins: {
+    define: {
+      args: {
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+      }
+    }
   }
 };
 

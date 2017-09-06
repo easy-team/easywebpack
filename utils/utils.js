@@ -16,7 +16,7 @@ utils.isBoolean = value => typeof value === 'boolean';
 
 utils.normalizePath = (filepath, baseDir) => path.isAbsolute(filepath) ? filepath : path.join(baseDir, filepath);
 
-utils.isTrue = value => !!value || value === undefined;
+utils.isTrue = value => value !== 'false' && (!!value || value === undefined);
 
 utils.mixin = (target, source) => {
   const mixinProperty = utils.isObject(source) ? Object.getOwnPropertyNames(source) : Object.getOwnPropertyNames(source.prototype);
@@ -50,7 +50,9 @@ utils.getEntry = (config, type) => {
         if (utils.isString(entry)) { // isDirectory
           const filepath = utils.normalizePath(entry, config.baseDir);
           if (fs.statSync(filepath).isDirectory()) {
-            const dirEntry = utils.walkFile(filepath, configEntry.exclude, configEntry.extMatch);
+            const extMapping = { vue: '.vue', react: '.jsx', weex: '.vue' };
+            const walkExt = entryLoader ? configEntry.extMatch || extMapping[config.framework] : configEntry.extMatch;
+            const dirEntry = utils.walkFile(filepath, configEntry.exclude, walkExt);
             Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, dirEntry));
           }
         } else if (utils.isObject(entry)) {

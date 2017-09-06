@@ -6,41 +6,43 @@ const chalk = require('chalk');
 const utils = require('../utils/utils');
 
 exports.module = {
+  enable: true,
   name: webpack.optimize.ModuleConcatenationPlugin
 };
 
 exports.error = {
+  enable: true,
   name: webpack.NoEmitOnErrorsPlugin
 };
 
 exports.provide = {
+  enable: true,
   name: webpack.ProvidePlugin,
-  args() {
-    return this.config.plugin.provide;
-  }
+  args: {}
 };
 
 exports.define = {
+  enable: true,
   name: webpack.DefinePlugin,
-  args() {
-    return this.config.plugin.define;
-  }
+  args: {}
 };
 
 exports.commonsChunk = {
-  type: 'client',
   enable: true,
+  type: 'client',
   name: webpack.optimize.CommonsChunkPlugin,
+  action: 'merge',
   args() {
-    const packKeys = Object.keys(this.packs);
+    const packKeys = Object.keys(this.packs || {});
     const chunks = Object.keys(this.options.entry).filter(entry => {
       return !packKeys.includes(entry);
     });
-    return { names: this.config.commonsChunk, chunks };
+    return { names: 'vendor', chunks };
   }
 };
 
 exports.uglifyJs = {
+  enable: true,
   env: ['prod'],
   name: webpack.optimize.UglifyJsPlugin,
   args: {
@@ -54,23 +56,26 @@ exports.uglifyJs = {
 };
 
 exports.hot = {
+  enable: true,
   type: 'client',
   env: ['dev'],
   name: webpack.HotModuleReplacementPlugin
 };
 
 exports.manifest = {
+  enable: true,
   type: 'client',
   name: 'webpack-manifest-plugin',
   args() {
-    const manifest = this.config.plugin.manifest && this.config.plugin.manifest.name || 'config/manifest.json';
-    const manifestPath = path.isAbsolute(manifest) ? manifest : path.join(this.config.baseDir, manifest);
-    const fileName = path.relative(this.buildPath, manifestPath);
-    return { fileName };
+    const filename = this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
+    const absFilename = path.posix.isAbsolute(filename) ? filename : path.posix.join(this.config.baseDir, filename);
+    const relativeFileName = path.posix.relative(this.buildPath, absFilename);
+    return { fileName: relativeFileName };
   }
 };
 
 exports.buildfile = {
+  enable: true,
   type: 'client',
   name: require('./plugin/build-config-webpack-plugin'),
   args() {
@@ -78,7 +83,7 @@ exports.buildfile = {
       baseDir: this.config.baseDir,
       host: utils.getHost(this.config.port),
       proxy: this.config.proxy,
-      commonsChunk: this.config.commonsChunk,
+      commonsChunk: this.getCommonsChunk(),
       buildPath: this.buildPath,
       publicPath: this.publicPath
     };
@@ -86,6 +91,7 @@ exports.buildfile = {
 };
 
 exports.progress = {
+  enable: true,
   name: 'progress-bar-webpack-plugin',
   args: {
     width: 100,
@@ -95,6 +101,7 @@ exports.progress = {
 };
 
 exports.imagemini = {
+  enable: true,
   env: ['prod'],
   type: 'client',
   name: 'imagemin-webpack-plugin',
@@ -102,6 +109,7 @@ exports.imagemini = {
 };
 
 exports.directoryname = {
+  enable: true,
   name: 'directory-named-webpack-plugin'
 };
 
@@ -110,7 +118,7 @@ exports.extract = {
   env: ['test', 'prod'],
   name: 'extract-text-webpack-plugin',
   enable() {
-    return !this.dev && utils.isTrue(this.config.cssExtract);
+    return this.config.cssExtract;
   },
   args() {
     return { filename: this.config.cssName };
@@ -118,13 +126,17 @@ exports.extract = {
 };
 
 exports.modulereplacement = {
-  enable: false,
+  enable: true,
+  type: 'server',
+  env: ['test', 'prod'],
   name: webpack.NormalModuleReplacementPlugin,
-  args: [/\.css$/, require.resolve('node-noop')]
+  args: [/\.(css|less|scss|sass)$/, require.resolve('node-noop')]
 };
 
 exports.ignore = {
+  enable: true,
   type: 'server',
+  env: ['test', 'prod'],
   name: webpack.IgnorePlugin,
   args: /\.(css|less|scss|sass)$/
 };
