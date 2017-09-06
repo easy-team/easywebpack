@@ -1,4 +1,12 @@
 
+3.0.0-rc1 / 2017-09-06
+======================
+
+  * feat:webpack3 rc1
+  * refactor:loader load
+  * feat:webpack3 doing
+  * feat:webpack3 loader and plugin refactor
+
 1.0.4 / 2017-08-21
 ==================
 
