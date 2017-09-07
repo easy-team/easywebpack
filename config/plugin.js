@@ -115,7 +115,6 @@ exports.directoryname = {
 
 exports.extract = {
   type: 'client',
-  env: ['test', 'prod'],
   name: 'extract-text-webpack-plugin',
   enable() {
     return this.config.cssExtract;
