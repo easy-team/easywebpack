@@ -24,6 +24,7 @@
     "chalk": "^2.0.1",
     "css-loader": "^0.28.4",
     "directory-named-webpack-plugin": "^2.2.3",
+    "eslint-loader": "^1.9.0",
     "eventsource-polyfill": "^0.9.6",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",

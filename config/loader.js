@@ -1,4 +1,5 @@
 'use strict';
+
 exports.babel = {
   enable: true,
   test: /\.jsx?$/,
@@ -8,6 +9,14 @@ exports.babel = {
       loader: 'babel-loader'
     }
   ]
+};
+
+exports.eslint = {
+  enable: true,
+  test: /\.jsx?$/,
+  loader: 'eslint-loader',
+  exclude: [/node_modules/],
+  enforce: 'pre'
 };
 
 exports.css = {
