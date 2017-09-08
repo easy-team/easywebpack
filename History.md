@@ -1,4 +1,11 @@
 
+3.0.0 / 2017-09-08
+==================
+
+  * fix: windows buildConfig path error
+  * doc:feature
+  * Release 3.0.0-rc3
+
 3.0.0-rc3 / 2017-09-08
 ======================
 
