@@ -20,7 +20,9 @@
 [download-url]: https://npmjs.org/package/easywebpack
 
 
-programming instead of configuration, webpack is no longer complex. 
+programming instead of configuration, webpack is no longer complex. the support feature:
+
+![easywebpack](https://github.com/hubcarl/easywebpack/blob/feature/webpack3/doc/images/easywebpack.png)
 
 - Support server and client webpack general compiler configuration.
 
