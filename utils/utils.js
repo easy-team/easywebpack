@@ -4,7 +4,12 @@ const fs = require('fs');
 const url = require('url');
 const queryString = require('querystring');
 const mkdirp = require('mkdirp');
-const utils = {};
+const cloneDeep = require('lodash.clonedeep');
+const utils = {
+  cloneDeep,
+  mkdirp,
+  queryString
+};
 
 utils.isFunction = value => typeof value === 'function';
 

@@ -47,5 +47,12 @@ exports.testConfig = {
   hash: true,
   miniJs: false,
   miniCss: false,
-  miniImage: false
+  miniImage: false,
+  plugins: {
+    define: {
+      args: {
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+      }
+    }
+  }
 };
