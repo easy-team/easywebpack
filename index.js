@@ -9,7 +9,6 @@ exports.StatsPlugin = require('stats-webpack-plugin');
 exports.ManifestPlugin = require('webpack-manifest-plugin');
 exports.ExtractTextPlugin = require('extract-text-webpack-plugin');
 exports.Utils = require('./utils/utils');
-exports.Loader = require('./utils/loader');
 exports.WebpackBuilder = require('./lib/builder');
 exports.WebpackBaseBuilder = require('./lib/base');
 exports.WebpackClientBuilder = require('./lib/client');

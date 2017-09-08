@@ -13,6 +13,7 @@
       "error",
       2
     ],
+    "arrow-body-style": "off",
     "no-confusing-arrow": "off",
     "class-methods-use-this": "off",
     "newline-after-var": "off",

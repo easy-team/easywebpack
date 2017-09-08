@@ -8,7 +8,7 @@ run/
 *.swp
 .vscode
 *.iml
-config
+config/buildConfig.json
 temp
 .nyc_output
 coverage.lcov

@@ -1,6 +1,8 @@
 'use strict';
 const expect = require('chai').expect;
-const webpack = require('webpack');
+const WebpackTool = require('webpack-tool');
+const webpack = WebpackTool.webpack;
+const merge = WebpackTool.merge;
 const WebpackBaseBuilder = require('../lib/base');
 const Utils = require('../utils/utils');
 const path = require('path').posix;
@@ -56,7 +58,7 @@ describe('plugin.test.js', () => {
     expect(builder.findPluginIndex(plugin) > -1);
     builder.updatePlugin(plugin, { minimize: true });
     const webpackConfig = builder.create();
-    const newPlugin = webpackConfig.plugins.filter(p =>{
+    const newPlugin = webpackConfig.configPlugin.filter(p =>{
       return p.constructor.name === 'LoaderOptionsPlugin';
     });
     expect(newPlugin[0].options.minimize);
@@ -67,13 +69,13 @@ describe('plugin.test.js', () => {
     const builder = createBuilder();
     builder.updatePlugin(new webpack.LoaderOptionsPlugin({ minimize: false }));
     const webpackConfig = builder.create();
-    const newPlugin = webpackConfig.plugins.filter(p =>{
+    const newPlugin = webpackConfig.configPlugin.filter(p =>{
       return p.constructor.name === 'LoaderOptionsPlugin';
     });
     expect(newPlugin[0].options.minimize === false);
 
     builder.updatePlugin(new webpack.LoaderOptionsPlugin({ minimize: true }));
-    const newPlugin2 = webpackConfig.plugins.filter(p =>{
+    const newPlugin2 = webpackConfig.configPlugin.filter(p =>{
       return p.constructor.name === 'LoaderOptionsPlugin';
     });
     expect(newPlugin2[0].options.minimize === true);

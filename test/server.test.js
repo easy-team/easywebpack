@@ -1,7 +1,8 @@
 'use strict';
 const expect = require('chai').expect;
-const webpack = require('webpack');
-const merge = require('webpack-merge');
+const WebpackTool = require('webpack-tool');
+const webpack = WebpackTool.webpack;
+const merge = WebpackTool.merge;
 const WebpackServerBuilder = require('../lib/server');
 const Loader = require('../utils/loader');
 const path = require('path').posix;
@@ -42,14 +43,14 @@ describe('server.test.js', () => {
       const webpackConfig = builder.create();
       expect(webpackConfig).to.include.all.keys('module', 'output', 'resolve', 'plugins');
       expect(webpackConfig.module.rules).to.be.an('array');
-      expect(webpackConfig.plugins).to.be.an('array');
+      expect(webpackConfig.configPlugin).to.be.an('array');
       expect(webpackConfig.resolve.extensions).to.be.an('array').that.includes('.js');
     });
     it('should create ignoreCSS config', () => {
       const builder = createBuilder();
       builder.ignoreCSS();
       const webpackConfig = builder.create();
-      expect(webpackConfig.plugins.some(p => {
+      expect(webpackConfig.configPlugin.some(p => {
         return p.constructor.name === 'IgnorePlugin';
       })).to.be.true;
     });
@@ -86,7 +87,7 @@ describe('server.test.js', () => {
       expect(updateLoader === null);
 
       const newLoaderIndex = builder.findLoaderIndex('vue-loader', 'loader');
-      const newLoader = builder.loaders[newLoaderIndex];
+      const newLoader = builder.configLoader[newLoaderIndex];
       expect(typeof newLoader.fn === 'function').to.be.true;
       expect(newLoader.options).to.have.property('compilerModules');
 

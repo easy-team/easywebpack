@@ -2,8 +2,9 @@
 const expect = require('chai').expect;
 const fs = require('fs');
 const path = require('path').posix;
-const webpack = require('webpack');
-const merge = require('webpack-merge');
+const WebpackTool = require('webpack-tool');
+const webpack = WebpackTool.webpack;
+const merge = WebpackTool.merge;
 const WebpackClientBuilder = require('../lib/client');
 const Loader = require('../utils/loader');
 const Utils = require('../utils/utils');
@@ -53,7 +54,7 @@ describe('client.test.js', () => {
       };
       const builder = createBuilder(config);
       const webpackConfig = builder.create();
-      const count = webpackConfig.plugins.filter(p =>{
+      const count = webpackConfig.configPlugin.filter(p =>{
         return p.constructor.name === 'StatsPlugin';
       }).length;
       expect(count).to.equal(1);
@@ -79,12 +80,12 @@ describe('client.test.js', () => {
       const webpackConfig = builder.create();
       expect(webpackConfig).to.include.all.keys('module', 'output', 'resolve', 'plugins');
       expect(webpackConfig.module.rules).to.be.an('array');
-      expect(webpackConfig.plugins).to.be.an('array');
+      expect(webpackConfig.configPlugin).to.be.an('array');
       expect(webpackConfig.resolve.extensions).to.be.an('array').that.includes('.js');
       expect(webpackConfig.entry['home/list']).to.include('app/web/page/home/list.js');
       expect(builder.findPluginIndex('ProvidePlugin') > -1);
 
-      const newPlugin = webpackConfig.plugins.filter(p => {
+      const newPlugin = webpackConfig.configPlugin.filter(p => {
         return p.constructor.name === 'CommonsChunkPlugin';
       });
       expect(newPlugin[0].chunkNames.toString() === 'vendor2').to.be.true;
@@ -112,7 +113,7 @@ describe('client.test.js', () => {
         }
       });
       const newLoaderIndex = builder.findLoaderIndex('vue-loader', 'loader');
-      const newLoader = builder.loaders[newLoaderIndex];
+      const newLoader = builder.configLoader[newLoaderIndex];
       expect(typeof newLoader.fn === 'function').to.be.true;
       expect(newLoader.options).to.have.property('compilerModules');
 
@@ -134,7 +135,7 @@ describe('client.test.js', () => {
       expect(webpackConfig1.output.chunkFilename).to.include('client/js/chunk/[name].js');
       expect(builder.findPluginIndex(builder.webpack.HotModuleReplacementPlugin) > -1).to.be.true;
 
-      const plugin = webpackConfig1.plugins.filter(p => {
+      const plugin = webpackConfig1.configPlugin.filter(p => {
         return p.constructor.name === 'ExtractTextPlugin';
       });
       expect(plugin.length === 0).to.be.true;
@@ -149,7 +150,7 @@ describe('client.test.js', () => {
     it('should create prod test', () => {
       const builder = createBuilder();
       builder.hasPlugin = name => {
-        return builder.webpackConfig.plugins.some(p => {
+        return builder.webpackConfig.configPlugin.some(p => {
           return p.constructor.name === name;
         });
       };
@@ -198,7 +199,7 @@ describe('client.test.js', () => {
       const builder = createBuilder({ env: 'dev', egg: true });
       builder.setEntry({ html: true, include: ['test'], exclude: [], template: 'test/layout.html' });
       const webpackConfig = builder.create();
-      const htmlCount = webpackConfig.plugins.filter(p => {
+      const htmlCount = webpackConfig.configPlugin.filter(p => {
         return p.constructor.name === 'HtmlWebpackPlugin';
       }).length;
       expect(htmlCount === 5).to.be.true;
@@ -208,7 +209,7 @@ describe('client.test.js', () => {
       const builder = createBuilder({ env: 'dev', egg: true });
       builder.setHtml({ include: ['test'], exclude: [], template: 'test/layout.html' });
       const webpackConfig = builder.create();
-      const htmlCount = webpackConfig.plugins.filter(p => {
+      const htmlCount = webpackConfig.configPlugin.filter(p => {
         return p.constructor.name === 'HtmlWebpackPlugin';
       }).length;
       expect(htmlCount === 5).to.be.true;
@@ -219,7 +220,7 @@ describe('client.test.js', () => {
       builder.setCommonsChunk('vendor');
       builder.setHtml({ include: ['test'], exclude: [], template: 'test/layout.html' });
       const webpackConfig = builder.create();
-      const htmlCount = webpackConfig.plugins.filter(p => {
+      const htmlCount = webpackConfig.configPlugin.filter(p => {
         return p.constructor.name === 'HtmlWebpackPlugin';
       }).length;
       expect(htmlCount === 5).to.be.true;

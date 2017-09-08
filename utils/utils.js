@@ -1,8 +1,15 @@
 'use strict';
 const path = require('path').posix;
 const fs = require('fs');
+const url = require('url');
+const queryString = require('querystring');
 const mkdirp = require('mkdirp');
-const utils = {};
+const cloneDeep = require('lodash.clonedeep');
+const utils = {
+  cloneDeep,
+  mkdirp,
+  queryString
+};
 
 utils.isFunction = value => typeof value === 'function';
 
@@ -14,7 +21,17 @@ utils.isBoolean = value => typeof value === 'boolean';
 
 utils.normalizePath = (filepath, baseDir) => path.isAbsolute(filepath) ? filepath : path.join(baseDir, filepath);
 
-utils.joinPath = function() {
+utils.isTrue = value => value !== 'false' && (!!value || value === undefined);
+
+utils.mixin = (target, source) => {
+  const mixinProperty = utils.isObject(source) ? Object.getOwnPropertyNames(source) : Object.getOwnPropertyNames(source.prototype);
+  mixinProperty.forEach(property => {
+    if (property !== 'constructor') {
+      target[property] = source.prototype[property];
+    }
+  });
+};
+utils.joinPath = function () {
   return [].slice.call(arguments, 0).map((arg, index) => {
     let tempArg = arg.replace(/\/$/, '');
     if (index > 0) {
@@ -24,21 +41,59 @@ utils.joinPath = function() {
   }).join('/');
 };
 
-utils.createEntry = (config, type) => {
+utils.getEntry = (config, type) => {
   const configEntry = config.entry;
+  const entries = {};
   if (configEntry && configEntry.include) {
-    const entryDirs = Array.isArray(configEntry.include) ? configEntry.include : [configEntry.include];
-    const normalizeEntryDirs = entryDirs.map(entryDir => utils.normalizePath(entryDir, config.baseDir));
     let entryLoader = configEntry.loader && configEntry.loader[type];
-    if(entryLoader){
+    if (entryLoader) {
       entryLoader = utils.normalizePath(entryLoader, config.baseDir);
     }
-    return utils.getEntry(normalizeEntryDirs, configEntry.exclude, configEntry.extMatch, entryLoader);
+    if (Array.isArray(configEntry.include) || utils.isString(configEntry.include)) {
+      const entryArray = Array.isArray(configEntry.include) ? configEntry.include : [configEntry.include];
+      entryArray.forEach(entry => { // ['app/web/page', { 'app/app': 'app/web/page/app/app.js?loader=false' }],
+        if (utils.isString(entry)) { // isDirectory
+          const filepath = utils.normalizePath(entry, config.baseDir);
+          if (fs.statSync(filepath).isDirectory()) {
+            const extMapping = { vue: '.vue', react: '.jsx', weex: '.vue' };
+            const walkExt = entryLoader ? configEntry.extMatch || extMapping[config.framework] : configEntry.extMatch;
+            const dirEntry = utils.walkFile(filepath, configEntry.exclude, walkExt);
+            Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, dirEntry));
+          }
+        } else if (utils.isObject(entry)) {
+          Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, entry, true));
+        }
+      });
+    } else if (utils.isObject(configEntry.include)) { // { 'app/app': 'app/web/page/app/app.js?loader=false', 'home/home': 'app/web/page/home/home.js' }
+      Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, configEntry.include, true));
+    }
   }
-  return {};
+  return entries;
 };
 
-utils.getEntry = (dirs, excludeRegex, extMatch = '.js', entryLoader) => {
+
+utils.createEntry = (baseDir, entryLoader, entryConfig, isParseUrl) => {
+  const entries = {};
+  Object.keys(entryConfig).forEach(entryName => {
+    let filepath = entryConfig[entryName];
+    let useLoader = !!entryLoader;
+    if (useLoader && isParseUrl) {
+      const fileInfo = url.parse(filepath);
+      const params = queryString.parse(fileInfo.query);
+      useLoader = utils.isTrue(params.loader);
+      filepath = utils.normalizePath(fileInfo.pathname, baseDir);
+    }
+    if (useLoader) {
+      entries[entryName] = ['babel-loader', entryLoader, filepath].join('!');
+    } else {
+      entries[entryName] = filepath;
+    }
+  });
+  return entries;
+};
+
+
+utils.walkFile = (dirs, excludeRegex, extMatch = '.js') => {
   const entries = {};
   let entryDir = '';
   const walk = (dir, exclude) => {
@@ -50,12 +105,8 @@ utils.getEntry = (dirs, excludeRegex, extMatch = '.js', entryLoader) => {
       } else {
         if (!utils.isMatch(exclude, filePath)) {
           if (filePath.endsWith(extMatch)) {
-            const fileName = filePath.replace(entryDir, '').replace(/^\//, '').replace(extMatch, '');
-            if (entryLoader) {
-              entries[fileName] = ['babel-loader', entryLoader, filePath].join('!');
-            } else {
-              entries[fileName] = filePath;
-            }
+            const entryName = filePath.replace(entryDir, '').replace(/^\//, '').replace(extMatch, '');
+            entries[entryName] = filePath;
           }
         }
       }
@@ -83,16 +134,16 @@ utils.isMatch = (regexArray, strMatch) => {
 utils.assetsPath = (prefix, filepath) => path.posix.join(prefix, filepath);
 
 
-utils.loadNodeModules = (isCache) => {
-  let nodeModules = {};
+utils.loadNodeModules = isCache => {
+  const nodeModules = {};
   const cacheFile = path.resolve(__dirname, '../temp/cache.json');
-  if(isCache && fs.existsSync(cacheFile)){
+  if (isCache && fs.existsSync(cacheFile)) {
     return require(cacheFile);
   }
   fs.readdirSync('node_modules').filter(x => ['.bin'].indexOf(x) === -1).forEach(mod => {
     nodeModules[mod] = `commonjs2 ${mod}`;
   });
-  if(isCache){
+  if (isCache) {
     utils.writeFile(cacheFile, nodeModules);
   }
   return nodeModules;

@@ -1,8 +1,30 @@
 
-1.0.8 / 2017-08-29
+3.0.0 / 2017-09-08
 ==================
 
-  * fix: windows loader not find , must set resolveLoader for node_modules
+  * fix: windows buildConfig path error
+  * doc:feature
+  * Release 3.0.0-rc3
+
+3.0.0-rc3 / 2017-09-08
+======================
+
+  * feat:css module
+  * feat: css module and css support impl and test
+
+3.0.0-rc2 / 2017-09-07
+======================
+
+  * fix:react css extract
+
+3.0.0-rc1 / 2017-09-06
+======================
+
+  * feat:webpack3 rc1
+  * refactor:loader load
+  * feat:webpack3 doing
+  * feat:webpack3 loader and plugin refactor
+>>>>>>> feature/webpack3
 
 1.0.4 / 2017-08-21
 ==================
