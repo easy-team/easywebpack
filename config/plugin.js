@@ -68,7 +68,7 @@ exports.manifest = {
   name: 'webpack-manifest-plugin',
   args() {
     const filename = this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
-    const absFilename = path.posix.isAbsolute(filename) ? filename : path.posix.join(this.config.baseDir, filename);
+    const absFilename = this.utils.normalizePath(filename, this.config.baseDir);
     const relativeFileName = path.posix.relative(this.buildPath, absFilename);
     return { fileName: relativeFileName };
   }
