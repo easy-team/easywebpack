@@ -1,4 +1,10 @@
 
+3.0.0-rc3 / 2017-09-08
+======================
+
+  * feat:css module
+  * feat: css module and css support impl and test
+
 3.0.0-rc2 / 2017-09-07
 ======================
 
