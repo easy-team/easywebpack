@@ -140,3 +140,16 @@ exports.ignore = {
   args: /\.(css|less|scss|sass)$/
 };
 
+exports.html = {
+  enable: true,
+  type: 'client',
+  name: 'html-webpack-plugin',
+  args: {
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true
+    }
+  }
+};

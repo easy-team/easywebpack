@@ -18,6 +18,7 @@
     "class-methods-use-this": "off",
     "newline-after-var": "off",
     "no-invalid-this": "off",
+    "no-nested-ternary": "off",
     "quotes": [
       "error",
       "single"
