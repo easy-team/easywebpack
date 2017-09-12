@@ -1,4 +1,9 @@
 
+3.0.1 / 2017-09-12
+==================
+
+  * fix:isUse method null and refactor html config
+
 3.0.0 / 2017-09-08
 ==================
 
