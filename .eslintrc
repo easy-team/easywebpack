@@ -19,6 +19,7 @@
     "newline-after-var": "off",
     "no-invalid-this": "off",
     "no-nested-ternary": "off",
+    "no-unused-vars": "off",
     "quotes": [
       "error",
       "single"

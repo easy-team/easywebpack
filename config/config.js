@@ -1,5 +1,8 @@
+'use strict';
+const path = require('path').posix;
+const baseDir = process.cwd();
 exports.defaultConfig = {
-  baseDir: process.cwd(),
+  baseDir,
   buildPath: 'public',
   publicPath: '/public/',
   prefix: '',
@@ -12,6 +15,18 @@ exports.defaultConfig = {
   miniCss: true,
   miniImage: true,
   cssExtract: true,
+  options: {
+    resolve: {
+      extensions: ['.js', '.jsx']
+    },
+    resolveLoader: {
+      modules: [
+        path.join(__dirname, '../node_modules'),
+        path.join(baseDir, 'node_modules'),
+        'node_modules'
+      ]
+    }
+  },
   loaders: {},
   loaderOptions: {
     css: {
