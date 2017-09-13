@@ -1,4 +1,9 @@
 
+3.1.0 / 2017-09-13
+==================
+
+  * feat:support loader use override and options config
+
 3.0.0 / 2017-09-08
 ==================
 
