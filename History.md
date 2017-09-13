@@ -1,8 +1,14 @@
 
+3.1.0 / 2017-09-13
+==================
+
+  * feat:support loader use override and options config
+
 3.0.1 / 2017-09-12
 ==================
 
   * fix:isUse method null and refactor html config
+
 
 3.0.0 / 2017-09-08
 ==================
