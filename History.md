@@ -35,7 +35,6 @@
   * refactor:loader load
   * feat:webpack3 doing
   * feat:webpack3 loader and plugin refactor
->>>>>>> feature/webpack3
 
 1.0.4 / 2017-08-21
 ==================
