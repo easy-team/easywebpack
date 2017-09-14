@@ -16,9 +16,9 @@ exports.WebpackServerBuilder = require('./lib/server');
 exports.getConfig = config => require('./lib/config')(config);
 
 const webpackTool = new WebpackTool();
-exports.build = (webpackConfig, callback) => {
-  webpackTool.build(webpackConfig, callback);
+exports.build = (webpackConfig, option, callback) => {
+  webpackTool.build(webpackConfig, option, callback);
 };
-exports.server = webpackConfig => {
-  webpackTool.server(webpackConfig);
+exports.server = (webpackConfig, option, callback) => {
+  webpackTool.server(webpackConfig, option, callback);
 };
