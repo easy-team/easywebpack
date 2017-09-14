@@ -1,4 +1,9 @@
 
+1.0.9 / 2017-09-14
+==================
+
+  * deps: upgrade webpack-tool to stage version , fix cli callback problem
+
 1.0.8 / 2017-08-29
 ==================
 
