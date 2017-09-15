@@ -6,6 +6,7 @@ const merge = WebpackTool.merge;
 const WebpackBaseBuilder = require('../lib/base');
 const Utils = require('../utils/utils');
 const path = require('path').posix;
+
 // http://chaijs.com/api/bdd/
 function createBuilder() {
   const builder = new WebpackBaseBuilder();
@@ -58,7 +59,7 @@ describe('plugin.test.js', () => {
     expect(builder.findPluginIndex(plugin) > -1);
     builder.updatePlugin(plugin, { minimize: true });
     const webpackConfig = builder.create();
-    const newPlugin = webpackConfig.configPlugin.filter(p =>{
+    const newPlugin = webpackConfig.configPlugin.filter(p => {
       return p.constructor.name === 'LoaderOptionsPlugin';
     });
     expect(newPlugin[0].options.minimize);
@@ -69,13 +70,13 @@ describe('plugin.test.js', () => {
     const builder = createBuilder();
     builder.updatePlugin(new webpack.LoaderOptionsPlugin({ minimize: false }));
     const webpackConfig = builder.create();
-    const newPlugin = webpackConfig.configPlugin.filter(p =>{
+    const newPlugin = webpackConfig.configPlugin.filter(p => {
       return p.constructor.name === 'LoaderOptionsPlugin';
     });
     expect(newPlugin[0].options.minimize === false);
 
     builder.updatePlugin(new webpack.LoaderOptionsPlugin({ minimize: true }));
-    const newPlugin2 = webpackConfig.configPlugin.filter(p =>{
+    const newPlugin2 = webpackConfig.configPlugin.filter(p => {
       return p.constructor.name === 'LoaderOptionsPlugin';
     });
     expect(newPlugin2[0].options.minimize === true);

@@ -3,7 +3,7 @@ const util = require('util');
 const path = require('path').posix;
 const chalk = require('chalk');
 const spawn = require('cross-spawn');
-const PEERS = /UNMET PEER DEPENDENCY ([a-z\-0-9\.]+)@(.+)/gm;
+const PEERS = /UNMET PEER DEPENDENCY ([a-z\-0-9.]+)@(.+)/gm;
 
 exports.requireModule = (name, modules) => {
   if (typeof name === 'object') {
@@ -27,11 +27,13 @@ exports.isInstalled = (name, modules) => {
   return !!exports.requireModule(name, modules);
 };
 
-exports.install = (deps, options) => {
+exports.install = (deps, options, type) => {
 
-  if (!deps || !deps.length) return;
+  if (!deps || !deps.length) {
+    return;
+  }
 
-  console.log(chalk.green('easywebpack: install webpack dynamic npm module:'), deps);
+  console.log(chalk.green(`easywebpack: install webpack dynamic ${type} npm module:\r\n`), deps);
 
   options = Object.assign({}, { save: false, dev: false, quiet: false, npm: 'npm' }, options);
 
@@ -65,7 +67,7 @@ exports.install = (deps, options) => {
   }
 
   if (peersDeps.length) {
-    this.install(peersDeps, options);
+    return this.install(peersDeps, options, 'peer');
   }
 
   return output;
@@ -75,7 +77,7 @@ exports.getDeps = (configDeps, defaultDeps) => {
   const deps = Object.assign({}, defaultDeps);
   if (configDeps) {
     Object.keys(configDeps).forEach(name => {
-      deps[name] = configDeps;
+      deps[name] = configDeps[name];
     });
   }
   return deps;
@@ -96,7 +98,7 @@ exports.installLoader = (rules, deps, modules) => {
       });
     }
   });
-  exports.install(pkgs);
+  exports.install(pkgs, {}, 'loader');
 };
 
 exports.installPlugin = (plugins, deps, modules) => {
@@ -112,7 +114,7 @@ exports.installPlugin = (plugins, deps, modules) => {
       }
     }
   });
-  exports.install(pkgs);
+  exports.install(pkgs, {}, 'plugin');
 };
 
 

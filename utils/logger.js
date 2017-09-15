@@ -17,12 +17,12 @@ class Logger {
   }
 
   print(tag, info) {
-    if (this.option.enable ===undefined || this.option.enable ) {
+    if (this.option.enable === undefined || this.option.enable) {
       this.info(info, tag);
     }
   }
 
-  debug(webpackConfig){
+  debug(webpackConfig) {
     this.env();
     this.config();
     this.keyword();
@@ -30,32 +30,32 @@ class Logger {
     this.all(webpackConfig);
   }
 
-  line(tag, info){
+  line(tag, info) {
     this.lineStart(tag);
     this.print(tag, info);
     this.lineEnd(tag);
   }
 
-  lineStart(tag){
-    this.print(tag, `-------------------start-------------------------`)
+  lineStart(tag) {
+    this.print(tag, '-------------------start-------------------------');
   }
 
-  lineEnd(tag){
-    this.print(tag, `-------------------end-------------------------`)
+  lineEnd(tag) {
+    this.print(tag, '-------------------end-------------------------');
   }
 
-  env(){
-    if(this.option.env){
-      this.info(`------ NODE_ENV: ${process.env.NODE_ENV}, BUILD_ENV: ${process.env.BUILD_ENV},  UPLOAD_CDN: ${process.env.UPLOAD_CDN} -------`,'env');
+  env() {
+    if (this.option.env) {
+      this.info(`------ NODE_ENV: ${process.env.NODE_ENV}, BUILD_ENV: ${process.env.BUILD_ENV},  UPLOAD_CDN: ${process.env.UPLOAD_CDN} -------`, 'env');
     }
   }
 
   all(info) {
-    if(this.option.all){
+    if (this.option.all) {
       this.lineStart('all');
-      if(info){
+      if (info) {
         this.print('all', info);
-      }else{
+      } else {
         this.config();
         this.keyword();
         this.loader();
@@ -83,7 +83,7 @@ class Logger {
     }
   }
 
-  options(options){
+  options(options) {
     if (this.option.options) {
       this.print('options', options || this.builder.options);
     }

@@ -54,7 +54,7 @@ describe('client.test.js', () => {
       };
       const builder = createBuilder(config);
       const webpackConfig = builder.create();
-      const count = webpackConfig.configPlugin.filter(p =>{
+      const count = webpackConfig.configPlugin.filter(p => {
         return p.constructor.name === 'StatsPlugin';
       }).length;
       expect(count).to.equal(1);

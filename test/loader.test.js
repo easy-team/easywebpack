@@ -6,6 +6,7 @@ const merge = WebpackTool.merge;
 const WebpackBaseBuilder = require('../lib/base');
 const Loader = require('../utils/loader');
 const path = require('path').posix;
+
 // http://chaijs.com/api/bdd/
 function createBuilder() {
   const builder = new WebpackBaseBuilder();
@@ -88,15 +89,15 @@ describe('loader.test.js', () => {
 
     builder.addLoader(imageLoader);
     expect(builder.findLoaderIndex(imageLoader) > -1);
-    builder.deleteLoader({loader: 'url-loader'}, 'loader');
+    builder.deleteLoader({ loader: 'url-loader' }, 'loader');
     expect(builder.findLoaderIndex(imageLoader) === -1);
 
     builder.addLoader(imageLoader);
     expect(builder.findLoaderIndex(imageLoader) > -1);
-    builder.deleteLoader({test: /\.(png|jpe?g|gif|svg)(\?.*)?$/}, 'test');
+    builder.deleteLoader({ test: /\.(png|jpe?g|gif|svg)(\?.*)?$/ }, 'test');
     expect(builder.findLoaderIndex(imageLoader) === -1);
 
-    expect(builder.deleteLoader({test: /\.(png|jpe?g|gif|svg)(\?.*)?$/}) === null );
+    expect(builder.deleteLoader({ test: /\.(png|jpe?g|gif|svg)(\?.*)?$/ }) === null);
   });
 
   describe('#webpack loader find test', () => {
