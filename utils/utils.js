@@ -5,11 +5,12 @@ const url = require('url');
 const queryString = require('querystring');
 const mkdirp = require('mkdirp');
 const cloneDeep = require('lodash.clonedeep');
-const utils = {
+const install = require('./install');
+const utils = Object.assign({}, {
   cloneDeep,
   mkdirp,
   queryString
-};
+}, install);
 
 utils.isFunction = value => typeof value === 'function';
 
