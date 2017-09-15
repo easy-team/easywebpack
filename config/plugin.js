@@ -5,6 +5,11 @@ const webpack = WebpackTool.webpack;
 const chalk = require('chalk');
 const utils = require('../utils/utils');
 
+exports.npm = {
+  name: 'npm-install-webpack-plugin',
+  args: {}
+};
+
 exports.module = {
   enable: true,
   name: webpack.optimize.ModuleConcatenationPlugin
