@@ -27,8 +27,7 @@ exports.defaultConfig = {
       ]
     }
   },
-  loaders: {},
-  loaderOptions: {
+  loaders: {
     css: {
       minimize: true
     }
