@@ -39,7 +39,7 @@ exports.commonsChunk = {
   action: 'merge',
   args() {
     const packKeys = Object.keys(this.packs || {});
-    const chunks = Object.keys(this.options.entry).filter(entry => {
+    const chunks = Object.keys(this.options.entry || {}).filter(entry => {
       return !packKeys.includes(entry);
     });
     return { names: 'vendor', chunks };

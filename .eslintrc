@@ -13,6 +13,7 @@
       "error",
       2
     ],
+    "no-underscore-dangle": "off",
     "consistent-return": "off",
     "no-cond-assign": "off",
     "arrow-body-style": "off",

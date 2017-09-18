@@ -32,7 +32,7 @@ utils.mixin = (target, source) => {
     }
   });
 };
-utils.joinPath = function() {
+utils.joinPath = function () {
   return [].slice.call(arguments, 0).map((arg, index) => {
     let tempArg = arg.replace(/\/$/, '');
     if (index > 0) {
@@ -134,6 +134,10 @@ utils.isMatch = (regexArray, strMatch) => {
 
 utils.assetsPath = (prefix, filepath) => path.posix.join(prefix, filepath);
 
+utils.getLoaderLabel = loader => {
+  const loaderName = utils.isObject(loader) ? loader.loader : loader;
+  return loaderName.replace(/-loader$/, '').replace(/-/g, '');
+};
 
 utils.loadNodeModules = isCache => {
   const nodeModules = {};
