@@ -1,5 +1,6 @@
 'use strict';
 const util = require('util');
+const fs = require('fs');
 const path = require('path').posix;
 const chalk = require('chalk');
 const spawn = require('cross-spawn');
@@ -12,13 +13,10 @@ exports.requireModule = (name, modules) => {
   if (path.isAbsolute(name)) {
     return require(name);
   }
+
   const module = modules.find(m => {
-    try {
-      require(path.join(m, name));
-      return true;
-    } catch (e) {
-      return false;
-    }
+    const modulepath = path.join(m, name);
+    return fs.existsSync(modulepath);
   });
   return module ? require(path.join(module, name)) : null;
 };
@@ -27,7 +25,7 @@ exports.isInstalled = (name, modules) => {
   return !!exports.requireModule(name, modules);
 };
 
-exports.install = (deps, options, type) => {
+exports.install = (deps, modules, options, type) => {
 
   if (!deps || !deps.length) {
     return;
@@ -59,18 +57,20 @@ exports.install = (deps, options, type) => {
   while (matches = PEERS.exec(output.stdout)) {
     const dep = matches[1];
     const version = matches[2];
-    if (version.match(' ')) {
-      peersDeps.push(dep);
-    } else {
-      peersDeps.push(util.format('%s@%s', dep, version));
+    if (!exports.isInstalled(dep, modules)) {
+      if (version.match(' ')) {
+        peersDeps.push(dep);
+      } else {
+        peersDeps.push(util.format('%s@%s', dep, version));
+      }
     }
   }
 
   if (peersDeps.length) {
-    return this.install(peersDeps, options, 'peer');
+    return this.install(peersDeps, modules, options, 'peer');
   }
 
-  return output;
+  return deps.length;
 };
 
 exports.getDeps = (configDeps, defaultDeps) => {
@@ -98,7 +98,7 @@ exports.installLoader = (rules, deps, modules) => {
       });
     }
   });
-  exports.install(pkgs, {}, 'loader');
+  return exports.install(pkgs, modules, {}, 'loader');
 };
 
 exports.installPlugin = (plugins, deps, modules) => {
@@ -114,7 +114,7 @@ exports.installPlugin = (plugins, deps, modules) => {
       }
     }
   });
-  exports.install(pkgs, {}, 'plugin');
+  return exports.install(pkgs, modules, {}, 'plugin');
 };
 
 

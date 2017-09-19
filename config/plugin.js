@@ -7,7 +7,9 @@ const utils = require('../utils/utils');
 
 exports.npm = {
   name: 'npm-install-webpack-plugin',
-  args: {}
+  args: {
+    dev: false
+  }
 };
 
 exports.module = {

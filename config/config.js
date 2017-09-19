@@ -21,15 +21,16 @@ exports.defaultConfig = {
     },
     resolveLoader: {
       modules: [
-        path.join(__dirname, '../node_modules'),
         path.join(baseDir, 'node_modules'),
-        'node_modules'
+        path.join(__dirname, '../node_modules')
       ]
     }
   },
   loaders: {
     css: {
-      minimize: true
+      options: {
+        minimize: true
+      }
     }
   },
   plugins: {
