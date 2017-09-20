@@ -2,6 +2,16 @@
 3.2.0 / 2017-09-20
 ==================
 
+  * fix:window npm dynamic install peer not match
+  * fix: conflict from webpack3
+  * doc:image weex error
+  * 3.1.3
+  * fix: when setEnv, default config not effective
+  * fix:loader boolean config not effective
+
+3.2.0 / 2017-09-20
+==================
+
   * feat:npm dynamic install npm module
   * fix:plugin args override
   * test:add unit test
