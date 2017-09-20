@@ -1,4 +1,9 @@
 
+3.2.1 / 2017-09-20
+==================
+
+  * fix: windows isAbsolute proplem, use path.isAbsolute,not path.posix.isAbsolute
+
 3.2.0 / 2017-09-20
 ==================
 
