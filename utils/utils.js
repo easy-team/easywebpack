@@ -78,7 +78,7 @@ utils.createEntry = (baseDir, entryLoader, entryConfig, isParseUrl) => {
   Object.keys(entryConfig).forEach(entryName => {
     let filepath = entryConfig[entryName];
     let useLoader = !!entryLoader;
-    if (useLoader && isParseUrl) {
+    if (isParseUrl) {
       const fileInfo = url.parse(filepath);
       const params = queryString.parse(fileInfo.query);
       useLoader = utils.isTrue(params.loader);

@@ -79,6 +79,7 @@ describe('plugin.test.js', () => {
       const builder1 = createBuilder({ type: 'client', env: 'prod' });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
+
       expect(!!getPluginByLabel('hot', plugins)).to.be.false;
       expect(!!getPluginByLabel('uglifyJs', plugins)).to.be.true;
       expect(!!getPluginByLabel('imagemini', plugins)).to.be.true;
