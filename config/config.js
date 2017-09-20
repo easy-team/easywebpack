@@ -1,6 +1,7 @@
 'use strict';
 const path = require('path').posix;
 const baseDir = process.cwd();
+
 exports.defaultConfig = {
   baseDir,
   buildPath: 'public',
@@ -9,34 +10,19 @@ exports.defaultConfig = {
   alias: {},
   packs: {},
   cdn: {},
-  hot: false,
-  hash: true,
-  miniJs: true,
-  miniCss: true,
-  miniImage: true,
-  cssExtract: true,
   options: {
     resolve: {
       extensions: ['.js', '.jsx']
     },
     resolveLoader: {
       modules: [
-        path.join(__dirname, '../node_modules'),
         path.join(baseDir, 'node_modules'),
-        'node_modules'
+        path.join(__dirname, '../node_modules')
       ]
     }
   },
   loaders: {},
-  loaderOptions: {
-    css: {
-      minimize: true
-    }
-  },
   plugins: {
-    define: {
-      args: { 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production') }
-    },
     manifest: {}
   }
 };
@@ -47,14 +33,7 @@ exports.devConfig = {
   miniJs: false,
   miniCss: false,
   miniImage: false,
-  cssExtract: false,
-  plugins: {
-    define: {
-      args: {
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-      }
-    }
-  }
+  cssExtract: false
 };
 
 exports.testConfig = {
@@ -63,10 +42,20 @@ exports.testConfig = {
   miniJs: false,
   miniCss: false,
   miniImage: false,
-  plugins: {
-    define: {
-      args: {
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+  cssExtract: true
+};
+
+exports.prodConfig = {
+  hot: false,
+  hash: true,
+  miniJs: true,
+  miniCss: true,
+  miniImage: true,
+  cssExtract: true,
+  loaders: {
+    css: {
+      options: {
+        minimize: true
       }
     }
   }

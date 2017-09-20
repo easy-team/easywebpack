@@ -5,6 +5,13 @@ const webpack = WebpackTool.webpack;
 const chalk = require('chalk');
 const utils = require('../utils/utils');
 
+exports.npm = {
+  name: 'npm-install-webpack-plugin',
+  args: {
+    dev: true
+  }
+};
+
 exports.module = {
   enable: true,
   name: webpack.optimize.ModuleConcatenationPlugin
@@ -24,7 +31,9 @@ exports.provide = {
 exports.define = {
   enable: true,
   name: webpack.DefinePlugin,
-  args: {}
+  args: {
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+  }
 };
 
 exports.commonsChunk = {
@@ -34,7 +43,7 @@ exports.commonsChunk = {
   action: 'merge',
   args() {
     const packKeys = Object.keys(this.packs || {});
-    const chunks = Object.keys(this.options.entry).filter(entry => {
+    const chunks = Object.keys(this.options.entry || {}).filter(entry => {
       return !packKeys.includes(entry);
     });
     return { names: 'vendor', chunks };

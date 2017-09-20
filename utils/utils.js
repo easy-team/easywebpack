@@ -5,11 +5,12 @@ const url = require('url');
 const queryString = require('querystring');
 const mkdirp = require('mkdirp');
 const cloneDeep = require('lodash.clonedeep');
-const utils = {
+const install = require('./install');
+const utils = Object.assign({}, {
   cloneDeep,
   mkdirp,
   queryString
-};
+}, install);
 
 utils.isFunction = value => typeof value === 'function';
 
@@ -77,7 +78,7 @@ utils.createEntry = (baseDir, entryLoader, entryConfig, isParseUrl) => {
   Object.keys(entryConfig).forEach(entryName => {
     let filepath = entryConfig[entryName];
     let useLoader = !!entryLoader;
-    if (useLoader && isParseUrl) {
+    if (isParseUrl) {
       const fileInfo = url.parse(filepath);
       const params = queryString.parse(fileInfo.query);
       useLoader = utils.isTrue(params.loader);
@@ -133,6 +134,10 @@ utils.isMatch = (regexArray, strMatch) => {
 
 utils.assetsPath = (prefix, filepath) => path.posix.join(prefix, filepath);
 
+utils.getLoaderLabel = loader => {
+  const loaderName = utils.isObject(loader) ? loader.loader : loader;
+  return loaderName.replace(/-loader$/, '').replace(/-/g, '');
+};
 
 utils.loadNodeModules = isCache => {
   const nodeModules = {};

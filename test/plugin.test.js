@@ -2,19 +2,27 @@
 const expect = require('chai').expect;
 const WebpackTool = require('webpack-tool');
 const webpack = WebpackTool.webpack;
-const merge = WebpackTool.merge;
 const WebpackBaseBuilder = require('../lib/base');
-const Utils = require('../utils/utils');
 const path = require('path').posix;
+
 // http://chaijs.com/api/bdd/
-function createBuilder() {
-  const builder = new WebpackBaseBuilder();
-  builder.setBuildPath(path.join(__dirname, 'test'));
+function createBuilder(config) {
+  const builder = new WebpackBaseBuilder(config);
+  if (config && config.type) {
+    builder.type = config.type;
+  }
+  builder.setBuildPath(path.join(__dirname, 'dist/pluglin'));
   builder.setPublicPath('/public');
   builder.setEntry({
     include: path.join(__dirname, 'test')
   });
   return builder;
+}
+
+function getPluginByLabel(label, plugins) {
+  return plugins.find(plugin => {
+    return plugin.__lable__ === label;
+  });
 }
 
 describe('plugin.test.js', () => {
@@ -30,54 +38,95 @@ describe('plugin.test.js', () => {
   afterEach(() => {
   });
 
-  describe('#webpack plugin delete test', () => {
-
-    const plugin = webpack.NoEmitOnErrorsPlugin;
-    const builder = createBuilder();
-
-    expect(builder.findPluginIndex(plugin) > -1);
-    builder.deletePlugin(plugin);
-    expect(builder.findPluginIndex(plugin) === -1);
-
-    builder.addPlugin(new webpack.NoEmitOnErrorsPlugin());
-    expect(builder.findPluginIndex(plugin) > -1);
-    builder.deletePlugin(plugin);
-    expect(builder.findPluginIndex(plugin) === -1);
-
-    builder.addPlugin(plugin);
-    expect(builder.findPluginIndex(plugin) > -1);
-    builder.deletePlugin('NoEmitOnErrorsPlugin');
-    expect(builder.findPluginIndex(plugin) === -1);
-
-    expect(builder.deletePlugin(plugin) === null);
-  });
-
-  describe('#webpack plugin update test', () => {
-    const plugin = webpack.LoaderOptionsPlugin;
-    const builder = createBuilder();
-    expect(builder.findPluginIndex(plugin) > -1);
-    builder.updatePlugin(plugin, { minimize: true });
-    const webpackConfig = builder.create();
-    const newPlugin = webpackConfig.configPlugin.filter(p =>{
-      return p.constructor.name === 'LoaderOptionsPlugin';
+  describe('#webpack createWebpackPlugin test', () => {
+    it('should plugin default enable test', () => {
+      const builder1 = createBuilder();
+      const webpackConfig1 = builder1.create();
+      const plugins = webpackConfig1.plugins;
+      expect(!!getPluginByLabel('npm', plugins)).to.be.true;
+      expect(!!getPluginByLabel('module', plugins)).to.be.true;
+      expect(!!getPluginByLabel('error', plugins)).to.be.true;
+      expect(!!getPluginByLabel('provide', plugins)).to.be.true;
+      expect(!!getPluginByLabel('define', plugins)).to.be.true;
+      expect(!!getPluginByLabel('progress', plugins)).to.be.true;
     });
-    expect(newPlugin[0].options.minimize);
-    expect(builder.updatePlugin('LoaderOptionsPlugin_No', { minimize: true }) === null);
-  });
 
-  describe('#webpack plugin find test', () => {
-    const builder = createBuilder();
-    builder.updatePlugin(new webpack.LoaderOptionsPlugin({ minimize: false }));
-    const webpackConfig = builder.create();
-    const newPlugin = webpackConfig.configPlugin.filter(p =>{
-      return p.constructor.name === 'LoaderOptionsPlugin';
+    it('should plugin client dev enable test', () => {
+      const builder1 = createBuilder({ type: 'client' });
+      const webpackConfig1 = builder1.create();
+      const plugins = webpackConfig1.plugins;
+      expect(!!getPluginByLabel('hot', plugins)).to.be.true;
+      expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
+      expect(!!getPluginByLabel('commonsChunk', plugins)).to.be.true;
+      expect(!!getPluginByLabel('buildfile', plugins)).to.be.true;
     });
-    expect(newPlugin[0].options.minimize === false);
 
-    builder.updatePlugin(new webpack.LoaderOptionsPlugin({ minimize: true }));
-    const newPlugin2 = webpackConfig.configPlugin.filter(p =>{
-      return p.constructor.name === 'LoaderOptionsPlugin';
+    it('should plugin client test enable test', () => {
+      const builder1 = createBuilder({ type: 'client', env: 'test' });
+      const webpackConfig1 = builder1.create();
+      const plugins = webpackConfig1.plugins;
+      expect(!!getPluginByLabel('hot', plugins)).to.be.false;
+      expect(!!getPluginByLabel('uglifyJs', plugins)).to.be.false;
+      expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
+      expect(!!getPluginByLabel('ignore', plugins)).to.be.false;
+      expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.false;
+      expect(!!getPluginByLabel('extract', plugins)).to.be.true;
+      expect(!!getPluginByLabel('buildfile', plugins)).to.be.true;
+      expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
     });
-    expect(newPlugin2[0].options.minimize === true);
+
+    it('should plugin client prod enable test', () => {
+      const builder1 = createBuilder({ type: 'client', env: 'prod' });
+      const webpackConfig1 = builder1.create();
+      const plugins = webpackConfig1.plugins;
+
+      expect(!!getPluginByLabel('hot', plugins)).to.be.false;
+      expect(!!getPluginByLabel('uglifyJs', plugins)).to.be.true;
+      expect(!!getPluginByLabel('imagemini', plugins)).to.be.true;
+      expect(!!getPluginByLabel('ignore', plugins)).to.be.false;
+      expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.false;
+      expect(!!getPluginByLabel('extract', plugins)).to.be.true;
+      expect(!!getPluginByLabel('buildfile', plugins)).to.be.true;
+      expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
+    });
+
+    it('should plugin server dev enable test', () => {
+      const builder1 = createBuilder({ type: 'server', env: 'dev' });
+      const webpackConfig1 = builder1.create();
+      const plugins = webpackConfig1.plugins;
+      expect(!!getPluginByLabel('hot', plugins)).to.be.false;
+      expect(!!getPluginByLabel('uglifyJs', plugins)).to.be.false;
+      expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
+      expect(!!getPluginByLabel('ignore', plugins)).to.be.false;
+      expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.false;
+      expect(!!getPluginByLabel('buildfile', plugins)).to.be.false;
+      expect(!!getPluginByLabel('extract', plugins)).to.be.false;
+    });
+
+    it('should plugin server test enable test', () => {
+      const builder1 = createBuilder({ type: 'server', env: 'test' });
+      const webpackConfig1 = builder1.create();
+      const plugins = webpackConfig1.plugins;
+      expect(!!getPluginByLabel('hot', plugins)).to.be.false;
+      expect(!!getPluginByLabel('uglifyJs', plugins)).to.be.false;
+      expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
+      expect(!!getPluginByLabel('ignore', plugins)).to.be.true;
+      expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.true;
+      expect(!!getPluginByLabel('buildfile', plugins)).to.be.false;
+      expect(!!getPluginByLabel('extract', plugins)).to.be.false;
+    });
+
+    it('should plugin server prod enable test', () => {
+      const builder1 = createBuilder({ type: 'server', env: 'prod' });
+      const webpackConfig1 = builder1.create();
+      const plugins = webpackConfig1.plugins;
+      expect(!!getPluginByLabel('hot', plugins)).to.be.false;
+      expect(!!getPluginByLabel('uglifyJs', plugins)).to.be.true;
+      expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
+      expect(!!getPluginByLabel('ignore', plugins)).to.be.true;
+      expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.true;
+      expect(!!getPluginByLabel('buildfile', plugins)).to.be.false;
+      expect(!!getPluginByLabel('extract', plugins)).to.be.false;
+    });
   });
 });

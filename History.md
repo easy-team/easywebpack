@@ -1,4 +1,12 @@
 
+3.2.0 / 2017-09-20
+==================
+
+  * feat:npm dynamic install npm module
+  * fix:plugin args override
+  * test:add unit test
+  * deps:remove unused dependence
+
 3.1.2 / 2017-09-14
 ==================
 
