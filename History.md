@@ -1,4 +1,17 @@
 
+3.2.0-rc3 / 2017-09-20
+======================
+
+  * feat:npm dynamic install npm module
+  * fix: dynamci npm install, require again not found
+  * test: add loader and plugin test
+  * test:add unit test
+  * feat: loader options config and fix loader boolean config
+  * Release 3.2.0-rc2
+  * fix: setEnv no effect
+  * feat:dynamic install npm module
+  * deps:remove unused dependence
+
 3.1.2 / 2017-09-14
 ==================
 
