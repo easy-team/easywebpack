@@ -3,8 +3,9 @@ const util = require('util');
 const fs = require('fs');
 const path = require('path').posix;
 const chalk = require('chalk');
+const os = require('os');
 const spawn = require('cross-spawn');
-const PEERS = /UNMET PEER DEPENDENCY ([a-z\-0-9.]+)@(.+)/gm;
+const PEERS = /UNMET PEER DEPENDENCY ([a-z\-0-9\.]+)@(.+)/gm;
 
 exports.requireModule = (name, modules) => {
   if (typeof name === 'object') {
@@ -52,18 +53,39 @@ exports.install = (deps, modules, options, type) => {
 
   let matches;
   const peersDeps = [];
-
-  // RegExps track return a single result each time
-  while (matches = PEERS.exec(output.stdout)) {
-    const dep = matches[1];
-    const version = matches[2];
-    if (!exports.isInstalled(dep, modules)) {
-      if (version.match(' ')) {
-        peersDeps.push(dep);
-      } else {
-        peersDeps.push(util.format('%s@%s', dep, version));
+  if (os.platform() === 'regex_test') { // windows not match PEERS
+    // RegExps track return a single result each time
+    while (matches = PEERS.exec(output.stdout)) {
+      const dep = matches[1];
+      const version = matches[2];
+      if (!exports.isInstalled(dep, modules)) {
+        if (version.match(' ')) {
+          peersDeps.push(dep);
+        } else {
+          peersDeps.push(util.format('%s@%s', dep, version));
+        }
       }
     }
+  } else {
+    deps.forEach(dep => {
+      const name = dep.split('@')[0];
+      const module = modules.find(m => {
+        const modulepath = path.join(m, name);
+        return fs.existsSync(modulepath);
+      });
+      if (module) {
+        const pkgpath = path.join(module, name, 'package.json');
+        const pkg = require(pkgpath);
+        const peerDependencies = pkg.peerDependencies;
+        if (peerDependencies) {
+          Object.keys(peerDependencies).forEach(pkgName => {
+            if (!exports.isInstalled(pkgName, modules)) {
+              peersDeps.push(`${pkgName}@${peerDependencies[pkgName]}`);
+            }
+          });
+        }
+      }
+    });
   }
 
   if (peersDeps.length) {
@@ -116,8 +138,3 @@ exports.installPlugin = (plugins, deps, modules, options) => {
   });
   return exports.install(pkgs, modules, options, 'plugin');
 };
-
-
-
-
-
