@@ -1,5 +1,5 @@
 'use strict';
-const path = require('path').posix;
+const path = require('path');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 
@@ -20,7 +20,7 @@ class BuildConfigPlugin {
   }
 
   apply(compiler) {
-    const filepath = path.isAbsolute(this.opts.filepath) ? this.opts.filepath : path.join(this.opts.baseDir, this.opts.filepath);
+    const filepath = path.isAbsolute(this.opts.filepath) ? this.opts.filepath : path.posix.join(this.opts.baseDir, this.opts.filepath);
     const content = {
       buildPath: this.opts.buildPath.replace(this.opts.baseDir, '').replace(/^\//, ''),
       publicPath: this.opts.proxy && this.opts.host ? this.opts.publicPath.replace(this.opts.host, '') : this.opts.publicPath,

@@ -1,5 +1,5 @@
 'use strict';
-const path = require('path').posix;
+const path = require('path');
 const fs = require('fs');
 const url = require('url');
 const queryString = require('querystring');
@@ -20,7 +20,7 @@ utils.isString = value => typeof value === 'string';
 
 utils.isBoolean = value => typeof value === 'boolean';
 
-utils.normalizePath = (filepath, baseDir) => path.isAbsolute(filepath) ? filepath : path.join(baseDir, filepath);
+utils.normalizePath = (filepath, baseDir) => path.isAbsolute(filepath) ? filepath : path.posix.join(baseDir, filepath);
 
 utils.isTrue = value => value !== 'false' && (!!value || value === undefined);
 
@@ -100,7 +100,7 @@ utils.walkFile = (dirs, excludeRegex, extMatch = '.js') => {
   const walk = (dir, exclude) => {
     const dirList = fs.readdirSync(dir);
     dirList.forEach(item => {
-      const filePath = path.join(dir, item);
+      const filePath = path.posix.join(dir, item);
       if (fs.statSync(filePath).isDirectory()) {
         walk(filePath, exclude);
       } else {
@@ -141,7 +141,7 @@ utils.getLoaderLabel = loader => {
 
 utils.loadNodeModules = isCache => {
   const nodeModules = {};
-  const cacheFile = path.resolve(__dirname, '../temp/cache.json');
+  const cacheFile = path.posix.resolve(__dirname, '../temp/cache.json');
   if (isCache && fs.existsSync(cacheFile)) {
     return require(cacheFile);
   }
@@ -189,7 +189,7 @@ utils.getHost = port => {
 
 utils.writeFile = (filepath, content) => {
   try {
-    mkdirp.sync(path.dirname(filepath));
+    mkdirp.sync(path.posix.dirname(filepath));
     fs.writeFileSync(filepath, typeof content === 'string' ? content : JSON.stringify(content), 'utf8');
   } catch (e) {
     console.error(`writeFile ${filepath} err`, e);

@@ -1,7 +1,7 @@
 'use strict';
 const util = require('util');
 const fs = require('fs');
-const path = require('path').posix;
+const path = require('path');
 const chalk = require('chalk');
 const os = require('os');
 const spawn = require('cross-spawn');
@@ -16,10 +16,10 @@ exports.requireModule = (name, modules) => {
   }
 
   const module = modules.find(m => {
-    const modulepath = path.join(m, name);
+    const modulepath = path.posix.join(m, name);
     return fs.existsSync(modulepath);
   });
-  return module ? require(path.join(module, name)) : null;
+  return module ? require(path.posix.join(module, name)) : null;
 };
 
 exports.isInstalled = (name, modules) => {
@@ -70,11 +70,11 @@ exports.install = (deps, modules, options, type) => {
     deps.forEach(dep => {
       const name = dep.split('@')[0];
       const module = modules.find(m => {
-        const modulepath = path.join(m, name);
+        const modulepath = path.posix.join(m, name);
         return fs.existsSync(modulepath);
       });
       if (module) {
-        const pkgpath = path.join(module, name, 'package.json');
+        const pkgpath = path.posix.join(module, name, 'package.json');
         const pkg = require(pkgpath);
         const peerDependencies = pkg.peerDependencies;
         if (peerDependencies) {
