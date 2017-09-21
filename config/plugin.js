@@ -1,5 +1,5 @@
 'use strict';
-const path = require('path').posix;
+const path = require('path');
 const WebpackTool = require('webpack-tool');
 const webpack = WebpackTool.webpack;
 const chalk = require('chalk');
@@ -78,7 +78,7 @@ exports.manifest = {
   args() {
     const filename = this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
     const absFilename = this.utils.normalizePath(filename, this.config.baseDir);
-    const relativeFileName = path.posix.relative(this.buildPath, absFilename);
+    let relativeFileName = path.relative(this.buildPath, absFilename);
     return { fileName: relativeFileName };
   }
 };
