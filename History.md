@@ -1,4 +1,9 @@
 
+3.2.3 / 2017-09-21
+==================
+
+  * fix: server side render, egg local dev mode , proxy static resource proxy to 7001 address
+
 3.2.2 / 2017-09-21
 ==================
 
