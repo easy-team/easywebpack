@@ -22,7 +22,6 @@ exports.eslint = {
 exports.css = {
   enable: true,
   test: /\.css$/,
-  exclude: /node_modules/,
   use: ['css-loader'],
   postcss: true,
   framework: true
@@ -31,7 +30,6 @@ exports.css = {
 exports.scss = {
   enable: true,
   test: /\.scss/,
-  exclude: /node_modules/,
   use: ['css-loader', 'sass-loader'],
   postcss: true,
   framework: true
@@ -40,7 +38,6 @@ exports.scss = {
 exports.sass = {
   enable: true,
   test: /\.sass/,
-  exclude: /node_modules/,
   use: ['css-loader', {
     loader: 'sass-loader',
     options: {
@@ -54,7 +51,6 @@ exports.sass = {
 exports.less = {
   enable: true,
   test: /\.less/,
-  exclude: /node_modules/,
   use: ['css-loader', 'less-loader'],
   postcss: true,
   framework: true
@@ -63,7 +59,6 @@ exports.less = {
 exports.stylus = {
   enable: true,
   test: /\.stylus/,
-  exclude: /node_modules/,
   use: ['css-loader', 'stylus-loader'],
   postcss: true,
   framework: true
@@ -72,7 +67,6 @@ exports.stylus = {
 exports.urlimage = {
   enable: true,
   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-  exclude: /node_modules/,
   use: [
     {
       loader: 'url-loader',
@@ -93,7 +87,6 @@ exports.urlimage = {
 exports.urlfont = {
   enable: true,
   test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-  exclude: /node_modules/,
   use: [
     {
       loader: 'url-loader',
