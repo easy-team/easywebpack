@@ -42,7 +42,15 @@ programming instead of configuration, webpack is no longer complex. the support 
 
 - Support custom components such as Vue or React by extending the WebpackClientBuilder or WebpackServerBuilder extension.
 
-- [API Document](http://hubcarl.github.io/easywebpack/webpack/api/) [Example](http://hubcarl.github.io/easywebpack/vue/easywebpack-vue-project/) [配置参数](http://hubcarl.github.io/easywebpack/webpack/config/)
+
+## Document
+
+- [使用文档](http://hubcarl.github.io/easywebpack)
+- [技术文档](https://zhuanlan.zhihu.com/easywebpack)
+- [配置参数](http://hubcarl.github.io/easywebpack/webpack/config/)
+- [API Document](http://hubcarl.github.io/easywebpack/webpack/api/)
+- [Example](http://hubcarl.github.io/easywebpack/vue/easywebpack-vue-project/)
+
 
 ## Install
 
