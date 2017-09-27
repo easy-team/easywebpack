@@ -1,4 +1,9 @@
 
+3.2.5 / 2017-09-27
+==================
+
+  perf: npm-install-webpack-plugin default enable affect npm start command start speed, default to disable
+
 3.2.4 / 2017-09-22
 ==================
 
