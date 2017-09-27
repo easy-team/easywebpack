@@ -1,4 +1,10 @@
 
+3.2.6 / 2017-09-27
+==================
+
+  fix:loader.use is function merge bug for vue options merge
+
+
 3.2.5 / 2017-09-27
 ==================
 
