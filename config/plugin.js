@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const utils = require('../utils/utils');
 
 exports.npm = {
+  enable: false,
   name: 'npm-install-webpack-plugin',
   args: {
     dev: true
