@@ -1,4 +1,12 @@
 
+3.2.7 / 2017-10-31
+==================
+
+  * fix:buildhtml not set, the build file path error
+  * Update README.md
+  * Update README.md
+  * doc: add use doc link
+
 3.2.6 / 2017-09-27
 ==================
 
