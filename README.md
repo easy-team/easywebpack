@@ -64,7 +64,13 @@ $ npm i easywebpack --save-dev
 - [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git)
 - [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git)
 
+## Webpack Command Tool
+
+[easywebpack-cli](https://github.com/hubcarl/easywebpack-cli.git) Webpack Building Command Line And Boilerplate Init Tool for easywebpack
+
 ## Project Boilerplate
+
+- [easywebpack-cli-template](https://github.com/hubcarl/easywebpack-cli-template)
 
 - [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) support vue server side render and client render
 
@@ -72,9 +78,7 @@ $ npm i easywebpack --save-dev
 
 - [easywebpack-weex-boilerplate](https://github.com/hubcarl/easywebpack-weex-boilerplate) support weex native build and web build
 
-## Webpack Command Tool
-
-[easywebpack-cli](https://github.com/hubcarl/easywebpack-cli.git) Webpack Building Command Line And Boilerplate Init Tool for easywebpack
+**Note: you can use [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli.git) init project.**
 
 ## Configuration
 
