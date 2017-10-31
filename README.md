@@ -70,7 +70,7 @@ $ npm i easywebpack --save-dev
 
 ## Project Boilerplate
 
-- [easywebpack-cli-template](https://github.com/hubcarl/easywebpack-cli-template)
+- [easywebpack-cli-template](https://github.com/hubcarl/easywebpack-cli-template) Config template and client render boilerplate template
 
 - [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) support vue server side render and client render
 
@@ -78,7 +78,7 @@ $ npm i easywebpack --save-dev
 
 - [easywebpack-weex-boilerplate](https://github.com/hubcarl/easywebpack-weex-boilerplate) support weex native build and web build
 
-**Note: you can use [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli.git) init project.**
+**Note: you can use [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli.git) init above project.**
 
 ## Configuration
 
