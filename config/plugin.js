@@ -84,6 +84,28 @@ exports.manifest = {
   }
 };
 
+exports.manifestDeps = {
+  enable: false,
+  type: 'client',
+  name: 'webpack-manifest-resource-plugin',
+  args() {
+    const manifestName = this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
+    const absFilename = this.utils.normalizePath(manifestName, this.config.baseDir);
+    const fileName = path.relative(this.buildPath, absFilename);
+    const commonsChunk = this.getCommonsChunk();
+    return {
+      baseDir: this.config.baseDir,
+      proxy: this.config.proxy,
+      host: utils.getHost(this.config.port),
+      buildPath: this.buildPath,
+      writeToFileEmit: this.dev,
+      commonsChunk,
+      fileName
+    };
+  }
+};
+
+
 exports.buildfile = {
   enable: true,
   type: 'client',
