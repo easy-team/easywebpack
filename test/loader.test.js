@@ -134,5 +134,25 @@ describe('loader.test.js', () => {
       expect(loader.use[1].options.fix).to.be.true;
 
     });
+
+    it('should merge loader test', () => {
+      const config = {
+        loaders:{
+          vuehtml: {
+            test: /\.html$/,
+            loader: 'vue-html-loader',
+            options:{
+              test: true
+            }
+          }
+        }
+      };
+      const builder = createBuilder(config);
+      const webpackConfig = builder.create();
+      const rules = webpackConfig.module.rules;
+      const vuehtml = getLoaderByName('vue-html', rules);
+      expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
+      expect(vuehtml.use[0].options.test).to.true;
+    });
   });
 });

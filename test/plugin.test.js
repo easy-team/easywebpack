@@ -43,12 +43,25 @@ describe('plugin.test.js', () => {
       const builder1 = createBuilder();
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
-      expect(!!getPluginByLabel('npm', plugins)).to.be.true;
       expect(!!getPluginByLabel('module', plugins)).to.be.true;
       expect(!!getPluginByLabel('error', plugins)).to.be.true;
       expect(!!getPluginByLabel('provide', plugins)).to.be.true;
       expect(!!getPluginByLabel('define', plugins)).to.be.true;
       expect(!!getPluginByLabel('progress', plugins)).to.be.true;
+    });
+
+    it('should plugin manifest enable test', () => {
+      const builder1 = createBuilder({
+        type: 'client',
+        plugins:{
+          manifest: false,
+          manifestDeps: true
+        }
+      });
+      const webpackConfig1 = builder1.create();
+      const plugins = webpackConfig1.plugins;
+      expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
+      expect(!!getPluginByLabel('manifestDeps', plugins)).to.be.true;
     });
 
     it('should plugin client dev enable test', () => {
@@ -127,6 +140,36 @@ describe('plugin.test.js', () => {
       expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.true;
       expect(!!getPluginByLabel('buildfile', plugins)).to.be.false;
       expect(!!getPluginByLabel('extract', plugins)).to.be.false;
+    });
+
+    it('should merge plugin test', () => {
+      const builder = createBuilder({
+        plugins:{
+          uglifyJs:{
+            enable: true,
+            merge: false,
+            name: webpack.optimize.UglifyJsPlugin,
+            args: {
+              compress: false
+            }
+          },
+          dll:{
+            enable: true,
+            name: webpack.DllPlugin,
+            args:{
+              path: 'manifest.json',
+              name: '[name]_[chunkhash]',
+              context: __dirname
+            }
+          }
+        }
+      });
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const uglifyJs = getPluginByLabel('uglifyJs', plugins);
+      const dll = getPluginByLabel('dll', plugins);
+      expect(uglifyJs.options.compress).to.be.false;
+      expect(!!dll).to.be.true;
     });
   });
 });
