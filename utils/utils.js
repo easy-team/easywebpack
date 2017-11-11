@@ -76,18 +76,18 @@ utils.getEntry = (config, type) => {
 utils.createEntry = (baseDir, entryLoader, entryConfig, isParseUrl) => {
   const entries = {};
   Object.keys(entryConfig).forEach(entryName => {
-    let filepath = entryConfig[entryName];
+    let targetFile = entryConfig[entryName];
     let useLoader = !!entryLoader;
-    if (isParseUrl) {
-      const fileInfo = url.parse(filepath);
+    if (isParseUrl && utils.isString(targetFile)) {
+      const fileInfo = url.parse(targetFile);
       const params = queryString.parse(fileInfo.query);
       useLoader = utils.isTrue(params.loader);
-      filepath = utils.normalizePath(fileInfo.pathname, baseDir);
+      targetFile = utils.normalizePath(fileInfo.pathname, baseDir);
     }
-    if (useLoader) {
-      entries[entryName] = ['babel-loader', entryLoader, filepath].join('!');
+    if (useLoader && utils.isString(targetFile)) {
+      entries[entryName] = ['babel-loader', entryLoader, targetFile].join('!');
     } else {
-      entries[entryName] = filepath;
+      entries[entryName] = targetFile;
     }
   });
   return entries;
