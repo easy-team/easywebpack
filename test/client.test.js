@@ -36,7 +36,7 @@ function getPluginByLabel(label, plugins) {
   });
 }
 
-describe('plugin.test.js', () => {
+describe('client.test.js', () => {
   before(() => {
   });
 
