@@ -29,6 +29,22 @@ exports.provide = {
   args: {}
 };
 
+exports.nameModule = {
+  enable: true,
+  env: ['dev'],
+  type: 'client',
+  name: webpack.NamedModulesPlugin,
+  args: {}
+};
+
+exports.hashModule = {
+  enable: true,
+  env: ['test', 'prod'],
+  type: 'client',
+  name: webpack.HashedModuleIdsPlugin,
+  args: {}
+};
+
 exports.define = {
   enable: true,
   name: webpack.DefinePlugin,
@@ -48,6 +64,17 @@ exports.commonsChunk = {
       return !packKeys.includes(entry);
     });
     return { names: 'vendor', chunks };
+  }
+};
+
+exports.runtime = {
+  enable: true,
+  type: 'client',
+  name: webpack.optimize.CommonsChunkPlugin,
+  action: 'merge',
+  args() {
+    const chunks = this.getCommonsChunk(false);
+    return { name: 'runtime',  chunks};
   }
 };
 
