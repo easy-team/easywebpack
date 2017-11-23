@@ -1,4 +1,9 @@
 
+3.3.3 / 2017-11-23
+==================
+
+  * fix: server not need source map, will improve build speed
+
 3.3.2 / 2017-11-13
 ==================
 
