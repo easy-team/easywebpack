@@ -48,8 +48,14 @@ exports.hashModule = {
 exports.define = {
   enable: true,
   name: webpack.DefinePlugin,
-  args: {
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+  args(){
+    return {
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+      EASY_IS_DEV: !!this.dev,
+      EASY_IS_SERVER: !!this.ssr,
+      EASY_PUBLIC_PATH: JSON.stringify(this.publicPath),
+      EASY_HOST_URL: JSON.stringify(`http://${this.utils.getIp()}:${this.config.port}`)
+    }
   }
 };
 
