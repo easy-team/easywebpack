@@ -22,7 +22,7 @@
 
 programming instead of configuration, webpack is no longer complex. the support feature:
 
-![easywebpack](https://github.com/hubcarl/easywebpack/blob/master/doc/images/easywebpack.png)
+![easywebpack](https://github.com/hubcarl/easywebpack/blob/master/docs/images/easywebpack.png)
 
 - Support Webpack3 (easywebpack 3.x.x) 和 Webpack2 (easywebpack 1.x.x)
 
