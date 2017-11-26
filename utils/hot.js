@@ -18,7 +18,7 @@ if (typeof window === 'object') {
             try {
               var update = JSON.parse(request.responseText);
               var c = update.c;
-              if (!c || JSON.stringify(c) === '{}') {
+              if (!c || JSON.stringify(c) === '{}' || JSON.stringify(c) === '{"0":true}') {
                 var links = document.getElementsByTagName('link');
                 for (var i = 0; i < links.length; i++) {
                   var href = links[i].href;
