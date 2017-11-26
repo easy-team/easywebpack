@@ -1,4 +1,9 @@
 
+3.3.7 / 2017-11-26
+==================
+
+  * feat: support html template from entry same name config
+
 3.3.6 / 2017-11-24
 ==================
 
