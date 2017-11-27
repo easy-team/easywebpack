@@ -47,9 +47,6 @@ programming instead of configuration, webpack is no longer complex. the support 
 
 - [使用文档](http://hubcarl.github.io/easywebpack)
 - [技术文档](https://zhuanlan.zhihu.com/easywebpack)
-- [配置参数](http://hubcarl.github.io/easywebpack/webpack/config/)
-- [API Document](http://hubcarl.github.io/easywebpack/webpack/api/)
-- [Example](http://hubcarl.github.io/easywebpack/vue/easywebpack-vue-project/)
 
 
 ## Install
