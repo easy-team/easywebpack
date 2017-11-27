@@ -45,8 +45,8 @@ programming instead of configuration, webpack is no longer complex. the support 
 
 ## Document
 
-- [使用文档](http://hubcarl.github.io/easywebpack)
-- [技术文档](https://zhuanlan.zhihu.com/easywebpack)
+- http://hubcarl.github.io/easywebpack
+- https://zhuanlan.zhihu.com/easywebpack
 
 
 ## Install
@@ -55,7 +55,7 @@ programming instead of configuration, webpack is no longer complex. the support 
 $ npm i easywebpack --save-dev
 ```
 
-## Build Solution
+## Webpack Build Solution
 
 - [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) 
 - [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git)
@@ -76,79 +76,16 @@ $ npm i easywebpack --save-dev
 
 - [easywebpack-weex-boilerplate](https://github.com/hubcarl/easywebpack-weex-boilerplate) support weex native build and web build
 
+- [easywebpack-multiple-html-boilerplate](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate) support static html or nunjucks template webpack build
+
+
 **Note: you can use [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli.git) init above project.**
+
 
 ## Configuration
 
-- see [config](config) for more detail.
-
-- more detail, please see [WebpackClientBuilder](https://github.com/hubcarl/easywebpack/blob/master/lib/client.js) and [WebpackServerBuilder](https://github.com/hubcarl/easywebpack/blob/master/lib/server.js)
-
-
-## Solution Implementation
-
-### extends `WebpackClientBuilder` (`WebpackClientBuilder extends WebpackBaseBuilder`) custom webpack client(browser) build config.
-
-```js
-const EasyWebpack = require('easywebpack');
-class WebpackClientBuilder extends EasyWebpack.WebpackClientBuilder {
-  constructor(config) {
-    super(config);
-    // call below api custom client builder
-  }
-}
-module.exports = WebpackClientBuilder;
-```
-
-Webpack client config: `new ClientDevBuilder(config).create()`
-
-
-### extends `WebpackServerBuilder` (`WebpackServerBuilder extends WebpackBaseBuilder`) custom webpack server(node) build config
-
-```js
-const EasyWebpack = require('easywebpack');
-class WebpackServerBuilder extends EasyWebpack.WebpackServerBuilder {
-  constructor(config) {
-    super(config);
-    // call below api custom server builder
-  }
-}
-module.exports = WebpackServerBuilder;
-```
-webpack server config: `new WebpackServerBuilder(config).create()`
-
-
-### webpack build
-
-- bash command build `build.js`
-
-
-```js
-const EasyWebpack = require('easywebpack');
-const clientConfig = require('./build/client');
-const serverConfig = require('./build/server');
-EasyWebpack.build([clientConfig, serverConfig], {}, () => {
-  console.log('wepback vue build finished');
-});
-```
-
-- package.json:
-
-```bash
-{
-  "scripts": {
-      "build-dev": "NODE_ENV=development node build",
-      "build-prod": "NODE_ENV=production node build"
-   }
-}
-```
-
-- bash run
-
-```bash
-npm run build-dev
-npm run build-prod
-```
+- see [easywebpack config](http://hubcarl.github.io/easywebpack/webpack/config/) for more detail.
+- see [extend easywebpack](http://hubcarl.github.io/easywebpack/webpack/install/) for extend solution.
 
 ## Questions & Suggestions
 
