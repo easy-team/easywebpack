@@ -63,6 +63,7 @@ $ npm i easywebpack --save-dev
 - [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) 
 - [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git)
 - [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git)
+- [easywebpack-html](https://github.com/hubcarl/easywebpack-html.git) 
 
 ## Webpack Command Tool
 
