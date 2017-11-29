@@ -1,4 +1,13 @@
 
+3.3.9 / 2017-11-29
+==================
+
+  * fix: import css in js not resolve
+  * doc:simpe use doc
+  * docs:simple doc
+  * Update README.md
+  * docs:image path doc to docs
+
 3.3.8 / 2017-11-26
 ==================
 
