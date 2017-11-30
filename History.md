@@ -1,4 +1,10 @@
 
+3.4.0 / 2017-11-30
+==================
+
+  * fix: when install npm module ,show detail error info
+  * feat: support webpack-bundle-analyzer and stats-webpack-plugin
+
 3.3.9 / 2017-11-29
 ==================
 
