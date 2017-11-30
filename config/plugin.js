@@ -173,6 +173,35 @@ exports.imagemini = {
   entry: 'default'
 };
 
+exports.analyzer = {
+  enable: false,
+  env: ['dev','test'],
+  type: 'client',
+  name: 'webpack-bundle-analyzer',
+  entry: 'BundleAnalyzerPlugin',
+  args(){
+    return {
+      analyzerPort: this.ssr ? 9998 : 9999,
+      statsFilename: this.type ? this.type + '_analyzer_stats.json' : 'analyzer_stats.json'
+    }
+  }
+};
+
+exports.stats = {
+  enable: false,
+  env: ['dev','test'],
+  type: 'client',
+  name: 'stats-webpack-plugin',
+  args(){
+    const args = [{
+      chunkModules: true,
+      exclude: [/node_modules[\\\/]/]
+    }];
+    args.unshift(this.type ? this.type + '_stats.json' : 'stats.json');
+    return args;
+  }
+};
+
 exports.directoryname = {
   enable: true,
   name: 'directory-named-webpack-plugin'
