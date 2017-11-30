@@ -175,8 +175,6 @@ exports.imagemini = {
 
 exports.analyzer = {
   enable: false,
-  env: ['dev','test'],
-  type: 'client',
   name: 'webpack-bundle-analyzer',
   entry: 'BundleAnalyzerPlugin',
   args(){
@@ -189,8 +187,6 @@ exports.analyzer = {
 
 exports.stats = {
   enable: false,
-  env: ['dev','test'],
-  type: 'client',
   name: 'stats-webpack-plugin',
   args(){
     const args = [{
