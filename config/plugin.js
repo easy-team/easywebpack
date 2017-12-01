@@ -50,9 +50,12 @@ exports.define = {
   name: webpack.DefinePlugin,
   args(){
     return {
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production')
+      },
       EASY_IS_DEV: !!this.dev,
-      EASY_IS_SERVER: !!this.ssr,
+      EASY_IS_PROD: !!this.prod,
+      EASY_IS_NODE: !!this.ssr,
       EASY_PUBLIC_PATH: JSON.stringify(this.publicPath),
       EASY_HOST_URL: JSON.stringify(`http://${this.utils.getIp()}:${this.config.port}`)
     }
@@ -80,7 +83,7 @@ exports.runtime = {
   action: 'merge',
   args() {
     const chunks = this.getCommonsChunk(false);
-    return { name: 'runtime',  chunks};
+    return { name: 'runtime', chunks };
   }
 };
 
