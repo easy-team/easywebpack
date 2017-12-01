@@ -68,6 +68,8 @@ utils.getEntry = (config, type) => {
     } else if (utils.isObject(configEntry.include)) { // { 'app/app': 'app/web/page/app/app.js?loader=false', 'home/home': 'app/web/page/home/home.js' }
       Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, configEntry.include, true));
     }
+  } else if (configEntry && utils.isObject(configEntry)) {
+    return configEntry;
   }
   return entries;
 };
