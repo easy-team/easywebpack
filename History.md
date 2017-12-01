@@ -1,4 +1,9 @@
 
+3.4.1 / 2017-12-01
+==================
+
+  * fix: dynamic install dev npm module imagemin-webpack-plugin  faild when NODE_EVN=production
+
 3.4.0 / 2017-11-30
 ==================
 
