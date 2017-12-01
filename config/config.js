@@ -60,3 +60,24 @@ exports.prodConfig = {
     }
   }
 };
+
+exports.dllConfig = {
+  hot: false,
+  cssExtract: false,
+  loaders: {
+    eslint: false,
+    scss: false,
+    sass: false,
+    less: false,
+    stylus: false
+  },
+  plugins: {
+    html: false,
+    runtime: false,
+    commonsChunk: false,
+    imagemini: false,
+    buildfile: false,
+    manifest: false,
+    manifestDeps: false
+  }
+};

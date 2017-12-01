@@ -1,5 +1,6 @@
 'use strict';
 const path = require('path');
+const fs = require('fs');
 const WebpackTool = require('webpack-tool');
 const webpack = WebpackTool.webpack;
 const chalk = require('chalk');
@@ -48,7 +49,7 @@ exports.hashModule = {
 exports.define = {
   enable: true,
   name: webpack.DefinePlugin,
-  args(){
+  args() {
     return {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production')
@@ -58,7 +59,7 @@ exports.define = {
       EASY_IS_NODE: !!this.ssr,
       EASY_PUBLIC_PATH: JSON.stringify(this.publicPath),
       EASY_HOST_URL: JSON.stringify(`http://${this.utils.getIp()}:${this.config.port}`)
-    }
+    };
   }
 };
 
@@ -84,6 +85,20 @@ exports.runtime = {
   args() {
     const chunks = this.getCommonsChunk(false);
     return { name: 'runtime', chunks };
+  }
+};
+
+exports.dll = {
+  enable() {
+    return fs.existsSync(path.join(this.config.baseDir, './dll.json'));
+  },
+  type: 'client',
+  name: webpack.DllReferencePlugin,
+  args() {
+    return {
+      context: this.config.baseDir,
+      manifest: require(path.join(this.config.baseDir, './dll.json'))
+    };
   }
 };
 
@@ -115,7 +130,7 @@ exports.manifest = {
   args() {
     const filename = this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
     const absFilename = this.utils.normalizePath(filename, this.config.baseDir);
-    let relativeFileName = path.relative(this.buildPath, absFilename);
+    const relativeFileName = path.relative(this.buildPath, absFilename);
     return { fileName: relativeFileName };
   }
 };
@@ -180,18 +195,18 @@ exports.analyzer = {
   enable: false,
   name: 'webpack-bundle-analyzer',
   entry: 'BundleAnalyzerPlugin',
-  args(){
+  args() {
     return {
       analyzerPort: this.ssr ? 9998 : 9999,
       statsFilename: this.type ? this.type + '_analyzer_stats.json' : 'analyzer_stats.json'
-    }
+    };
   }
 };
 
 exports.stats = {
   enable: false,
   name: 'stats-webpack-plugin',
-  args(){
+  args() {
     const args = [{
       chunkModules: true,
       exclude: [/node_modules[\\\/]/]
