@@ -90,14 +90,14 @@ exports.runtime = {
 
 exports.dll = {
   enable() {
-    return fs.existsSync(path.join(this.config.baseDir, './dll.json'));
+    return fs.existsSync(this.getDllManifestPath());
   },
   type: 'client',
   name: webpack.DllReferencePlugin,
   args() {
     return {
       context: this.config.baseDir,
-      manifest: require(path.join(this.config.baseDir, './dll.json'))
+      manifest: require(this.getDllManifestPath())
     };
   }
 };
