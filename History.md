@@ -1,4 +1,13 @@
 
+3.5.0-beta.1 / 2017-12-04
+==================
+
+  * feat: support npm dynamic install check switch
+  * feat: add getWebpackConfig extend params:option
+  * refactor: support dll filename custom and add addLoader and addPlugin method
+  * feat: auto create dll, not config webpack.dll.js
+  * feat:dll support
+
 3.4.1 / 2017-12-01
 ==================
 
