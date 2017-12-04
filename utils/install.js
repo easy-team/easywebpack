@@ -106,7 +106,7 @@ exports.getDeps = (configDeps, defaultDeps) => {
 };
 
 exports.installLoader = (rules, deps, modules, options = {}) => {
-  if (!options.check) return;
+  if (options.check === false) return;
   const pkgs = [];
   rules.forEach(rule => {
     if (Array.isArray(rule.use)) {
@@ -125,7 +125,7 @@ exports.installLoader = (rules, deps, modules, options = {}) => {
 };
 
 exports.installPlugin = (plugins, deps, modules, options = {}) => {
-  if (!options.check) return;
+  if (options.check === false) return;
   const pkgs = [];
   Object.keys(plugins).forEach(key => {
     const name = plugins[key].name;
