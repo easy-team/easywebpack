@@ -90,7 +90,7 @@ exports.runtime = {
 
 exports.dll = {
   enable() {
-    return fs.existsSync(this.getDllManifestPath());
+    return this.config.plugins && this.config.plugins.dll && fs.existsSync(this.getDllManifestPath());
   },
   type: 'client',
   name: webpack.DllReferencePlugin,
