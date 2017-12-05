@@ -64,7 +64,9 @@ exports.define = {
 };
 
 exports.commonsChunk = {
-  enable: true,
+  enable() {
+    return this.config.plugins.commonsChunk || !this.config.plugins.dll;
+  },
   type: 'client',
   name: webpack.optimize.CommonsChunkPlugin,
   action: 'merge',
@@ -78,7 +80,9 @@ exports.commonsChunk = {
 };
 
 exports.runtime = {
-  enable: true,
+  enable() {
+    return this.config.plugins.commonsChunk || !this.config.plugins.dll;
+  },
   type: 'client',
   name: webpack.optimize.CommonsChunkPlugin,
   action: 'merge',
@@ -90,14 +94,14 @@ exports.runtime = {
 
 exports.dll = {
   enable() {
-    return this.config.plugins && this.config.plugins.dll && fs.existsSync(this.getDllManifestPath());
+    return this.config.plugins && this.config.plugins.dll && fs.existsSync(this.getDllFilePath());
   },
   type: 'client',
   name: webpack.DllReferencePlugin,
   args() {
     return {
       context: this.config.baseDir,
-      manifest: require(this.getDllManifestPath())
+      manifest: require(this.getDllFilePath())
     };
   }
 };
@@ -128,7 +132,7 @@ exports.manifest = {
   type: 'client',
   name: 'webpack-manifest-plugin',
   args() {
-    const filename = this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
+    const filename = this.config.plugins && this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
     const absFilename = this.utils.normalizePath(filename, this.config.baseDir);
     const relativeFileName = path.relative(this.buildPath, absFilename);
     return { fileName: relativeFileName };
@@ -140,19 +144,30 @@ exports.manifestDeps = {
   type: 'client',
   name: 'webpack-manifest-resource-plugin',
   args() {
-    const manifestName = this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
-    const absFilename = this.utils.normalizePath(manifestName, this.config.baseDir);
-    const fileName = path.relative(this.buildPath, absFilename);
-    const commonsChunk = this.getCommonsChunk();
-    return {
+    const args = {
       baseDir: this.config.baseDir,
-      proxy: this.config.proxy,
+      proxy: this.proxy,
       host: utils.getHost(this.config.port),
       buildPath: this.buildPath,
-      writeToFileEmit: this.dev,
-      commonsChunk,
-      fileName
+      writeToFileEmit: true
     };
+    const plugins = this.config.plugins || {};
+    const manifest = plugins.manifestDeps || {};
+    const manifestName = manifest.fileName || 'config/manifest.json';
+    const absFileName = this.utils.normalizePath(manifestName, this.config.baseDir);
+    const dllAbsFileName = absFileName.replace(/\.json$/, '-dll.json');
+    let fileName;
+    if (manifest.dll) { // 生成 dll manifest
+      fileName = path.relative(this.buildPath, dllAbsFileName);
+      return this.merge(args, { fileName, manifestDll: true });
+    } else {
+      fileName = path.relative(this.buildPath, absFileName);
+    }
+    // 如果开启了dll 功能, 则读取 dll manifest 配置, 然后与项目 manifest 合并
+    if (plugins.dll && fs.existsSync(dllAbsFileName)) {
+      return this.merge(args, { fileName, commonsChunk: [plugins.dll.vendorName || 'vendor'], manifestDll: require(dllAbsFileName) });
+    }
+    return this.merge(args, { fileName, commonsChunk: this.getCommonsChunk() });
   }
 };
 
@@ -165,7 +180,7 @@ exports.buildfile = {
     return {
       baseDir: this.config.baseDir,
       host: utils.getHost(this.config.port),
-      proxy: this.config.proxy,
+      proxy: this.proxy,
       commonsChunk: this.getCommonsChunk(),
       buildPath: this.buildPath,
       publicPath: this.publicPath

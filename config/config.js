@@ -10,17 +10,6 @@ exports.defaultConfig = {
   alias: {},
   packs: {},
   cdn: {},
-  options: {
-    resolve: {
-      extensions: ['.js', '.jsx']
-    },
-    resolveLoader: {
-      modules: [
-        path.join(baseDir, 'node_modules'),
-        path.join(__dirname, '../node_modules')
-      ]
-    }
-  },
   loaders: {},
   plugins: {
     manifest: {}
@@ -62,7 +51,6 @@ exports.prodConfig = {
 };
 
 exports.dllConfig = {
-  hot: false,
   cssExtract: false,
   loaders: {
     eslint: false,
@@ -78,6 +66,8 @@ exports.dllConfig = {
     imagemini: false,
     buildfile: false,
     manifest: false,
-    manifestDeps: false
+    manifestDeps: {
+      dll: true
+    }
   }
 };

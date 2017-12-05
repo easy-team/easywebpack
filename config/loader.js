@@ -103,3 +103,15 @@ exports.urlfont = {
     }
   ]
 };
+
+exports.nunjucks = {
+  enable: false,
+  type: 'client',
+  test: /\.html$/,
+  use: ['html-loader', {
+    loader: 'nunjucks-html-loader',
+    options: {
+      searchPaths: ['src/widget','src/component']
+    }
+  }]
+};

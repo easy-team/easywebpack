@@ -16,7 +16,7 @@ const webpackTool = new WebpackTool();
 
 exports.getWebpackConfig = config => {
   if (config.framework === 'dll') {
-    return [exports.getWebpackDllConfig(config)];
+    return [exports.getDllWebpackConfig(config)];
   }
   if (config.framework === 'js') {
     return exports.WebpackBuilder.getWebpackConfig(config, [exports.WebpackClientBuilder]);
@@ -24,8 +24,12 @@ exports.getWebpackConfig = config => {
   return exports.WebpackBuilder.getWebpackConfig(config, [exports.WebpackClientBuilder, exports.WebpackServerBuilder]);
 };
 
-exports.getWebpackDllConfig = config => {
-  return new exports.WebpackDllBuilder(config).create();
+exports.getDllWebpackConfig = (config, option = {}) => {
+  if (option.singleConfig) {
+    return new exports.WebpackDllBuilder(config).create();
+  } else {
+    return exports.WebpackBuilder.getDllWebpackConfig(config);
+  }
 };
 
 exports.build = (webpackConfig, option, callback) => {
