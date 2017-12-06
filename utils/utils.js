@@ -1,6 +1,7 @@
 ﻿'use strict';
 const path = require('path');
 const fs = require('fs');
+const assert = require('assert');
 const url = require('url');
 const queryString = require('querystring');
 const mkdirp = require('mkdirp');
@@ -32,7 +33,7 @@ utils.mixin = (target, source) => {
     }
   });
 };
-utils.joinPath = function () {
+utils.joinPath = function() {
   return [].slice.call(arguments, 0).map((arg, index) => {
     let tempArg = arg.replace(/\/$/, '');
     if (index > 0) {
@@ -43,34 +44,36 @@ utils.joinPath = function () {
 };
 
 utils.getEntry = (config, type) => {
+  let entryArray = [];
+  let entryLoader;
+  let extMatch = '.js';
   const configEntry = config.entry;
   const entries = {};
   if (configEntry && configEntry.include) {
-    let entryLoader = configEntry.loader && configEntry.loader[type];
+    entryLoader = type && configEntry.loader && configEntry.loader[type];
     if (entryLoader) {
       entryLoader = utils.normalizePath(entryLoader, config.baseDir);
     }
-    if (Array.isArray(configEntry.include) || utils.isString(configEntry.include)) {
-      const entryArray = Array.isArray(configEntry.include) ? configEntry.include : [configEntry.include];
-      entryArray.forEach(entry => { // ['app/web/page', { 'app/app': 'app/web/page/app/app.js?loader=false' }],
-        if (utils.isString(entry)) { // isDirectory
-          const filepath = utils.normalizePath(entry, config.baseDir);
-          if (fs.statSync(filepath).isDirectory()) {
-            const extMapping = { vue: '.vue', react: '.jsx', weex: '.vue' };
-            const walkExt = entryLoader ? configEntry.extMatch || extMapping[config.framework] : configEntry.extMatch;
-            const dirEntry = utils.walkFile(filepath, configEntry.exclude, walkExt);
-            Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, dirEntry));
-          }
-        } else if (utils.isObject(entry)) {
-          Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, entry, true));
-        }
-      });
-    } else if (utils.isObject(configEntry.include)) { // { 'app/app': 'app/web/page/app/app.js?loader=false', 'home/home': 'app/web/page/home/home.js' }
-      Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, configEntry.include, true));
-    }
-  } else if (configEntry && utils.isObject(configEntry)) {
-    return configEntry;
+    const extMapping = { vue: '.vue', react: '.jsx', weex: '.vue' };
+    extMatch = entryLoader ? configEntry.extMatch || extMapping[config.framework] : configEntry.extMatch;
+    entryArray = Array.isArray(configEntry.include) ? configEntry.include : [configEntry.include];
+  } else {
+    entryArray.push(configEntry);
   }
+  entryArray.forEach(entry => { // ['app/web/page', { 'app/app': 'app/web/page/app/app.js?loader=false' }],
+    if (utils.isString(entry)) { // isDirectory
+      const filepath = utils.normalizePath(entry, config.baseDir);
+      if (fs.statSync(filepath).isDirectory()) {
+        const dirEntry = utils.walkFile(filepath, configEntry.exclude, extMatch, config.baseDir);
+        Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, dirEntry, true));
+      }
+    } else if (entry instanceof RegExp) {
+      const dirEntry = utils.walkFile(entry, configEntry.exclude, extMatch, config.baseDir);
+      Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, dirEntry, false));
+    } else if (utils.isObject(entry)) {
+      Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, entry, true));
+    }
+  });
   return entries;
 };
 
@@ -86,7 +89,7 @@ utils.createEntry = (baseDir, entryLoader, entryConfig, isParseUrl) => {
       useLoader = utils.isTrue(params.loader);
       targetFile = utils.normalizePath(fileInfo.pathname, baseDir);
     }
-    if (useLoader && utils.isString(targetFile)) {
+    if (entryLoader && useLoader && utils.isString(targetFile)) {
       entries[entryName] = ['babel-loader', entryLoader, targetFile].join('!');
     } else {
       entries[entryName] = targetFile;
@@ -95,45 +98,60 @@ utils.createEntry = (baseDir, entryLoader, entryConfig, isParseUrl) => {
   return entries;
 };
 
+utils.getDirByRegex = (regex, baseDir) => {
+  const strRegex = String(regex).replace(/^\//, '').replace(/\/$/, '').replace(/\\/, '');
+  const entryDir = strRegex.split('\/').reduce((dir, item) => {
+    if (/^[A-Za-z0-9]*$/.test(item)) {
+      return dir ? dir + '/' + item : item;
+    }
+    return dir;
+  }, '');
+  assert(entryDir, `The regex ${strRegex} must begin with / + a letter or number`);
+  return utils.normalizePath(entryDir, baseDir);
+};
 
-utils.walkFile = (dirs, excludeRegex, extMatch = '.js') => {
+utils.walkFile = (dirs, excludeRegex, extMatch = '.js', baseDir) => {
   const entries = {};
   let entryDir = '';
-  const walk = (dir, exclude) => {
+  const walk = (dir, include, exclude) => {
     const dirList = fs.readdirSync(dir);
     dirList.forEach(item => {
       const filePath = path.posix.join(dir, item);
       // console.log('----walkFile', entryDir, filePath);
       if (fs.statSync(filePath).isDirectory()) {
-        walk(filePath, exclude);
-      } else {
-        if (!utils.isMatch(exclude, filePath)) {
-          if (filePath.endsWith(extMatch)) {
-            const entryName = filePath.replace(entryDir, '').replace(/^\//, '').replace(extMatch, '');
-            entries[entryName] = filePath;
-          }
+        walk(filePath, include, exclude);
+      } else if (include.length > 0 && utils.isMatch(include, filePath) && !utils.isMatch(exclude, filePath)
+        || include.length === 0 && !utils.isMatch(exclude, filePath)) {
+        if (filePath.endsWith(extMatch)) {
+          const entryName = filePath.replace(entryDir, '').replace(/^\//, '').replace(extMatch, '');
+          entries[entryName] = filePath;
         }
       }
     });
   };
 
+  const includeRegex = [];
+  if (dirs instanceof RegExp) {
+    includeRegex.push(dirs);
+    dirs = utils.getDirByRegex(dirs, baseDir);
+  }
   dirs = Array.isArray(dirs) ? dirs : [dirs];
   dirs.forEach(dir => {
     if (fs.existsSync(dir)) {
       entryDir = dir;
-      walk(dir, excludeRegex);
+      walk(dir, includeRegex, excludeRegex);
     }
   });
   return entries;
 };
 
 utils.isMatch = (regexArray, strMatch) => {
-  if (!regexArray || !regexArray.length) {
+  if (!regexArray) {
     return false;
   }
+  regexArray = Array.isArray(regexArray) ? regexArray : [regexArray];
   return regexArray.some(item => new RegExp(item, '').test(strMatch));
 };
-
 
 utils.assetsPath = (prefix, filepath) => path.posix.join(prefix, filepath);
 
