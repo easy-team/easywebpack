@@ -204,8 +204,11 @@ utils.getIp = position => {
 };
 
 utils.getHost = port => {
-  const ip = utils.getIp();
-  return `http://${ip}:${port}`;
+  if (port) {
+    const ip = utils.getIp();
+    return `http://${ip}:${port}`;
+  }
+  return '';
 };
 
 utils.writeFile = (filepath, content) => {

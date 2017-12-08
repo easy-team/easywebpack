@@ -10,6 +10,9 @@ exports.defaultConfig = {
   alias: {},
   packs: {},
   cdn: {},
+  install:{
+    check: false
+  },
   loaders: {},
   plugins: {
     manifest: {}
@@ -60,14 +63,14 @@ exports.dllConfig = {
     stylus: false
   },
   plugins: {
+    hot:true,
     html: false,
     runtime: false,
     commonsChunk: false,
     imagemini: false,
     buildfile: false,
     manifest: false,
-    manifestDeps: {
-      dll: true
-    }
+    manifestDeps: false,
+    manifestDll: true
   }
 };

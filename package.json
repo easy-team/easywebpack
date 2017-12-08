@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "3.5.0-beta.4",
+  "version": "3.5.0-beta.5",
   "description": "programming instead of configuration, webpack is no longer complex",
   "keywords": [
     "webpack",
@@ -128,5 +128,7 @@
   },
   "homepage": "https://github.com/hubcarl/easywebpack#readme",
   "author": "hubcarl@126.com",
-  "license": "MIT"
+  "license": "MIT",
+  "_from": "easywebpack@3.5.0-beta.5",
+  "_resolved": "http://registry.npm.alibaba-inc.com/easywebpack/download/easywebpack-3.5.0-beta.5.tgz"
 }

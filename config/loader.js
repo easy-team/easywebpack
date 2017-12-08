@@ -115,3 +115,10 @@ exports.nunjucks = {
     }
   }]
 };
+
+exports.ejs = {
+  enable: false,
+  type: 'client',
+  test: /\.ejs/,
+  use: ['ejs-loader']
+};

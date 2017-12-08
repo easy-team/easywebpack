@@ -14,12 +14,18 @@ exports.getConfig = config => require('./lib/config')(config);
 
 const webpackTool = new WebpackTool();
 
-exports.getWebpackConfig = config => {
-  if (config.framework === 'dll') {
-    return [exports.getDllWebpackConfig(config)];
+exports.getWebpackConfig = (config, option = {}) => {
+  if (config.framework === 'dll' || option.onlyDll) {
+    return exports.getDllWebpackConfig(config, option);
   }
   if (config.framework === 'js') {
     return exports.WebpackBuilder.getWebpackConfig(config, [exports.WebpackClientBuilder]);
+  }
+  if (config.framework === 'web'|| option.onlyWeb) {
+    return exports.WebpackBuilder.getWebpackConfig(config, [exports.WebpackClientBuilder]);
+  }
+  if (config.framework === 'node'|| option.onlyNode) {
+    return exports.WebpackBuilder.getWebpackConfig(config, [exports.WebpackServerBuilder]);
   }
   return exports.WebpackBuilder.getWebpackConfig(config, [exports.WebpackClientBuilder, exports.WebpackServerBuilder]);
 };
