@@ -31,7 +31,7 @@ exports.provide = {
 };
 
 exports.nameModule = {
-  enable: true,
+  enable: false,
   env: ['dev'],
   type: 'client',
   name: webpack.NamedModulesPlugin,
@@ -74,7 +74,7 @@ exports.commonsChunk = {
     const chunks = Object.keys(this.options.entry || {}).filter(entry => {
       return !packKeys.includes(entry);
     });
-    return { names: 'vendor', chunks };
+    return { names: 'common', chunks };
   }
 };
 
@@ -130,7 +130,7 @@ exports.manifestDll = {
   name: 'webpack-manifest-resource-plugin',
   args() {
     const dllConfig = this.config.dll || {};
-    const filepath = this.getCompileTempDir(`config/manifest-${dllConfig.name}.json`);
+    const filepath = utils.getCompileTempDir(`config/manifest-${dllConfig.name}.json`);
     return {
       baseDir: this.baseDir,
       proxy: this.proxy,
@@ -142,31 +142,6 @@ exports.manifestDll = {
       dllConfig,
       filepath
     };
-  }
-};
-
-exports.manifestDeps = {
-  enable: false,
-  type: 'client',
-  name: 'webpack-manifest-resource-plugin',
-  args() {
-    const args = {
-      baseDir: this.baseDir,
-      proxy: this.proxy,
-      host: this.host,
-      buildPath: this.buildPath,
-      assets: false,
-      writeToFileEmit: true
-    };
-    const dllConfig = this.config.dll;
-    const plugins = this.config.plugins || {};
-    const manifest = plugins.manifestDeps || {};
-    const filepath = path.join(this.baseDir, manifest.fileName || 'config/manifest.json') ;
-    // 如果开启了dll 功能, 则读取 dll manifest 配置, 然后与项目 manifest 合并
-    if (dllConfig) {
-      return this.merge(args, { filepath, dllConfig, dllDir: this.getCompileTempDir() });
-    }
-    return this.merge(args, { filepath, commonsChunk: this.getCommonsChunk() });
   }
 };
 

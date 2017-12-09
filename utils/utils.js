@@ -1,6 +1,7 @@
 ﻿'use strict';
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
 const assert = require('assert');
 const url = require('url');
 const queryString = require('querystring');
@@ -236,6 +237,26 @@ utils.readFile = filepath => {
 
 utils.saveBuildConfig = (filepath, buildConfig) => {
   utils.writeFile(filepath, buildConfig);
+};
+
+utils.getVersion = (name, baseDir) =>{
+  const pkgFile = path.join(baseDir, 'node_modules', name, 'package.json');
+  if (fs.existsSync(pkgFile)) {
+    const pkgJSON = require(pkgFile);
+    return pkgJSON.version
+  }
+  return null;
+};
+
+utils.getCompileTempDir = (filename = '', baseDir) => {
+  const pkgfile = path.join(baseDir || process.cwd(), 'package.json');
+  const pkg = require(pkgfile);
+  const project = pkg.name;
+  return os.tmpdir() + `/easywebpack/${project}/${filename}`;
+};
+
+utils.getDllFilePath = (name) => {
+  return utils.getCompileTempDir(`dll/manifest-${name}-dll.json`);
 };
 
 module.exports = utils;
