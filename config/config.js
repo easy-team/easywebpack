@@ -63,7 +63,6 @@ exports.dllConfig = {
     stylus: false
   },
   plugins: {
-    hot:true,
     html: false,
     runtime: false,
     commonsChunk: false,
