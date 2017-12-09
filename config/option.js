@@ -3,8 +3,9 @@ const path = require('path');
 const baseDir = process.cwd();
 module.exports = {
   context: baseDir,
+  output:{},
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js']
   },
   resolveLoader: {
     modules: [
