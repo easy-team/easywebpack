@@ -1,11 +1,13 @@
 'use strict';
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
 const WebpackTool = require('webpack-tool');
 const webpack = WebpackTool.webpack;
 const chalk = require('chalk');
 const utils = require('../utils/utils');
-
+const WORKERS = os.cpus().length - 1;
+const UGLIFYJS_WORKERS = WORKERS > 10 ? 10 : WORKERS;
 exports.npm = {
   enable: false,
   name: 'npm-install-webpack-plugin',
@@ -96,11 +98,17 @@ exports.uglifyJs = {
   env: ['prod'],
   name: webpack.optimize.UglifyJsPlugin,
   args: {
-    compress: {
+    parallel: UGLIFYJS_WORKERS,
+    uglifyOptions: {
       warnings: false,
-      dead_code: true,
-      drop_console: true,
-      drop_debugger: true
+      compress: {
+        dead_code: true,
+        drop_console: true,
+        drop_debugger: true
+      },
+      output: {
+        comments: false
+      }
     }
   }
 };
