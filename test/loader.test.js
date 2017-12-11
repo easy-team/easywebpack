@@ -9,10 +9,10 @@ const path = require('path').posix;
 // http://chaijs.com/api/bdd/
 function createBuilder(config) {
   const builder = new WebpackBaseBuilder(config);
-  builder.setBuildPath(path.join(__dirname, 'dist/loader'));
+  builder.setBuildPath(path.join(__dirname, '../dist/loader'));
   builder.setPublicPath('/public');
   builder.setEntry({
-    include: path.join(__dirname, 'test')
+    include: path.join(__dirname, '../test')
   });
   return builder;
 }

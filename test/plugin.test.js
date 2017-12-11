@@ -11,10 +11,10 @@ function createBuilder(config) {
   if (config && config.type) {
     builder.type = config.type;
   }
-  builder.setBuildPath(path.join(__dirname, 'dist/pluglin'));
+  builder.setBuildPath(path.join(__dirname, '../dist/pluglin'));
   builder.setPublicPath('/public');
   builder.setEntry({
-    include: path.join(__dirname, 'test')
+    include: path.join(__dirname, '../test')
   });
   return builder;
 }
@@ -54,14 +54,12 @@ describe('plugin.test.js', () => {
       const builder1 = createBuilder({
         type: 'client',
         plugins:{
-          manifest: false,
-          manifestDeps: true
+          manifest: true
         }
       });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
-      expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
-      expect(!!getPluginByLabel('manifestDeps', plugins)).to.be.true;
+      expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
     });
 
     it('should plugin client dev enable test', () => {
@@ -71,7 +69,6 @@ describe('plugin.test.js', () => {
       expect(!!getPluginByLabel('hot', plugins)).to.be.true;
       expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
       expect(!!getPluginByLabel('commonsChunk', plugins)).to.be.true;
-      expect(!!getPluginByLabel('buildfile', plugins)).to.be.true;
     });
 
     it('should plugin client test enable test', () => {
@@ -84,7 +81,6 @@ describe('plugin.test.js', () => {
       expect(!!getPluginByLabel('ignore', plugins)).to.be.false;
       expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.false;
       expect(!!getPluginByLabel('extract', plugins)).to.be.true;
-      expect(!!getPluginByLabel('buildfile', plugins)).to.be.true;
       expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
     });
 
@@ -99,7 +95,6 @@ describe('plugin.test.js', () => {
       expect(!!getPluginByLabel('ignore', plugins)).to.be.false;
       expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.false;
       expect(!!getPluginByLabel('extract', plugins)).to.be.true;
-      expect(!!getPluginByLabel('buildfile', plugins)).to.be.true;
       expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
     });
 
@@ -112,7 +107,6 @@ describe('plugin.test.js', () => {
       expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
       expect(!!getPluginByLabel('ignore', plugins)).to.be.false;
       expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.false;
-      expect(!!getPluginByLabel('buildfile', plugins)).to.be.false;
       expect(!!getPluginByLabel('extract', plugins)).to.be.false;
     });
 
@@ -125,7 +119,6 @@ describe('plugin.test.js', () => {
       expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
       expect(!!getPluginByLabel('ignore', plugins)).to.be.true;
       expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.true;
-      expect(!!getPluginByLabel('buildfile', plugins)).to.be.false;
       expect(!!getPluginByLabel('extract', plugins)).to.be.false;
     });
 
@@ -138,7 +131,6 @@ describe('plugin.test.js', () => {
       expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
       expect(!!getPluginByLabel('ignore', plugins)).to.be.true;
       expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.true;
-      expect(!!getPluginByLabel('buildfile', plugins)).to.be.false;
       expect(!!getPluginByLabel('extract', plugins)).to.be.false;
     });
 

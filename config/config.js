@@ -2,7 +2,7 @@
 const path = require('path');
 const baseDir = process.cwd();
 
-exports.defaultConfig = {
+exports.baseConfig = {
   baseDir,
   buildPath: 'public',
   publicPath: '/public/',

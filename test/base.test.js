@@ -9,10 +9,10 @@ const path = require('path').posix;
 // http://chaijs.com/api/bdd/
 function createBuilder(config) {
   const builder = new WebpackBaseBuilder(config);
-  builder.setBuildPath(path.join(__dirname, 'dist/base'));
+  builder.setBuildPath('dist/base');
   builder.setPublicPath('/public');
   builder.setEntry({
-    include: path.join(__dirname, 'test')
+    include: __dirname
   });
   return builder;
 }
@@ -34,9 +34,7 @@ describe('base.test.js', () => {
     it('should setOption', () => {
       const builder = createBuilder();
 
-      const optionPluginCount = builder.options.configPlugin && builder.options.configPlugin.length || 1;
-
-      builder.setOption({
+      builder.setWebpackConfig({
         resolve: {
           extensions: ['.vue']
         },
@@ -45,9 +43,9 @@ describe('base.test.js', () => {
           publicPath: __dirname
         }
       });
-      expect(builder.options.output.path).to.equal(__dirname);
-      expect(builder.options.output.publicPath).to.equal(__dirname);
-      expect(builder.options.resolve.extensions).to.have.lengthOf(3);
+      expect(builder.webpackConfig.output.path).to.equal(__dirname);
+      expect(builder.webpackConfig.output.publicPath).to.equal(__dirname);
+      expect(builder.webpackConfig.resolve.extensions).to.have.lengthOf(2);
     });
 
     it('should option method test', () => {
@@ -61,8 +59,8 @@ describe('base.test.js', () => {
       builder.setDefine('process.env.system', 'web');
 
       const webpackConfig = builder.create();
-      expect(builder.options.resolve.alias).to.have.property('component');
-      expect(builder.options.resolve.alias).to.have.property('widget');
+      expect(builder.webpackConfig.resolve.alias).to.have.property('component');
+      expect(builder.webpackConfig.resolve.alias).to.have.property('widget');
       expect(webpackConfig.resolve.alias).to.have.property('component');
       expect(webpackConfig.resolve.alias).to.have.property('widget');
       expect(webpackConfig.resolve.alias.component).to.not.equal('app/web/component');
@@ -75,7 +73,7 @@ describe('base.test.js', () => {
       const builder = createBuilder();
 
       builder.setAlias('vue', 'vue/dist/vue.common.js');
-      expect(builder.options.resolve.alias).to.have.property('vue');
+      expect(builder.webpackConfig.resolve.alias).to.have.property('vue');
       const webpackConfig = builder.create();
       expect(webpackConfig.resolve.alias).to.have.property('vue');
     });
@@ -83,7 +81,7 @@ describe('base.test.js', () => {
       const builder = createBuilder();
       builder.setExtensions('.vue');
       builder.setExtensions(['.css', '.jsx']);
-      expect(builder.options.resolve.extensions).to.include.members(['.vue', '.css', '.jsx']);
+      expect(builder.webpackConfig.resolve.extensions).to.include.members(['.vue', '.css', '.jsx']);
       const webpackConfig = builder.create();
       expect(webpackConfig.resolve.extensions).to.include.members(['.vue', '.css', '.jsx']);
     });

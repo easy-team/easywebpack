@@ -65,15 +65,13 @@ exports.define = {
 };
 
 exports.commonsChunk = {
-  enable() {
-    return this.config.plugins.commonsChunk || !this.config.dll;
-  },
+  enable: true,
   type: 'client',
   name: webpack.optimize.CommonsChunkPlugin,
   action: 'merge',
   args() {
     const packKeys = Object.keys(this.packs || {});
-    const chunks = Object.keys(this.options.entry || {}).filter(entry => {
+    const chunks = Object.keys(this.webpackConfig.entry || {}).filter(entry => {
       return !packKeys.includes(entry);
     });
     return { names: 'common', chunks };
@@ -81,9 +79,7 @@ exports.commonsChunk = {
 };
 
 exports.runtime = {
-  enable() {
-    return this.config.plugins.commonsChunk || !this.config.dll;
-  },
+  enable: true,
   type: 'client',
   name: webpack.optimize.CommonsChunkPlugin,
   action: 'merge',
@@ -149,23 +145,6 @@ exports.manifestDll = {
       writeToFileEmit: true,
       dllConfig,
       filepath
-    };
-  }
-};
-
-
-exports.buildfile = {
-  enable: true,
-  type: 'client',
-  name: require('./plugin/build-config-webpack-plugin'),
-  args() {
-    return {
-      baseDir: this.baseDir,
-      host: this.host,
-      proxy: this.proxy,
-      buildPath: this.buildPath,
-      publicPath: this.publicPath,
-      commonsChunk: this.getCommonsChunk(),
     };
   }
 };

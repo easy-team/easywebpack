@@ -115,7 +115,7 @@ describe('client.test.js', () => {
         }
       });
       const webpackConfig = builder.create();
-      const html= webpackConfig.plugins.filter(plugin => {
+      const html = webpackConfig.plugins.filter(plugin => {
         return plugin.__plugin__ === 'html-webpack-plugin';
       });
       expect(html.length).to.equal(Object.keys(webpackConfig.entry).length);

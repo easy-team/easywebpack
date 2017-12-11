@@ -7,9 +7,11 @@ const url = require('url');
 const queryString = require('querystring');
 const mkdirp = require('mkdirp');
 const cloneDeep = require('lodash.clonedeep');
+const cloneDeepWith = require('lodash.clonedeepWith');
 const install = require('./install');
 const utils = Object.assign({}, {
   cloneDeep,
+  cloneDeepWith,
   mkdirp,
   queryString
 }, install);

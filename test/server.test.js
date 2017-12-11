@@ -9,7 +9,8 @@ const path = require('path').posix;
 // http://chaijs.com/api/bdd/
 function createBuilder(config) {
   const builder = new WebpackServerBuilder(merge({
-    buildPath: path.join(__dirname, 'dist/client'),
+    cost: true,
+    buildPath: 'dist/client',
     publicPath: '/public',
     entry: {
       include: path.join(__dirname)
@@ -81,7 +82,7 @@ describe('server.test.js', () => {
     });
 
     it('should egg test', () => {
-      const builder = createBuilder({ egg: true });
+      const builder = createBuilder({ egg: true, baseDir: path.join(__dirname, '..') });
       const webpackConfig = builder.create();
       expect(webpackConfig.output.path).to.equal(path.join(__dirname, '../app/view'));
     });
