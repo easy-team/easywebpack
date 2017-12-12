@@ -82,7 +82,7 @@ describe('client.test.js', () => {
 
     it('should egg test', () => {
       const builder = createBuilder({ egg: true });
-      expect(builder.proxy).to.true;
+      expect(builder.config.proxy).to.true;
     });
   });
 

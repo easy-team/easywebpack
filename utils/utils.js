@@ -16,6 +16,10 @@ const utils = Object.assign({}, {
   queryString
 }, install);
 
+utils.has = value => {
+  return value !== undefined;
+};
+
 utils.isFunction = value => typeof value === 'function';
 
 utils.isObject = value => typeof value === 'object';
@@ -25,6 +29,18 @@ utils.isString = value => typeof value === 'string';
 utils.isBoolean = value => typeof value === 'boolean';
 
 utils.normalizePath = (filepath, baseDir) => path.isAbsolute(filepath) ? filepath : path.join(baseDir, filepath);
+
+utils.normalizeBuildPath = (buildPath, baseDir) => {
+  return utils.normalizePath(buildPath, baseDir);
+};
+
+utils.normalizePublicPath = (publicPath) => {
+  publicPath = `${publicPath.replace(/\/$/, '')}/`;
+  if (!/^(https?:|\/\/?)/.test(publicPath)) {
+    publicPath = `/${publicPath}`;
+  }
+  return publicPath;
+};
 
 utils.isTrue = value => value !== 'false' && (!!value || value === undefined);
 
@@ -241,7 +257,7 @@ utils.saveBuildConfig = (filepath, buildConfig) => {
   utils.writeFile(filepath, buildConfig);
 };
 
-utils.getVersion = (name, baseDir) =>{
+utils.getVersion = (name, baseDir) => {
   const pkgFile = path.join(baseDir, 'node_modules', name, 'package.json');
   if (fs.existsSync(pkgFile)) {
     const pkgJSON = require(pkgFile);

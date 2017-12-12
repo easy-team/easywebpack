@@ -2,10 +2,11 @@
 const path = require('path');
 const baseDir = process.cwd();
 
-exports.baseConfig = {
+exports.config = {
   baseDir,
   buildPath: 'public',
   publicPath: '/public/',
+  hashLength: 8,
   prefix: '',
   alias: {},
   packs: {},
@@ -69,7 +70,6 @@ exports.dllConfig = {
     imagemini: false,
     buildfile: false,
     manifest: false,
-    manifestDeps: false,
     manifestDll: true
   }
 };

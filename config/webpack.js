@@ -8,7 +8,7 @@ module.exports = {
   resolve: {
     extensions: ['.js']
   },
-  externals:{},
+  externals:[],
   resolveLoader: {
     modules: [
       path.join(baseDir, 'node_modules'),

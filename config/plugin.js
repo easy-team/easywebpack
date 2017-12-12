@@ -58,8 +58,8 @@ exports.define = {
       EASY_IS_DEV: !!this.dev,
       EASY_IS_PROD: !!this.prod,
       EASY_IS_NODE: !!this.ssr,
-      EASY_PUBLIC_PATH: JSON.stringify(this.publicPath),
-      EASY_HOST_URL: JSON.stringify(`http://${this.utils.getIp()}:${this.config.port}`)
+      EASY_PUBLIC_PATH: JSON.stringify(this.config.publicPath),
+      EASY_HOST_URL: JSON.stringify(`${this.host}`)
     };
   }
 };
@@ -79,7 +79,9 @@ exports.commonsChunk = {
 };
 
 exports.runtime = {
-  enable: true,
+  enable(){
+    return !this.config.dll && this.isUse('commonsChunk');
+  },
   type: 'client',
   name: webpack.optimize.CommonsChunkPlugin,
   action: 'merge',
@@ -123,7 +125,7 @@ exports.manifest = {
   args() {
     const filename = this.config.plugins && this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
     const absFilename = this.utils.normalizePath(filename, this.baseDir);
-    const relativeFileName = path.relative(this.buildPath, absFilename);
+    const relativeFileName = path.relative(this.config.buildPath, absFilename);
     return { fileName: relativeFileName };
   }
 };
@@ -139,12 +141,28 @@ exports.manifestDll = {
       baseDir: this.baseDir,
       proxy: this.proxy,
       host: this.host,
-      buildPath: this.buildPath,
+      buildPath: this.config.buildPath,
       assets: false,
       manifestDll: true,
       writeToFileEmit: true,
       dllConfig,
       filepath
+    };
+  }
+};
+
+exports.buildfile = {
+  enable: true,
+  type: 'client',
+  name: require('./plugin/build-config-webpack-plugin'),
+  args() {
+    return {
+      baseDir: this.baseDir,
+      host: this.host,
+      proxy: this.config.proxy,
+      buildPath: this.config.buildPath,
+      publicPath: this.config.publicPath,
+      commonsChunk: this.getCommonsChunk(),
     };
   }
 };
