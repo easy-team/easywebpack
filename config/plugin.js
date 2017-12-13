@@ -55,11 +55,13 @@ exports.define = {
     const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : (this.prod ? 'production' : 'development');
     return {
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-      EASY_IS_DEV: !!this.dev,
-      EASY_IS_PROD: !!this.prod,
-      EASY_IS_NODE: !!this.ssr,
-      EASY_PUBLIC_PATH: JSON.stringify(this.config.publicPath),
-      EASY_HOST_URL: JSON.stringify(`${this.host}`)
+      EASY_ENV_IS_DEV: !!this.dev,
+      EASY_ENV_IS_TEST: !!this.test,
+      EASY_ENV_IS_PROD: !!this.prod,
+      EASY_ENV_IS_BROWSER: !(!!this.ssr),
+      EASY_ENV_IS_NODE: !!this.ssr,
+      EASY_ENV_PUBLIC_PATH: JSON.stringify(this.config.publicPath),
+      EASY_ENV_HOST_URL: JSON.stringify(`${this.host}`)
     };
   }
 };

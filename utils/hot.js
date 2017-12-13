@@ -3,12 +3,12 @@ if (typeof window === 'object') {
   var hotClient = require('webpack-hot-middleware/client?noInfo=false&reload=true&quiet=false&autoConnect=false');
   var currentHash;
   hotClient.setOptionsAndConnect({
-    path: EASY_HOST_URL + '/__webpack_hmr'
+    path: EASY_ENV_HOST_URL + '/__webpack_hmr'
   });
   hotClient.subscribeAll(event => {
     if (event.action === 'built' && currentHash) {
       var request = new XMLHttpRequest();
-      var requestPath = EASY_PUBLIC_PATH + currentHash + '.hot-update.json';
+      var requestPath = EASY_ENV_PUBLIC_PATH + currentHash + '.hot-update.json';
       request.open("GET", requestPath, true);
       request.timeout = 5000;
       request.send(null);
