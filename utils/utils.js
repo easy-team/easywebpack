@@ -175,7 +175,21 @@ utils.isMatch = (regexArray, strMatch) => {
 utils.assetsPath = (prefix, filepath) => path.posix.join(prefix, filepath);
 
 utils.getLoaderLabel = loader => {
-  const loaderName = utils.isObject(loader) ? loader.loader : loader;
+  let loaderName = loader;
+  if (utils.isObject(loader)) {
+    if (loader.loader) {
+      loaderName = loader.loader;
+    } else if (Array.isArray(loader.use)) {
+      loaderName = loader.use.reduce((name, item) => {
+        if (utils.isString(item)) {
+          name += item;
+        } else {
+          name += item.loader;
+        }
+        return name;
+      }, '');
+    }
+  }
   return loaderName.replace(/-loader$/, '').replace(/-/g, '');
 };
 
