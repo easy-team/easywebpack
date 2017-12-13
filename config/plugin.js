@@ -98,9 +98,10 @@ exports.runtime = {
 exports.uglifyJs = {
   enable: true,
   env: ['prod'],
-  name: webpack.optimize.UglifyJsPlugin,
+  name: 'uglifyjs-webpack-plugin',
   args: {
     parallel: UGLIFYJS_WORKERS,
+    comments: false,
     uglifyOptions: {
       warnings: false,
       compress: {
