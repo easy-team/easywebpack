@@ -291,4 +291,17 @@ utils.getDllFilePath = (name) => {
   return utils.getCompileTempDir(`dll/manifest-${name}-dll.json`);
 };
 
+utils.getDllConfig = (dll) => {
+  if (utils.isString(dll)) {
+    return [{ name: 'vendor', lib: [dll] }];
+  } else if (utils.isObject(dll) && dll.name && dll.lib) {
+    return [dll];
+  } else if (Array.isArray(dll) && dll.length && utils.isString(dll[0])) {
+    return [{ name: 'vendor', lib: dll }];
+  } else if (Array.isArray(dll) && dll.length && utils.isObject(dll[0]) && dll[0].name) {
+    return dll
+  }
+  return [];
+};
+
 module.exports = utils;
