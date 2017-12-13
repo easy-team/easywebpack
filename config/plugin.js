@@ -76,7 +76,9 @@ exports.commonsChunk = {
     const chunks = Object.keys(this.webpackConfig.entry || {}).filter(entry => {
       return !packKeys.includes(entry);
     });
-    return { names: 'common', chunks };
+    const lib = this.utils.isObject(this.config.lib) ? this.config.lib : {};
+    const names = lib.name || 'common';
+    return { names, chunks };
   }
 };
 

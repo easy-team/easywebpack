@@ -49,7 +49,7 @@ exports.sass = {
 };
 
 exports.less = {
-  enable: true,
+  enable: false,
   test: /\.less/,
   use: ['css-loader', 'less-loader'],
   postcss: true,
@@ -57,7 +57,7 @@ exports.less = {
 };
 
 exports.stylus = {
-  enable: true,
+  enable: false,
   test: /\.stylus/,
   use: ['css-loader', 'stylus-loader'],
   postcss: true,
