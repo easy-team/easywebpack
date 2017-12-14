@@ -101,7 +101,6 @@ exports.uglifyJs = {
   name: 'uglifyjs-webpack-plugin',
   args: {
     parallel: UGLIFYJS_WORKERS,
-    comments: false,
     uglifyOptions: {
       warnings: false,
       compress: {
