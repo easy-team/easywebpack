@@ -11,11 +11,13 @@
   "rules": {
     "indent": [
       "error",
-      2
+      2,
+      { "SwitchCase": 1 }
     ],
     "no-underscore-dangle": "off",
     "consistent-return": "off",
     "no-cond-assign": "off",
+    "lines-around-comment": "off",
     "arrow-body-style": "off",
     "no-confusing-arrow": "off",
     "class-methods-use-this": "off",
