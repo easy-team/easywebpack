@@ -1,7 +1,7 @@
 {
   "name": "easywebpack",
   "version": "3.5.0-rc.6",
-  "description": "programming instead of configuration, webpack is no longer complex",
+  "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
     "webpack-tool",

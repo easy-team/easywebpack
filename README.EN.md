@@ -20,14 +20,13 @@
 [download-url]: https://npmjs.org/package/easywebpack
 
 
-基于 Webpack 的前端构建工程化解决方案
-
+programming instead of configuration, webpack is no longer complex. the support feature:
 
 ![easywebpack](https://github.com/hubcarl/easywebpack/blob/master/docs/images/easywebpack.png)
 
 - Support Webpack3 (easywebpack 3.x.x) 和 Webpack2 (easywebpack 1.x.x)
 
-- Support server render build or client render build by easywebpack configuration
+- Support server render build or client render build by easywebpack configuration.
 
 - Support Multi-page and Single-page webpack build.
 

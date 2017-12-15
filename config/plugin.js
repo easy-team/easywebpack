@@ -230,18 +230,21 @@ exports.extract = {
   }
 };
 
+
 exports.modulereplacement = {
-  enable: true,
+  enable() {
+    return this.config.cssExtract;
+  },
   type: 'server',
-  env: ['test', 'prod'],
   name: webpack.NormalModuleReplacementPlugin,
   args: [/\.(css|less|scss|sass)$/, require.resolve('node-noop')]
 };
 
 exports.ignore = {
-  enable: true,
+  enable() {
+    return this.config.cssExtract;
+  },
   type: 'server',
-  env: ['test', 'prod'],
   name: webpack.IgnorePlugin,
   args: /\.(css|less|scss|sass)$/
 };
