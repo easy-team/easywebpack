@@ -34,7 +34,7 @@ utils.normalizeBuildPath = (buildPath, baseDir) => {
   return utils.normalizePath(buildPath, baseDir);
 };
 
-utils.normalizePublicPath = (publicPath) => {
+utils.normalizePublicPath = publicPath => {
   publicPath = `${publicPath.replace(/\/$/, '')}/`;
   if (!/^(https?:|\/\/?)/.test(publicPath)) {
     publicPath = `/${publicPath}`;
@@ -121,7 +121,7 @@ utils.getDirByRegex = (regex, baseDir) => {
   const strRegex = String(regex).replace(/^\//, '').replace(/\/$/, '').replace(/\\/, '');
   const entryDir = strRegex.split('\/').reduce((dir, item) => {
     if (/^[A-Za-z0-9]*$/.test(item)) {
-      return dir ? dir + '/' + item : item;
+      return dir ? `${dir}/${item}` : item;
     }
     return dir;
   }, '');
@@ -209,7 +209,6 @@ utils.loadNodeModules = isCache => {
 };
 
 utils.getIp = position => {
-  const os = require('os');
   const interfaces = os.networkInterfaces();
   const ips = [];
 
@@ -275,7 +274,7 @@ utils.getVersion = (name, baseDir) => {
   const pkgFile = path.join(baseDir, 'node_modules', name, 'package.json');
   if (fs.existsSync(pkgFile)) {
     const pkgJSON = require(pkgFile);
-    return pkgJSON.version
+    return pkgJSON.version;
   }
   return null;
 };
@@ -284,14 +283,14 @@ utils.getCompileTempDir = (filename = '', baseDir) => {
   const pkgfile = path.join(baseDir || process.cwd(), 'package.json');
   const pkg = require(pkgfile);
   const project = pkg.name;
-  return os.tmpdir() + `/easywebpack/${project}/${filename}`;
+  return `${os.tmpdir()}/easywebpack/${project}/${filename}`;
 };
 
-utils.getDllFilePath = (name) => {
+utils.getDllFilePath = name => {
   return utils.getCompileTempDir(`dll/manifest-${name}-dll.json`);
 };
 
-utils.getDllConfig = (dll) => {
+utils.getDllConfig = dll => {
   if (utils.isString(dll)) {
     return [{ name: 'vendor', lib: [dll] }];
   } else if (utils.isObject(dll) && dll.name && dll.lib) {
@@ -299,7 +298,7 @@ utils.getDllConfig = (dll) => {
   } else if (Array.isArray(dll) && dll.length && utils.isString(dll[0])) {
     return [{ name: 'vendor', lib: dll }];
   } else if (Array.isArray(dll) && dll.length && utils.isObject(dll[0]) && dll[0].name) {
-    return dll
+    return dll;
   }
   return [];
 };
