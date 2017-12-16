@@ -1,4 +1,39 @@
 
+3.5.0-rc.7 / 2017-12-16
+=======================
+
+  * fix: webpack-node-externals commonjs ignore non js file
+  * fix: node render error when external module include non js file
+  * fix: css module loader twice
+  * feat: auto add alias and external to dll config
+  * fix: create dll plugin parasm not set
+  * fix: ugilyJs webpack version and single install params chema error
+  * fix: dll publicPath not use host
+  * feat: support single install uglifyjs-webpack-plugin
+  * deps: not use webpack.ugilyfy, use uglifyjs-webpack-plugin npm module
+  * publish:3.5.0-rc.1
+  * feat: dll support object and array config
+  * feat: support commonsChunk and lib params sync
+  * feat: add commonsChunk alias config.lib configuration
+  * feat: support webpack native configuration
+  * fix: config merge override problem
+  * refactor: config merge login
+  * refactor: setOption to more api method
+  * fix: uglifyJs config and support mult process build
+  * fix: dll build env not set
+  * feat: manifest upgrade and support low version
+  * feat: mult dll support
+  * perf:webpack target node externals use npm module webpack-node-externals
+  * feat:entry support object, regex, string, include regex
+  * feat: dll function use in project success
+  * feat: support html dll inject
+  * Release 3.5.0-beta.1
+  * feat: support npm dynamic install check switch
+  * feat: add getWebpackConfig extend params:option
+  * refactor: support dll filename custom and add addLoader and addPlugin method
+  * feat: auto create dll,not single config webpack.dll.js
+  * feat:dll support
+
 3.5.0-beta.1 / 2017-12-04
 ==================
 
