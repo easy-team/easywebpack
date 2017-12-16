@@ -30,7 +30,7 @@
 
 ## 版本说明
 
-最新版本基于 Webpack 3 版本， 目前 `easywebpack` 稳定版本：～3.4.x  `easywebpack` 新特性版本: ^3.5.0-rc.x. 对应的 Vue/React/Weex 解决方案也分别you对应的稳定版和新特性版本， 线上使用时请使用稳定版本。 以 Vue 稳定版和开发版本安装举例：
+最新版本基于 Webpack 3 版本， 目前 `easywebpack` 稳定版本：～3.4.x  `easywebpack` 新特性版本: ^3.5.0-rc.x. 对应的 Vue/React/Weex 解决方案也分别有对应的稳定版和新特性版本， 线上使用时请使用稳定版本。 以 Vue 稳定版和开发版本安装举例：
 
 - 稳定版本安装
 
@@ -64,21 +64,21 @@ npm install easywebpack-vue@next --save-dev
 - 支持 dll 构建解决方案
 - 提供 `easywebpack-cli` 和 `webpack-tool` 辅助工具。
 
-**easywebpack不与任何框架耦合， 你需要基于现有的解决方案使用或者扩展解决方案**
+**easywebpack不与任何框架耦合， 你需要基于现有的解决方案使用或者扩展解决方案使用**
 
 ## 解决方案
 
-基于 `easywebpack` 基础骨架，目前已扩展 `Vue` `React` `Weex`, `HTML` 三种解决方案，其中 `easywebpack-vue` 和 `easywebpack-react` 支持纯前端构建和Node端构建模式，`easywebpack-weex` 支持 Native 和 Web 构建模式。
+基于 `easywebpack` 基础骨架，目前已扩展 `Vue` `React` `Weex`, `HTML` 四种解决方案：
 
-- [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) 
-- [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git)
-- [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git)
-- [easywebpack-html](https://github.com/hubcarl/easywebpack-html.git) 
+- [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git)  支持 Vue 纯前端构建和Node端构建模式
+- [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git) 支持 React 纯前端构建和Node端构建模式
+- [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git) 支持 Native 和 Web 构建模式
+- [easywebpack-html](https://github.com/hubcarl/easywebpack-html.git) 支持 HTML静态页面模式，支持 nunjucks 引擎
 
 
 ## 命令行工具
 
-[easywebpack-cli](https://github.com/hubcarl/easywebpack-cli.git) 基于 easywebpack 前端工程化解决方案构建的脚手架工具。
+[easywebpack-cli](https://github.com/hubcarl/easywebpack-cli.git) 基于 easywebpack 前端工程化解决方案构建的脚手架命令行工具。
 
 - 支持 Vue/React/Weex 框架项目的初始化，包括 SPA应用，多页面应用，Server Side Render(Egg)项目
 - 支持命令行 Webpack 构建，包括Webpack配置信息打印(调试)和获取
@@ -96,7 +96,7 @@ npm install easywebpack-vue@next --save-dev
 - [easywebpack-weex-boilerplate](https://github.com/hubcarl/easywebpack-weex-boilerplate) Weex Native 和 Web 构建骨架项目
 - [easywebpack-multiple-html-boilerplate](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate) 静态页面构建方案骨架，支持纯 HTML 构建 和 nunjucks 构建。 
 
-**以上估计可以通过 easywebpack-cli 初始化**
+**以上骨架可以通过 easywebpack-cli 初始化**
 
 ## License
 
