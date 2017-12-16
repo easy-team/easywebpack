@@ -83,7 +83,7 @@ exports.commonsChunk = {
 };
 
 exports.runtime = {
-  enable(){
+  enable() {
     return !this.config.dll && this.isUse('commonsChunk');
   },
   type: 'client',
