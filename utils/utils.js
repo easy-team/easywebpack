@@ -118,7 +118,7 @@ utils.createEntry = (baseDir, entryLoader, entryConfig, isParseUrl) => {
 };
 
 utils.getDirByRegex = (regex, baseDir) => {
-  const strRegex = String(regex).replace(/^\//, '').replace(/\/$/, '').replace(/\\/, '');
+  const strRegex = String(regex).replace(/^\//, '').replace(/\/$/, '').replace(/\\/g, '');
   const entryDir = strRegex.split('\/').reduce((dir, item) => {
     if (/^[A-Za-z0-9]*$/.test(item)) {
       return dir ? `${dir}/${item}` : item;
