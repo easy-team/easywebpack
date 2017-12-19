@@ -1,7 +1,7 @@
 
 3.5.0-rc.8 / 2017-12-16 正式版本即将发布
 =======================
-
+  - entry include 支持正则配置
   - 支持 webpack dll 配置和自动化构建， 无需手动先构建dll， 然后再构建页面
   - 简化 commonsChunk lib 配置， 无需在 onClient 调用 addEntry 设置
   - plugins 和 loaders 增加数组的配置的兼容，也就是支持原生配置
