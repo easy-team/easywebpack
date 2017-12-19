@@ -1,12 +1,12 @@
 
-3.5.0-rc.7 / 2017-12-16 正式版本即将发布
+3.5.0-rc.8 / 2017-12-16 正式版本即将发布
 =======================
 
-  - 支持 webpack dll 配置和自动化构建
+  - 支持 webpack dll 配置和自动化构建， 无需手动先构建dll， 然后再构建页面
   - 简化 commonsChunk lib 配置， 无需在 onClient 调用 addEntry 设置
   - plugins 和 loaders 增加数组的配置的兼容，也就是支持原生配置
   - 去掉options节点配置，改为 webpack.config.js 支持原生 Webpack 配置
-  - 支持多进程 Webpack 编译, 结合dll功能编译速度显著提示，初步测试编译时间减少2/3
+  - 支持多进程 Webpack 编译, 结合dll功能编译速度显著提示，初步测试编译时间减少2/3, 第三方组件越多和页面越多，越明显
   - manifest和buildfie合并为新的manifest， 无需 manifest 和 manifestDeps 兼容配置， 同时去掉 buildfie 配置， 
   - 默认禁用 npm start 启动检查 webpack loader 和 plugin 是否安装的功能， 提高编译速度。
   - stylus 和 less loader 默认有开启改为禁用， 减少不必要的安装
