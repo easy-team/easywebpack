@@ -254,11 +254,6 @@ exports.html = {
   type: 'client',
   name: 'html-webpack-plugin',
   args: {
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true
-    }
+    inject: true
   }
 };
