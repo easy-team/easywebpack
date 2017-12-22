@@ -1,4 +1,10 @@
 
+3.5.1 / 2017-12-22
+==================
+
+  * fix: modify default publicPath, dll publicPath not update
+  * doc:History version
+
 3.5.0 / 2017-12-21
 =======================
   - entry include 支持正则配置
