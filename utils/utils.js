@@ -139,8 +139,7 @@ utils.walkFile = (dirs, excludeRegex, extMatch = '.js', baseDir) => {
       // console.log('----walkFile', entryDir, filePath);
       if (fs.statSync(filePath).isDirectory()) {
         walk(filePath, include, exclude);
-      } else if (include.length > 0 && utils.isMatch(include, filePath) && !utils.isMatch(exclude, filePath)
-        || include.length === 0 && !utils.isMatch(exclude, filePath)) {
+      } else if (include.length > 0 && utils.isMatch(include, filePath) && !utils.isMatch(exclude, filePath) || include.length === 0 && !utils.isMatch(exclude, filePath)) {
         if (filePath.endsWith(extMatch)) {
           const entryName = filePath.replace(entryDir, '').replace(/^\//, '').replace(extMatch, '');
           entries[entryName] = filePath;
