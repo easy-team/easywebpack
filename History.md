@@ -1,4 +1,9 @@
 
+3.5.2 / 2017-12-25
+==================
+
+  * fix:loader default is disable, custom set config auto open
+
 3.5.1 / 2017-12-22
 ==================
 
