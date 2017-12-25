@@ -302,4 +302,88 @@ utils.getDllConfig = dll => {
   return [];
 };
 
+utils.getDllCacheInfoPath = name => {
+  return utils.getCompileTempDir(`dll/cache-${name}.json`);
+};
+
+utils.getModuleInfo = (module, baseDir) => {
+  if (/\.js$/.test(module)) {
+    if (fs.existsSync(module)) {
+      const stat = fs.statSync(module);
+      return stat.mtimeMs;
+    }
+    const moduleFile = path.join(baseDir, 'node_modules', module);
+    const stat = fs.statSync(moduleFile);
+    return stat.mtimeMs;
+  }
+  const pkgFile = path.join(baseDir, 'node_modules', module, 'package.json');
+  if (fs.existsSync(pkgFile)) {
+    const pkgJSON = require(pkgFile);
+    return pkgJSON.version;
+  }
+  const moduleIndexFile = path.join(baseDir, 'node_modules', module, 'index.js');
+  if (fs.existsSync(moduleIndexFile)) {
+    const stat = fs.statSync(moduleIndexFile);
+    return stat.mtimeMs;
+  }
+  return module;
+};
+
+utils.saveDllCacheInfo = (config, webpackConfigFile, dllCachePath, webpackDllInfo, webpackConfigFileLastModifyTime) => {
+  const webpackDllLibInfo = {};
+  webpackDllInfo.lib.forEach(module => {
+    const info = utils.getModuleInfo(module, config.baseDir);
+    webpackDllLibInfo[module] = info;
+  });
+  utils.writeFile(dllCachePath, {
+    webpackDllInfo,
+    webpackDllLibInfo,
+    webpackConfigFile,
+    webpackConfigFileLastModifyTime
+  });
+};
+
+utils.getDllCacheInfo = dllCachePath => {
+  if (fs.existsSync(dllCachePath)) {
+    return require(dllCachePath);
+  }
+  return null;
+};
+
+utils.checkDllUpdate = (config, dll) => {
+  const baseDir = config.baseDir;
+  const filepath = config.webpackConfigFile ? config.webpackConfigFile : path.join(baseDir, 'webpack.config.js');
+  const stat = fs.statSync(filepath);
+  const lastModifyTime = stat.mtimeMs;
+  const dllCachePath = utils.getDllCacheInfoPath(dll.name);
+  // dll manifest 文件不存在
+  if (!fs.existsSync(utils.getDllFilePath(dll.name))) {
+    return true;
+  }
+  // cache file 文件不存在
+  if (!fs.existsSync(dllCachePath)) {
+    utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, lastModifyTime);
+    return true;
+  }
+  // 判断 webpack.config.js 修改时间
+  const dllCacheInfo = utils.getDllCacheInfo(dllCachePath);
+  if (dllCacheInfo) {
+    if (dllCacheInfo.webpackConfigFileLastModifyTime !== lastModifyTime) {
+      utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, lastModifyTime);
+      return true;
+    }
+    // 判断 module 版本是否有升级, 目前只判断主module, module 依赖变更的暂不支持
+    const webpackDllLibInfo = dllCacheInfo.webpackDllLibInfo;
+    return dll.lib.some(module => {
+      const info = utils.getModuleInfo(module, config.baseDir);
+      if (webpackDllLibInfo[module] !== info) {
+        utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, lastModifyTime);
+        return true;
+      }
+      return false;
+    });
+  }
+  return false;
+};
+
 module.exports = utils;
