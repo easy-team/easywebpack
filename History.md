@@ -1,4 +1,11 @@
 
+3.5.4 / 2017-12-26
+==================
+
+  * feat: dll auto checkout and fix dll path error
+  * feat: support auto check dll config modify, rebuild dll
+  * style:format eslint code
+
 3.5.2 / 2017-12-25
 ==================
 
