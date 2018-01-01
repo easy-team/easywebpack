@@ -83,7 +83,7 @@ exports.commonsChunk = {
 };
 
 exports.runtime = {
-  enable(){
+  enable() {
     return !this.config.dll && this.isUse('commonsChunk');
   },
   type: 'client',
@@ -254,11 +254,6 @@ exports.html = {
   type: 'client',
   name: 'html-webpack-plugin',
   args: {
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true
-    }
+    inject: true
   }
 };

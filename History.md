@@ -1,47 +1,48 @@
 
-3.5.0-rc.7 / 2017-12-16
-=======================
-
-  * fix: webpack-node-externals commonjs ignore non js file
-  * fix: node render error when external module include non js file
-  * fix: css module loader twice
-  * feat: auto add alias and external to dll config
-  * fix: create dll plugin parasm not set
-  * fix: ugilyJs webpack version and single install params chema error
-  * fix: dll publicPath not use host
-  * feat: support single install uglifyjs-webpack-plugin
-  * deps: not use webpack.ugilyfy, use uglifyjs-webpack-plugin npm module
-  * publish:3.5.0-rc.1
-  * feat: dll support object and array config
-  * feat: support commonsChunk and lib params sync
-  * feat: add commonsChunk alias config.lib configuration
-  * feat: support webpack native configuration
-  * fix: config merge override problem
-  * refactor: config merge login
-  * refactor: setOption to more api method
-  * fix: uglifyJs config and support mult process build
-  * fix: dll build env not set
-  * feat: manifest upgrade and support low version
-  * feat: mult dll support
-  * perf:webpack target node externals use npm module webpack-node-externals
-  * feat:entry support object, regex, string, include regex
-  * feat: dll function use in project success
-  * feat: support html dll inject
-  * Release 3.5.0-beta.1
-  * feat: support npm dynamic install check switch
-  * feat: add getWebpackConfig extend params:option
-  * refactor: support dll filename custom and add addLoader and addPlugin method
-  * feat: auto create dll,not single config webpack.dll.js
-  * feat:dll support
-
-3.5.0-beta.1 / 2017-12-04
+3.5.6 / 2017-12-27
 ==================
 
-  * feat: support npm dynamic install check switch
-  * feat: add getWebpackConfig extend params:option
-  * refactor: support dll filename custom and add addLoader and addPlugin method
-  * feat: auto create dll, not config webpack.dll.js
-  * feat:dll support
+  * fix: dynamic install pkg: config.install
+
+3.5.5 / 2017-12-26
+==================
+
+  * fix:dev mode not get dll config
+
+3.5.4 / 2017-12-26
+==================
+
+  * feat: dll auto checkout and fix dll path error
+  * feat: support auto check dll config modify, rebuild dll
+  * style:format eslint code
+
+3.5.2 / 2017-12-25
+==================
+
+  * fix:loader default is disable, custom set config auto open
+
+3.5.1 / 2017-12-22
+==================
+
+  * fix: modify default publicPath, dll publicPath not update
+  * doc:History version
+
+3.5.0 / 2017-12-21
+=======================
+  - entry include 支持正则配置
+  - 支持 webpack dll 配置和自动化构建， 无需手动先构建dll， 然后再构建页面
+  - 简化 commonsChunk lib 配置， 无需在 onClient 调用 addEntry 设置
+  - plugins 和 loaders 增加数组的配置的兼容，也就是支持原生配置
+  - 去掉options节点配置，改为 webpack.config.js 支持原生 Webpack 配置
+  - 支持多进程 Webpack 编译, 结合dll功能编译速度显著提示，初步测试编译时间减少2/3, 第三方组件越多和页面越多，越明显
+  - manifest和buildfie合并为新的manifest， 无需 manifest 和 manifestDeps 兼容配置， 同时去掉 buildfie 配置， 
+  - 默认禁用 npm start 启动检查 webpack loader 和 plugin 是否安装的功能， 提高编译速度。
+  - stylus 和 less loader 默认有开启改为禁用， 减少不必要的安装
+  - 新增内置插件 webpack-bundle-analyzer 和 stats-webpack-plugin
+  - node externals 改为 webpack-node-externals 插件实现
+  - 压缩插件由webpack内置改为 uglifyjs-webpack-plugin 独立插件, 从而支持多进程编译
+  - 解决 NODE_ENV=production 导致动态安装 npm 依赖失败
+  - 修复 easywebpack 配置合并覆盖问题
 
 3.4.1 / 2017-12-01
 ==================

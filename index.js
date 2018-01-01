@@ -13,7 +13,6 @@ exports.WebpackDllBuilder = require('./lib/dll');
 exports.getConfig = config => require('./lib/config')(config);
 
 const webpackTool = new WebpackTool();
-
 exports.getWebpackConfig = (config, option = {}) => {
   if (config.framework === 'dll' || option.onlyDll) {
     return exports.getDllWebpackConfig(config, option);
@@ -21,10 +20,10 @@ exports.getWebpackConfig = (config, option = {}) => {
   if (config.framework === 'js') {
     return exports.WebpackBuilder.getWebpackConfig(config, [exports.WebpackClientBuilder]);
   }
-  if (config.framework === 'web'|| option.onlyWeb) {
+  if (config.framework === 'web' || option.onlyWeb) {
     return exports.WebpackBuilder.getWebpackConfig(config, [exports.WebpackClientBuilder]);
   }
-  if (config.framework === 'node'|| option.onlyNode) {
+  if (config.framework === 'node' || option.onlyNode) {
     return exports.WebpackBuilder.getWebpackConfig(config, [exports.WebpackServerBuilder]);
   }
   return exports.WebpackBuilder.getWebpackConfig(config, [exports.WebpackClientBuilder, exports.WebpackServerBuilder]);
@@ -33,14 +32,14 @@ exports.getWebpackConfig = (config, option = {}) => {
 exports.getDllWebpackConfig = (config, option = {}) => {
   if (option.singleConfig) {
     return new exports.WebpackDllBuilder(config).create();
-  } else {
-    return exports.WebpackBuilder.getDllWebpackConfig(config);
   }
+  return exports.WebpackBuilder.getDllWebpackConfig(config);
 };
 
 exports.build = (webpackConfig, option, callback) => {
   webpackTool.build(webpackConfig, option, callback);
 };
+
 exports.server = (webpackConfig, option, callback) => {
   webpackTool.server(webpackConfig, option, callback);
 };
