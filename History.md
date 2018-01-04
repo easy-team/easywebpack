@@ -1,4 +1,12 @@
 
+3.5.9 / 2018-01-04
+==================
+
+  * fix: publicPath override for cdn url
+  * eslint:remove config
+  * fix: plugins is undefined
+  * doc: update image name
+
 3.5.8 / 2018-01-04
 ==================
 
