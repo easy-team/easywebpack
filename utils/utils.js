@@ -34,9 +34,14 @@ utils.normalizeBuildPath = (buildPath, baseDir) => {
   return utils.normalizePath(buildPath, baseDir);
 };
 
+
+utils.isHttpOrHttps = strUrl => {
+  return /^(https?:|\/\/)/.test(strUrl);
+};
+
 utils.normalizePublicPath = publicPath => {
   publicPath = `${publicPath.replace(/\/$/, '')}/`;
-  if (!/^(https?:|\/\/?)/.test(publicPath)) {
+  if (!utils.isHttpOrHttps(publicPath) && !/^\//.test(publicPath)) {
     publicPath = `/${publicPath}`;
   }
   return publicPath;

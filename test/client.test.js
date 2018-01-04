@@ -121,4 +121,41 @@ describe('client.test.js', () => {
       expect(html.length).to.equal(Object.keys(webpackConfig.entry).length);
     });
   });
+
+  describe('#webpack publicPath test', () => {
+    const cdnUrl = 'http://easywebpack.cn/public';
+    it('should dev cdn config test', () => {
+      const builder = createBuilder({ debug: true, env: 'dev', cdn: { url: cdnUrl} });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.publicPath).to.equal(cdnUrl + '/');
+    });
+    it('should dev publicPath abspath config test', () => {
+      const builder = createBuilder({ debug: true, env: 'dev', publicPath: cdnUrl });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.publicPath).to.equal(cdnUrl + '/');
+    });
+    it('should dev publicPath config test', () => {
+      const builder = createBuilder({ debug: true, env: 'dev', publicPath: '/static' });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.publicPath).to.equal(builder.host + '/static/');
+    });
+
+    it('should dev publicPath useHost false config test', () => {
+      const builder = createBuilder({ debug: true, env: 'dev', publicPath: '/static', useHost: false });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.publicPath).to.equal('/static/');
+    });
+
+    it('should dev publicPath default env prod config test', () => {
+      const builder = createBuilder({ debug: true, env: 'test' });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.publicPath).to.equal('/public/');
+    });
+
+    it('should dev publicPath env test config test', () => {
+      const builder = createBuilder({ debug: true, env: 'test', publicPath: '/static' });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.publicPath).to.equal('/static/');
+    });
+  });
 });
