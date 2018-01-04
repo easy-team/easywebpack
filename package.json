@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "3.5.6",
+  "version": "3.5.7",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
@@ -113,7 +113,8 @@
       "lib/logger.js",
       "utils/*.js",
       "index.js",
-      "config/plugin/*",
+      "config/*.js",
+      "config/plugin/*.js",
       "test/*.test.js",
       "build"
     ]

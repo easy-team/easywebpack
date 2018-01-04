@@ -1,4 +1,11 @@
 
+3.5.7 / 2018-01-04
+==================
+
+  * feat: auto open manifest when use dll
+  * fix: module undefined when typescript module dev hot add or delete
+  * doc:update readme to ZN
+
 3.5.6 / 2017-12-27
 ==================
 

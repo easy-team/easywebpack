@@ -32,16 +32,9 @@
 
 最新版本基于 Webpack 3 版本， 目前 `easywebpack` 稳定版本：～3.4.x  `easywebpack` 新特性版本: ^3.5.0-rc.x. 对应的 Vue/React/Weex 解决方案也分别有对应的稳定版和新特性版本， 线上使用时请使用稳定版本。 以 Vue 稳定版和开发版本安装举例：
 
-- 稳定版本安装
 
 ```bash
 npm install easywebpack-vue --save-dev
-```
-
-- 新开发特性版本
-
-```bash
-npm install easywebpack-vue@next --save-dev
 ```
 
 ## 基础功能
@@ -66,7 +59,12 @@ npm install easywebpack-vue@next --save-dev
 
 **easywebpack不与任何框架耦合， 你需要基于现有的解决方案使用或者扩展解决方案使用**
 
-## 解决方案
+
+## 工程化
+
+![easywebpack](https://github.com/hubcarl/easywebpack/blob/master/docs/images/easywebpack.solution.png)
+
+### 解决方案
 
 基于 `easywebpack` 基础骨架，目前已扩展 `Vue` `React` `Weex`, `HTML` 四种解决方案：
 
@@ -76,7 +74,7 @@ npm install easywebpack-vue@next --save-dev
 - [easywebpack-html](https://github.com/hubcarl/easywebpack-html.git) 支持 HTML静态页面模式，支持 nunjucks 引擎
 
 
-## 命令行工具
+### 命令行工具
 
 [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli.git) 基于 easywebpack 前端工程化解决方案构建的脚手架命令行工具。
 
@@ -85,7 +83,7 @@ npm install easywebpack-vue@next --save-dev
 - 提供构建结果 UI 导航展现和访问。
 
 
-## 项目骨架
+### 项目骨架
 
 - [easywebpack-cli-template](https://github.com/hubcarl/easywebpack-cli-template) Vue/React/Wee 纯前端项目目标
 
