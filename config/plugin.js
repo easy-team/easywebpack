@@ -18,6 +18,7 @@ exports.npm = {
 
 exports.module = {
   enable: true,
+  env: ['test', 'prod'],
   name: webpack.optimize.ModuleConcatenationPlugin
 };
 
@@ -33,7 +34,7 @@ exports.provide = {
 };
 
 exports.nameModule = {
-  enable: false,
+  enable: true,
   env: ['dev'],
   type: 'client',
   name: webpack.NamedModulesPlugin,
