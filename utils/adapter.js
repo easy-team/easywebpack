@@ -39,7 +39,7 @@ const manifest = {
   }
 };
 
-exports.normalizeManifestPlugin = (plugins, config) => {
+exports.normalizeManifestPlugin = (plugins = {}, config) => {
   if (plugins && plugins.manifestDeps || config.dll) {
     plugins.manifest = manifest;
     plugins.buildfile = false;
