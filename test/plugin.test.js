@@ -21,22 +21,18 @@ function createBuilder(config) {
 
 function getPluginByLabel(label, plugins) {
   return plugins.find(plugin => {
-    return plugin.__lable__ === label;
+    return plugin.__lable__ === label || plugin.__plugin__ === label;
   });
 }
 
 describe('plugin.test.js', () => {
-  before(() => {
-  });
+  before(() => {});
 
-  after(() => {
-  });
+  after(() => {});
 
-  beforeEach(() => {
-  });
+  beforeEach(() => {});
 
-  afterEach(() => {
-  });
+  afterEach(() => {});
 
   describe('#webpack createWebpackPlugin test', () => {
     it('should plugin default enable test', () => {
@@ -53,17 +49,22 @@ describe('plugin.test.js', () => {
     it('should plugin manifest enable test', () => {
       const builder1 = createBuilder({
         type: 'client',
-        plugins:{
+        plugins: {
           manifest: true
         }
       });
+      builder1.setProvide('$', 'jquery');
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
+      const provide = getPluginByLabel('provide', plugins);
+      expect(provide.definitions).to.have.property('$');
       expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
     });
 
     it('should plugin client dev enable test', () => {
-      const builder1 = createBuilder({ type: 'client' });
+      const builder1 = createBuilder({
+        type: 'client'
+      });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
       expect(!!getPluginByLabel('hot', plugins)).to.be.true;
@@ -72,7 +73,10 @@ describe('plugin.test.js', () => {
     });
 
     it('should plugin client test enable test', () => {
-      const builder1 = createBuilder({ type: 'client', env: 'test' });
+      const builder1 = createBuilder({
+        type: 'client',
+        env: 'test'
+      });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
       expect(!!getPluginByLabel('hot', plugins)).to.be.false;
@@ -85,7 +89,10 @@ describe('plugin.test.js', () => {
     });
 
     it('should plugin client prod enable test', () => {
-      const builder1 = createBuilder({ type: 'client', env: 'prod' });
+      const builder1 = createBuilder({
+        type: 'client',
+        env: 'prod'
+      });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
 
@@ -99,7 +106,10 @@ describe('plugin.test.js', () => {
     });
 
     it('should plugin server dev enable test', () => {
-      const builder1 = createBuilder({ type: 'server', env: 'dev' });
+      const builder1 = createBuilder({
+        type: 'server',
+        env: 'dev'
+      });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
       expect(!!getPluginByLabel('hot', plugins)).to.be.false;
@@ -111,7 +121,10 @@ describe('plugin.test.js', () => {
     });
 
     it('should plugin server test enable test', () => {
-      const builder1 = createBuilder({ type: 'server', env: 'test' });
+      const builder1 = createBuilder({
+        type: 'server',
+        env: 'test'
+      });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
       expect(!!getPluginByLabel('hot', plugins)).to.be.false;
@@ -123,7 +136,10 @@ describe('plugin.test.js', () => {
     });
 
     it('should plugin server prod enable test', () => {
-      const builder1 = createBuilder({ type: 'server', env: 'prod' });
+      const builder1 = createBuilder({
+        type: 'server',
+        env: 'prod'
+      });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
       expect(!!getPluginByLabel('hot', plugins)).to.be.false;
@@ -136,8 +152,8 @@ describe('plugin.test.js', () => {
 
     it('should merge plugin test', () => {
       const builder = createBuilder({
-        plugins:{
-          uglifyJs:{
+        plugins: {
+          uglifyJs: {
             enable: true,
             merge: false,
             name: webpack.optimize.UglifyJsPlugin,
@@ -145,10 +161,10 @@ describe('plugin.test.js', () => {
               compress: false
             }
           },
-          dll:{
+          dll: {
             enable: true,
             name: webpack.DllPlugin,
-            args:{
+            args: {
               path: 'manifest.json',
               name: '[name]_[chunkhash]',
               context: __dirname
@@ -158,9 +174,105 @@ describe('plugin.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const uglifyJs = getPluginByLabel('uglifyJs', plugins);
-      const dll = getPluginByLabel('dll', plugins);
+      const uglifyJs = getPluginByLabel('UglifyJsPlugin', plugins);
+      const dll = getPluginByLabel('DllPlugin', plugins);
       expect(uglifyJs.options.compress).to.be.false;
+      expect(!!dll).to.be.true;
+    });
+
+    it('should add webpack plugin test', () => {
+      const builder = createBuilder({});
+      builder.addPlugin(new webpack.DllPlugin({
+        path: 'manifest.json',
+        name: '[name]_[chunkhash]',
+        context: __dirname
+      }));
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const dll = getPluginByLabel('DllPlugin', plugins);
+      expect(!!dll).to.be.true;
+    });
+
+    it('should add extend plugin test', () => {
+      const builder = createBuilder({});
+      builder.addPlugin({
+        dll: {
+          enable: true,
+          name: webpack.DllPlugin,
+          args: {
+            path: 'manifest.json',
+            name: '[name]_[chunkhash]',
+            context: __dirname
+          }
+        }
+      });
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const dll = getPluginByLabel('DllPlugin', plugins);
+      expect(!!dll).to.be.true;
+    });
+
+    it('should merge array webpack plugin test', () => {
+      const builder = createBuilder({});
+      builder.mergePlugin([
+        new webpack.DllPlugin({
+          path: 'manifest.json',
+          name: '[name]_[chunkhash]',
+          context: __dirname
+        })
+      ]);
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const dll = getPluginByLabel('DllPlugin', plugins);
+      expect(!!dll).to.be.true;
+    });
+
+    it('should merge array extend plugin test', () => {
+      const builder = createBuilder({});
+      builder.mergePlugin([{
+        enable: true,
+        name: webpack.DllPlugin,
+        args: {
+          path: 'manifest.json',
+          name: '[name]_[chunkhash]',
+          context: __dirname
+        }
+      }]);
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const dll = getPluginByLabel('DllPlugin', plugins);
+      expect(!!dll).to.be.true;
+    });
+    it('should merge array extend key plugin test', () => {
+      const builder = createBuilder({});
+      builder.mergePlugin([{ dll : {
+        enable: true,
+        name: webpack.DllPlugin,
+        args: {
+          path: 'manifest.json',
+          name: '[name]_[chunkhash]',
+          context: __dirname
+        }
+      }}]);
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const dll = getPluginByLabel('DllPlugin', plugins);
+      expect(!!dll).to.be.true;
+    });
+
+    it('should merge array extend name object plugin test', () => {
+      const builder = createBuilder({});
+      builder.mergePlugin([{
+        name: new webpack.DllPlugin({
+          path: 'manifest.json',
+          name: '[name]_[chunkhash]',
+          context: __dirname
+        })
+      }
+      ]);
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const dll = getPluginByLabel('DllPlugin', plugins);
       expect(!!dll).to.be.true;
     });
   });

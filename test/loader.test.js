@@ -155,4 +155,101 @@ describe('loader.test.js', () => {
       expect(vuehtml.use[0].options.test).to.true;
     });
   });
+  it('should add extend loader test', () => {
+    const builder = createBuilder({});
+    builder.addLoader({
+      vuehtml: {
+        test: /\.html$/,
+        loader: 'vue-html-loader',
+        options:{
+          test: true
+        }
+      }
+    });
+    const webpackConfig = builder.create();
+    const rules = webpackConfig.module.rules;
+    const vuehtml = getLoaderByName('vue-html', rules);
+    expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
+    expect(vuehtml.use[0].options.test).to.true;
+  });
+  it('should add webpack loader test', () => {
+    const builder = createBuilder({});
+    builder.addLoader({
+      test: /\.html$/,
+      loader: 'vue-html-loader',
+      options:{
+        test: true
+      }
+    });
+    const webpackConfig = builder.create();
+    const rules = webpackConfig.module.rules;
+    const vuehtml = getLoaderByName('vue-html', rules);
+    expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
+    expect(vuehtml.use[0].options.test).to.true;
+  });
+  it('should add webpack loader use item string test', () => {
+    const builder = createBuilder({});
+    builder.addLoader({
+      test: /\.html$/,
+      use: ['vue-html-loader']
+    });
+    const webpackConfig = builder.create();
+    const rules = webpackConfig.module.rules;
+    const vuehtml = getLoaderByName('vue-html', rules);
+    expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
+  });
+
+  it('should add webpack loader use item object test', () => {
+    const builder = createBuilder({});
+    builder.addLoader({
+      test: /\.html$/,
+      use: [{
+        loader: 'vue-html-loader',
+        options: {
+          test: true
+        }
+      }]
+    });
+    const webpackConfig = builder.create();
+    const rules = webpackConfig.module.rules;
+    const vuehtml = getLoaderByName('vue-html', rules);
+    expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
+    expect(vuehtml.use[0].options.test).to.true;
+  });
+
+  it('should merge array webpack loader test', () => {
+    const builder = createBuilder({});
+    builder.addLoader([{
+      test: /\.html$/,
+      use: [{
+        loader: 'vue-html-loader',
+        options: {
+          test: true
+        }
+      }]
+    }]);
+    const webpackConfig = builder.create();
+    const rules = webpackConfig.module.rules;
+    const vuehtml = getLoaderByName('vue-html', rules);
+    expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
+    expect(vuehtml.use[0].options.test).to.true;
+  });
+
+  it('should merge array extend loader test', () => {
+    const builder = createBuilder({});
+    builder.addLoader([{
+      vuehtml: {
+        test: /\.html$/,
+        loader: 'vue-html-loader',
+        options:{
+          test: true
+        }
+      }
+    }]);
+    const webpackConfig = builder.create();
+    const rules = webpackConfig.module.rules;
+    const vuehtml = getLoaderByName('vue-html', rules);
+    expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
+    expect(vuehtml.use[0].options.test).to.true;
+  });
 });

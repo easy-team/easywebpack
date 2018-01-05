@@ -102,4 +102,24 @@ describe('server.test.js', () => {
       expect(webpackConfig.entry).to.include.keys(['base.test', 'utils', 'logger']);
     });
   });
+
+  describe('#webpack externals test', () => {
+    it('should externals config test', () => {
+      const builder = createBuilder({});
+      const webpackConfig = builder.create();
+      expect(webpackConfig.externals.length).to.equal(1);
+      expect(typeof webpackConfig.externals[0] === 'function').to.be.true;
+    });
+
+    it('should externals not use default config test', () => {
+      const builder = createBuilder({
+        nodeExternals : {
+          useDefault: false
+        }
+      });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.externals.length).to.equal(1);
+      expect(typeof webpackConfig.externals[0] === 'function').to.be.true;
+    });
+  });
 });
