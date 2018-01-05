@@ -55,6 +55,7 @@ exports.prodConfig = {
 };
 
 exports.dllConfig = {
+  miniImage: false,
   cssExtract: false,
   loaders: {
     eslint: false,
