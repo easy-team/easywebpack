@@ -1,4 +1,11 @@
 
+3.5.13 / 2018-01-06
+===================
+
+  * test: remove test log
+  * fix: dll entry add twice
+  * fix: cdn dynamicDir test
+
 3.5.9 / 2018-01-04
 ==================
 
