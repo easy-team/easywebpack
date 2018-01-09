@@ -48,7 +48,7 @@ describe('base.test.js', () => {
       expect(builder.webpackConfig.resolve.extensions).to.have.lengthOf(2);
     });
 
-    it('should option method test', () => {
+    it('should webpack alias test', () => {
       const builder = createBuilder();
       builder.setExternals({ $: 'window.jquery' });
       builder.setAlias('component', 'app/web/component');
@@ -63,7 +63,7 @@ describe('base.test.js', () => {
       expect(builder.webpackConfig.resolve.alias).to.have.property('widget');
       expect(webpackConfig.resolve.alias).to.have.property('component');
       expect(webpackConfig.resolve.alias).to.have.property('widget');
-      expect(webpackConfig.resolve.alias.component).to.not.equal('app/web/component');
+      expect(webpackConfig.resolve.alias.component).to.equal('app/web/component');
       expect(webpackConfig.resolve.alias.asset).to.equal('app/web/asset');
     });
   });
