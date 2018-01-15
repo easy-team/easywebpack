@@ -114,6 +114,7 @@ utils.createEntry = (baseDir, entryLoader, entryConfig, isParseUrl) => {
       useLoader = utils.isTrue(params.loader);
       targetFile = utils.normalizePath(filename, baseDir);
     }
+    targetFile = targetFile.split('?')[0];
     if (entryLoader && useLoader && utils.isString(targetFile)) {
       entries[entryName] = ['babel-loader', entryLoader, targetFile].join('!');
     } else {
