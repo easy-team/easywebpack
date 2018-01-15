@@ -19,6 +19,23 @@ exports.eslint = {
   enforce: 'pre'
 };
 
+exports.typescript = {
+  enable: false,
+  type: 'client',
+  test: /\.ts$/,
+  exclude: [/node_modules/],
+  use: ['ts-loader'],
+  options: {}
+};
+
+exports.tslint = {
+  enable: false,
+  test: /\.ts$/,
+  exclude: /node_modules/,
+  enforce: 'pre',
+  use: ['tslint-loader'],
+};
+
 exports.css = {
   enable: true,
   test: /\.css$/,

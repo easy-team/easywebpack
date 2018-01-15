@@ -182,4 +182,52 @@ describe('client.test.js', () => {
       expect(commonsChunks.length).to.equal(2);
     });
   });
+
+  describe('#webpack typescript test', () => {
+    it('should default typescript enable test', () => {
+      const builder = createBuilder();
+      const webpackConfig = builder.create();
+      const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
+      expect(tsLoader).to.be.undefined;
+    });
+
+    it('should typescript enable test', () => {
+      const builder = createBuilder({
+        loaders:{
+          typescript: true
+        }
+      });
+      const webpackConfig = builder.create();
+      const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
+      expect(tsLoader.use[0].loader).to.equal('ts-loader');
+    });
+
+    it('should typescript config test', () => {
+      const configFile = path.resolve(__dirname, './app/web/tsconfig.json');
+      const builder = createBuilder({
+        loaders:{
+          typescript: {
+            options:{
+              configFile,
+            }
+          }
+        }
+      });
+      const webpackConfig = builder.create();
+      const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
+      expect(tsLoader.use[0].loader).to.equal('ts-loader');
+      expect(tsLoader.use[0].options.configFile).to.equal(configFile);
+    });
+
+    it('should tslint enable test', () => {
+      const builder = createBuilder({
+        loaders:{
+          tslint: true
+        }
+      });
+      const webpackConfig = builder.create();
+      const tsLoader = getLoaderByName('tslint', webpackConfig.module.rules);
+      expect(tsLoader.use[0].loader).to.equal('tslint-loader');
+    });
+  });
 });
