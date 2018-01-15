@@ -110,10 +110,10 @@ utils.createEntry = (baseDir, entryLoader, entryConfig, isParseUrl) => {
     if (isParseUrl && utils.isString(targetFile)) {
       const fileInfo = url.parse(targetFile);
       const params = queryString.parse(fileInfo.query);
-      const filename = path.normalize(fileInfo.href);
       useLoader = utils.isTrue(params.loader);
       targetFile = targetFile.split('?')[0];
-      targetFile = utils.normalizePath(filename, baseDir);
+      targetFile = path.normalize(targetFile);
+      targetFile = utils.normalizePath(targetFile, baseDir);
     }
     if (entryLoader && useLoader && utils.isString(targetFile)) {
       entries[entryName] = ['babel-loader', entryLoader, targetFile].join('!');
