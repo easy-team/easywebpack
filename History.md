@@ -1,5 +1,5 @@
 
-3.5.16 / 2018-01-15
+3.5.18 / 2018-01-15
 ===================
 
   * fix:https://github.com/hubcarl/egg-vue-webpack-boilerplate/issues/51
