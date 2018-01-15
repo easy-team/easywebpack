@@ -144,7 +144,7 @@ exports.manifestDll = {
     const filepath = utils.getCompileTempDir(`config/manifest-${dllConfig.name}.json`);
     return {
       baseDir: this.baseDir,
-      proxy: this.proxy,
+      proxy: this.config.proxy,
       host: this.host,
       buildPath: this.config.buildPath,
       assets: false,

@@ -170,6 +170,27 @@ describe('client.test.js', () => {
       const webpackConfig = builder.create();
       expect(webpackConfig.output.publicPath).to.equal('/static/');
     });
+
+    it('should dev publicPath env dev proxy config test', () => {
+      const host = 'http://debug1.com';
+      const builder = createBuilder({ host, env: 'dev' });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.publicPath).to.equal(`${host}:9000/public/`);
+    });
+
+    it('should dev publicPath env dev proxy and publicPath config test', () => {
+      const host = 'http://debug2.com';
+      const builder = createBuilder({ host, env: 'dev' , publicPath: '/static' });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.publicPath).to.equal(`${host}:9000/static/`);
+    });
+
+    it('should dev publicPath env dev proxy and http publicPath config test', () => {
+      const host = 'http://debug3.com';
+      const builder = createBuilder({ host, env: 'dev' , publicPath: 'http://cdn.com/static' });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.publicPath).to.equal(`http://cdn.com/static/`);
+    });
   });
 
   describe('#webpack commonsChunk test', () => {

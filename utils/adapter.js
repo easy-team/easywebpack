@@ -91,7 +91,6 @@ module.exports = class WebpackAdapter {
                 }
               }
             });
-            console.log(this.builder.loaders.typescript);
           }
         }
       }
