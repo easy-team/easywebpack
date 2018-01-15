@@ -1,6 +1,8 @@
 'use strict';
 const path = require('path');
+const fs = require('fs');
 const utils = require('./utils');
+const g = require('lodash.get');
 
 const manifest = {
   enable: true,
@@ -39,24 +41,65 @@ const manifest = {
   }
 };
 
-exports.normalizeManifestPlugin = (plugins = {}, config) => {
-  if (plugins && plugins.manifestDeps || config.dll) {
-    plugins.manifest = manifest;
-    plugins.buildfile = false;
-  } else if (config.framework === 'vue') {
-    const version = utils.getVersion('egg-view-vue-ssr', config.baseDir);
-    // 版本3 只能用 manifest
-    if (version && /^3/.test(version)) {
-      plugins.manifest = manifest;
-      plugins.buildfile = false;
-    }
-  } else if (config.framework === 'react') {
-    const version = utils.getVersion('egg-view-react-ssr', config.baseDir);
-    // 版本2 只能用 新 manifest
-    if (version && /^2/.test(version)) {
-      plugins.manifest = manifest;
-      plugins.buildfile = false;
-    }
+module.exports = class WebpackAdapter {
+  constructor(builder) {
+    this.builder = builder;
+    this.baseDir = builder.baseDir;
   }
-  return plugins;
+
+  adapterManifestPlugin(plugins = {}, config) {
+    if (plugins && plugins.manifestDeps || config.dll) {
+      plugins.manifest = manifest;
+      plugins.buildfile = false;
+    } else if (config.framework === 'vue') {
+      const version = utils.getVersion('egg-view-vue-ssr', config.baseDir);
+      // 版本3 只能用 manifest
+      if (version && /^3/.test(version)) {
+        plugins.manifest = manifest;
+        plugins.buildfile = false;
+      }
+    } else if (config.framework === 'react') {
+      const version = utils.getVersion('egg-view-react-ssr', config.baseDir);
+      // 版本2 只能用 新 manifest
+      if (version && /^2/.test(version)) {
+        plugins.manifest = manifest;
+        plugins.buildfile = false;
+      }
+    }
+    return plugins;
+  }
+  adapterLoader(loaders = {}, config, outerConfig) {
+    const configLoaders = outerConfig.loaders;
+    if (utils.isObject(configLoaders)) {
+      // 默认 typescript 开启, tslint 开启，eslint 禁用
+      if (configLoaders.typescript) {
+        if (utils.isObject(loaders.eslint) && configLoaders.eslint === undefined) {
+          this.builder.mergeLoader({ eslint: false });
+        }
+        if (utils.isObject(loaders.tslint) && configLoaders.tslint === undefined) {
+          this.builder.mergeLoader({ tslint: true });
+        }
+        // egg project, auto set client typescript tsconfig.json config
+        const tsConfigFile = g(outerConfig, 'typescript.options.configFile');
+        if (outerConfig.egg && !tsConfigFile) {
+          const configFile = path.join(this.baseDir, './app/web/tsconfig.json');
+          if (fs.existsSync(configFile)) {
+            this.builder.mergeLoader({
+              typescript: {
+                options: {
+                  configFile
+                }
+              }
+            });
+            console.log(this.builder.loaders.typescript);
+          }
+        }
+      }
+    }
+    return this.builder.loaders;
+  }
+
+  adapterPlugin(plugins = {}, config, outerConfig) {
+    return this.builder.plugins;
+  }
 };

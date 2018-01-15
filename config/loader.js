@@ -24,8 +24,7 @@ exports.typescript = {
   type: 'client',
   test: /\.ts$/,
   exclude: [/node_modules/],
-  use: ['ts-loader'],
-  options: {}
+  use: ['ts-loader']
 };
 
 exports.tslint = {

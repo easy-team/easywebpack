@@ -5,7 +5,8 @@ const webpack = WebpackTool.webpack;
 const merge = WebpackTool.merge;
 const WebpackClientBuilder = require('../lib/client');
 const path = require('path').posix;
-
+const fs = require('fs');
+const utils = require('../utils/utils');
 // http://chaijs.com/api/bdd/
 function createBuilder(config) {
   const builder = new WebpackClientBuilder(merge({
@@ -188,18 +189,28 @@ describe('client.test.js', () => {
       const builder = createBuilder();
       const webpackConfig = builder.create();
       const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
+      const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
+      const eslint = getLoaderByName('eslint', webpackConfig.module.rules);
       expect(tsLoader).to.be.undefined;
+      expect(tslint).to.be.undefined;
+      expect(eslint.use[0].loader).to.equal('eslint-loader');
     });
 
     it('should typescript enable test', () => {
       const builder = createBuilder({
         loaders:{
+          eslint: true,
+          tslint: true,
           typescript: true
         }
       });
       const webpackConfig = builder.create();
       const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
+      const eslint = getLoaderByName('eslint', webpackConfig.module.rules);
+      const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
       expect(tsLoader.use[0].loader).to.equal('ts-loader');
+      expect(eslint.use[0].loader).to.equal('eslint-loader');
+      expect(tslint.use[0].loader).to.equal('tslint-loader');
     });
 
     it('should typescript config test', () => {
@@ -215,6 +226,10 @@ describe('client.test.js', () => {
       });
       const webpackConfig = builder.create();
       const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
+      const eslint = getLoaderByName('eslint', webpackConfig.module.rules);
+      const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
+      expect(eslint).to.be.undefined;
+      expect(tslint.use[0].loader).to.equal('tslint-loader');
       expect(tsLoader.use[0].loader).to.equal('ts-loader');
       expect(tsLoader.use[0].options.configFile).to.equal(configFile);
     });
@@ -228,6 +243,24 @@ describe('client.test.js', () => {
       const webpackConfig = builder.create();
       const tsLoader = getLoaderByName('tslint', webpackConfig.module.rules);
       expect(tsLoader.use[0].loader).to.equal('tslint-loader');
+    });
+
+    it('should typescript egg configFile auto set test', () => {
+      const configFile = path.resolve(process.cwd(), './app/web/tsconfig.json');
+      const builder = createBuilder({
+        egg: true,
+        loaders:{
+          typescript: true
+        }
+      });
+      if(!fs.existsSync(configFile)){
+        utils.writeFile(configFile, {});
+      }
+      const webpackConfig = builder.create();
+      const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
+      expect(tsLoader.use[0].loader).to.equal('ts-loader');
+      expect(tsLoader.use[0].options.configFile).to.equal(configFile);
+      fs.unlinkSync(configFile);
     });
   });
 });

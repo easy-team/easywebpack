@@ -33,7 +33,7 @@ function getLoaderByName(name, rules) {
 
 function getPluginByLabel(label, plugins) {
   return plugins.find(plugin => {
-    return plugin.__lable__ === label || plugin.__plugin__ === 'html-webpack-plugin';
+    return plugin.__lable__ === label || plugin.__plugin__ === label;
   });
 }
 
@@ -121,5 +121,25 @@ describe('server.test.js', () => {
       expect(webpackConfig.externals.length).to.equal(1);
       expect(typeof webpackConfig.externals[0] === 'function').to.be.true;
     });
+  });
+
+  it('should typescript config test', () => {
+    const configFile = path.resolve(__dirname, './app/web/tsconfig.json');
+    const builder = createBuilder({
+      loaders:{
+        typescript: {
+          options:{
+            configFile,
+          }
+        }
+      }
+    });
+    const webpackConfig = builder.create();
+    const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
+    const eslint = getLoaderByName('eslint', webpackConfig.module.rules);
+    const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
+    expect(tsLoader).to.be.undefined;
+    expect(eslint).to.be.undefined;
+    expect(!!tslint).to.be.true;
   });
 });
