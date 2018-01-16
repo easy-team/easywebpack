@@ -138,8 +138,9 @@ describe('server.test.js', () => {
     const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
     const eslint = getLoaderByName('eslint', webpackConfig.module.rules);
     const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
-    expect(tsLoader).to.be.undefined;
     expect(eslint).to.be.undefined;
-    expect(!!tslint).to.be.true;
+    expect(tslint.use[0].loader).to.equal('tslint-loader');
+    expect(tsLoader.use[0].loader).to.equal('ts-loader');
+    expect(tsLoader.use[0].options.configFile).to.equal(configFile);
   });
 });

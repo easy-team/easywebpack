@@ -89,21 +89,22 @@ utils.getEntry = (config, type) => {
       const filepath = utils.normalizePath(entry, config.baseDir);
       if (fs.statSync(filepath).isDirectory()) {
         const dirEntry = utils.walkFile(filepath, configEntry.exclude, extMatch, config.baseDir);
-        Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, dirEntry, true));
+        Object.assign(entries, utils.createEntry(config, entryLoader, dirEntry, true));
       }
     } else if (entry instanceof RegExp) {
       const dirEntry = utils.walkFile(entry, configEntry.exclude, extMatch, config.baseDir);
-      Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, dirEntry, false));
+      Object.assign(entries, utils.createEntry(config, entryLoader, dirEntry, false));
     } else if (utils.isObject(entry)) {
-      Object.assign(entries, utils.createEntry(config.baseDir, entryLoader, entry, true));
+      Object.assign(entries, utils.createEntry(config, entryLoader, entry, true));
     }
   });
   return entries;
 };
 
 
-utils.createEntry = (baseDir, entryLoader, entryConfig, isParseUrl) => {
+utils.createEntry = (config, entryLoader, entryConfig, isParseUrl) => {
   const entries = {};
+  const baseDir = config.baseDir;
   Object.keys(entryConfig).forEach(entryName => {
     let targetFile = entryConfig[entryName];
     let useLoader = !!entryLoader;
@@ -360,6 +361,9 @@ utils.getDllCacheInfo = dllCachePath => {
 utils.checkDllUpdate = (config, dll) => {
   const baseDir = config.baseDir;
   const filepath = config.webpackConfigFile ? config.webpackConfigFile : path.join(baseDir, 'webpack.config.js');
+  if (!fs.existsSync(filepath)) {
+    return true;
+  }
   const stat = fs.statSync(filepath);
   const lastModifyTime = stat.mtimeMs;
   const dllCachePath = utils.getDllCacheInfoPath(dll.name);

@@ -278,7 +278,6 @@ describe('loader.test.js', () => {
       const builder = createClientBuilder({ devtool: 'source-map'});
       const webpackConfig = builder.create();
       const cssLoader = getLoaderByName('css', webpackConfig.module.rules);
-      console.log(cssLoader);
 
       const postcssLoader = cssLoader.use.find(loader => {
         return loader.loader === 'postcss-loader';
@@ -299,7 +298,6 @@ describe('loader.test.js', () => {
     
       const webpackConfig = builder.create();
       const cssLoader = getLoaderByName('css', webpackConfig.module.rules);
-      console.log(cssLoader);
 
       const postcssLoader = cssLoader.use.find(loader => {
         return loader.loader === 'postcss-loader';

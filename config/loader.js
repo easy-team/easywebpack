@@ -21,7 +21,6 @@ exports.eslint = {
 
 exports.typescript = {
   enable: false,
-  type: 'client',
   test: /\.ts$/,
   exclude: [/node_modules/],
   use: ['ts-loader']
