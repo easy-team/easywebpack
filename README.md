@@ -44,7 +44,7 @@ npm install easywebpack-vue --save-dev
 - 支持服务端渲染, 前端渲染, 静态页面渲染三种构建方式
 - 支持单页面, 多页面服务端渲染构建模式
 - 默认支持 `dev`,`test`, `prod` 环境配置
-- 集成 `webpack-hot-middleware` 热更新实现
+- 集成 `webpack-hot-middleware` 热更新实现, 支持 css inline 和 css extract 热更新
 - 支持 entry 原生配置和目录遍历自动构造 entry 功能
 - 支持自动根据后缀名构建 entry 文件，比如 `.vue` 和 `.jsx` 文件为入口文件
 - 支持 es6 class 继承方式编写 Webpack 配置
@@ -55,6 +55,7 @@ npm install easywebpack-vue --save-dev
 - 支持 loader 和 plugin npm module 是否启用，按需安装
 - 支持 eslint, postcss 等特性
 - 支持 dll 构建解决方案
+- 支持 webpack typescript 构建
 - 提供 `easywebpack-cli` 和 `webpack-tool` 辅助工具。
 
 **easywebpack不与任何框架耦合， 你需要基于现有的解决方案使用或者扩展解决方案使用**

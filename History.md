@@ -1,4 +1,11 @@
 
+3.6.0 / 2018-01-16
+==================
+
+  * feat: use typescript, auto add resolve.extendsions: .ts
+  * feat: support postcss loader options config and auto set sourceMap:true when devtool set
+  * feat: add typescript support
+
 3.5.18 / 2018-01-15
 ===================
 
