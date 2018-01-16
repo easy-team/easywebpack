@@ -232,6 +232,7 @@ describe('client.test.js', () => {
       expect(tsLoader.use[0].loader).to.equal('ts-loader');
       expect(eslint.use[0].loader).to.equal('eslint-loader');
       expect(tslint.use[0].loader).to.equal('tslint-loader');
+      expect(webpackConfig.resolve.extensions).to.include.members(['.ts', '.js']);
     });
 
     it('should typescript config test', () => {

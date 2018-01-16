@@ -93,6 +93,7 @@ module.exports = class WebpackAdapter {
             });
           }
         }
+        this.builder.setExtensions(['.ts'], false);
       }
     }
     return this.builder.loaders;
