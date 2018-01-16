@@ -4,6 +4,7 @@ const WebpackTool = require('webpack-tool');
 const webpack = WebpackTool.webpack;
 const merge = WebpackTool.merge;
 const WebpackBaseBuilder = require('../lib/base');
+const WebpackClientBuilder = require('../lib/client');
 const path = require('path').posix;
 
 // http://chaijs.com/api/bdd/
@@ -17,6 +18,15 @@ function createBuilder(config) {
   return builder;
 }
 
+function createClientBuilder(config) {
+  const builder = new WebpackClientBuilder(config);
+  builder.setBuildPath(path.join(__dirname, '../dist/loader'));
+  builder.setPublicPath('/public');
+  builder.setEntry({
+    include: path.join(__dirname, '../test')
+  });
+  return builder;
+}
 function getLoaderByName(name, rules) {
   const loaderName = `${name}-loader`;
   return rules.find(rule => {
@@ -251,5 +261,50 @@ describe('loader.test.js', () => {
     const vuehtml = getLoaderByName('vue-html', rules);
     expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
     expect(vuehtml.use[0].options.test).to.true;
+  });
+
+  describe('#webpack feature loader test', () => {
+    it('should postcss-loader default config', () => {
+      const builder = createBuilder();
+      const webpackConfig = builder.create();
+      const cssLoader = getLoaderByName('css', webpackConfig.module.rules);
+      const postcssLoader = cssLoader.use.find(loader => {
+        return loader.loader === 'postcss-loader';
+      });
+      expect(postcssLoader.options.sourceMap).to.be.undefined;
+    });
+
+    it('should postcss-loader devtool config', () => {
+      const builder = createClientBuilder({ devtool: 'source-map'});
+      const webpackConfig = builder.create();
+      const cssLoader = getLoaderByName('css', webpackConfig.module.rules);
+      console.log(cssLoader);
+
+      const postcssLoader = cssLoader.use.find(loader => {
+        return loader.loader === 'postcss-loader';
+      });
+      expect(postcssLoader.options.sourceMap).to.be.true;
+    });
+
+    it('should postcss-loader override devtool config', () => {
+      const builder = createClientBuilder({
+        devtool: 'source-map', loaders: {
+          options: {
+            postcss: {
+              sourceMap: false
+            }
+          }
+        }
+      });
+    
+      const webpackConfig = builder.create();
+      const cssLoader = getLoaderByName('css', webpackConfig.module.rules);
+      console.log(cssLoader);
+
+      const postcssLoader = cssLoader.use.find(loader => {
+        return loader.loader === 'postcss-loader';
+      });
+      expect(postcssLoader.options.sourceMap).to.be.false;
+    });
   });
 });
