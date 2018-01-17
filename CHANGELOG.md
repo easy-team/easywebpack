@@ -1,3 +1,13 @@
+<a name="3.6.3"></a>
+## [3.6.3](https://github.com/hubcarl/easywebpack/compare/3.6.2...3.6.3) (2018-01-17)
+
+
+### Bug Fixes
+
+* default config merge repeat ([79939ae](https://github.com/hubcarl/easywebpack/commit/79939ae))
+
+
+
 <a name="3.6.2"></a>
 ## [3.6.2](https://github.com/hubcarl/easywebpack/compare/3.5.18...3.6.2) (2018-01-17)
 
