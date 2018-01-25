@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "3.6.3",
+  "version": "3.6.4",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
@@ -11,7 +11,6 @@
     "chalk": "^2.0.1",
     "cross-spawn": "^5.1.0",
     "css-loader": "^0.28.4",
-    "eslint-config-egg": "^5.1.1",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "lodash.clonedeep": "^4.5.0",
