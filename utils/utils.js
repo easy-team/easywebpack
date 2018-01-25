@@ -90,6 +90,11 @@ utils.getEntry = (config, type) => {
       if (fs.statSync(filepath).isDirectory()) {
         const dirEntry = utils.walkFile(filepath, configEntry.exclude, extMatch, config.baseDir);
         Object.assign(entries, utils.createEntry(config, entryLoader, dirEntry, true));
+      } else {
+        const entryName = path.basename(filepath, path.extname(filepath));
+        const singleEntry = {};
+        singleEntry[entryName] = filepath;
+        Object.assign(entries, utils.createEntry(config, entryLoader, singleEntry, true));
       }
     } else if (entry instanceof RegExp) {
       const dirEntry = utils.walkFile(entry, configEntry.exclude, extMatch, config.baseDir);
