@@ -1,3 +1,13 @@
+<a name="3.6.5"></a>
+## [3.6.5](https://github.com/hubcarl/easywebpack/compare/3.6.3...3.6.5) (2018-02-03)
+
+
+### Features
+
+* support config.template for html ([1da9c36](https://github.com/hubcarl/easywebpack/commit/1da9c36))
+
+
+
 <a name="3.6.4"></a>
 ## [3.6.4](https://github.com/hubcarl/easywebpack/compare/3.6.3...3.6.4) (2018-01-25)
 
