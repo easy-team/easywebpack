@@ -298,8 +298,8 @@ utils.getCompileTempDir = (filename = '', baseDir) => {
   return `${os.tmpdir()}/easywebpack/${project}/${filename}`;
 };
 
-utils.getDllFilePath = name => {
-  return utils.getCompileTempDir(`dll/manifest-${name}-dll.json`);
+utils.getDllFilePath = (name, env = 'dev') => {
+  return utils.getCompileTempDir(`${env}/dll/manifest-${name}-dll.json`);
 };
 
 utils.getDllConfig = dll => {
@@ -315,8 +315,8 @@ utils.getDllConfig = dll => {
   return [];
 };
 
-utils.getDllCacheInfoPath = name => {
-  return utils.getCompileTempDir(`dll/cache-${name}.json`);
+utils.getDllCacheInfoPath = (name, env = 'dev') => {
+  return utils.getCompileTempDir(`${env}/dll/cache-${name}.json`);
 };
 
 utils.getModuleInfo = (module, baseDir) => {
@@ -371,14 +371,14 @@ utils.checkDllUpdate = (config, dll) => {
   }
   const stat = fs.statSync(filepath);
   const lastModifyTime = stat.mtimeMs;
-  const dllCachePath = utils.getDllCacheInfoPath(dll.name);
-  // dll manifest 文件不存在
-  if (!fs.existsSync(utils.getDllFilePath(dll.name))) {
-    return true;
-  }
+  const dllCachePath = utils.getDllCacheInfoPath(dll.name, config.env);
   // cache file 文件不存在
   if (!fs.existsSync(dllCachePath)) {
     utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, lastModifyTime);
+    return true;
+  }
+  // dll manifest 文件不存在
+  if (!fs.existsSync(utils.getDllFilePath(dll.name, config.env))) {
     return true;
   }
   // 判断 webpack.config.js 修改时间

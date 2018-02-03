@@ -30,7 +30,7 @@ const manifest = {
         fileName,
         commonsChunk: this.getCommonsChunk(),
         dllConfig,
-        dllDir: utils.getCompileTempDir()
+        dllDir: utils.getCompileTempDir(this.env)
       });
     }
     return this.merge(args, {

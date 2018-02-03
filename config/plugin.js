@@ -141,7 +141,7 @@ exports.manifestDll = {
   name: 'webpack-manifest-resource-plugin',
   args() {
     const dllConfig = this.config.dll || {};
-    const filepath = utils.getCompileTempDir(`config/manifest-${dllConfig.name}.json`);
+    const filepath = utils.getCompileTempDir(`${this.env}/config/manifest-${dllConfig.name}.json`);
     return {
       baseDir: this.baseDir,
       proxy: this.config.proxy,
