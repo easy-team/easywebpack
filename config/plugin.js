@@ -7,7 +7,7 @@ const webpack = WebpackTool.webpack;
 const chalk = require('chalk');
 const utils = require('../utils/utils');
 const WORKERS = os.cpus().length - 1;
-const UGLIFYJS_WORKERS = WORKERS > 10 ? 10 : WORKERS;
+const UGLIFYJS_WORKERS = WORKERS > 8 ? 8 : WORKERS;
 exports.npm = {
   enable: false,
   name: 'npm-install-webpack-plugin',
@@ -256,5 +256,17 @@ exports.html = {
   name: 'html-webpack-plugin',
   args: {
     inject: true
+  }
+};
+
+exports.serviceworker = {
+  enable: false,
+  type: 'client',
+  name: 'service-worker-precache-webpack-plugin',
+  args() {
+    return {
+      hash: this.test || this.prod,
+      minify: this.prod
+    }
   }
 };

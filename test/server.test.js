@@ -143,4 +143,16 @@ describe('server.test.js', () => {
     expect(tsLoader.use[0].loader).to.equal('ts-loader');
     expect(tsLoader.use[0].options.configFile).to.equal(configFile);
   });
+
+  it('should server service worker disable test', () => {
+    const builder = createBuilder({
+      plugins: {
+        serviceworker: true
+      }
+    });
+    const webpackConfig = builder.create();
+    const plugins = webpackConfig.plugins;
+    const serviceworker = getPluginByLabel('serviceworker', plugins);
+    expect(!!serviceworker).to.be.false;
+  });
 });

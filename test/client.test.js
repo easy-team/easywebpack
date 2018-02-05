@@ -33,7 +33,7 @@ function getLoaderByName(name, rules) {
 
 function getPluginByLabel(label, plugins) {
   return plugins.find(plugin => {
-    return plugin.__lable__ === label || plugin.__plugin__ === 'html-webpack-plugin';
+    return plugin.__lable__ === label || plugin.__plugin__ === label;
   });
 }
 
@@ -283,6 +283,61 @@ describe('client.test.js', () => {
       expect(tsLoader.use[0].loader).to.equal('ts-loader');
       expect(tsLoader.use[0].options.configFile).to.equal(configFile);
       fs.unlinkSync(configFile);
+    });
+
+
+    it('should service worker default test', () => {
+      const builder = createBuilder({});
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const serviceworker = getPluginByLabel('serviceworker', plugins);
+      expect(!!serviceworker).to.be.false;
+    });
+
+    it('should open service worker test', () => {
+      const builder = createBuilder({
+        plugins: {
+          serviceworker: true
+        }
+      });
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const serviceworker = getPluginByLabel('serviceworker', plugins);
+      expect(!!serviceworker).to.be.true;
+    });
+
+    it('should open service worker test', () => {
+      const builder = createBuilder({
+        env: 'prod',
+        plugins: {
+          serviceworker: true
+        }
+      });
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const serviceworker = getPluginByLabel('serviceworker', plugins);
+      expect(serviceworker.options.prefix).to.equal('sw');
+      expect(serviceworker.options.hash).to.be.true;
+      expect(serviceworker.options.minify).to.be.true;
+    });
+
+    it('should override service worker default config test', () => {
+      const builder = createBuilder({
+        env: 'prod',
+        plugins: {
+          serviceworker: {
+            prefix: '',
+            hash: false,
+            minify: false
+          }
+        }
+      });
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const serviceworker = getPluginByLabel('serviceworker', plugins);
+      expect(serviceworker.options.prefix).to.equal('');
+      expect(serviceworker.options.hash).to.be.false;
+      expect(serviceworker.options.minify).to.be.false;
     });
   });
 });
