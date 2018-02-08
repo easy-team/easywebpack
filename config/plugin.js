@@ -56,12 +56,14 @@ exports.define = {
     const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : (this.prod ? 'production' : 'development');
     return {
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+      EASY_ENV: JSON.stringify(this.env),
       EASY_ENV_IS_DEV: !!this.dev,
       EASY_ENV_IS_TEST: !!this.test,
       EASY_ENV_IS_PROD: !!this.prod,
       EASY_ENV_IS_BROWSER: !(!!this.ssr),
       EASY_ENV_IS_NODE: !!this.ssr,
-      EASY_ENV_PUBLIC_PATH: JSON.stringify(this.config.publicPath),
+      EASY_ENV_LOCAL_PUBLIC_PATH: JSON.stringify(this.config.publicPath),
+      EASY_ENV_PUBLIC_PATH: JSON.stringify(this.publicPath),
       EASY_ENV_HOST_URL: JSON.stringify(`${this.host}`)
     };
   }
@@ -146,7 +148,9 @@ exports.manifestDll = {
       baseDir: this.baseDir,
       proxy: this.config.proxy,
       host: this.host,
-      buildPath: this.config.buildPath,
+      buildPath: this.buildPath,
+      publicPath: this.publicPath,
+      localPublicPath: this.config.publicPath,
       assets: false,
       manifestDll: true,
       writeToFileEmit: true,
@@ -165,8 +169,9 @@ exports.buildfile = {
       baseDir: this.baseDir,
       host: this.host,
       proxy: this.config.proxy,
-      buildPath: this.config.buildPath,
-      publicPath: this.config.publicPath,
+      buildPath: this.buildPath,
+      publicPath: this.publicPath,
+      localPublicPath: this.config.publicPath,
       commonsChunk: this.getCommonsChunk(),
     };
   }
@@ -265,8 +270,10 @@ exports.serviceworker = {
   name: 'service-worker-precache-webpack-plugin',
   args() {
     return {
+      env: this.env,
       hash: this.test || this.prod,
-      minify: this.prod
-    }
+      minify: this.prod,
+      localPublicPath: this.config.publicPath
+    };
   }
 };

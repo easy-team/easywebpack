@@ -13,7 +13,9 @@ const manifest = {
       baseDir: this.baseDir,
       host: this.host,
       proxy: this.config.proxy,
-      buildPath: this.config.buildPath,
+      buildPath: this.buildPath,
+      publicPath: this.publicPath,
+      localPublicPath: this.config.publicPath,
       assets: false,
       writeToFileEmit: true
     };

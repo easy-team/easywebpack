@@ -133,7 +133,7 @@ describe('client.test.js', () => {
     it('should dev cdn dynamicDir config test', () => {
       const builder = createBuilder({ debug: true, env: 'dev', cdn: { url: cdnUrl, dynamicDir: 'cdn'} });
       const webpackConfig = builder.create();
-      expect(webpackConfig.output.publicPath).to.equal(cdnUrl + '/cdn/');
+      expect(webpackConfig.output.publicPath).to.equal(cdnUrl + '/cdn/public/');
     });
     it('should dev cdn config test', () => {
       const builder = createBuilder({ debug: true, env: 'dev', cdn: { url: cdnUrl} });

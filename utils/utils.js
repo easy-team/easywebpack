@@ -319,6 +319,10 @@ utils.getDllCacheInfoPath = (name, env = 'dev') => {
   return utils.getCompileTempDir(`${env}/dll/cache-${name}.json`);
 };
 
+utils.getCacheInfoPath = () => {
+  return utils.getCompileTempDir('config.json');
+};
+
 utils.getModuleInfo = (module, baseDir) => {
   if (/\.js$/.test(module)) {
     if (fs.existsSync(module)) {
