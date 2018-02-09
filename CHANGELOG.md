@@ -1,3 +1,12 @@
+<a name="3.6.6"></a>
+## [3.6.6](https://github.com/hubcarl/easywebpack/compare/3.6.3...3.6.6) (2018-02-09)
+
+
+### Bug Fixes
+
+* easy build dll --size ([be5053f](https://github.com/hubcarl/easywebpack/commit/be5053f))
+
+
 <a name="3.6.5"></a>
 ## [3.6.5](https://github.com/hubcarl/easywebpack/compare/3.6.3...3.6.5) (2018-02-03)
 
