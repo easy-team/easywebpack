@@ -48,6 +48,9 @@ module.exports = class WebpackAdapter {
   }
 
   adapterManifestPlugin(plugins = {}, config) {
+    if (config.buildDll) {
+      return plugins;
+    }
     if (plugins && plugins.manifestDeps || config.dll) {
       plugins.manifest = manifest;
       plugins.buildfile = false;
