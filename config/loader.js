@@ -43,7 +43,7 @@ exports.css = {
 };
 
 exports.scss = {
-  enable: true,
+  enable: false,
   test: /\.scss/,
   use: ['css-loader', 'sass-loader'],
   postcss: true,
@@ -51,7 +51,7 @@ exports.scss = {
 };
 
 exports.sass = {
-  enable: true,
+  enable: false,
   test: /\.sass/,
   use: ['css-loader', {
     loader: 'sass-loader',
@@ -91,7 +91,7 @@ exports.urlimage = {
       fn(){
         return {
           options: {
-            name: this.config.imageName
+            name: this.webpackInfo.imageName
           }
         }
       }
@@ -111,7 +111,7 @@ exports.urlfont = {
       fn(){
         return {
           options: {
-            name: this.config.frontName
+            name: this.webpackInfo.frontName
           }
         }
       }

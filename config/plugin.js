@@ -128,12 +128,39 @@ exports.hot = {
 exports.manifest = {
   enable: true,
   type: 'client',
-  name: 'webpack-manifest-plugin',
+  name: 'webpack-manifest-resource-plugin',
   args() {
-    const filename = this.config.plugins && this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
-    const absFilename = this.utils.normalizePath(filename, this.baseDir);
-    const relativeFileName = path.relative(this.config.buildPath, absFilename);
-    return { fileName: relativeFileName };
+    const args = {
+      baseDir: this.baseDir,
+      host: this.host,
+      proxy: this.config.proxy,
+      buildPath: this.buildPath,
+      publicPath: this.publicPath,
+      localPublicPath: this.config.publicPath,
+      assets: false,
+      writeToFileEmit: true
+    };
+    const plugins = this.config.plugins || {};
+    const manifestConfig = plugins.manifest || {};
+    const filepath = path.join(this.baseDir, manifestConfig.fileName || 'config/manifest.json');
+    // 兼容旧 manifest 配置
+    const fileName = path.relative(this.config.buildPath, filepath);
+    const dllConfig = utils.getDllConfig(this.config.dll);
+    // 如果开启了dll 功能, 则读取 dll manifest 配置, 然后与项目 manifest 合并
+    if (dllConfig) {
+      return this.merge(args, {
+        filepath,
+        fileName,
+        commonsChunk: this.getCommonsChunk(),
+        dllConfig,
+        dllDir: utils.getCompileTempDir(this.env)
+      });
+    }
+    return this.merge(args, {
+      filepath,
+      fileName,
+      commonsChunk: this.getCommonsChunk()
+    });
   }
 };
 
@@ -156,23 +183,6 @@ exports.manifestDll = {
       writeToFileEmit: true,
       dllConfig,
       filepath
-    };
-  }
-};
-
-exports.buildfile = {
-  enable: true,
-  type: 'client',
-  name: require('./plugin/build-config-webpack-plugin'),
-  args() {
-    return {
-      baseDir: this.baseDir,
-      host: this.host,
-      proxy: this.config.proxy,
-      buildPath: this.buildPath,
-      publicPath: this.publicPath,
-      localPublicPath: this.config.publicPath,
-      commonsChunk: this.getCommonsChunk(),
     };
   }
 };
@@ -232,7 +242,7 @@ exports.extract = {
     return this.config.cssExtract;
   },
   args() {
-    return { filename: this.config.cssName };
+    return { filename: this.webpackInfo.cssName };
   }
 };
 

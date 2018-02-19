@@ -69,7 +69,6 @@ exports.dllConfig = {
     runtime: false,
     commonsChunk: false,
     imagemini: false,
-    buildfile: false,
     manifest: false,
     manifestDll: true
   }
