@@ -10,7 +10,6 @@ const path = require('path').posix;
 function createBuilder(config) {
   const builder = new WebpackServerBuilder(merge({
     cost: true,
-    buildPath: 'dist/client',
     publicPath: '/public',
     entry: {
       include: path.join(__dirname)
