@@ -7,7 +7,6 @@ exports.config = {
   buildPath: 'public',
   publicPath: '/public/',
   hashLength: 8,
-  prefix: '',
   alias: {},
   packs: {},
   cdn: {},
@@ -15,9 +14,8 @@ exports.config = {
     check: false
   },
   loaders: {},
-  plugins: {
-    manifest: {}
-  }
+  plugins: {}
+
 };
 
 exports.devConfig = {
