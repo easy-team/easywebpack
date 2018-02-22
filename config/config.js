@@ -4,6 +4,7 @@ const baseDir = process.cwd();
 
 exports.config = {
   baseDir,
+  port:9000,
   buildPath: 'public',
   publicPath: '/public/',
   hashLength: 8,
@@ -15,7 +16,6 @@ exports.config = {
   },
   loaders: {},
   plugins: {}
-
 };
 
 exports.devConfig = {

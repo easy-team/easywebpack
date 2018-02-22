@@ -70,7 +70,9 @@ exports.define = {
 };
 
 exports.commonsChunk = {
-  enable: true,
+  enable() {
+    return !this.config.dll;
+  },
   type: 'client',
   name: webpack.optimize.CommonsChunkPlugin,
   action: 'merge',
@@ -87,7 +89,7 @@ exports.commonsChunk = {
 
 exports.runtime = {
   enable() {
-    return !this.config.dll && this.isUse('commonsChunk');
+    return this.isUse('commonsChunk');
   },
   type: 'client',
   name: webpack.optimize.CommonsChunkPlugin,
@@ -133,7 +135,7 @@ exports.manifest = {
     const args = {
       baseDir: this.baseDir,
       host: this.host,
-      proxy: this.config.proxy,
+      proxy: this.proxy,
       buildPath: this.buildPath,
       publicPath: this.publicPath,
       localPublicPath: this.config.publicPath,
@@ -173,7 +175,7 @@ exports.manifestDll = {
     const filepath = utils.getCompileTempDir(`${this.env}/config/manifest-${dllConfig.name}.json`);
     return {
       baseDir: this.baseDir,
-      proxy: this.config.proxy,
+      proxy: this.proxy,
       host: this.host,
       buildPath: this.buildPath,
       publicPath: this.publicPath,

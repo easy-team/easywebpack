@@ -135,11 +135,6 @@ describe('client.test.js', () => {
       const webpackConfig = builder.create();
       expect(webpackConfig.output.publicPath).to.equal(cdnUrl + '/cdn/public/');
     });
-    it('should dev cdn config test', () => {
-      const builder = createBuilder({ debug: true, env: 'dev', cdn: { url: cdnUrl} });
-      const webpackConfig = builder.create();
-      expect(webpackConfig.output.publicPath).to.equal(cdnUrl + '/');
-    });
 
     it('should dev publicPath abspath config test', () => {
       const builder = createBuilder({ debug: true, env: 'dev', publicPath: cdnUrl });
@@ -169,14 +164,14 @@ describe('client.test.js', () => {
       const host = 'http://debug1.com';
       const builder = createBuilder({ host, env: 'dev' });
       const webpackConfig = builder.create();
-      expect(webpackConfig.output.publicPath).to.equal(`${host}/public/`);
+      expect(webpackConfig.output.publicPath).to.equal(`${host}:9000/public/`);
     });
 
     it('should dev publicPath env dev proxy and publicPath config test', () => {
       const host = 'http://debug2.com';
       const builder = createBuilder({ host, env: 'dev' , publicPath: '/static' });
       const webpackConfig = builder.create();
-      expect(webpackConfig.output.publicPath).to.equal(`${host}/static/`);
+      expect(webpackConfig.output.publicPath).to.equal(`${host}:9000/static/`);
     });
 
     it('should dev publicPath env dev proxy and http publicPath config test', () => {
@@ -195,6 +190,32 @@ describe('client.test.js', () => {
         return plugin.constructor.name === 'CommonsChunkPlugin';
       });
       expect(webpackConfig.entry).to.have.property('common');
+      expect(commonsChunks.length).to.equal(2);
+    });
+  });
+
+  describe('#webpack dll commonsChunk default false test', () => {
+    it('should dev cdn config test', () => {
+      const builder = createBuilder({ env: 'dev', dll: ['mocha'] });
+      const webpackConfig = builder.create();
+      const commonsChunks = webpackConfig.plugins.filter(plugin =>{
+        return plugin.constructor.name === 'CommonsChunkPlugin';
+      });
+      expect(webpackConfig.entry).to.have.not.property('common');
+      expect(commonsChunks.length).to.equal(0);
+    });
+  });
+
+  describe('#webpack commonsChunk dll exist test', () => {
+    it('should dev cdn config test', () => {
+      const builder = createBuilder({ env: 'dev', dll: ['mocha'], plugins:{
+        commonsChunk: true
+      }});
+      const webpackConfig = builder.create();
+      const commonsChunks = webpackConfig.plugins.filter(plugin =>{
+        return plugin.constructor.name === 'CommonsChunkPlugin';
+      });
+      expect(webpackConfig.entry).to.have.not.property('common');
       expect(commonsChunks.length).to.equal(2);
     });
   });
