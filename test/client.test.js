@@ -145,6 +145,12 @@ describe('client.test.js', () => {
     it('should dev publicPath config test', () => {
       const builder = createBuilder({ debug: true, env: 'dev', publicPath: '/static' });
       const webpackConfig = builder.create();
+      expect(webpackConfig.output.publicPath).to.equal('/static/');
+    });
+
+    it('should dev publicPath config proxy false test', () => {
+      const builder = createBuilder({ debug: true, proxy: false, env: 'dev', publicPath: '/static' });
+      const webpackConfig = builder.create();
       expect(webpackConfig.output.publicPath).to.equal(builder.host + '/static/');
     });
 

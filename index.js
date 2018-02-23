@@ -2,8 +2,8 @@
 
 const WebpackTool = require('webpack-tool');
 exports.WebpackTool = WebpackTool;
-exports.webpack = require('webpack');
-exports.merge = require('webpack-merge');
+exports.webpack = WebpackTool.webpack;
+exports.merge = WebpackTool.merge;
 exports.Utils = require('./utils/utils');
 exports.WebpackBuilder = require('./lib/builder');
 exports.WebpackBaseBuilder = require('./lib/base');

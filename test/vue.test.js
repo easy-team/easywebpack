@@ -52,7 +52,7 @@ describe('vue.test.js', () => {
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
       expect(webpackConfig.output.path).to.equal(path.join(baseDir, 'dist/vue'));
-      expect(webpackConfig.output.publicPath).to.equal(`${utils.getHost('9000')}/public/dist/`);
+      expect(webpackConfig.output.publicPath).to.equal(`/public/dist/`);
 
       expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
       expect(!!getPluginByLabel('commonsChunk', plugins)).to.be.true;
@@ -75,7 +75,7 @@ describe('vue.test.js', () => {
       expect(webpackConfig.entry['base.test'].length).to.equal(2);
       expect(webpackConfig.entry['base.test'][0]).to.includes('webpack-hot-middleware');
       expect(webpackConfig.output.path).to.equal(path.join(baseDir, 'dist/vue/override'));
-      expect(webpackConfig.output.publicPath).to.equal(`${utils.getHost('9000')}/public/dist/override/`);
+      expect(webpackConfig.output.publicPath).to.equal(`/public/dist/override/`);
 
       expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
       expect(!!getPluginByLabel('commonsChunk', plugins)).to.be.true;
