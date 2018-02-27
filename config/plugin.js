@@ -69,36 +69,36 @@ exports.define = {
   }
 };
 
-exports.commonsChunk = {
-  enable() {
-    return !this.config.dll;
-  },
-  type: 'client',
-  name: webpack.optimize.CommonsChunkPlugin,
-  action: 'merge',
-  args() {
-    const packKeys = Object.keys(this.packs || {});
-    const chunks = Object.keys(this.webpackConfig.entry || {}).filter(entry => {
-      return !packKeys.includes(entry);
-    });
-    const lib = this.utils.isObject(this.config.lib) ? this.config.lib : {};
-    const names = lib.name || 'common';
-    return { names, chunks };
-  }
-};
+// exports.commonsChunk = {
+//   enable() {
+//     return !this.config.dll;
+//   },
+//   type: 'client',
+//   name: webpack.optimize.CommonsChunkPlugin,
+//   action: 'merge',
+//   args() {
+//     const packKeys = Object.keys(this.packs || {});
+//     const chunks = Object.keys(this.webpackConfig.entry || {}).filter(entry => {
+//       return !packKeys.includes(entry);
+//     });
+//     const lib = this.utils.isObject(this.config.lib) ? this.config.lib : {};
+//     const names = lib.name || 'common';
+//     return { names, chunks };
+//   }
+// };
 
-exports.runtime = {
-  enable() {
-    return this.isUse('commonsChunk');
-  },
-  type: 'client',
-  name: webpack.optimize.CommonsChunkPlugin,
-  action: 'merge',
-  args() {
-    const chunks = this.getCommonsChunk(false);
-    return { name: 'runtime', chunks };
-  }
-};
+// exports.runtime = {
+//   enable() {
+//     return this.isUse('commonsChunk');
+//   },
+//   type: 'client',
+//   name: webpack.optimize.CommonsChunkPlugin,
+//   action: 'merge',
+//   args() {
+//     const chunks = this.getCommonsChunk(false);
+//     return { name: 'runtime', chunks };
+//   }
+// };
 
 exports.uglifyJs = {
   enable: true,
@@ -233,7 +233,7 @@ exports.stats = {
 };
 
 exports.directoryname = {
-  enable: true,
+  enable: false,
   name: 'directory-named-webpack-plugin'
 };
 
