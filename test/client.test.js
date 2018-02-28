@@ -193,7 +193,7 @@ describe('client.test.js', () => {
       const builder = createBuilder({ env: 'dev', lib: ['mocha'] });
       const webpackConfig = builder.create();
       const commonsChunks = webpackConfig.plugins.filter(plugin =>{
-        return plugin.constructor.name === 'CommonsChunkPlugin';
+        return plugin.constructor.name === 'SplitChunksPlugin' || plugin.constructor.name === 'RuntimeChunkPlugin';
       });
       expect(webpackConfig.entry).to.have.property('common');
       expect(commonsChunks.length).to.equal(2);
@@ -219,7 +219,7 @@ describe('client.test.js', () => {
       }});
       const webpackConfig = builder.create();
       const commonsChunks = webpackConfig.plugins.filter(plugin =>{
-        return plugin.constructor.name === 'CommonsChunkPlugin';
+        return plugin.constructor.name === 'SplitChunksPlugin' || plugin.constructor.name === 'RuntimeChunkPlugin';
       });
       expect(webpackConfig.entry).to.have.not.property('common');
       expect(commonsChunks.length).to.equal(2);

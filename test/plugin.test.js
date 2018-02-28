@@ -153,14 +153,6 @@ describe('plugin.test.js', () => {
     it('should merge plugin test', () => {
       const builder = createBuilder({
         plugins: {
-          uglifyJs: {
-            enable: true,
-            merge: false,
-            name: webpack.optimize.UglifyJsPlugin,
-            args: {
-              compress: false
-            }
-          },
           dll: {
             enable: true,
             name: webpack.DllPlugin,
@@ -174,9 +166,7 @@ describe('plugin.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const uglifyJs = getPluginByLabel('UglifyJsPlugin', plugins);
       const dll = getPluginByLabel('DllPlugin', plugins);
-      expect(uglifyJs.options.compress).to.be.false;
       expect(!!dll).to.be.true;
     });
 
