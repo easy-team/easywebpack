@@ -20,7 +20,7 @@
     "directory-named-webpack-plugin": "^2.2.3",
     "eslint": "^4.3.0",
     "eslint-loader": "^2.0.0",
-    "extract-text-webpack-plugin": "^3.0.0",
+    "extract-text-webpack-plugin": "next",
     "file-loader": "^1.1.10",
     "html-webpack-plugin": "^2.30.1",
     "lodash.clonedeep": "^4.5.0",

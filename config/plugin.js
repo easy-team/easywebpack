@@ -8,6 +8,14 @@ const chalk = require('chalk');
 const utils = require('../utils/utils');
 const WORKERS = os.cpus().length - 1;
 const UGLIFYJS_WORKERS = WORKERS > 8 ? 8 : WORKERS;
+
+exports.hot = {
+  enable: true,
+  type: 'client',
+  env: ['dev'],
+  name: webpack.HotModuleReplacementPlugin
+};
+
 exports.npm = {
   enable: false,
   name: 'npm-install-webpack-plugin',
@@ -118,13 +126,6 @@ exports.uglifyJs = {
       }
     }
   }
-};
-
-exports.hot = {
-  enable: true,
-  type: 'client',
-  env: ['dev'],
-  name: webpack.HotModuleReplacementPlugin
 };
 
 exports.manifest = {
