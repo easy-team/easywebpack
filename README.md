@@ -30,7 +30,7 @@
 
 ## 版本说明
 
-最新版本基于 Webpack 3 版本， 目前 `easywebpack` 稳定版本：～3.6.x  `easywebpack` 新特性版本: next. 对应的 Vue/React/Weex 解决方案也分别有对应的稳定版和新特性版本， 线上使用时请使用稳定版本。 以 Vue 稳定版和开发版本安装举例：
+最新版本基于 Webpack 3 版本， 目前 `easywebpack` 稳定版本：[![NPM version][npm-image]][npm-url]  `easywebpack` 新特性版本: next. 对应的 Vue/React/Weex 解决方案也分别有对应的稳定版和新特性版本， 线上使用时请使用稳定版本。 以 Vue 稳定版和开发版本安装举例：
 
 
 ```bash
@@ -67,8 +67,8 @@ npm install easywebpack-vue --save-dev
 
 ### 解决方案
 
-基于 `easywebpack` 基础骨架，目前已扩展 `Vue` `React` `Weex`, `HTML` 四种解决方案：
-
+基于 `easywebpack` 基础骨架，目前已扩展 `Vue` `React` `Weex`, `HTML`, `Javascript` 五种解决方案：
+- [easywebpack-js](https://github.com/hubcarl/easywebpack-vue.git)  支持纯 javascript 文件构建模式
 - [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git)  支持 Vue 纯前端构建和Node端构建模式
 - [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git) 支持 React 纯前端构建和Node端构建模式
 - [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git) 支持 Native 和 Web 构建模式
@@ -79,20 +79,32 @@ npm install easywebpack-vue --save-dev
 
 [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli.git) 基于 easywebpack 前端工程化解决方案构建的脚手架命令行工具。
 
-- 支持 Vue/React/Weex 框架项目的初始化，包括 SPA应用，多页面应用，Server Side Render(Egg)项目
-- 支持命令行 Webpack 构建，包括Webpack配置信息打印(调试)和获取
+- 支持 Vue/React/Weex/HTML 框架项目的初始化，包括 SPA 应用，多页面应用，Server Side Render(Egg)项目
+- 支持命令行 Webpack 构建，包括 Webpack 配置信息打印(调试)和获取
 - 提供构建结果 UI 导航展现和访问。
 
 
 ### 项目骨架
 
-- [easywebpack-cli-template](https://github.com/hubcarl/easywebpack-cli-template) Vue/React/Wee 纯前端项目目标
+- [easywebpack-cli-template](https://github.com/hubcarl/easywebpack-cli-template) Vue/React/Weex 纯前端项目目标
 
 - [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) Egg + Vue 服务端渲染骨架
 
+- [egg-vue-webpack-spa-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate／tree/feature/green/spa) Egg + Vue 单页面服务端渲染骨架
+
+- [egg-vue-webpack-mpa-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate/tree/feature/green/multi) Egg + Vue 多页面服务端渲染骨架
+
+- [egg-vue-typescript-boilerplate](https://github.com/hubcarl/egg-vue-typescript-boilerplate) Egg + Vue + TypeScript + Webpack 服务端渲染骨架
+
 - [egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate) Egg + React 服务端渲染骨架
 
+- [egg-react-webpack-spa-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate／tree/feature/green/spa) Egg + React 单页面服务端渲染骨架
+
+- [egg-react-typescript-boilerplate](https://github.com/hubcarl/egg-react-typescript-boilerplate) Egg + React + TypeScript + Webpack 服务端渲染骨架
+
+- [egg-react-webpack-mpa-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/feature/green/multi) Egg + React 多页面服务端渲染骨架
 - [easywebpack-weex-boilerplate](https://github.com/hubcarl/easywebpack-weex-boilerplate) Weex Native 和 Web 构建骨架项目
+
 - [easywebpack-multiple-html-boilerplate](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate) 静态页面构建方案骨架，支持纯 HTML 构建 和 nunjucks 构建。 
 
 **以上骨架可以通过 easywebpack-cli 初始化**
