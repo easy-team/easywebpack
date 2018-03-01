@@ -90,7 +90,7 @@ npm install easywebpack-vue --save-dev
 
 - [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) Egg + Vue 服务端渲染骨架
 
-- [egg-vue-webpack-spa-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate／tree/feature/green/spa) Egg + Vue 单页面服务端渲染骨架
+- [egg-vue-webpack-spa-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate/tree/feature/green/spa) Egg + Vue 单页面服务端渲染骨架
 
 - [egg-vue-webpack-mpa-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate/tree/feature/green/multi) Egg + Vue 多页面服务端渲染骨架
 
@@ -98,11 +98,12 @@ npm install easywebpack-vue --save-dev
 
 - [egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate) Egg + React 服务端渲染骨架
 
-- [egg-react-webpack-spa-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate／tree/feature/green/spa) Egg + React 单页面服务端渲染骨架
+- [egg-react-webpack-spa-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/feature/green/spa) Egg + React 单页面服务端渲染骨架
+
+- [egg-react-webpack-mpa-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/feature/green/multi) Egg + React 多页面服务端渲染骨架
 
 - [egg-react-typescript-boilerplate](https://github.com/hubcarl/egg-react-typescript-boilerplate) Egg + React + TypeScript + Webpack 服务端渲染骨架
 
-- [egg-react-webpack-mpa-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/feature/green/multi) Egg + React 多页面服务端渲染骨架
 - [easywebpack-weex-boilerplate](https://github.com/hubcarl/easywebpack-weex-boilerplate) Weex Native 和 Web 构建骨架项目
 
 - [easywebpack-multiple-html-boilerplate](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate) 静态页面构建方案骨架，支持纯 HTML 构建 和 nunjucks 构建。 
