@@ -5,7 +5,7 @@ if (typeof window === 'object') {
   hotClient.setOptionsAndConnect({
     path: EASY_ENV_HOST_URL + '/__webpack_hmr'
   });
-  hotClient.subscribeAll(event => {
+  hotClient.subscribeAll(function() {
     if (event.action === 'built' && currentHash) {
       var request = new XMLHttpRequest();
       var requestPath = EASY_ENV_PUBLIC_PATH + currentHash + '.hot-update.json';
