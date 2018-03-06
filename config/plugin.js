@@ -24,28 +24,9 @@ exports.npm = {
   }
 };
 
-exports.module = {
-  enable: true,
-  env: ['test', 'prod'],
-  name: webpack.optimize.ModuleConcatenationPlugin
-};
-
-exports.error = {
-  enable: true,
-  name: webpack.NoEmitOnErrorsPlugin
-};
-
 exports.provide = {
   enable: true,
   name: webpack.ProvidePlugin,
-  args: {}
-};
-
-exports.nameModule = {
-  enable: true,
-  env: ['dev'],
-  type: 'client',
-  name: webpack.NamedModulesPlugin,
   args: {}
 };
 
