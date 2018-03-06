@@ -22,11 +22,15 @@ function createBuilder(config) {
   return builder;
 }
 
-function getLoaderByName(name, rules) {
+function getLoaderByName(name, rules, test) {
   const loaderName = `${name}-loader`;
   return rules.find(rule => {
     return rule.use.some(loader => {
-      return loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
+      const hasLoader = loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
+      if(test && rule.test && typeof loader === 'object') {
+        return rule.test.toString().indexOf(test)>-1 && hasLoader;
+      }
+      return hasLoader;
     });
   });
 }
@@ -187,6 +191,72 @@ describe('client.test.js', () => {
       expect(webpackConfig.output.publicPath).to.equal(`http://cdn.com/static/`);
     });
   });
+
+  describe('#webpack hash test', () => {
+    it('should dev hash config test', () => {
+      const builder = createBuilder({ env: 'dev' });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.filename).to.equal('js/[name].js');
+      expect(webpackConfig.output.chunkFilename).to.equal('js/chunk/[name].js');
+    });
+
+    it('should dev image hash config test', () => {
+      const builder = createBuilder({ env: 'dev' });
+      const webpackConfig = builder.create();
+      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'png');
+      expect(imageLoader.use[0].options.name).to.equal('img/[name].[ext]');
+    });
+
+    it('should dev font hash config test', () => {
+      const builder = createBuilder({ env: 'dev' });
+      const webpackConfig = builder.create();
+      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'woff2');
+      expect(imageLoader.use[0].options.name).to.equal('font/[name].[ext]');
+    });
+
+    it('should test hash config test', () => {
+      const builder = createBuilder({ env: 'test' });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.filename).to.equal('js/[name].[chunkhash:8].js');
+      expect(webpackConfig.output.chunkFilename).to.equal('js/chunk/[name].[chunkhash:8].js');
+    });
+
+    it('should test image hash config test', () => {
+      const builder = createBuilder({ env: 'test' });
+      const webpackConfig = builder.create();
+      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'png');
+      expect(imageLoader.use[0].options.name).to.equal('img/[name].[hash:8].[ext]');
+    });
+
+    it('should test font hash config test', () => {
+      const builder = createBuilder({ env: 'test' });
+      const webpackConfig = builder.create();
+      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'woff2');
+      expect(imageLoader.use[0].options.name).to.equal('font/[name].[hash:8].[ext]');
+    });
+
+    it('should prod hash config test', () => {
+      const builder = createBuilder({ env: 'prod' });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.filename).to.equal('js/[name].[chunkhash:8].js');
+      expect(webpackConfig.output.chunkFilename).to.equal('js/chunk/[name].[chunkhash:8].js');
+    });
+
+    it('should prod image hash config test', () => {
+      const builder = createBuilder({ env: 'prod' });
+      const webpackConfig = builder.create();
+      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'png');
+      expect(imageLoader.use[0].options.name).to.equal('img/[name].[hash:8].[ext]');
+    });
+
+    it('should prod font hash config test', () => {
+      const builder = createBuilder({ env: 'prod' });
+      const webpackConfig = builder.create();
+      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'woff2');
+      expect(imageLoader.use[0].options.name).to.equal('font/[name].[hash:8].[ext]');
+    });
+  });
+
 
   describe('#webpack commonsChunk test', () => {
     it('should dev cdn config test', () => {

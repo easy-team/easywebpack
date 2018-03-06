@@ -19,29 +19,23 @@ exports.config = {
 };
 
 exports.devConfig = {
-  hot: true,
   hash: false,
-  miniJs: false,
-  miniCss: false,
-  miniImage: false,
-  cssExtract: false
+  cssExtract: false,
+  plugins:{
+    hot: true,
+  }
 };
 
 exports.testConfig = {
-  hot: false,
   hash: true,
-  miniJs: false,
-  miniCss: false,
-  miniImage: false,
-  cssExtract: true
+  cssExtract: true,
+  plugins:{
+    hot: false,
+  }
 };
 
 exports.prodConfig = {
-  hot: false,
   hash: true,
-  miniJs: true,
-  miniCss: true,
-  miniImage: true,
   cssExtract: true,
   loaders: {
     css: {
@@ -49,11 +43,13 @@ exports.prodConfig = {
         minimize: true
       }
     }
+  },
+  plugins:{
+    hot: false,
   }
 };
 
 exports.dllConfig = {
-  miniImage: false,
   cssExtract: false,
   loaders: {
     eslint: false,
