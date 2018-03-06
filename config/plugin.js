@@ -60,7 +60,8 @@ exports.define = {
 
 exports.commonsChunk = {
   enable() {
-    return !this.config.dll;
+    const config = this.config;
+    return !config.dll && !(config.optimization && config.optimization.splitChunks);
   },
   type: 'client',
   name: webpack.optimize.SplitChunksPlugin,
@@ -72,7 +73,10 @@ exports.commonsChunk = {
     });
     const lib = this.utils.isObject(this.config.lib) ? this.config.lib : {};
     const name = lib.name || 'common';
-    return { name, chunks };
+    return {
+      name,
+      chunks
+    };
   }
 };
 
@@ -83,7 +87,14 @@ exports.runtime = {
   type: 'client',
   name: webpack.optimize.RuntimeChunkPlugin,
   action: 'merge',
-  args: { name: 'runtime'}
+  args() {
+    const config = this.config;
+    const runtimeChunk = config.optimization && config.optimization.runtimeChunk;
+    const name = this.utils.isObject(runtimeChunk) && runtimeChunk.name;
+    return {
+      name: name || 'runtime'
+    };
+  }
 };
 
 exports.uglifyJs = {
@@ -223,7 +234,9 @@ exports.extract = {
     return this.config.cssExtract;
   },
   args() {
-    return { filename: this.webpackInfo.cssName };
+    return {
+      filename: this.webpackInfo.cssName
+    };
   }
 };
 

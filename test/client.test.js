@@ -259,7 +259,7 @@ describe('client.test.js', () => {
 
 
   describe('#webpack commonsChunk test', () => {
-    it('should dev cdn config test', () => {
+    it('should dev SplitChunks config test', () => {
       const builder = createBuilder({ env: 'dev', lib: ['mocha'] });
       const webpackConfig = builder.create();
       const commonsChunks = webpackConfig.plugins.filter(plugin =>{
@@ -267,6 +267,27 @@ describe('client.test.js', () => {
       });
       expect(webpackConfig.entry).to.have.property('common');
       expect(commonsChunks.length).to.equal(2);
+    });
+
+    it('should optimization splitChunks and runtimeChunk config test', () => {
+      const builder = createBuilder({
+        env: 'dev', 
+        optimization: {
+          splitChunks: {
+            name: 'common',
+          },
+          runtimeChunk: {
+            name: 'runtime',
+          },
+        }
+      });
+      const webpackConfig = builder.create();
+      const commonsChunks = webpackConfig.plugins.filter(plugin =>{
+        return plugin.constructor.name === 'SplitChunksPlugin' || plugin.constructor.name === 'RuntimeChunkPlugin';
+      });
+      expect(commonsChunks.length).to.equal(0);
+      expect(webpackConfig.optimization.splitChunks.name).to.equal('common');
+      expect(webpackConfig.optimization.runtimeChunk.name).to.equal('runtime');
     });
   });
 
