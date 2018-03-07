@@ -22,9 +22,9 @@ class Logger {
     }
   }
 
-  cost(){
-    if(this.builder.config.cost){
-      this.info(`------ init cost:  ${this.builder.t2- this.builder.t1}, init create cost: ${this.builder.t3- this.builder.t2}, create cost: ${this.builder.t4 - this.builder.t3} -------,  create total cost: ${this.builder.t4- this.builder.t1} -------\r\n`, 'cost');
+  cost() {
+    if (this.builder.config.cost) {
+      this.info(`------ init cost:  ${this.builder.t2 - this.builder.t1}, init create cost: ${this.builder.t3 - this.builder.t2}, create cost: ${this.builder.t4 - this.builder.t3} -------,  create total cost: ${this.builder.t4 - this.builder.t1} -------\r\n`, 'cost');
     }
   }
 
