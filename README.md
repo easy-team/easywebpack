@@ -30,8 +30,10 @@
 
 ## 版本说明
 
-最新版本基于 Webpack 3 版本， 目前 `easywebpack` 稳定版本：[![NPM version][npm-image]][npm-url]  `easywebpack` 新特性版本: next. 对应的 Vue/React/Weex 解决方案也分别有对应的稳定版和新特性版本， 线上使用时请使用稳定版本。 以 Vue 稳定版和开发版本安装举例：
+- easywebpack 4.x.x > webpack 4.x.x
+- easywebpack 3.x.x > webpack 3.x.x
 
+对应的 Vue/React/Weex/HTML/JS 解决方案也分别有对应的版本。 以 Vue 稳定版和开发版本安装举例：
 
 ```bash
 npm install easywebpack-vue --save-dev
