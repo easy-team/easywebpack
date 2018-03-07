@@ -1,3 +1,26 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/hubcarl/easywebpack/compare/3.7.1...4.0.0) (2018-03-07)
+
+
+### Bug Fixes
+
+* dll resolveLoader.module config for easywebpack in framework ([031672b](https://github.com/hubcarl/easywebpack/commit/031672b))
+* egg buildPath dir must be app/view ([8c7b3ef](https://github.com/hubcarl/easywebpack/commit/8c7b3ef))
+* egg config server path: app/view ([8ba0720](https://github.com/hubcarl/easywebpack/commit/8ba0720))
+* es6 to es5 ([6d8100f](https://github.com/hubcarl/easywebpack/commit/6d8100f))
+* proxy publicPath ([f988c1b](https://github.com/hubcarl/easywebpack/commit/f988c1b))
+
+
+### Features
+
+* [BREAK_CHANGE] webpack 4 support
+* adjust error msg when plugin missing ([927e63a](https://github.com/hubcarl/easywebpack/commit/927e63a))
+* commonsChunk for webpack4 ([21be7f9](https://github.com/hubcarl/easywebpack/commit/21be7f9))
+* disable commonsChunk config and directoryName plugin ([277ebb4](https://github.com/hubcarl/easywebpack/commit/277ebb4))
+* use proxy, not need dev host ([95a348a](https://github.com/hubcarl/easywebpack/commit/95a348a))
+
+
+
 <a name="3.6.6"></a>
 ## [3.6.6](https://github.com/hubcarl/easywebpack/compare/3.6.3...3.6.6) (2018-02-09)
 
