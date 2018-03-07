@@ -39,8 +39,8 @@ describe('plugin.test.js', () => {
       const builder1 = createBuilder();
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
-      expect(!!getPluginByLabel('module', plugins)).to.be.false;
-      expect(!!getPluginByLabel('error', plugins)).to.be.true;
+      // expect(!!getPluginByLabel('module', plugins)).to.be.false;
+      // expect(!!getPluginByLabel('error', plugins)).to.be.true;
       expect(!!getPluginByLabel('provide', plugins)).to.be.true;
       expect(!!getPluginByLabel('define', plugins)).to.be.true;
       expect(!!getPluginByLabel('progress', plugins)).to.be.true;
@@ -153,14 +153,6 @@ describe('plugin.test.js', () => {
     it('should merge plugin test', () => {
       const builder = createBuilder({
         plugins: {
-          uglifyJs: {
-            enable: true,
-            merge: false,
-            name: webpack.optimize.UglifyJsPlugin,
-            args: {
-              compress: false
-            }
-          },
           dll: {
             enable: true,
             name: webpack.DllPlugin,
@@ -174,9 +166,7 @@ describe('plugin.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const uglifyJs = getPluginByLabel('UglifyJsPlugin', plugins);
       const dll = getPluginByLabel('DllPlugin', plugins);
-      expect(uglifyJs.options.compress).to.be.false;
       expect(!!dll).to.be.true;
     });
 

@@ -4,10 +4,10 @@ const baseDir = process.cwd();
 
 exports.config = {
   baseDir,
+  port:9000,
   buildPath: 'public',
   publicPath: '/public/',
   hashLength: 8,
-  prefix: '',
   alias: {},
   packs: {},
   cdn: {},
@@ -15,35 +15,27 @@ exports.config = {
     check: false
   },
   loaders: {},
-  plugins: {
-    manifest: {}
-  }
+  plugins: {}
 };
 
 exports.devConfig = {
-  hot: true,
   hash: false,
-  miniJs: false,
-  miniCss: false,
-  miniImage: false,
-  cssExtract: false
+  cssExtract: false,
+  plugins:{
+    hot: true,
+  }
 };
 
 exports.testConfig = {
-  hot: false,
   hash: true,
-  miniJs: false,
-  miniCss: false,
-  miniImage: false,
-  cssExtract: true
+  cssExtract: true,
+  plugins:{
+    hot: false,
+  }
 };
 
 exports.prodConfig = {
-  hot: false,
   hash: true,
-  miniJs: true,
-  miniCss: true,
-  miniImage: true,
   cssExtract: true,
   loaders: {
     css: {
@@ -51,11 +43,13 @@ exports.prodConfig = {
         minimize: true
       }
     }
+  },
+  plugins:{
+    hot: false,
   }
 };
 
 exports.dllConfig = {
-  miniImage: false,
   cssExtract: false,
   loaders: {
     eslint: false,
@@ -69,7 +63,6 @@ exports.dllConfig = {
     runtime: false,
     commonsChunk: false,
     imagemini: false,
-    buildfile: false,
     manifest: false,
     manifestDll: true
   }

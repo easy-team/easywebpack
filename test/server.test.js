@@ -10,7 +10,6 @@ const path = require('path').posix;
 function createBuilder(config) {
   const builder = new WebpackServerBuilder(merge({
     cost: true,
-    buildPath: 'dist/client',
     publicPath: '/public',
     entry: {
       include: path.join(__dirname)
@@ -82,7 +81,7 @@ describe('server.test.js', () => {
     });
 
     it('should egg test', () => {
-      const builder = createBuilder({ egg: true, baseDir: path.join(__dirname, '..') });
+      const builder = createBuilder({ egg: true, buildPath: 'dist', baseDir: path.join(__dirname, '..') });
       const webpackConfig = builder.create();
       expect(webpackConfig.output.path).to.equal(path.join(__dirname, '../app/view'));
     });

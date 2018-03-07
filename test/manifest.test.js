@@ -13,8 +13,7 @@ class ClientBuilder extends WebpackClientBuilder {
     super(config);
     this.mergeConfig({
       plugins: {
-        manifest: false,
-        manifestDeps: false
+        manifest: false
       }
     });
   }
@@ -51,7 +50,6 @@ describe('manifest.test.js', () => {
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
       expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
-      expect(!!getPluginByLabel('buildfile', plugins)).to.be.true;
       expect(!!getPluginByLabel('commonsChunk', plugins)).to.be.true;
       expect(!!getPluginByLabel('runtime', plugins)).to.be.true;
     });
@@ -72,12 +70,11 @@ describe('manifest.test.js', () => {
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
       expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
-      expect(!!getPluginByLabel('buildfile', plugins)).to.be.true;
     });
   });
 
   describe('#webpack manifest test', () => {
-    it('should use manifestDeps config test', () => {
+    it('should use manifest config test', () => {
       const builder = new ClientBuilder({
         baseDir,
         entry: {
@@ -85,32 +82,25 @@ describe('manifest.test.js', () => {
           template: 'test/layout.html'
         },
         plugins: {
-          manifest: false,
-          manifestDeps: true
+          manifest: true,
         }
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
       expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
-      expect(!!getPluginByLabel('buildfile', plugins)).to.be.false;
     });
   });
   describe('#webpack server manifest test', () => {
-    it('should use manifestDeps config test', () => {
+    it('should use manifest config test', () => {
       const builder = new WebpackServerBuilder({
         baseDir,
         entry: {
           include: __dirname
-        },
-        plugins: {
-          manifest: false,
-          manifestDeps: true
         }
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
       expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
-      expect(!!getPluginByLabel('buildfile', plugins)).to.be.false;
     });
   });
 });

@@ -8,6 +8,14 @@ const chalk = require('chalk');
 const utils = require('../utils/utils');
 const WORKERS = os.cpus().length - 1;
 const UGLIFYJS_WORKERS = WORKERS > 8 ? 8 : WORKERS;
+
+exports.hot = {
+  enable: true,
+  type: 'client',
+  env: ['dev'],
+  name: webpack.HotModuleReplacementPlugin
+};
+
 exports.npm = {
   enable: false,
   name: 'npm-install-webpack-plugin',
@@ -16,28 +24,9 @@ exports.npm = {
   }
 };
 
-exports.module = {
-  enable: true,
-  env: ['test', 'prod'],
-  name: webpack.optimize.ModuleConcatenationPlugin
-};
-
-exports.error = {
-  enable: true,
-  name: webpack.NoEmitOnErrorsPlugin
-};
-
 exports.provide = {
   enable: true,
   name: webpack.ProvidePlugin,
-  args: {}
-};
-
-exports.nameModule = {
-  enable: true,
-  env: ['dev'],
-  type: 'client',
-  name: webpack.NamedModulesPlugin,
   args: {}
 };
 
@@ -70,9 +59,12 @@ exports.define = {
 };
 
 exports.commonsChunk = {
-  enable: true,
+  enable() {
+    const config = this.config;
+    return !config.dll && !(config.optimization && config.optimization.splitChunks);
+  },
   type: 'client',
-  name: webpack.optimize.CommonsChunkPlugin,
+  name: webpack.optimize.SplitChunksPlugin,
   action: 'merge',
   args() {
     const packKeys = Object.keys(this.packs || {});
@@ -80,21 +72,28 @@ exports.commonsChunk = {
       return !packKeys.includes(entry);
     });
     const lib = this.utils.isObject(this.config.lib) ? this.config.lib : {};
-    const names = lib.name || 'common';
-    return { names, chunks };
+    const name = lib.name || 'common';
+    return {
+      name,
+      chunks
+    };
   }
 };
 
 exports.runtime = {
   enable() {
-    return !this.config.dll && this.isUse('commonsChunk');
+    return this.isUse('commonsChunk');
   },
   type: 'client',
-  name: webpack.optimize.CommonsChunkPlugin,
+  name: webpack.optimize.RuntimeChunkPlugin,
   action: 'merge',
   args() {
-    const chunks = this.getCommonsChunk(false);
-    return { name: 'runtime', chunks };
+    const config = this.config;
+    const runtimeChunk = config.optimization && config.optimization.runtimeChunk;
+    const name = this.utils.isObject(runtimeChunk) && runtimeChunk.name;
+    return {
+      name: name || 'runtime'
+    };
   }
 };
 
@@ -118,22 +117,42 @@ exports.uglifyJs = {
   }
 };
 
-exports.hot = {
-  enable: true,
-  type: 'client',
-  env: ['dev'],
-  name: webpack.HotModuleReplacementPlugin
-};
-
 exports.manifest = {
   enable: true,
   type: 'client',
-  name: 'webpack-manifest-plugin',
+  name: 'webpack-manifest-resource-plugin',
   args() {
-    const filename = this.config.plugins && this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
-    const absFilename = this.utils.normalizePath(filename, this.baseDir);
-    const relativeFileName = path.relative(this.config.buildPath, absFilename);
-    return { fileName: relativeFileName };
+    const args = {
+      baseDir: this.baseDir,
+      host: this.host,
+      proxy: this.proxy,
+      buildPath: this.buildPath,
+      publicPath: this.publicPath,
+      localPublicPath: this.config.publicPath,
+      assets: false,
+      writeToFileEmit: true
+    };
+    const plugins = this.config.plugins || {};
+    const manifestConfig = plugins.manifest || {};
+    const filepath = path.join(this.baseDir, manifestConfig.fileName || 'config/manifest.json');
+    // 兼容旧 manifest 配置
+    const fileName = path.relative(this.config.buildPath, filepath);
+    const dllConfig = utils.getDllConfig(this.config.dll);
+    // 如果开启了dll 功能, 则读取 dll manifest 配置, 然后与项目 manifest 合并
+    if (dllConfig) {
+      return this.merge(args, {
+        filepath,
+        fileName,
+        commonsChunk: this.getCommonsChunk(),
+        dllConfig,
+        dllDir: utils.getCompileTempDir(this.env)
+      });
+    }
+    return this.merge(args, {
+      filepath,
+      fileName,
+      commonsChunk: this.getCommonsChunk()
+    });
   }
 };
 
@@ -146,7 +165,7 @@ exports.manifestDll = {
     const filepath = utils.getCompileTempDir(`${this.env}/config/manifest-${dllConfig.name}.json`);
     return {
       baseDir: this.baseDir,
-      proxy: this.config.proxy,
+      proxy: this.proxy,
       host: this.host,
       buildPath: this.buildPath,
       publicPath: this.publicPath,
@@ -156,23 +175,6 @@ exports.manifestDll = {
       writeToFileEmit: true,
       dllConfig,
       filepath
-    };
-  }
-};
-
-exports.buildfile = {
-  enable: true,
-  type: 'client',
-  name: require('./plugin/build-config-webpack-plugin'),
-  args() {
-    return {
-      baseDir: this.baseDir,
-      host: this.host,
-      proxy: this.config.proxy,
-      buildPath: this.buildPath,
-      publicPath: this.publicPath,
-      localPublicPath: this.config.publicPath,
-      commonsChunk: this.getCommonsChunk(),
     };
   }
 };
@@ -221,7 +223,7 @@ exports.stats = {
 };
 
 exports.directoryname = {
-  enable: true,
+  enable: false,
   name: 'directory-named-webpack-plugin'
 };
 
@@ -232,7 +234,9 @@ exports.extract = {
     return this.config.cssExtract;
   },
   args() {
-    return { filename: this.config.cssName };
+    return {
+      filename: this.webpackInfo.cssName
+    };
   }
 };
 

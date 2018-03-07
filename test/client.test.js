@@ -22,11 +22,15 @@ function createBuilder(config) {
   return builder;
 }
 
-function getLoaderByName(name, rules) {
+function getLoaderByName(name, rules, test) {
   const loaderName = `${name}-loader`;
   return rules.find(rule => {
     return rule.use.some(loader => {
-      return loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
+      const hasLoader = loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
+      if(test && rule.test && typeof loader === 'object') {
+        return rule.test.toString().indexOf(test)>-1 && hasLoader;
+      }
+      return hasLoader;
     });
   });
 }
@@ -81,10 +85,10 @@ describe('client.test.js', () => {
       expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
     });
 
-    it('should egg test', () => {
-      const builder = createBuilder({ egg: true });
-      expect(builder.config.proxy).to.true;
-    });
+    // it('should egg test', () => {
+    //   const builder = createBuilder({ egg: true });
+    //   expect(builder.config.proxy).to.true;
+    // });
   });
 
   describe('#webpack hook test', () => {
@@ -135,11 +139,6 @@ describe('client.test.js', () => {
       const webpackConfig = builder.create();
       expect(webpackConfig.output.publicPath).to.equal(cdnUrl + '/cdn/public/');
     });
-    it('should dev cdn config test', () => {
-      const builder = createBuilder({ debug: true, env: 'dev', cdn: { url: cdnUrl} });
-      const webpackConfig = builder.create();
-      expect(webpackConfig.output.publicPath).to.equal(cdnUrl + '/');
-    });
 
     it('should dev publicPath abspath config test', () => {
       const builder = createBuilder({ debug: true, env: 'dev', publicPath: cdnUrl });
@@ -150,13 +149,13 @@ describe('client.test.js', () => {
     it('should dev publicPath config test', () => {
       const builder = createBuilder({ debug: true, env: 'dev', publicPath: '/static' });
       const webpackConfig = builder.create();
-      expect(webpackConfig.output.publicPath).to.equal(builder.host + '/static/');
+      expect(webpackConfig.output.publicPath).to.equal('/static/');
     });
 
-    it('should dev publicPath useHost false config test', () => {
-      const builder = createBuilder({ debug: true, env: 'dev', publicPath: '/static', useHost: false });
+    it('should dev publicPath config proxy false test', () => {
+      const builder = createBuilder({ debug: true, proxy: false, env: 'dev', publicPath: '/static' });
       const webpackConfig = builder.create();
-      expect(webpackConfig.output.publicPath).to.equal('/static/');
+      expect(webpackConfig.output.publicPath).to.equal(builder.host + '/static/');
     });
 
     it('should dev publicPath default env prod config test', () => {
@@ -193,14 +192,127 @@ describe('client.test.js', () => {
     });
   });
 
+  describe('#webpack hash test', () => {
+    it('should dev hash config test', () => {
+      const builder = createBuilder({ env: 'dev' });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.filename).to.equal('js/[name].js');
+      expect(webpackConfig.output.chunkFilename).to.equal('js/chunk/[name].js');
+    });
+
+    it('should dev image hash config test', () => {
+      const builder = createBuilder({ env: 'dev' });
+      const webpackConfig = builder.create();
+      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'png');
+      expect(imageLoader.use[0].options.name).to.equal('img/[name].[ext]');
+    });
+
+    it('should dev font hash config test', () => {
+      const builder = createBuilder({ env: 'dev' });
+      const webpackConfig = builder.create();
+      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'woff2');
+      expect(imageLoader.use[0].options.name).to.equal('font/[name].[ext]');
+    });
+
+    it('should test hash config test', () => {
+      const builder = createBuilder({ env: 'test' });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.filename).to.equal('js/[name].[chunkhash:8].js');
+      expect(webpackConfig.output.chunkFilename).to.equal('js/chunk/[name].[chunkhash:8].js');
+    });
+
+    it('should test image hash config test', () => {
+      const builder = createBuilder({ env: 'test' });
+      const webpackConfig = builder.create();
+      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'png');
+      expect(imageLoader.use[0].options.name).to.equal('img/[name].[hash:8].[ext]');
+    });
+
+    it('should test font hash config test', () => {
+      const builder = createBuilder({ env: 'test' });
+      const webpackConfig = builder.create();
+      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'woff2');
+      expect(imageLoader.use[0].options.name).to.equal('font/[name].[hash:8].[ext]');
+    });
+
+    it('should prod hash config test', () => {
+      const builder = createBuilder({ env: 'prod' });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.filename).to.equal('js/[name].[chunkhash:8].js');
+      expect(webpackConfig.output.chunkFilename).to.equal('js/chunk/[name].[chunkhash:8].js');
+    });
+
+    it('should prod image hash config test', () => {
+      const builder = createBuilder({ env: 'prod' });
+      const webpackConfig = builder.create();
+      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'png');
+      expect(imageLoader.use[0].options.name).to.equal('img/[name].[hash:8].[ext]');
+    });
+
+    it('should prod font hash config test', () => {
+      const builder = createBuilder({ env: 'prod' });
+      const webpackConfig = builder.create();
+      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'woff2');
+      expect(imageLoader.use[0].options.name).to.equal('font/[name].[hash:8].[ext]');
+    });
+  });
+
+
   describe('#webpack commonsChunk test', () => {
-    it('should dev cdn config test', () => {
+    it('should dev SplitChunks config test', () => {
       const builder = createBuilder({ env: 'dev', lib: ['mocha'] });
+      const webpackConfig = builder.create();
+      const commonsChunks = webpackConfig.plugins.filter(plugin =>{
+        return plugin.constructor.name === 'SplitChunksPlugin' || plugin.constructor.name === 'RuntimeChunkPlugin';
+      });
+      expect(webpackConfig.entry).to.have.property('common');
+      expect(commonsChunks.length).to.equal(2);
+    });
+
+    it('should optimization splitChunks and runtimeChunk config test', () => {
+      const builder = createBuilder({
+        env: 'dev', 
+        optimization: {
+          splitChunks: {
+            name: 'common',
+          },
+          runtimeChunk: {
+            name: 'runtime',
+          },
+        }
+      });
+      const webpackConfig = builder.create();
+      const commonsChunks = webpackConfig.plugins.filter(plugin =>{
+        return plugin.constructor.name === 'SplitChunksPlugin' || plugin.constructor.name === 'RuntimeChunkPlugin';
+      });
+      expect(commonsChunks.length).to.equal(0);
+      expect(webpackConfig.optimization.splitChunks.name).to.equal('common');
+      expect(webpackConfig.optimization.runtimeChunk.name).to.equal('runtime');
+    });
+  });
+
+  describe('#webpack dll commonsChunk default false test', () => {
+    it('should dev cdn config test', () => {
+      const builder = createBuilder({ env: 'dev', dll: ['mocha'] });
       const webpackConfig = builder.create();
       const commonsChunks = webpackConfig.plugins.filter(plugin =>{
         return plugin.constructor.name === 'CommonsChunkPlugin';
       });
-      expect(webpackConfig.entry).to.have.property('common');
+      expect(webpackConfig.entry).to.have.not.property('common');
+      expect(commonsChunks.length).to.equal(0);
+    });
+  });
+
+  describe('#webpack commonsChunk dll exist test', () => {
+    it('should dev cdn config test', () => {
+      const builder = createBuilder({ env: 'dev', dll: ['mocha'], plugins:{
+        commonsChunk: true
+      }});
+      const webpackConfig = builder.create();
+      const commonsChunks = webpackConfig.plugins.filter(plugin =>{
+        return plugin.constructor.name === 'SplitChunksPlugin' || plugin.constructor.name === 'RuntimeChunkPlugin';
+      });
+      expect(webpackConfig.entry).to.have.not.property('common');
       expect(commonsChunks.length).to.equal(2);
     });
   });
