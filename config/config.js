@@ -15,7 +15,10 @@ exports.config = {
     check: false
   },
   loaders: {},
-  plugins: {}
+  plugins: {},
+  optimization: {
+    minimize: false
+  }
 };
 
 exports.devConfig = {

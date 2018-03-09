@@ -98,10 +98,14 @@ exports.runtime = {
 };
 
 exports.uglifyJs = {
-  enable: true,
+  enable() {
+    const config = this.config;
+    return !(config.optimization && config.optimization.minimize);
+  },
   env: ['prod'],
   name: 'uglifyjs-webpack-plugin',
   args: {
+    cache: true,
     parallel: UGLIFYJS_WORKERS,
     uglifyOptions: {
       warnings: false,
