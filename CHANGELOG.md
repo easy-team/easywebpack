@@ -1,3 +1,14 @@
+<a name="4.0.1"></a>
+## [4.0.1](https://github.com/hubcarl/easywebpack/compare/4.0.0...4.0.1) (2018-03-09)
+
+
+### Bug Fixes
+
+* less loader not add preloaders ([6d373bc](https://github.com/hubcarl/easywebpack/commit/6d373bc))
+* uglifyjs-webpack-plugin repeat and open cache ([256f679](https://github.com/hubcarl/easywebpack/commit/256f679))
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/hubcarl/easywebpack/compare/3.7.1...4.0.0) (2018-03-07)
 
