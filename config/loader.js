@@ -68,7 +68,7 @@ exports.less = {
   test: /\.less/,
   use: ['css-loader', 'less-loader'],
   postcss: true,
-  framework: true
+  framework: false
 };
 
 exports.stylus = {
