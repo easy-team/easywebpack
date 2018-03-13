@@ -96,4 +96,15 @@ describe('base.test.js', () => {
       expect(webpackConfig.resolve.extensions).to.be.an('array').that.includes('.js');
     });
   });
+
+  describe('#webpack create test', () => {
+    it('should create webpack config', () => {
+      const builder = createBuilder({
+        prefix: 'static'
+      });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.output.filename).to.equal('static/js/[name].js');
+      expect(webpackConfig.output.chunkFilename).to.equal('static/js/chunk/[name].js');
+  });
+});
 });
