@@ -1,3 +1,13 @@
+<a name="3.7.2"></a>
+## [3.7.2](https://github.com/hubcarl/easywebpack/compare/3.7.1...3.7.2) (2018-03-13)
+
+
+### Bug Fixes
+
+* dynamic load componet extract css not require, extract must use allChunks: true ([f3b34ef](https://github.com/hubcarl/easywebpack/commit/f3b34ef))
+
+
+
 <a name="3.6.6"></a>
 ## [3.6.6](https://github.com/hubcarl/easywebpack/compare/3.6.3...3.6.6) (2018-02-09)
 
