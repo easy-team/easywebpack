@@ -1,3 +1,14 @@
+<a name="4.0.3"></a>
+## [4.0.3](https://github.com/hubcarl/easywebpack/compare/4.0.2...4.0.3) (2018-03-13)
+
+
+### Bug Fixes
+
+* dynamic load componet extract css not require, must use allChunk ([6255a79](https://github.com/hubcarl/easywebpack/commit/6255a79))
+* npm cnpm warn ([c6f038b](https://github.com/hubcarl/easywebpack/commit/c6f038b))
+
+
+
 <a name="4.0.1"></a>
 ## [4.0.1](https://github.com/hubcarl/easywebpack/compare/4.0.0...4.0.1) (2018-03-09)
 
