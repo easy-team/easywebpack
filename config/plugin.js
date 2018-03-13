@@ -239,7 +239,8 @@ exports.extract = {
   },
   args() {
     return {
-      filename: this.webpackInfo.cssName
+      filename: this.webpackInfo.cssName,
+      allChunks: true
     };
   }
 };
