@@ -232,7 +232,7 @@ exports.extract = {
     return this.config.cssExtract;
   },
   args() {
-    return { filename: this.config.cssName };
+    return { filename: this.config.cssName, allChunks: true };
   }
 };
 
