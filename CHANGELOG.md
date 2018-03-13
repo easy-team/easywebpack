@@ -1,3 +1,13 @@
+<a name="3.7.3"></a>
+## [3.7.3](https://github.com/hubcarl/easywebpack/compare/3.7.2...3.7.3) (2018-03-13)
+
+
+### Features
+
+* https://github.com/hubcarl/easywebpack/issues/15 ([2fed25b](https://github.com/hubcarl/easywebpack/commit/2fed25b))
+
+
+
 <a name="3.7.2"></a>
 ## [3.7.2](https://github.com/hubcarl/easywebpack/compare/3.7.1...3.7.2) (2018-03-13)
 
