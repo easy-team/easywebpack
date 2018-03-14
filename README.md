@@ -70,7 +70,7 @@ npm install easywebpack-vue --save-dev
 ### 解决方案
 
 基于 `easywebpack` 基础骨架，目前已扩展 `Vue` `React` `Weex`, `HTML`, `Javascript` 五种解决方案：
-- [easywebpack-js](https://github.com/hubcarl/easywebpack-vue.git)  支持纯 javascript 文件构建模式
+- [easywebpack-js](https://github.com/hubcarl/easywebpack-js.git)  支持纯 javascript 文件构建模式
 - [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git)  支持 Vue 纯前端构建和Node端构建模式
 - [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git) 支持 React 纯前端构建和Node端构建模式
 - [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git) 支持 Native 和 Web 构建模式

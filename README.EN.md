@@ -57,6 +57,7 @@ $ npm i easywebpack --save-dev
 
 ## Webpack Build Solution
 
+- [easywebpack-js](https://github.com/hubcarl/easywebpack-js.git) 
 - [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git) 
 - [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git)
 - [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git)
