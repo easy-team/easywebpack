@@ -1,3 +1,14 @@
+<a name="4.0.5"></a>
+## [4.0.5](https://github.com/hubcarl/easywebpack/compare/4.0.3...4.0.5) (2018-03-15)
+
+
+### Bug Fixes
+
+* less loader not include ([9d42768](https://github.com/hubcarl/easywebpack/commit/9d42768))
+* set prefix support with easywebpack 3 ([ffb14a6](https://github.com/hubcarl/easywebpack/commit/ffb14a6))
+
+
+
 <a name="4.0.3"></a>
 ## [4.0.3](https://github.com/hubcarl/easywebpack/compare/4.0.2...4.0.3) (2018-03-13)
 
