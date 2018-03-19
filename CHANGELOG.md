@@ -1,3 +1,13 @@
+<a name="3.8.0"></a>
+# [3.8.0](https://github.com/hubcarl/easywebpack/compare/3.7.5...3.8.0) (2018-03-19)
+
+
+### Features
+
+* support config.cache config, build speed ([1539529](https://github.com/hubcarl/easywebpack/commit/1539529))
+
+
+
 <a name="3.7.5"></a>
 ## [3.7.5](https://github.com/hubcarl/easywebpack/compare/3.7.4...3.7.5) (2018-03-19)
 
