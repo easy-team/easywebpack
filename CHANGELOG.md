@@ -1,3 +1,13 @@
+<a name="3.8.1"></a>
+## [3.8.1](https://github.com/hubcarl/easywebpack/compare/3.8.0...3.8.1) (2018-03-19)
+
+
+### Bug Fixes
+
+* typescirpt default merge use mergeConfig ([990491e](https://github.com/hubcarl/easywebpack/commit/990491e))
+
+
+
 <a name="3.8.0"></a>
 # [3.8.0](https://github.com/hubcarl/easywebpack/compare/3.7.5...3.8.0) (2018-03-19)
 
