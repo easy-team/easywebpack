@@ -1,3 +1,13 @@
+<a name="4.0.7"></a>
+## [4.0.7](https://github.com/hubcarl/easywebpack/compare/4.0.6...4.0.7) (2018-03-19)
+
+
+### Bug Fixes
+
+* loader options extend config ([a6df7b0](https://github.com/hubcarl/easywebpack/commit/a6df7b0))
+
+
+
 <a name="4.0.6"></a>
 ## [4.0.6](https://github.com/hubcarl/easywebpack/compare/4.0.5...4.0.6) (2018-03-19)
 
