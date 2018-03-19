@@ -89,10 +89,12 @@ module.exports = class WebpackAdapter {
         if (outerConfig.egg && !tsConfigFile) {
           const configFile = path.join(this.baseDir, './app/web/tsconfig.json');
           if (fs.existsSync(configFile)) {
-            this.builder.mergeLoader({
-              typescript: {
-                options: {
-                  configFile
+            this.builder.mergeConfig({
+              loaderOptions: {
+                ts: {
+                  options: {
+                    configFile
+                  }
                 }
               }
             });
