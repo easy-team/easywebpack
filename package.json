@@ -134,8 +134,7 @@
     "url": "git+https://github.com/hubcarl/easywebpack.git"
   },
   "publishConfig":{
-    "tag": "3.x",
-    "registry": "git+https://github.com/hubcarl/easywebpack.git"
+    "tag": "3.x"
   },
   "bugs": {
     "url": "https://github.com/hubcarl/easywebpack/issues"
