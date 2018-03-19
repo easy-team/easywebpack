@@ -1,3 +1,13 @@
+<a name="4.0.6"></a>
+## [4.0.6](https://github.com/hubcarl/easywebpack/compare/4.0.5...4.0.6) (2018-03-19)
+
+
+### Bug Fixes
+
+* dll not support typescript and postcss-loader not invalid options config ([a2ba0ee](https://github.com/hubcarl/easywebpack/commit/a2ba0ee))
+
+
+
 <a name="4.0.5"></a>
 ## [4.0.5](https://github.com/hubcarl/easywebpack/compare/4.0.3...4.0.5) (2018-03-15)
 
