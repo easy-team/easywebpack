@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "3.7.4",
+  "version": "3.7.5",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
@@ -132,6 +132,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hubcarl/easywebpack.git"
+  },
+  "publishConfig":{
+    "tag": "3.x",
+    "registry": "git+https://github.com/hubcarl/easywebpack.git"
   },
   "bugs": {
     "url": "https://github.com/hubcarl/easywebpack/issues"
