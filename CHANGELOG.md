@@ -1,3 +1,13 @@
+<a name="3.7.4"></a>
+## [3.7.4](https://github.com/hubcarl/easywebpack/compare/3.7.3...3.7.4) (2018-03-19)
+
+
+### Bug Fixes
+
+* postcss-loader options merge invalid property ([3c32c77](https://github.com/hubcarl/easywebpack/commit/3c32c77))
+
+
+
 <a name="3.7.3"></a>
 ## [3.7.3](https://github.com/hubcarl/easywebpack/compare/3.7.2...3.7.3) (2018-03-13)
 
