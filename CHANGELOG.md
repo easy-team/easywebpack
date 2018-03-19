@@ -1,3 +1,13 @@
+<a name="3.7.5"></a>
+## [3.7.5](https://github.com/hubcarl/easywebpack/compare/3.7.4...3.7.5) (2018-03-19)
+
+
+### Bug Fixes
+
+* dll not support typescript ([88bdb7f](https://github.com/hubcarl/easywebpack/commit/88bdb7f))
+
+
+
 <a name="3.7.4"></a>
 ## [3.7.4](https://github.com/hubcarl/easywebpack/compare/3.7.3...3.7.4) (2018-03-19)
 
