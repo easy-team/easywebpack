@@ -16,7 +16,14 @@ function createBuilder(config) {
   });
   return builder;
 }
-
+function getLoaderByName(name, rules) {
+  const loaderName = `${name}-loader`;
+  return rules.filter(rule => {
+    return rule.use.some(loader => {
+      return loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
+    });
+  });
+}
 describe('base.test.js', () => {
   before(() => {
   });
@@ -94,6 +101,33 @@ describe('base.test.js', () => {
       expect(webpackConfig).to.include.all.keys('module', 'output', 'resolve', 'plugins');
       expect(webpackConfig.module.rules).to.be.an('array');
       expect(webpackConfig.resolve.extensions).to.be.an('array').that.includes('.js');
+    });
+  });
+  describe('#webpack cache loader test', () => {
+    it('should create babel cache loader test', () => {
+      const builder = createBuilder();
+      const webpackConfig = builder.create();
+      const cacheLoader = getLoaderByName('cache', webpackConfig.module.rules);
+      expect(cacheLoader.length).to.equal(0);
+    });
+    it('should create babel cache loader test', () => {
+      const builder = createBuilder({
+        cache: true,
+      });
+      const webpackConfig = builder.create();
+      const cacheLoader = getLoaderByName('cache', webpackConfig.module.rules);
+      expect(cacheLoader.length).to.equal(1);
+    });
+    it('should create babel cache loader test', () => {
+      const builder = createBuilder({
+        cache: true,
+        loaders:{
+          typescript: true
+        }
+      });
+      const webpackConfig = builder.create();
+      const cacheLoader = getLoaderByName('cache', webpackConfig.module.rules);
+      expect(cacheLoader.length).to.equal(2);
     });
   });
 });
