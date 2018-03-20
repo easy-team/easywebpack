@@ -1,3 +1,13 @@
+<a name="4.1.1"></a>
+## [4.1.1](https://github.com/hubcarl/easywebpack/compare/4.1.0...4.1.1) (2018-03-20)
+
+
+### Bug Fixes
+
+* client and server cache dir separation ([856f7e0](https://github.com/hubcarl/easywebpack/commit/856f7e0))
+
+
+
 <a name="4.1.0"></a>
 # [4.1.0](https://github.com/hubcarl/easywebpack/compare/4.0.7...4.1.0) (2018-03-20)
 
