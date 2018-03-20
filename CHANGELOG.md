@@ -1,3 +1,14 @@
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/hubcarl/easywebpack/compare/4.0.7...4.1.0) (2018-03-20)
+
+
+### Features
+
+* mp4|webm|ogg|mp3|wav|flac|aac for url-loader ([76a597a](https://github.com/hubcarl/easywebpack/commit/76a597a))
+* support babel cache and typescript cache, default true ([f3db2cc](https://github.com/hubcarl/easywebpack/commit/f3db2cc))
+
+
+
 <a name="4.0.7"></a>
 ## [4.0.7](https://github.com/hubcarl/easywebpack/compare/4.0.6...4.0.7) (2018-03-19)
 
