@@ -8,6 +8,7 @@ exports.config = {
   buildPath: 'public',
   publicPath: '/public/',
   hashLength: 8,
+  cache: true,
   alias: {},
   packs: {},
   cdn: {},

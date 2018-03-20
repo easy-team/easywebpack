@@ -125,6 +125,7 @@ describe('server.test.js', () => {
   it('should typescript config test', () => {
     const configFile = path.resolve(__dirname, './app/web/tsconfig.json');
     const builder = createBuilder({
+      cache: false,
       loaders:{
         typescript: {
           options:{

@@ -341,7 +341,8 @@ describe('client.test.js', () => {
       const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
       const eslint = getLoaderByName('eslint', webpackConfig.module.rules);
       const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
-      expect(tsLoader.use[0].loader).to.equal('ts-loader');
+      expect(tsLoader.use[0].loader).to.equal('cache-loader');
+      expect(tsLoader.use[1].loader).to.equal('ts-loader');
       expect(eslint.use[0].loader).to.equal('eslint-loader');
       expect(tslint.use[0].loader).to.equal('tslint-loader');
       expect(webpackConfig.resolve.extensions).to.include.members(['.ts', '.js']);
@@ -364,8 +365,9 @@ describe('client.test.js', () => {
       const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
       expect(eslint).to.be.undefined;
       expect(tslint.use[0].loader).to.equal('tslint-loader');
-      expect(tsLoader.use[0].loader).to.equal('ts-loader');
-      expect(tsLoader.use[0].options.configFile).to.equal(configFile);
+      expect(tsLoader.use[0].loader).to.equal('cache-loader');
+      expect(tsLoader.use[1].loader).to.equal('ts-loader');
+      expect(tsLoader.use[1].options.configFile).to.equal(configFile);
     });
 
     it('should tslint enable test', () => {
@@ -383,6 +385,7 @@ describe('client.test.js', () => {
       const configFile = path.resolve(process.cwd(), './app/web/tsconfig.json');
       const builder = createBuilder({
         egg: true,
+        cache: false,
         loaders:{
           typescript: true
         }

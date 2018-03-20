@@ -3,6 +3,7 @@ const expect = require('chai').expect;
 const WebpackTool = require('webpack-tool');
 const webpack = WebpackTool.webpack;
 const merge = WebpackTool.merge;
+const utils = require('../utils/utils');
 const WebpackBaseBuilder = require('../lib/base');
 const WebpackClientBuilder = require('../lib/client');
 const path = require('path').posix;
@@ -35,7 +36,14 @@ function getLoaderByName(name, rules) {
     });
   });
 }
-
+function getLoadersByName(name, rules) {
+  const loaderName = `${name}-loader`;
+  return rules.filter(rule => {
+    return rule.use.some(loader => {
+      return loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
+    });
+  });
+}
 function getLoaderByTest(test, rules) {
   return rules.find(rule => {
     return rule.test.toString() === test.toString();
@@ -81,6 +89,7 @@ describe('loader.test.js', () => {
 
     it('should loader merge options test', () => {
       const config = {
+        cache: false,
         loaders: {
           eslint: {
             options: {
@@ -262,6 +271,7 @@ describe('loader.test.js', () => {
     expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
     expect(vuehtml.use[0].options.test).to.true;
   });
+  
 
   describe('#webpack feature loader test', () => {
     it('should postcss-loader default config', () => {
@@ -303,6 +313,63 @@ describe('loader.test.js', () => {
         return loader.loader === 'postcss-loader';
       });
       expect(postcssLoader.options.sourceMap).to.be.false;
+    });
+  });
+
+  describe('#webpack feature url loader test', () => {
+    it('should url-loader default config', () => {
+      const builder = createBuilder();
+      const webpackConfig = builder.create();
+      const urlLoaders = getLoadersByName('url', webpackConfig.module.rules);
+      expect(urlLoaders.length).to.equal(3);
+    });
+    it('should url-loader default config', () => {
+      const builder = createBuilder({
+        loaders:{
+          urlmedia:false,
+          urlfont: false,
+          urlimage: {
+            options:{
+              limit: 10000
+            }
+          }
+        }
+      });
+      const webpackConfig = builder.create();
+      const urlLoader = getLoaderByName('url', webpackConfig.module.rules);
+      expect(urlLoader.use[0].options.limit).to.equal(10000);
+    });
+  });
+  describe('#webpack babel loader test', () => {
+    it('should babel-loader default config', () => {
+      const cacheDirectory = utils.getCacheLoaderInfoPath('babel-loader', 'dev');
+      const builder = createBuilder();
+      const webpackConfig = builder.create();
+      const babelLoader = getLoaderByName('babel', webpackConfig.module.rules);
+      expect(babelLoader.use.length).to.equal(1);
+      expect(babelLoader.use[0].options.cacheDirectory).to.equal(cacheDirectory);
+    });
+  });
+  describe('#webpack config cache test', () => {
+    it('should config cache false config', () => {
+      const cacheDirectory = utils.getCacheLoaderInfoPath('babel-loader', 'dev');
+      const builder = createBuilder({
+        cache: false
+      });
+      const webpackConfig = builder.create();
+      const babelLoader = getLoaderByName('babel', webpackConfig.module.rules);
+      expect(babelLoader.use.length).to.equal(1);
+      expect(babelLoader.use[0].options.cacheDirectory).to.be.undefined
+    });
+    it('should config cache undefined config', () => {
+      const cacheDirectory = utils.getCacheLoaderInfoPath('babel-loader', 'dev');
+      const builder = createBuilder({
+        cache: undefined
+      });
+      const webpackConfig = builder.create();
+      const babelLoader = getLoaderByName('babel', webpackConfig.module.rules);
+      expect(babelLoader.use.length).to.equal(1);
+      expect(babelLoader.use[0].options.cacheDirectory).to.equal(cacheDirectory);
     });
   });
 });

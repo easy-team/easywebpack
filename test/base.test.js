@@ -5,7 +5,7 @@ const webpack = WebpackTool.webpack;
 const merge = WebpackTool.merge;
 const WebpackBaseBuilder = require('../lib/base');
 const path = require('path').posix;
-
+const utils = require('../utils/utils');
 // http://chaijs.com/api/bdd/
 function createBuilder(config) {
   const builder = new WebpackBaseBuilder(config);
@@ -16,7 +16,14 @@ function createBuilder(config) {
   });
   return builder;
 }
-
+function getLoaderByName(name, rules) {
+  const loaderName = `${name}-loader`;
+  return rules.filter(rule => {
+    return rule.use.some(loader => {
+      return loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
+    });
+  });
+}
 describe('base.test.js', () => {
   before(() => {
   });
@@ -105,6 +112,51 @@ describe('base.test.js', () => {
       const webpackConfig = builder.create();
       expect(webpackConfig.output.filename).to.equal('static/js/[name].js');
       expect(webpackConfig.output.chunkFilename).to.equal('static/js/chunk/[name].js');
+  });
+  describe('#webpack cache loader test', () => {
+    it('should create babel cache loader disable test', () => {
+      const builder = createBuilder({
+        cache: false,
+      });
+      const webpackConfig = builder.create();
+      const cacheLoader = getLoaderByName('cache', webpackConfig.module.rules);
+      expect(cacheLoader.length).to.equal(0);
+    });
+    it('should create babel typescript cache loader test', () => {
+      const cacheDirectory = utils.getCacheLoaderInfoPath('cache-loader')
+      const builder = createBuilder({
+        loaders:{
+          typescript: true
+        }
+      });
+      const webpackConfig = builder.create();
+      const cacheLoader = getLoaderByName('cache', webpackConfig.module.rules);
+      expect(cacheLoader.length).to.equal(1);
+      expect(cacheLoader[0].use.length).to.equal(2);
+      expect(cacheLoader[0].use[0].loader).to.equal('cache-loader');
+      expect(cacheLoader[0].use[0].options.cacheDirectory).to.equal(cacheDirectory);
+      expect(cacheLoader[0].use[1].loader).to.equal('ts-loader');
+    });
+    it('should create babel typescript config test', () => {
+      const cacheDirectory = utils.getCacheLoaderInfoPath('cache-loader')
+      const builder = createBuilder({
+        loaders:{
+          typescript: {
+            options:{
+              configFile: __dirname
+            }
+          }
+        }
+      });
+      const webpackConfig = builder.create();
+      const cacheLoader = getLoaderByName('cache', webpackConfig.module.rules);
+      expect(cacheLoader.length).to.equal(1);
+      expect(cacheLoader[0].use.length).to.equal(2);
+      expect(cacheLoader[0].use[0].loader).to.equal('cache-loader');
+      expect(cacheLoader[0].use[0].options.cacheDirectory).to.equal(cacheDirectory);
+      expect(cacheLoader[0].use[1].loader).to.equal('ts-loader');
+      expect(cacheLoader[0].use[1].options.configFile).to.equal(__dirname);
+    });
   });
 });
 });

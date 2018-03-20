@@ -316,6 +316,10 @@ utils.getDllCacheInfoPath = (name, env = 'dev') => {
   return utils.getCompileTempDir(`${env}/dll/cache-${name}.json`);
 };
 
+utils.getCacheLoaderInfoPath = (loader, env = 'dev') => {
+  return utils.getCompileTempDir(`${env}/${loader}`);
+};
+
 utils.getCacheInfoPath = () => {
   return utils.getCompileTempDir('config.json');
 };

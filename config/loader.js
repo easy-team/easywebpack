@@ -4,11 +4,13 @@ exports.babel = {
   enable: true,
   test: /\.jsx?$/,
   exclude: /node_modules/,
-  use: [
-    {
-      loader: 'babel-loader'
+  use() {
+    const loader = 'babel-loader'
+    if (this.config.cache) {
+      return [this.createCacheLoader(loader, this.config.cache)];
     }
-  ]
+    return [loader];
+  }
 };
 
 exports.eslint = {
@@ -23,7 +25,14 @@ exports.typescript = {
   enable: false,
   test: /\.ts$/,
   exclude: [/node_modules/],
-  use: ['ts-loader']
+  use() {
+    const loaders = ['ts-loader'];
+    if(this.config.cache) {
+      const cacheLoader = this.createCacheLoader('cache-loader', this.config.cache);
+      loaders.unshift(cacheLoader);
+    }
+    return loaders;
+  }
 };
 
 exports.tslint = {

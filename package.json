@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "4.0.7",
+  "version": "4.1.0",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
@@ -15,6 +15,7 @@
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.2",
+    "cache-loader": "^1.2.2",
     "chalk": "^2.0.1",
     "cross-spawn": "^5.1.0",
     "css-loader": "^0.28.4",
