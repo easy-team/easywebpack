@@ -1,3 +1,13 @@
+<a name="3.8.3"></a>
+## [3.8.3](https://github.com/hubcarl/easywebpack/compare/3.8.2...3.8.3) (2018-03-22)
+
+
+### Bug Fixes
+
+* loader options merge ([dc81f23](https://github.com/hubcarl/easywebpack/commit/dc81f23))
+
+
+
 <a name="3.8.1"></a>
 ## [3.8.1](https://github.com/hubcarl/easywebpack/compare/3.8.0...3.8.1) (2018-03-19)
 
