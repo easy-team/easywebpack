@@ -56,6 +56,18 @@ describe('loader.test.js', () => {
   });
 
   describe('#webpack createWebpackLoader test', () => {
+    it('should loader default test', () => {
+      const builder1 = createBuilder();
+      const webpackConfig1 = builder1.create();
+      const rules1 = webpackConfig1.module.rules;
+      expect(getLoaderByName('eslint', rules1)).to.include.all.keys(['test', 'use']);
+      expect(getLoaderByName('babel', rules1)).to.include.all.keys(['test', 'use']);
+      expect(getLoaderByName('css', rules1)).to.include.all.keys(['test', 'use']);
+      expect(getLoaderByTest(/\.(png|jpe?g|gif|svg)(\?.*)?$/, rules1)).to.include.all.keys(['test', 'use']);
+      expect(getLoaderByTest(/\.(woff2?|eot|ttf|otf)(\?.*)?$/, rules1)).to.include.all.keys(['test', 'use']);
+      expect(getLoaderByTest(/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/, rules1)).to.include.all.keys(['test', 'use']);
+    });
+
     it('should loader enable test', () => {
       const builder1 = createBuilder();
       const webpackConfig1 = builder1.create();
@@ -164,7 +176,24 @@ describe('loader.test.js', () => {
       expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
       expect(vuehtml.use[0].options.test).to.true;
     });
+
+    it('should merge nunjucks loader config test', () => {
+      const builder = createClientBuilder({});
+      builder.mergeLoader({
+        nunjucks:{
+          options:{
+            searchPaths: ['./widget', './test']
+          }
+        }
+      });
+      const webpackConfig = builder.create();
+      const rules = webpackConfig.module.rules;
+      const nunjucks = getLoaderByName('nunjucks-html', rules);
+      expect(nunjucks.use[1].loader).to.equal('nunjucks-html-loader');
+      expect(nunjucks.use[1].options.searchPaths).to.have.members(['src/widget', 'src/component', './widget', './test']);
+    });
   });
+  
   it('should add extend loader test', () => {
     const builder = createBuilder({});
     builder.addLoader({

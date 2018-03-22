@@ -109,6 +109,26 @@ exports.urlimage = {
   ]
 };
 
+exports.urlmedia = {
+  enable: true,
+  test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+  use: [
+    {
+      loader: 'url-loader',
+      options: {
+        limit: 1024
+      },
+      fn(){
+        return {
+          options: {
+            name: this.config.mediaName
+          }
+        }
+      }
+    }
+  ]
+}
+
 exports.urlfont = {
   enable: true,
   test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,

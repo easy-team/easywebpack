@@ -202,7 +202,7 @@ utils.getLoaderLabel = loader => {
       }, '');
     }
   }
-  return loaderName.replace(/-loader$/, '').replace(/-/g, '');
+  return loaderName.replace(/-loader$/, '');
 };
 
 utils.loadNodeModules = isCache => {
