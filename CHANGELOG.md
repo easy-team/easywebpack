@@ -1,3 +1,13 @@
+<a name="4.1.2"></a>
+## [4.1.2](https://github.com/hubcarl/easywebpack/compare/4.1.1...4.1.2) (2018-03-22)
+
+
+### Bug Fixes
+
+* loader options merge ([69e14f2](https://github.com/hubcarl/easywebpack/commit/69e14f2))
+
+
+
 <a name="4.1.1"></a>
 ## [4.1.1](https://github.com/hubcarl/easywebpack/compare/4.1.0...4.1.1) (2018-03-20)
 
