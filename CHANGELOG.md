@@ -1,3 +1,13 @@
+<a name="3.8.4"></a>
+## [3.8.4](https://github.com/hubcarl/easywebpack/compare/3.8.3...3.8.4) (2018-03-27)
+
+
+### Bug Fixes
+
+* ts-loader exclude override ([afd6c78](https://github.com/hubcarl/easywebpack/commit/afd6c78))
+
+
+
 <a name="3.8.3"></a>
 ## [3.8.3](https://github.com/hubcarl/easywebpack/compare/3.8.2...3.8.3) (2018-03-22)
 
