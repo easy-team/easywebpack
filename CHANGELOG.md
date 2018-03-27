@@ -1,3 +1,13 @@
+<a name="4.1.3"></a>
+## [4.1.3](https://github.com/hubcarl/easywebpack/compare/4.1.2...4.1.3) (2018-03-27)
+
+
+### Bug Fixes
+
+* ts-loader exclude array to object for override ([647d963](https://github.com/hubcarl/easywebpack/commit/647d963))
+
+
+
 <a name="4.1.2"></a>
 ## [4.1.2](https://github.com/hubcarl/easywebpack/compare/4.1.1...4.1.2) (2018-03-22)
 
