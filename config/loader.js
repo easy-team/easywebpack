@@ -25,7 +25,7 @@ exports.eslint = {
 exports.typescript = {
   enable: false,
   test: /\.ts$/,
-  exclude: [/node_modules/],
+  exclude: /node_modules/,
   use() {
     const loaders = ['ts-loader'];
     if(this.config.cache) {
