@@ -210,9 +210,10 @@ exports.analyzer = {
   name: 'webpack-bundle-analyzer',
   entry: 'BundleAnalyzerPlugin',
   args() {
+    const prefix = this.dll ? 'dll' : this.type;
     return {
-      analyzerPort: this.ssr ? 9998 : 9999,
-      statsFilename: this.type ? this.type + '_analyzer_stats.json' : 'analyzer_stats.json'
+      analyzerPort: this.dll ? 9997 : this.ssr ? 9998 : 9999,
+      statsFilename: prefix ? prefix + '_analyzer_stats.json' : 'analyzer_stats.json'
     };
   }
 };
@@ -221,11 +222,12 @@ exports.stats = {
   enable: false,
   name: 'stats-webpack-plugin',
   args() {
+    const prefix = this.dll ? 'dll' : this.type;
     const args = [{
       chunkModules: true,
       exclude: [/node_modules[\\\/]/]
     }];
-    args.unshift(this.type ? this.type + '_stats.json' : 'stats.json');
+    args.unshift(prefix ? prefix + '_stats.json' : 'stats.json');
     return args;
   }
 };
