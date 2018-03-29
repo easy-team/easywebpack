@@ -1,3 +1,8 @@
+<a name="4.2.0"></a>
+# [4.2.0](https://github.com/hubcarl/easywebpack/compare/4.1.3...4.2.0) (2018-03-29)
+
+
+
 <a name="4.1.3"></a>
 ## [4.1.3](https://github.com/hubcarl/easywebpack/compare/4.1.2...4.1.3) (2018-03-27)
 
