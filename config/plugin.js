@@ -142,20 +142,24 @@ exports.manifest = {
     // 兼容旧 manifest 配置
     const fileName = path.relative(this.config.buildPath, filepath);
     const dllConfig = utils.getDllConfig(this.config.dll);
+    const dllDir =  utils.getDllManifestDir(this.env);
+    const dllChunk = this.getDLLChunk();
+    const commonsChunk = this.getCommonsChunk();
     // 如果开启了dll 功能, 则读取 dll manifest 配置, 然后与项目 manifest 合并
-    if (dllConfig) {
+    if (dllConfig.length) {
       return this.merge(args, {
+        dllDir,
         filepath,
         fileName,
-        commonsChunk: this.getCommonsChunk(),
         dllConfig,
-        dllDir: utils.getCompileTempDir(this.env)
+        dllChunk,
+        commonsChunk
       });
     }
     return this.merge(args, {
       filepath,
       fileName,
-      commonsChunk: this.getCommonsChunk()
+      commonsChunk
     });
   }
 };
@@ -166,7 +170,7 @@ exports.manifestDll = {
   name: 'webpack-manifest-resource-plugin',
   args() {
     const dllConfig = this.config.dll || {};
-    const filepath = utils.getCompileTempDir(`${this.env}/config/manifest-${dllConfig.name}.json`);
+    const filepath = this.utils.getDllManifestPath(dllConfig.name, this.env);
     return {
       baseDir: this.baseDir,
       proxy: this.proxy,

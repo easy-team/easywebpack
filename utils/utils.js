@@ -202,7 +202,7 @@ utils.getLoaderLabel = loader => {
       }, '');
     }
   }
-  return loaderName.replace(/-loader$/, '');
+  return loaderName.replace(/-loader$/, '').replace(/-/g, '');
 };
 
 utils.loadNodeModules = isCache => {
@@ -292,11 +292,24 @@ utils.getCompileTempDir = (filename = '', baseDir) => {
   const pkgfile = path.join(baseDir || process.cwd(), 'package.json');
   const pkg = require(pkgfile);
   const project = pkg.name;
-  return `${os.tmpdir()}/easywebpack/${project}/${filename}`;
+  return path.join(os.tmpdir(), 'easywebpack', project, filename);
 };
 
 utils.getDllFilePath = (name, env = 'dev') => {
-  return utils.getCompileTempDir(`${env}/dll/manifest-${name}-dll.json`);
+  const dir = utils.getDllManifestDir(env);
+  return path.join(dir, `dll-${name}.json`);
+};
+
+utils.getDllCompileFileDir = (env = 'dev') => {
+  const dir = utils.getDllManifestDir(env);
+  return path.join(dir, 'file');
+};
+utils.getDllManifestDir = (env = 'dev') => {
+  return utils.getCompileTempDir(`${env}/dll`);
+};
+utils.getDllManifestPath = (name, env = 'dev') => {
+  const dir = utils.getDllManifestDir(env);
+  return path.join(dir, `manifest-${name}.json`);
 };
 
 utils.getDllConfig = dll => {
