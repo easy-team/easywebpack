@@ -1,3 +1,13 @@
+<a name="4.2.2"></a>
+## [4.2.2](https://github.com/hubcarl/easywebpack/compare/4.2.1...4.2.2) (2018-03-29)
+
+
+### Bug Fixes
+
+* stats port ([ede98df](https://github.com/hubcarl/easywebpack/commit/ede98df))
+
+
+
 <a name="4.2.0"></a>
 # [4.2.0](https://github.com/hubcarl/easywebpack/compare/4.1.3...4.2.0) (2018-03-29)
 
