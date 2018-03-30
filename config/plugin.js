@@ -292,3 +292,21 @@ exports.serviceworker = {
     };
   }
 };
+
+exports.tschecker = {
+  enable: false,
+  type: 'client',
+  name: 'fork-ts-checker-webpack-plugin',
+  args() {
+    const filepath = path.resolve(this.baseDir, this.config.egg ? 'app/web/tsconfig.json' : 'tsconfig.json');
+    const arg = {
+      silent: true,
+      memoryLimit: 512,
+      checkSyntacticErrors: true
+    };
+    if (fs.existsSync(filepath)) {
+      arg.tsconfig = filepath;
+    }
+    return arg;
+  }
+};
