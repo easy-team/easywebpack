@@ -1,3 +1,13 @@
+<a name="3.8.7"></a>
+## [3.8.7](https://github.com/hubcarl/easywebpack/compare/3.8.6...3.8.7) (2018-03-30)
+
+
+### Bug Fixes
+
+* eval use production, jsbundle file size large, limit use eval in production ([50d8c9c](https://github.com/hubcarl/easywebpack/commit/50d8c9c))
+
+
+
 <a name="3.8.6"></a>
 ## [3.8.6](https://github.com/hubcarl/easywebpack/compare/3.8.5...3.8.6) (2018-03-30)
 
