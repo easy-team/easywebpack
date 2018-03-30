@@ -1,3 +1,18 @@
+<a name="4.2.3"></a>
+## [4.2.3](https://github.com/hubcarl/easywebpack/compare/4.2.2...4.2.3) (2018-03-30)
+
+
+### Bug Fixes
+
+* eval use production, jsbundle file size large, limit use eval in production ([4a32c4f](https://github.com/hubcarl/easywebpack/commit/4a32c4f))
+
+
+### Features
+
+* support thread-loader and cache-loader for babel and ts ([ae5d444](https://github.com/hubcarl/easywebpack/commit/ae5d444))
+
+
+
 <a name="4.2.2"></a>
 ## [4.2.2](https://github.com/hubcarl/easywebpack/compare/4.2.1...4.2.2) (2018-03-29)
 
