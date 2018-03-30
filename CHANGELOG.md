@@ -1,3 +1,13 @@
+<a name="3.8.6"></a>
+## [3.8.6](https://github.com/hubcarl/easywebpack/compare/3.8.5...3.8.6) (2018-03-30)
+
+
+### Bug Fixes
+
+* hot css ([4d65f20](https://github.com/hubcarl/easywebpack/commit/4d65f20))
+
+
+
 <a name="3.8.4"></a>
 ## [3.8.4](https://github.com/hubcarl/easywebpack/compare/3.8.3...3.8.4) (2018-03-27)
 
