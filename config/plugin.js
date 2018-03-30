@@ -107,6 +107,7 @@ exports.uglifyJs = {
   args: {
     cache: true,
     parallel: UGLIFYJS_WORKERS,
+    sourceMap: true,
     uglifyOptions: {
       warnings: false,
       compress: {
