@@ -5,11 +5,17 @@ exports.babel = {
   test: /\.jsx?$/,
   exclude: /node_modules/,
   use() {
-    const loader = 'babel-loader'
-    if (this.config.cache) {
-      return [this.createCacheLoader(loader, this.config.cache)];
+    const loaders = [];
+    const compile = this.config.compile;
+    if (compile.thread) {
+      loaders.unshift(this.createThreadLoader(this.config.thread));
     }
-    return [loader];
+    if (compile.cache) {
+      loaders.push(this.createCacheLoader(this.config.cache, 'babel-loader'));
+    } else {
+      loaders.push({ loader: 'babel-loader', options: {} });
+    }
+    return loaders;
   }
 };
 
@@ -26,10 +32,19 @@ exports.typescript = {
   test: /\.ts$/,
   exclude: /node_modules/,
   use() {
-    const loaders = ['ts-loader'];
-    if(this.config.cache) {
-      const cacheLoader = this.createCacheLoader('cache-loader', this.config.cache);
-      loaders.unshift(cacheLoader);
+    const loaders = [];
+    const createTsLoader = options =>{
+      return { loader: 'ts-loader', options };
+    };
+    const compile = this.config.compile;
+    if (compile.thread) {
+      loaders.unshift(this.createThreadLoader(this.config.thread));
+      loaders.push(createTsLoader({ happyPackMode: true }));
+    } else {
+      loaders.push(createTsLoader());
+    }
+    if (compile.cache) {
+      loaders.unshift(this.createCacheLoader(this.config.cache));
     }
     return loaders;
   }

@@ -329,12 +329,15 @@ describe('client.test.js', () => {
       expect(eslint.use[0].loader).to.equal('eslint-loader');
     });
 
-    it('should typescript enable test', () => {
+    it('should typescript cache enable test', () => {
       const builder = createBuilder({
         loaders:{
           eslint: true,
           tslint: true,
           typescript: true
+        },
+        compile:{
+          cache: true
         }
       });
       const webpackConfig = builder.create();
@@ -348,7 +351,31 @@ describe('client.test.js', () => {
       expect(webpackConfig.resolve.extensions).to.include.members(['.ts', '.js']);
     });
 
-    it('should typescript config test', () => {
+    it('should typescript cache and thread enable test', () => {
+      const builder = createBuilder({
+        loaders:{
+          eslint: true,
+          tslint: true,
+          typescript: true
+        },
+        compile:{
+          cache: true,
+          thread: true
+        }
+      });
+      const webpackConfig = builder.create();
+      const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
+      const eslint = getLoaderByName('eslint', webpackConfig.module.rules);
+      const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
+      expect(tsLoader.use[0].loader).to.equal('cache-loader');
+      expect(tsLoader.use[1].loader).to.equal('thread-loader');
+      expect(tsLoader.use[2].loader).to.equal('ts-loader');
+      expect(eslint.use[0].loader).to.equal('eslint-loader');
+      expect(tslint.use[0].loader).to.equal('tslint-loader');
+      expect(webpackConfig.resolve.extensions).to.include.members(['.ts', '.js']);
+    });
+
+    it('should typescript cache config test', () => {
       const configFile = path.resolve(__dirname, './app/web/tsconfig.json');
       const builder = createBuilder({
         loaders:{
@@ -357,6 +384,9 @@ describe('client.test.js', () => {
               configFile,
             }
           }
+        },
+        compile:{
+          cache: true
         }
       });
       const webpackConfig = builder.create();
@@ -453,6 +483,38 @@ describe('client.test.js', () => {
       expect(serviceworker.options.prefix).to.equal('');
       expect(serviceworker.options.hash).to.be.false;
       expect(serviceworker.options.minify).to.be.false;
+    });
+  });
+  describe('#webpack devtool test', () => {
+    it('should dev devtool test', () => {
+      const builder = createBuilder({ env: 'dev', devtool: 'source-map'});
+      const webpackConfig = builder.create();
+      expect(webpackConfig.devtool).to.equal('source-map');
+    });
+    it('should prod devtool test', () => {
+      const builder = createBuilder({ env: 'prod', devtool: 'source-map'});
+      const webpackConfig = builder.create();
+      expect(webpackConfig.devtool).to.equal('source-map');
+    });
+    it('should dev eval devtool test', () => {
+      const builder = createBuilder({ env: 'dev', devtool: 'eval'});
+      const webpackConfig = builder.create();
+      expect(webpackConfig.devtool).to.equal('eval');
+    });
+    it('should prod eval devtool test', () => {
+      const builder = createBuilder({ env: 'prod', devtool: 'eval'});
+      const webpackConfig = builder.create();
+      expect(webpackConfig.devtool).to.equal('source-map');
+    });
+    it('should dev cli eval devtool test', () => {
+      const builder = createBuilder({ env: 'prod', devtool: 'eval', cliDevtool: true});
+      const webpackConfig = builder.create();
+      expect(webpackConfig.devtool).to.equal('eval');
+    });
+    it('should prod cli eval devtool test', () => {
+      const builder = createBuilder({ env: 'prod', devtool: 'eval', cliDevtool: true });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.devtool).to.equal('eval');
     });
   });
 });

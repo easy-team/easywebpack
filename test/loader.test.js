@@ -340,22 +340,10 @@ describe('loader.test.js', () => {
       expect(urlLoader.use[0].options.limit).to.equal(10000);
     });
   });
-  describe('#webpack babel loader test', () => {
-    it('should babel-loader default config', () => {
+  describe('#webpack config cache test', () => {
+    it('should config babel loader cache false config', () => {
       const cacheDirectory = utils.getCacheLoaderInfoPath('babel-loader', 'dev');
       const builder = createBuilder();
-      const webpackConfig = builder.create();
-      const babelLoader = getLoaderByName('babel', webpackConfig.module.rules);
-      expect(babelLoader.use.length).to.equal(1);
-      expect(babelLoader.use[0].options.cacheDirectory).to.equal(cacheDirectory);
-    });
-  });
-  describe('#webpack config cache test', () => {
-    it('should config cache false config', () => {
-      const cacheDirectory = utils.getCacheLoaderInfoPath('babel-loader', 'dev');
-      const builder = createBuilder({
-        cache: false
-      });
       const webpackConfig = builder.create();
       const babelLoader = getLoaderByName('babel', webpackConfig.module.rules);
       expect(babelLoader.use.length).to.equal(1);
@@ -364,7 +352,9 @@ describe('loader.test.js', () => {
     it('should config cache undefined config', () => {
       const cacheDirectory = utils.getCacheLoaderInfoPath('babel-loader', 'dev');
       const builder = createBuilder({
-        cache: undefined
+        compile:{
+          cache: true
+        }
       });
       const webpackConfig = builder.create();
       const babelLoader = getLoaderByName('babel', webpackConfig.module.rules);

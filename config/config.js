@@ -19,6 +19,10 @@ exports.config = {
   plugins: {},
   optimization: {
     minimize: false
+  },
+  compile:{
+    cache: false,
+    thread: false
   }
 };
 
@@ -68,6 +72,7 @@ exports.dllConfig = {
     commonsChunk: false,
     imagemini: false,
     manifest: false,
-    manifestDll: true
+    manifestDll: true,
+    tsChecker: false
   }
 };
