@@ -1,3 +1,13 @@
+<a name="3.8.8"></a>
+## [3.8.8](https://github.com/hubcarl/easywebpack/compare/3.8.7...3.8.8) (2018-04-09)
+
+
+### Bug Fixes
+
+* webpack array merge repeat ([b4c8596](https://github.com/hubcarl/easywebpack/commit/b4c8596))
+
+
+
 <a name="3.8.7"></a>
 ## [3.8.7](https://github.com/hubcarl/easywebpack/compare/3.8.6...3.8.7) (2018-03-30)
 
