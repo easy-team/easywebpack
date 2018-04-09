@@ -1,3 +1,20 @@
+<a name="4.2.5"></a>
+## [4.2.5](https://github.com/hubcarl/easywebpack/compare/4.2.4...4.2.5) (2018-04-09)
+
+
+### Bug Fixes
+
+* array merge repeat ([abbf382](https://github.com/hubcarl/easywebpack/commit/abbf382))
+
+<a name="4.2.4"></a>
+## [4.2.4](https://github.com/hubcarl/easywebpack/compare/4.2.3...4.2.4) (2018-04-09)
+
+
+### Bug Fixes
+
+* client and server cache dir separation ([856f7e0](https://github.com/hubcarl/easywebpack/commit/856f7e0))
+
+
 <a name="4.2.3"></a>
 ## [4.2.3](https://github.com/hubcarl/easywebpack/compare/4.2.2...4.2.3) (2018-03-30)
 
