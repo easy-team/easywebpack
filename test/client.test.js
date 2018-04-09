@@ -517,4 +517,21 @@ describe('client.test.js', () => {
       expect(webpackConfig.devtool).to.equal('eval');
     });
   });
+  describe('#webpack merge test', () => {
+    it('should merge array uniq', () => {
+      const builder = createBuilder({
+        loaders : {
+          scss: {
+            options: {
+              includePaths: [path.resolve(__dirname, 'app/web/asset'), path.resolve(__dirname, 'app/web/asset/style')],
+              sourceMap: true,
+            },
+          },
+        }
+      });
+      const webpackConfig = builder.create();
+      const scssLoader = getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
+      expect(scssLoader.use[3].options.includePaths.length).to.equal(2);
+    });
+  });
 });
