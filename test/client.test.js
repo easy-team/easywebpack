@@ -22,11 +22,15 @@ function createBuilder(config) {
   return builder;
 }
 
-function getLoaderByName(name, rules) {
+function getLoaderByName(name, rules, test) {
   const loaderName = `${name}-loader`;
   return rules.find(rule => {
     return rule.use.some(loader => {
-      return loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
+      const hasLoader = loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
+      if(test && rule.test && typeof loader === 'object') {
+        return rule.test.toString().indexOf(test)>-1 && hasLoader;
+      }
+      return hasLoader;
     });
   });
 }
@@ -370,6 +374,23 @@ describe('client.test.js', () => {
       const builder = createBuilder({ env: 'prod', devtool: 'eval', cliDevtool: true });
       const webpackConfig = builder.create();
       expect(webpackConfig.devtool).to.equal('eval');
+    });
+  });
+  describe('#webpack merge test', () => {
+    it('should merge array uniq', () => {
+      const builder = createBuilder({
+        loaders : {
+          scss: {
+            options: {
+              includePaths: [path.resolve(__dirname, 'app/web/asset'), path.resolve(__dirname, 'app/web/asset/style')],
+              sourceMap: true,
+            },
+          },
+        }
+      });
+      const webpackConfig = builder.create();
+      const scssLoader = getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
+      expect(scssLoader.use[3].options.includePaths.length).to.equal(2);
     });
   });
 });

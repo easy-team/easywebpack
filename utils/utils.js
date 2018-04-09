@@ -8,10 +8,12 @@ const queryString = require('querystring');
 const mkdirp = require('mkdirp');
 const cloneDeep = require('lodash.clonedeep');
 const cloneDeepWith = require('lodash.clonedeepwith');
+const uniq = require('lodash.uniq');
 const install = require('./install');
 const utils = Object.assign({}, {
   cloneDeep,
   cloneDeepWith,
+  uniq,
   mkdirp,
   queryString
 }, install);
