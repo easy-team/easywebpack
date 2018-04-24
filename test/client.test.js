@@ -393,4 +393,84 @@ describe('client.test.js', () => {
       expect(scssLoader.use[3].options.includePaths.length).to.equal(2);
     });
   });
+  describe('#webpack devtool sourceMap test', () => {
+    it('should devtool set sourceMap test', () => {
+      const builder = createBuilder({
+        devtool: 'source-map',
+        loaders: {
+          less: true,
+          stylus: true,
+        }
+      });
+      const webpackConfig = builder.create();
+      const cssLoader = getLoaderByName('css', webpackConfig.module.rules, /\.css/);
+      const sassLoader = getLoaderByName('sass', webpackConfig.module.rules, /\.sass/);
+      const scssLoader = getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
+      const LessLoader = getLoaderByName('less', webpackConfig.module.rules, /\.less/);
+      const stylusLoader = getLoaderByName('stylus', webpackConfig.module.rules, /\.stylus/);
+      expect(cssLoader.use[1].options.sourceMap).to.be.true;
+      
+      expect(sassLoader.use[1].options.sourceMap).to.be.true;
+      expect(sassLoader.use[3].options.sourceMap).to.be.true;
+      
+      expect(scssLoader.use[1].options.sourceMap).to.be.true;
+      expect(scssLoader.use[3].options.sourceMap).to.be.true;
+
+      expect(LessLoader.use[1].options.sourceMap).to.be.true;
+      expect(LessLoader.use[3].options.sourceMap).to.be.true;
+
+      expect(stylusLoader.use[1].options.sourceMap).to.be.true;
+      expect(stylusLoader.use[3].options.sourceMap).to.be.true;
+    });
+    it('should devtool set sourceMap override test', () => {
+      const builder = createBuilder({
+        devtool: 'source-map',
+        loaders: {
+          css: {
+            options:{
+              sourceMap: false,
+            }
+          },
+          scss:  {
+            options:{
+              sourceMap: false,
+            }
+          },
+          sass:  {
+            options:{
+              sourceMap: false,
+            }
+          },
+          less:  {
+            options:{
+              sourceMap: false,
+            }
+          },
+          stylus:  {
+            options:{
+              sourceMap: false,
+            }
+          },
+        }
+      });
+      const webpackConfig = builder.create();
+      const cssLoader = getLoaderByName('css', webpackConfig.module.rules, /\.css/);
+      const sassLoader = getLoaderByName('sass', webpackConfig.module.rules, /\.sass/);
+      const scssLoader = getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
+      const lessLoader = getLoaderByName('less', webpackConfig.module.rules, /\.less/);
+      const stylusLoader = getLoaderByName('stylus', webpackConfig.module.rules, /\.stylus/);
+      expect(cssLoader.use[1].options.sourceMap).to.be.false;
+      expect(sassLoader.use[1].options.sourceMap).to.be.false;
+      expect(sassLoader.use[3].options.sourceMap).to.be.false;
+      
+      expect(scssLoader.use[1].options.sourceMap).to.be.false;
+      expect(scssLoader.use[3].options.sourceMap).to.be.false;
+
+      expect(lessLoader.use[1].options.sourceMap).to.be.false;
+      expect(lessLoader.use[3].options.sourceMap).to.be.false;
+
+      expect(stylusLoader.use[1].options.sourceMap).to.be.false;
+      expect(stylusLoader.use[3].options.sourceMap).to.be.false;
+    });
+  });
 });
