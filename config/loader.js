@@ -60,7 +60,7 @@ exports.tslint = {
 
 exports.css = {
   enable: true,
-  test: /\.css$/,
+  test: /\.css/,
   use: ['css-loader'],
   postcss: true,
   framework: true
