@@ -16,6 +16,7 @@
     "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.2",
     "cache-loader": "^1.2.2",
+    "thread-loader": "^1.1.5",
     "chalk": "^2.0.1",
     "cross-spawn": "^5.1.0",
     "css-loader": "^0.28.4",
