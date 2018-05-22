@@ -1,3 +1,14 @@
+<a name="4.4.1"></a>
+## [4.4.1](https://github.com/hubcarl/easywebpack/compare/4.4.0...4.4.1) (2018-05-22)
+
+
+### Bug Fixes
+
+* add thread-loader ([a35a0d7](https://github.com/hubcarl/easywebpack/commit/a35a0d7))
+* build prod css not compressed ([7703b0b](https://github.com/hubcarl/easywebpack/commit/7703b0b))
+
+
+
 <a name="4.2.5"></a>
 ## [4.2.5](https://github.com/hubcarl/easywebpack/compare/4.2.4...4.2.5) (2018-04-09)
 
