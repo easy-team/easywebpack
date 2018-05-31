@@ -1,3 +1,13 @@
+<a name="4.4.2"></a>
+## [4.4.2](https://github.com/hubcarl/easywebpack/compare/4.4.1...4.4.2) (2018-05-31)
+
+
+### Bug Fixes
+
+* remove repeat cache config ([8e00d12](https://github.com/hubcarl/easywebpack/commit/8e00d12))
+
+
+
 <a name="4.4.1"></a>
 ## [4.4.1](https://github.com/hubcarl/easywebpack/compare/4.4.0...4.4.1) (2018-05-22)
 
