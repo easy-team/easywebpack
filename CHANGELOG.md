@@ -1,3 +1,21 @@
+<a name="4.4.3"></a>
+## [4.4.3](https://github.com/hubcarl/easywebpack/compare/4.2.5...4.4.3) (2018-06-07)
+
+
+### Bug Fixes
+
+* add thread-loader ([a35a0d7](https://github.com/hubcarl/easywebpack/commit/a35a0d7))
+* build prod css not compressed ([7703b0b](https://github.com/hubcarl/easywebpack/commit/7703b0b))
+* remove repeat cache config ([8e00d12](https://github.com/hubcarl/easywebpack/commit/8e00d12))
+* 修复html-webpack无法查找entryTemplate ([815b33c](https://github.com/hubcarl/easywebpack/commit/815b33c))
+
+
+### Features
+
+* auto set sourceMap when devtool set ([708cce8](https://github.com/hubcarl/easywebpack/commit/708cce8))
+
+
+
 <a name="4.4.2"></a>
 ## [4.4.2](https://github.com/hubcarl/easywebpack/compare/4.4.1...4.4.2) (2018-05-31)
 
