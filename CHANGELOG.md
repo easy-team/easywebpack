@@ -1,3 +1,14 @@
+<a name="4.4.4"></a>
+## [4.4.4](https://github.com/hubcarl/easywebpack/compare/4.4.2...4.4.4) (2018-06-09)
+
+
+### Bug Fixes
+
+* set host, proxy false ([4e09a2c](https://github.com/hubcarl/easywebpack/commit/4e09a2c))
+* 修复html-webpack无法查找entryTemplate ([815b33c](https://github.com/hubcarl/easywebpack/commit/815b33c))
+
+
+
 <a name="4.4.3"></a>
 ## [4.4.3](https://github.com/hubcarl/easywebpack/compare/4.2.5...4.4.3) (2018-06-07)
 
