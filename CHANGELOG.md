@@ -1,3 +1,13 @@
+<a name="3.9.1"></a>
+## [3.9.1](https://github.com/hubcarl/easywebpack/compare/3.9.0...3.9.1) (2018-06-20)
+
+
+### Bug Fixes
+
+* dll support node key config ([f16c092](https://github.com/hubcarl/easywebpack/commit/f16c092))
+
+
+
 <a name="3.8.8"></a>
 ## [3.8.8](https://github.com/hubcarl/easywebpack/compare/3.8.7...3.8.8) (2018-04-09)
 
