@@ -1,3 +1,13 @@
+<a name="3.9.2"></a>
+## [3.9.2](https://github.com/hubcarl/easywebpack/compare/3.9.1...3.9.2) (2018-06-26)
+
+
+### Bug Fixes
+
+* custom buildPath will lead to node buidPath error ([5879d99](https://github.com/hubcarl/easywebpack/commit/5879d99))
+
+
+
 <a name="3.9.1"></a>
 ## [3.9.1](https://github.com/hubcarl/easywebpack/compare/3.9.0...3.9.1) (2018-06-20)
 
