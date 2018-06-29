@@ -240,14 +240,14 @@ exports.directoryname = {
 
 exports.extract = {
   type: 'client',
-  name: 'extract-text-webpack-plugin',
+  name: 'mini-css-extract-plugin',
   enable() {
     return this.config.cssExtract;
   },
   args() {
     return {
       filename: this.webpackInfo.cssName,
-      allChunks: true
+      chunkFilename: this.webpackInfo.cssChunkName
     };
   }
 };
