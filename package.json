@@ -42,7 +42,7 @@
     "webpack-hot-middleware": "^2.13.2",
     "webpack-manifest-resource-plugin": "^4.0.0",
     "webpack-node-externals": "^1.6.0",
-    "webpack-tool": "next"
+    "webpack-tool": "^4.1.0"
   },
   "devDependencies": {
     "chai": "^4.0.0",
