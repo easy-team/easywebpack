@@ -1,3 +1,13 @@
+<a name="4.4.6"></a>
+## [4.4.6](https://github.com/hubcarl/easywebpack/compare/4.4.5...4.4.6) (2018-06-29)
+
+
+### Bug Fixes
+
+* test env use production, scan code ([f617f6e](https://github.com/hubcarl/easywebpack/commit/f617f6e))
+
+
+
 <a name="4.4.4"></a>
 ## [4.4.4](https://github.com/hubcarl/easywebpack/compare/4.4.2...4.4.4) (2018-06-09)
 
