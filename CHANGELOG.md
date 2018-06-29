@@ -1,3 +1,13 @@
+<a name="4.5.0"></a>
+# [4.5.0](https://github.com/hubcarl/easywebpack/compare/4.4.6...4.5.0) (2018-06-29)
+
+
+### Features
+
+* extract-text-webpack-plugin to mini-css-extract-plugin ([54b6c54](https://github.com/hubcarl/easywebpack/commit/54b6c54))
+
+
+
 <a name="4.4.6"></a>
 ## [4.4.6](https://github.com/hubcarl/easywebpack/compare/4.4.5...4.4.6) (2018-06-29)
 
