@@ -1,3 +1,13 @@
+<a name="4.5.1"></a>
+## [4.5.1](https://github.com/hubcarl/easywebpack/compare/4.5.0...4.5.1) (2018-08-21)
+
+
+### Bug Fixes
+
+* multiple process lead build slow, set default 2 ([a8f4d6e](https://github.com/hubcarl/easywebpack/commit/a8f4d6e))
+
+
+
 <a name="4.5.0"></a>
 # [4.5.0](https://github.com/hubcarl/easywebpack/compare/4.4.6...4.5.0) (2018-06-29)
 
