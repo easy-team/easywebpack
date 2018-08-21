@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "3.9.2",
+  "version": "3.10.0-beta.2",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
@@ -137,7 +137,7 @@
     "url": "git+https://github.com/hubcarl/easywebpack.git"
   },
   "publishConfig": {
-    "tag": "3.x"
+    "tag": "beta"
   },
   "bugs": {
     "url": "https://github.com/hubcarl/easywebpack/issues"
