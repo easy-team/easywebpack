@@ -303,7 +303,17 @@ utils.getCompileTempDir = (filename = '', baseDir) => {
 utils.getDllFilePath = (name, env = 'dev') => {
   return utils.getCompileTempDir(`${env}/dll/manifest-${name}-dll.json`);
 };
-
+utils.getDllCompileFileDir = (env = 'dev') => {
+  const dir = utils.getDllManifestDir(env);
+  return path.join(dir, 'file');
+};
+utils.getDllManifestDir = (env = 'dev') => {
+  return utils.getCompileTempDir(`${env}/dll`);
+};
+utils.getDllManifestPath = (name, env = 'dev') => {
+  const dir = utils.getDllManifestDir(env);
+  return path.join(dir, `manifest-${name}.json`);
+};
 utils.getDllConfig = dll => {
   if (utils.isString(dll)) {
     return [{ name: 'vendor', lib: [dll] }];
