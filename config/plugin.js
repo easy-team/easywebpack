@@ -6,8 +6,6 @@ const WebpackTool = require('webpack-tool');
 const webpack = WebpackTool.webpack;
 const chalk = require('chalk');
 const utils = require('../utils/utils');
-const WORKERS = os.cpus().length - 1;
-const UGLIFYJS_WORKERS = WORKERS > 8 ? 8 : WORKERS;
 
 exports.hot = {
   enable: true,
@@ -106,7 +104,7 @@ exports.uglifyJs = {
   name: 'uglifyjs-webpack-plugin',
   args: {
     cache: true,
-    parallel: UGLIFYJS_WORKERS,
+    parallel: 2,
     sourceMap: true,
     uglifyOptions: {
       warnings: false,
