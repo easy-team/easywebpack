@@ -1,3 +1,20 @@
+<a name="3.10.0"></a>
+# [3.10.0](https://github.com/hubcarl/easywebpack/compare/3.9.2...3.10.0) (2018-08-22)
+
+
+### Bug Fixes
+
+* client render dll inject ([9be298c](https://github.com/hubcarl/easywebpack/commit/9be298c))
+* manifest path for egg ([ff5c5a3](https://github.com/hubcarl/easywebpack/commit/ff5c5a3))
+* old manifest path custom ([469f80f](https://github.com/hubcarl/easywebpack/commit/469f80f))
+
+
+### Features
+
+* manifest default path use outputPath ([290b0eb](https://github.com/hubcarl/easywebpack/commit/290b0eb))
+
+
+
 <a name="3.9.2"></a>
 ## [3.9.2](https://github.com/hubcarl/easywebpack/compare/3.9.1...3.9.2) (2018-06-26)
 
