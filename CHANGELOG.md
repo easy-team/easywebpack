@@ -1,3 +1,13 @@
+<a name="4.5.2"></a>
+## [4.5.2](https://github.com/hubcarl/easywebpack/compare/4.5.1...4.5.2) (2018-08-22)
+
+
+### Bug Fixes
+
+* support set manifest filepath and default outputPath ([d41de3f](https://github.com/hubcarl/easywebpack/commit/d41de3f))
+
+
+
 <a name="4.5.1"></a>
 ## [4.5.1](https://github.com/hubcarl/easywebpack/compare/4.5.0...4.5.1) (2018-08-21)
 
