@@ -137,7 +137,10 @@ exports.manifest = {
     };
     const plugins = this.config.plugins || {};
     const manifestConfig = plugins.manifest || {};
-    const filepath = path.join(this.baseDir, manifestConfig.fileName || 'config/manifest.json');
+    const configManifestFileName = manifestConfig.fileName || (manifestConfig.args && manifestConfig.args.fileName);
+    const manifestName = configManifestFileName || (this.config.egg ? 'config/manifest.json' : 'manifest.json');
+    const manifestDir = this.config.egg ? this.baseDir : this.buildPath;
+    const filepath = path.join(manifestDir, manifestName);
     // 兼容旧 manifest 配置
     const fileName = path.relative(this.config.buildPath, filepath);
     const dllConfig = utils.getDllConfig(this.config.dll);
