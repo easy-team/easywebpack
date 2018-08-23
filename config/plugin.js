@@ -131,8 +131,7 @@ exports.manifest = {
   type: 'client',
   name: 'webpack-manifest-plugin',
   args() {
-    const filename = this.config.plugins && this.config.plugins.manifest && this.config.plugins.manifest.filename || 'config/manifest.json';
-    const absFilename = this.utils.normalizePath(filename, this.baseDir);
+    const absFilename = this.getManifestFilePath();
     const relativeFileName = path.relative(this.config.buildPath, absFilename);
     return { fileName: relativeFileName };
   }
