@@ -1,3 +1,14 @@
+<a name="3.9.3"></a>
+## [3.9.3](https://github.com/hubcarl/easywebpack/compare/3.9.2...3.9.3) (2018-08-28)
+
+
+### Bug Fixes
+
+* dll not inject html ([5105faf](https://github.com/hubcarl/easywebpack/commit/5105faf))
+* manifest filePath set invalid ([9a96f50](https://github.com/hubcarl/easywebpack/commit/9a96f50))
+
+
+
 <a name="3.9.2"></a>
 ## [3.9.2](https://github.com/hubcarl/easywebpack/compare/3.9.1...3.9.2) (2018-06-26)
 
