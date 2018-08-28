@@ -1,5 +1,13 @@
-<a name="3.9.3"></a>
-## [3.9.3](https://github.com/hubcarl/easywebpack/compare/3.9.2...3.9.3) (2018-08-28)
+<a name="3.10.2"></a>
+## [3.10.2](https://github.com/hubcarl/easywebpack/compare/3.9.2...3.10.2) (2018-08-28)
+
+
+### Bug Fixes
+
+* dll not inject html ([5105faf](https://github.com/hubcarl/easywebpack/commit/5105faf))
+
+<a name="3.10.2"></a>
+## [3.10.2](https://github.com/hubcarl/easywebpack/compare/3.9.2...3.10.2) (2018-08-28)
 
 
 ### Bug Fixes
