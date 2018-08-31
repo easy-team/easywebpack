@@ -312,3 +312,16 @@ exports.tschecker = {
     return arg;
   }
 };
+
+exports.clean = {
+  enable: true,
+  env: ['test','prod'],
+  type: 'client',
+  name: 'clean-webpack-plugin',
+  args() {
+    const dist = path.relative(this.baseDir, this.buildPath);
+    const dirs = [dist];
+    const options = { root: this.baseDir };
+    return [dirs, options];
+  }
+}
