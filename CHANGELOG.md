@@ -1,3 +1,15 @@
+<a name="4.6.0"></a>
+# [4.6.0](https://github.com/hubcarl/easywebpack/compare/4.5.2...4.6.0) (2018-08-31)
+
+
+### Features
+
+* add clean-webpack-plugin config support ([ce50e67](https://github.com/hubcarl/easywebpack/commit/ce50e67))
+* dev mode not use cdn config ([70bcae1](https://github.com/hubcarl/easywebpack/commit/70bcae1))
+* 如果存在同名 html 模板文件, 全局 template 配置非必须 ([7ec20aa](https://github.com/hubcarl/easywebpack/commit/7ec20aa))
+
+
+
 <a name="4.5.2"></a>
 ## [4.5.2](https://github.com/hubcarl/easywebpack/compare/4.5.1...4.5.2) (2018-08-22)
 
