@@ -1,3 +1,18 @@
+<a name="4.7.0"></a>
+# [4.7.0](https://github.com/hubcarl/easywebpack/compare/4.6.0...4.7.0) (2018-09-05)
+
+
+### Bug Fixes
+
+* css hot ([13fc036](https://github.com/hubcarl/easywebpack/commit/13fc036))
+
+
+### Features
+
+* support BABEL_ENV node and web single config ([61df5fb](https://github.com/hubcarl/easywebpack/commit/61df5fb))
+
+
+
 <a name="4.6.0"></a>
 # [4.6.0](https://github.com/hubcarl/easywebpack/compare/4.5.2...4.6.0) (2018-08-31)
 
