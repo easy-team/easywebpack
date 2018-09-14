@@ -16,6 +16,7 @@
     "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.2",
     "cache-loader": "^1.2.2",
+    "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "chalk": "^2.0.1",
     "clean-webpack-plugin": "^0.1.19",
     "cross-spawn": "^5.1.0",

@@ -324,4 +324,10 @@ exports.clean = {
     const options = { root: this.baseDir };
     return [dirs, options];
   }
-}
+};
+
+exports.case = {
+  enable: true,
+  name: 'case-sensitive-paths-webpack-plugin',
+  args:{}
+};
