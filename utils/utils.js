@@ -10,6 +10,7 @@ const cloneDeep = require('lodash.clonedeep');
 const cloneDeepWith = require('lodash.clonedeepwith');
 const uniq = require('lodash.uniq');
 const install = require('./install');
+const glob = require('glob');
 const utils = Object.assign({}, {
   cloneDeep,
   cloneDeepWith,
@@ -36,7 +37,6 @@ utils.normalizeBuildPath = (buildPath, baseDir) => {
   return utils.normalizePath(buildPath, baseDir);
 };
 
-
 utils.isHttpOrHttps = strUrl => {
   return /^(https?:|\/\/)/.test(strUrl);
 };
@@ -59,6 +59,7 @@ utils.mixin = (target, source) => {
     }
   });
 };
+
 utils.joinPath = function() {
   return [].slice.call(arguments, 0).map((arg, index) => {
     let tempArg = arg.replace(/\/$/, '');
@@ -70,6 +71,14 @@ utils.joinPath = function() {
 };
 
 utils.getEntry = (config, type) => {
+  const entry = config.entry;
+  if (utils.isObject(entry) && (entry.loader || entry.include)) {
+    return utils.getCustomEntry(config, type);
+  }
+  return utils.getGlobEntry(config, type);
+};
+
+utils.getCustomEntry = (config, type) => {
   let entryArray = [];
   let entryLoader;
   let extMatch = '.js';
@@ -108,6 +117,24 @@ utils.getEntry = (config, type) => {
   return entries;
 };
 
+utils.getGlobEntry = (config, type) => {
+  const { entry, baseDir } = config;
+  if (utils.isString(entry)) {
+    const prefix = utils.getDirByRegex(entry);
+    const files = glob.sync(config.entry);
+    const entries = {};
+    files.forEach(file => {
+      const ext = path.extname(file);
+      const entryName = file.replace(ext, '').replace(prefix, '').replace(/^\//, '');
+      entries[entryName] = utils.normalizePath(file, baseDir);
+    });
+    return entries;
+  }
+  if (utils.isObject(entry)) {
+    return entry;
+  }
+  return {};
+};
 
 utils.createEntry = (config, entryLoader, entryConfig, isParseUrl) => {
   const entries = {};
@@ -141,7 +168,7 @@ utils.getDirByRegex = (regex, baseDir) => {
     return dir;
   }, '');
   assert(entryDir, `The regex ${strRegex} must begin with / + a letter or number`);
-  return utils.normalizePath(entryDir, baseDir);
+  return baseDir ? utils.normalizePath(entryDir, baseDir) : entryDir;
 };
 
 utils.walkFile = (dirs, excludeRegex, extMatch = '.js', baseDir) => {
@@ -187,6 +214,29 @@ utils.isMatch = (regexArray, strMatch) => {
 };
 
 utils.assetsPath = (prefix, filepath) => path.posix.join(prefix, filepath);
+
+utils.getLoaderOptionString = (name, options) => {
+  const kvArray = [];
+  options && Object.keys(options).forEach(key => {
+    const value = options[key];
+    if (Array.isArray(value)) {
+      value.forEach(item => {
+        kvArray.push(`${key}[]=${item}`);
+      });
+    } else if (typeof value === 'object') {
+      // TODO:
+    } else if (typeof value === 'boolean') {
+      kvArray.push(value === true ? `+${key}` : `-${key}`);
+    } else {
+      kvArray.push(`${key}=${value}`);
+    }
+  });
+  const optionStr = kvArray.join(',');
+  if (name) {
+    return /\?/.test(name) ? `${name},${optionStr}` : name + (optionStr ? `?${optionStr}` : '');
+  }
+  return optionStr;
+};
 
 utils.getLoaderLabel = loader => {
   let loaderName = loader;
