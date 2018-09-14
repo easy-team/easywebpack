@@ -138,8 +138,8 @@ exports.manifest = {
     const plugins = this.config.plugins || {};
     const manifestConfig = plugins.manifest || {};
     const configManifestFileName = manifestConfig.fileName || (manifestConfig.args && manifestConfig.args.fileName);
-    const manifestName = configManifestFileName || (this.config.egg ? 'config/manifest.json' : 'manifest.json');
-    const manifestDir = this.config.egg ? this.baseDir : this.buildPath;
+    const manifestName = configManifestFileName || (this.egg ? 'config/manifest.json' : 'manifest.json');
+    const manifestDir = this.egg ? this.baseDir : this.buildPath;
     const filepath = path.join(manifestDir, manifestName);
     // 兼容旧 manifest 配置
     const fileName = path.relative(this.config.buildPath, filepath);
@@ -300,7 +300,7 @@ exports.tschecker = {
   type: 'client',
   name: 'fork-ts-checker-webpack-plugin',
   args() {
-    const filepath = path.resolve(this.baseDir, this.config.egg ? 'app/web/tsconfig.json' : 'tsconfig.json');
+    const filepath = path.resolve(this.baseDir, this.egg ? 'app/web/tsconfig.json' : 'tsconfig.json');
     const arg = {
       silent: true,
       memoryLimit: 512,

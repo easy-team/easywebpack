@@ -472,4 +472,13 @@ utils.checkDllUpdate = (config, dll) => {
   return false;
 };
 
+utils.isEgg = config => {
+  const baseDir = config.baseDir;
+  if (config.egg) {
+    return true;
+  }
+  const pkg = require(path.join(baseDir, 'package.json'));
+  return pkg.dependencies['egg-view-vue-ssr'] || pkg.dependencies['egg-view-react-ssr'];
+};
+
 module.exports = utils;
