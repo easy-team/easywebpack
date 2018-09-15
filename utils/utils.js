@@ -9,9 +9,11 @@ const mkdirp = require('mkdirp');
 const cloneDeep = require('lodash.clonedeep');
 const cloneDeepWith = require('lodash.clonedeepwith');
 const uniq = require('lodash.uniq');
+const _ = require('lodash.get');
 const install = require('./install');
 const glob = require('glob');
 const utils = Object.assign({}, {
+  _,
   cloneDeep,
   cloneDeepWith,
   uniq,
