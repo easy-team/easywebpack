@@ -121,9 +121,10 @@ utils.getCustomEntry = (config, type) => {
 
 utils.getGlobEntry = (config, type) => {
   const { entry, baseDir } = config;
+
   if (utils.isString(entry)) {
-    const prefix = utils.getDirByRegex(entry);
     const files = glob.sync(config.entry);
+    const prefix = utils.getDirByRegex(entry);
     const entries = {};
     files.forEach(file => {
       const ext = path.extname(file);
