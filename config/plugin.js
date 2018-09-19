@@ -324,4 +324,12 @@ exports.clean = {
     const options = { root: this.baseDir };
     return [dirs, options];
   }
-}
+};
+
+exports.cssmini = {
+  enable: true,
+  env: 'prod',
+  type: 'client',
+  name: 'optimize-css-assets-webpack-plugin',
+  args:{}
+};

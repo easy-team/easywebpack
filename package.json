@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "4.7.0",
+  "version": "4.7.1",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
@@ -32,6 +32,7 @@
     "mini-css-extract-plugin": "^0.4.0",
     "node-noop": "^1.0.0",
     "npm-install-webpack-plugin": "^4.0.5",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^2.1.0",
     "progress-bar-webpack-plugin": "^1.10.0",
     "service-worker-precache-webpack-plugin": "^1.0.0",
