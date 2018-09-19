@@ -1,3 +1,13 @@
+<a name="4.7.1"></a>
+## [4.7.1](https://github.com/hubcarl/easywebpack/compare/4.7.0...4.7.1) (2018-09-19)
+
+
+### Bug Fixes
+
+* css not mini-> minicss: optimize-css-assets-webpack-plugin ([ebe38f9](https://github.com/hubcarl/easywebpack/commit/ebe38f9))
+
+
+
 <a name="4.7.0"></a>
 # [4.7.0](https://github.com/hubcarl/easywebpack/compare/4.6.0...4.7.0) (2018-09-05)
 
