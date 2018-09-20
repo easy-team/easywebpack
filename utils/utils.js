@@ -74,7 +74,7 @@ utils.joinPath = function() {
 
 utils.getEntry = (config, type) => {
   const entry = config.entry;
-  if (utils.isObject(entry) && (entry.loader || entry.include)) {
+  if (utils.isObject(entry) && (entry instanceof RegExp || entry.loader || entry.include)) {
     return utils.getCustomEntry(config, type);
   }
   return utils.getGlobEntry(config, type);
@@ -124,11 +124,11 @@ utils.getGlobEntry = (config, type) => {
 
   if (utils.isString(entry)) {
     const files = glob.sync(config.entry);
-    const prefix = utils.getDirByRegex(entry);
+    const dir = utils.getDirByRegex(entry);
     const entries = {};
     files.forEach(file => {
       const ext = path.extname(file);
-      const entryName = file.replace(ext, '').replace(prefix, '').replace(/^\//, '');
+      const entryName = path.relative(dir, file).replace(ext, '');
       entries[entryName] = utils.normalizePath(file, baseDir);
     });
     return entries;
@@ -476,11 +476,10 @@ utils.checkDllUpdate = (config, dll) => {
 };
 
 utils.isEgg = config => {
-  const baseDir = config.baseDir;
   if (config.egg) {
     return true;
   }
-  const pkg = require(path.join(baseDir, 'package.json'));
+  const pkg = require(path.join(config.baseDir, 'package.json'));
   return pkg.dependencies['egg-view-vue-ssr'] || pkg.dependencies['egg-view-react-ssr'];
 };
 

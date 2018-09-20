@@ -82,7 +82,7 @@ describe('html.test.js', () => {
     it('should entry dir html template test', () => {
       const template = path.normalize(path.join(__dirname, 'layout.html'));
       const builder = createBuilder({
-        entry:'./test',
+        entry:'./test/*.js',
         template
       });
       const webpackConfig = builder.create();
