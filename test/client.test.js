@@ -502,7 +502,7 @@ describe('client.test.js', () => {
       expect(webpackConfig.devtool).to.equal('source-map');
     });
     it('should prod devtool test', () => {
-      const builder = createBuilder({ env: 'prod', devtool: 'source-map'});
+      const builder = createBuilder({ env: 'prod', cliDevtool: 'source-map'});
       const webpackConfig = builder.create();
       expect(webpackConfig.devtool).to.equal('source-map');
     });
@@ -512,19 +512,19 @@ describe('client.test.js', () => {
       expect(webpackConfig.devtool).to.equal('eval');
     });
     it('should prod eval devtool test', () => {
-      const builder = createBuilder({ env: 'prod', devtool: 'eval'});
+      const builder = createBuilder({ env: 'prod', cliDevtool: 'eval'});
       const webpackConfig = builder.create();
-      expect(webpackConfig.devtool).to.equal('source-map');
+      expect(webpackConfig.devtool).to.equal('eval');
     });
     it('should dev cli eval devtool test', () => {
       const builder = createBuilder({ env: 'prod', devtool: 'eval', cliDevtool: true});
       const webpackConfig = builder.create();
-      expect(webpackConfig.devtool).to.equal('eval');
+      expect(webpackConfig.devtool).to.equal('source-map');
     });
     it('should prod cli eval devtool test', () => {
       const builder = createBuilder({ env: 'prod', devtool: 'eval', cliDevtool: true });
       const webpackConfig = builder.create();
-      expect(webpackConfig.devtool).to.equal('eval');
+      expect(webpackConfig.devtool).to.equal('source-map');
     });
   });
   describe('#webpack merge test', () => {

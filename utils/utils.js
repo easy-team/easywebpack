@@ -134,6 +134,9 @@ utils.getGlobEntry = (config, type) => {
     return entries;
   }
   if (utils.isObject(entry)) {
+    Object.keys(entry).forEach(key => {
+      entry[key] = utils.normalizePath(entry[key], baseDir);
+    });
     return entry;
   }
   return {};

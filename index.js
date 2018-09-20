@@ -42,9 +42,9 @@ exports.getDllWebpackConfig = (config = {}, option = {}) => {
 };
 
 exports.build = (webpackConfig, option, callback) => {
-  webpackTool.build(webpackConfig, option, callback);
+  return webpackTool.build(webpackConfig, option, callback);
 };
 
 exports.server = (webpackConfig, option, callback) => {
-  webpackTool.server(webpackConfig, option, callback);
+  return webpackTool.server(webpackConfig, option, callback);
 };
