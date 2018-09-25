@@ -119,16 +119,34 @@ utils.getCustomEntry = (config, type) => {
   return entries;
 };
 
+// support 'app/web/page/**!(component|components|view|views)/*.vue'
+utils.glob = (root, str) => {
+  const result = str.match(/!\((.*)\)/);
+  if (result && result.length) {
+    const matchIgnore = result[0];
+    const matchIgnoreKeys = result[1];
+    const matchStr = str.replace(matchIgnore, '');
+    const ignore = matchIgnoreKeys.split('|').map(key => {
+      if (/\./.test(key)) {
+        return `**/${key}`;
+      }
+      return `**/${key}/**`;
+    });
+    return glob.sync(matchStr, { root, ignore });
+  }
+  return glob.sync(str, { root });
+};
+
 utils.getGlobEntry = (config, type) => {
   const { entry, baseDir } = config;
 
   if (utils.isString(entry)) {
-    const dir = utils.getDirByRegex(entry);
-    const files = glob.sync(config.entry, { root: dir });
+    const root = utils.getDirByRegex(entry);
+    const files = utils.glob(root, entry);
     const entries = {};
     files.forEach(file => {
       const ext = path.extname(file);
-      const entryName = path.relative(dir, file).replace(ext, '');
+      const entryName = path.relative(root, file).replace(ext, '');
       entries[entryName] = utils.normalizePath(file, baseDir);
     });
     return entries;
