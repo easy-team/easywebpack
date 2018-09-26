@@ -12,6 +12,7 @@
     "webpack-generator"
   ],
   "dependencies": {
+    "autoprefixer": "^9.1.5",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.2",
@@ -35,7 +36,7 @@
     "mini-css-extract-plugin": "^0.4.0",
     "node-noop": "^1.0.0",
     "npm-install-webpack-plugin": "^4.0.5",
-    "postcss-loader": "^2.1.0",
+    "postcss-loader": "^3.0.0",
     "progress-bar-webpack-plugin": "^1.10.0",
     "service-worker-precache-webpack-plugin": "^1.0.0",
     "shelljs": "^0.7.4",
@@ -85,7 +86,7 @@
     "stylus-loader": "latest"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "scripts": {
     "start": "node index.js",
