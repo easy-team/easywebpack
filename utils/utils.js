@@ -12,6 +12,7 @@ const uniq = require('lodash.uniq');
 const _ = require('lodash.get');
 const install = require('./install');
 const glob = require('glob');
+const shell = require('shelljs');
 const utils = Object.assign({}, {
   _,
   cloneDeep,
@@ -296,6 +297,10 @@ utils.loadNodeModules = isCache => {
   return nodeModules;
 };
 
+utils.getPort = port => {
+  
+};
+
 utils.getIp = position => {
   const interfaces = os.networkInterfaces();
   const ips = [];
@@ -411,6 +416,11 @@ utils.getCacheLoaderInfoPath = (loader, env = 'dev', type = 'client') => {
 
 utils.getCacheInfoPath = () => {
   return utils.getCompileTempDir('config.json');
+};
+
+utils.setCacheInfoPath = json => {
+  const cachePath = utils.getCacheInfoPath();
+  utils.writeFile(cachePath, json);
 };
 
 utils.getModuleInfo = (module, baseDir) => {

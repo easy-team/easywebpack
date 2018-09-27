@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "4.7.0-rc.2",
+  "version": "4.8.0-rc.1",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
@@ -28,6 +28,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "cross-spawn": "^5.1.0",
     "css-loader": "^0.28.4",
+    "detect-port": "^1.2.3",
     "directory-named-webpack-plugin": "^2.2.3",
     "eslint": "^4.3.0",
     "eslint-config-egg": "^7.1.0",
@@ -41,6 +42,7 @@
     "lodash.uniq": "^4.5.0",
     "mini-css-extract-plugin": "^0.4.0",
     "node-noop": "^1.0.0",
+    "node-tool-utils": "^1.0.0",
     "npm-install-webpack-plugin": "^4.0.5",
     "postcss-loader": "^3.0.0",
     "progress-bar-webpack-plugin": "^1.10.0",
@@ -66,6 +68,7 @@
     "less-loader": "^4.0.5",
     "mocha": "^3.4.2",
     "node-sass": "^4.5.3",
+    "node-tool-utils": "^1.0.0",
     "nyc": "^11.1.0",
     "sass-loader": "^6.0.6",
     "stylus": "^0.54.5",
