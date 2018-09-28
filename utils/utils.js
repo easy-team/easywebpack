@@ -297,10 +297,6 @@ utils.loadNodeModules = isCache => {
   return nodeModules;
 };
 
-utils.getPort = port => {
-  
-};
-
 utils.getIp = position => {
   const interfaces = os.networkInterfaces();
   const ips = [];
