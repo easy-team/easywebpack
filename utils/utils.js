@@ -466,40 +466,44 @@ utils.getDllCacheInfo = dllCachePath => {
 utils.checkDllUpdate = (config, dll) => {
   const baseDir = config.baseDir;
   const filepath = config.webpackConfigFile ? config.webpackConfigFile : path.join(baseDir, 'webpack.config.js');
-  if (!fs.existsSync(filepath)) {
-    return true;
-  }
-  const stat = fs.statSync(filepath);
-  const lastModifyTime = stat.mtimeMs;
   const dllCachePath = utils.getDllCacheInfoPath(dll.name, config.env);
   // cache file 文件不存在
   if (!fs.existsSync(dllCachePath)) {
-    utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, lastModifyTime);
+    utils.saveDllCacheInfo(config, filepath, dllCachePath, dll);
     return true;
   }
   // dll manifest 文件不存在
   if (!fs.existsSync(utils.getDllFilePath(dll.name, config.env))) {
     return true;
   }
-  // 判断 webpack.config.js 修改时间
   const dllCacheInfo = utils.getDllCacheInfo(dllCachePath);
-  if (dllCacheInfo) {
-    if (dllCacheInfo.webpackConfigFileLastModifyTime !== lastModifyTime) {
+  // webpack.config.js 修改
+  if (fs.existsSync(filepath)) {
+    const stat = fs.statSync(filepath);
+    const lastModifyTime = stat.mtimeMs;
+    // 判断 webpack.config.js 修改时间
+    const webpackConfigFileLastModifyTime = dllCacheInfo.webpackConfigFileLastModifyTime
+    if (webpackConfigFileLastModifyTime && webpackConfigFileLastModifyTime !== lastModifyTime) {
       utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, lastModifyTime);
       return true;
     }
-    // 判断 module 版本是否有升级, 目前只判断主module, module 依赖变更的暂不支持
-    const webpackDllLibInfo = dllCacheInfo.webpackDllLibInfo;
-    return dll.lib.some(module => {
-      const info = utils.getModuleInfo(module, config.baseDir);
-      if (webpackDllLibInfo[module] !== info) {
-        utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, lastModifyTime);
-        return true;
-      }
-      return false;
-    });
   }
-  return false;
+  // dll 配置不等
+  const webpackDllInfo = dllCacheInfo.webpackDllInfo;
+  if (JSON.stringify(dll) !== JSON.stringify(webpackDllInfo)) {
+    utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, +new Date());
+    return true;
+  }
+  // 判断 module 版本是否有升级, 目前只判断主module, module 依赖变更的暂不支持
+  const webpackDllLibInfo = dllCacheInfo.webpackDllLibInfo;
+  return dll.lib.some(module => {
+    const info = utils.getModuleInfo(module, config.baseDir);
+    if (webpackDllLibInfo[module] !== info) {
+      utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, +new Date());
+      return true;
+    }
+    return false;
+  });
 };
 
 utils.isEgg = config => {
