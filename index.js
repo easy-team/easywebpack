@@ -13,7 +13,7 @@ exports.WebpackDllBuilder = require('./lib/dll');
 
 
 exports.getConfig = (config = {}, option = {}) => {
-  return exports.WebpackBuilder.getBuilderConfig(config, option);
+  return exports.WebpackBuilder.getConfig(config, option);
 };
 
 exports.getWebpackConfig = (config = {}, option = {}) => {
