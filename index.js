@@ -10,9 +10,11 @@ exports.WebpackBaseBuilder = require('./lib/base');
 exports.WebpackClientBuilder = require('./lib/client');
 exports.WebpackServerBuilder = require('./lib/server');
 exports.WebpackDllBuilder = require('./lib/dll');
-exports.getConfig = config => require('./lib/config')(config);
 
-const webpackTool = new WebpackTool();
+exports.getConfig = (config, option) => {
+  exports.WebpackBuilder.getBuilderConfig(config, option);
+};
+
 exports.getWebpackConfig = (config = {}, option = {}) => {
   if (config.framework === 'dll' || option.onlyDll) {
     return exports.getDllWebpackConfig(config, option);
@@ -42,9 +44,9 @@ exports.getDllWebpackConfig = (config = {}, option = {}) => {
 };
 
 exports.build = (webpackConfig, option, callback) => {
-  webpackTool.build(webpackConfig, option, callback);
+  new WebpackTool().build(webpackConfig, option, callback);
 };
 
 exports.server = (webpackConfig, option, callback) => {
-  webpackTool.server(webpackConfig, option, callback);
+  new WebpackTool().server(webpackConfig, option, callback);
 };
