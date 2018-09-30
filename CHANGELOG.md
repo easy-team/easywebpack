@@ -1,11 +1,10 @@
-<a name="4.7.2"></a>
-## [4.7.2](https://github.com/hubcarl/easywebpack/compare/4.7.1...4.7.2) (2018-09-30)
+<a name="4.7.3"></a>
+## [4.7.3](https://github.com/hubcarl/easywebpack/compare/4.7.2...4.7.3) (2018-09-30)
 
 
 ### Bug Fixes
 
-* cli get config ([d2c54dd](https://github.com/hubcarl/easywebpack/commit/d2c54dd))
-
+* cli get config ([d28604e](https://github.com/hubcarl/easywebpack/commit/d28604e))
 
 
 <a name="4.7.1"></a>
