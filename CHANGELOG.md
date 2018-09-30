@@ -1,3 +1,13 @@
+<a name="3.10.3"></a>
+## [3.10.3](https://github.com/hubcarl/easywebpack/compare/3.10.2...3.10.3) (2018-09-30)
+
+
+### Bug Fixes
+
+* cli get config ([3015af4](https://github.com/hubcarl/easywebpack/commit/3015af4))
+
+
+
 <a name="3.10.2"></a>
 ## [3.10.2](https://github.com/hubcarl/easywebpack/compare/3.9.2...3.10.2) (2018-08-28)
 
