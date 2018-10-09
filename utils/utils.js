@@ -9,8 +9,12 @@ const mkdirp = require('mkdirp');
 const cloneDeep = require('lodash.clonedeep');
 const cloneDeepWith = require('lodash.clonedeepwith');
 const uniq = require('lodash.uniq');
+const _ = require('lodash.get');
 const install = require('./install');
+const glob = require('glob');
+const shell = require('shelljs');
 const utils = Object.assign({}, {
+  _,
   cloneDeep,
   cloneDeepWith,
   uniq,
@@ -36,7 +40,6 @@ utils.normalizeBuildPath = (buildPath, baseDir) => {
   return utils.normalizePath(buildPath, baseDir);
 };
 
-
 utils.isHttpOrHttps = strUrl => {
   return /^(https?:|\/\/)/.test(strUrl);
 };
@@ -59,6 +62,7 @@ utils.mixin = (target, source) => {
     }
   });
 };
+
 utils.joinPath = function() {
   return [].slice.call(arguments, 0).map((arg, index) => {
     let tempArg = arg.replace(/\/$/, '');
@@ -70,6 +74,14 @@ utils.joinPath = function() {
 };
 
 utils.getEntry = (config, type) => {
+  const entry = config.entry;
+  if (utils.isObject(entry) && (entry instanceof RegExp || entry.loader || entry.include)) {
+    return utils.getCustomEntry(config, type);
+  }
+  return utils.getGlobEntry(config, type);
+};
+
+utils.getCustomEntry = (config, type) => {
   let entryArray = [];
   let entryLoader;
   let extMatch = '.js';
@@ -108,6 +120,46 @@ utils.getEntry = (config, type) => {
   return entries;
 };
 
+// support 'app/web/page/**!(component|components|view|views)/*.vue'
+utils.glob = (root, str) => {
+  const result = str.match(/!\((.*)\)/);
+  if (result && result.length) {
+    const matchIgnore = result[0];
+    const matchIgnoreKeys = result[1];
+    const matchStr = str.replace(matchIgnore, '');
+    const ignore = matchIgnoreKeys.split('|').map(key => {
+      if (/\./.test(key)) {
+        return `**/${key}`;
+      }
+      return `**/${key}/**`;
+    });
+    return glob.sync(matchStr, { root, ignore });
+  }
+  return glob.sync(str, { root });
+};
+
+utils.getGlobEntry = (config, type) => {
+  const { entry, baseDir } = config;
+
+  if (utils.isString(entry)) {
+    const root = utils.getDirByRegex(entry);
+    const files = utils.glob(root, entry);
+    const entries = {};
+    files.forEach(file => {
+      const ext = path.extname(file);
+      const entryName = path.relative(root, file).replace(ext, '');
+      entries[entryName] = utils.normalizePath(file, baseDir);
+    });
+    return entries;
+  }
+  if (utils.isObject(entry)) {
+    Object.keys(entry).forEach(key => {
+      entry[key] = utils.normalizePath(entry[key], baseDir);
+    });
+    return entry;
+  }
+  return {};
+};
 
 utils.createEntry = (config, entryLoader, entryConfig, isParseUrl) => {
   const entries = {};
@@ -141,7 +193,7 @@ utils.getDirByRegex = (regex, baseDir) => {
     return dir;
   }, '');
   assert(entryDir, `The regex ${strRegex} must begin with / + a letter or number`);
-  return utils.normalizePath(entryDir, baseDir);
+  return baseDir ? utils.normalizePath(entryDir, baseDir) : entryDir;
 };
 
 utils.walkFile = (dirs, excludeRegex, extMatch = '.js', baseDir) => {
@@ -187,6 +239,29 @@ utils.isMatch = (regexArray, strMatch) => {
 };
 
 utils.assetsPath = (prefix, filepath) => path.posix.join(prefix, filepath);
+
+utils.getLoaderOptionString = (name, options) => {
+  const kvArray = [];
+  options && Object.keys(options).forEach(key => {
+    const value = options[key];
+    if (Array.isArray(value)) {
+      value.forEach(item => {
+        kvArray.push(`${key}[]=${item}`);
+      });
+    } else if (typeof value === 'object') {
+      // TODO:
+    } else if (typeof value === 'boolean') {
+      kvArray.push(value === true ? `+${key}` : `-${key}`);
+    } else {
+      kvArray.push(`${key}=${value}`);
+    }
+  });
+  const optionStr = kvArray.join(',');
+  if (name) {
+    return /\?/.test(name) ? `${name},${optionStr}` : name + (optionStr ? `?${optionStr}` : '');
+  }
+  return optionStr;
+};
 
 utils.getLoaderLabel = loader => {
   let loaderName = loader;
@@ -339,6 +414,11 @@ utils.getCacheInfoPath = () => {
   return utils.getCompileTempDir('config.json');
 };
 
+utils.setCacheInfoPath = json => {
+  const cachePath = utils.getCacheInfoPath();
+  utils.writeFile(cachePath, json);
+};
+
 utils.getModuleInfo = (module, baseDir) => {
   if (/\.js$/.test(module)) {
     if (fs.existsSync(module)) {
@@ -386,40 +466,52 @@ utils.getDllCacheInfo = dllCachePath => {
 utils.checkDllUpdate = (config, dll) => {
   const baseDir = config.baseDir;
   const filepath = config.webpackConfigFile ? config.webpackConfigFile : path.join(baseDir, 'webpack.config.js');
-  if (!fs.existsSync(filepath)) {
-    return true;
-  }
-  const stat = fs.statSync(filepath);
-  const lastModifyTime = stat.mtimeMs;
   const dllCachePath = utils.getDllCacheInfoPath(dll.name, config.env);
   // cache file 文件不存在
   if (!fs.existsSync(dllCachePath)) {
-    utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, lastModifyTime);
+    utils.saveDllCacheInfo(config, filepath, dllCachePath, dll);
     return true;
   }
   // dll manifest 文件不存在
   if (!fs.existsSync(utils.getDllFilePath(dll.name, config.env))) {
     return true;
   }
-  // 判断 webpack.config.js 修改时间
   const dllCacheInfo = utils.getDllCacheInfo(dllCachePath);
-  if (dllCacheInfo) {
-    if (dllCacheInfo.webpackConfigFileLastModifyTime !== lastModifyTime) {
+  // webpack.config.js 修改
+  if (fs.existsSync(filepath)) {
+    const stat = fs.statSync(filepath);
+    const lastModifyTime = stat.mtimeMs;
+    // 判断 webpack.config.js 修改时间
+    const webpackConfigFileLastModifyTime = dllCacheInfo.webpackConfigFileLastModifyTime
+    if (webpackConfigFileLastModifyTime && webpackConfigFileLastModifyTime !== lastModifyTime) {
       utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, lastModifyTime);
       return true;
     }
-    // 判断 module 版本是否有升级, 目前只判断主module, module 依赖变更的暂不支持
-    const webpackDllLibInfo = dllCacheInfo.webpackDllLibInfo;
-    return dll.lib.some(module => {
-      const info = utils.getModuleInfo(module, config.baseDir);
-      if (webpackDllLibInfo[module] !== info) {
-        utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, lastModifyTime);
-        return true;
-      }
-      return false;
-    });
   }
-  return false;
+  // dll 配置不等
+  const webpackDllInfo = dllCacheInfo.webpackDllInfo;
+  if (JSON.stringify(dll) !== JSON.stringify(webpackDllInfo)) {
+    utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, +new Date());
+    return true;
+  }
+  // 判断 module 版本是否有升级, 目前只判断主module, module 依赖变更的暂不支持
+  const webpackDllLibInfo = dllCacheInfo.webpackDllLibInfo;
+  return dll.lib.some(module => {
+    const info = utils.getModuleInfo(module, config.baseDir);
+    if (webpackDllLibInfo[module] !== info) {
+      utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, +new Date());
+      return true;
+    }
+    return false;
+  });
+};
+
+utils.isEgg = config => {
+  if (config.egg) {
+    return true;
+  }
+  const pkg = require(path.join(config.baseDir, 'package.json'));
+  return pkg.dependencies['egg-view-vue-ssr'] || pkg.dependencies['egg-view-react-ssr'];
 };
 
 module.exports = utils;

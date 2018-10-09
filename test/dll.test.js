@@ -53,12 +53,24 @@ describe('dll.test.js', () => {
     it('should dll refrence plugin test', () => {
       const filename = WebpackClientBuilder.getDllFilePath('vendor');
       if (!fs.existsSync(filename)) {
-        utils.writeFile(filename, {});
+        utils.writeFile(filename, {
+          name: 'vendor',
+          content: {
+            './node_modules/_vuex@3.0.1@vuex/dist/vuex.esm.js': {
+              id: "./node_modules/_vuex@3.0.1@vuex/dist/vuex.esm.js",
+              buildMeta: {}
+            }
+          }
+        });
       }
-      const builder = new WebpackClientBuilder({  entry: {
-        include: __dirname,
-        template: 'test/layout.html'
-      }, dll: ['mocha'] });
+      const builder = new WebpackClientBuilder({
+        env: 'dev',
+        entry: {
+          include: __dirname
+        },
+        template: 'test/layout.html',
+        dll: ['mocha']
+      });
       const webpackConfig = builder.createWebpackConfig();
       const dllReferencePlugin = getPluginByLabel('DllReferencePlugin', webpackConfig.plugins);
       expect(!!dllReferencePlugin).to.be.true;

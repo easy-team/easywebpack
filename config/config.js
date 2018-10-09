@@ -5,8 +5,8 @@ const baseDir = process.cwd();
 exports.config = {
   baseDir,
   port:9000,
-  buildPath: 'public',
-  publicPath: '/public/',
+  buildPath: 'dist',
+  publicPath: '/',
   hashLength: 8,
   alias: {},
   packs: {},

@@ -31,7 +31,6 @@ describe('builder.test.js', () => {
   describe('#webpack builder.getBuilderConfig test', () => {
     it('should test', () => {
       const builderConfig = WebpackBuilder.getBuilderConfig();
-      expect(Object.keys(builderConfig).length).to.equal(1);
       expect(builderConfig.baseDir).to.equal(process.cwd());
     });
 
@@ -65,12 +64,12 @@ describe('builder.test.js', () => {
     });
 
     it('should type:client test', () => {
-      const webpackConfig = easywebpack.getWebpackConfig( { type: 'client'});
+      const webpackConfig = easywebpack.getWebpackConfig( { target: 'web'});
       expect(webpackConfig.target).to.equal('web');
     });
 
     it('should type:server test', () => {
-      const webpackConfig = easywebpack.getWebpackConfig( { type: 'server'});
+      const webpackConfig = easywebpack.getWebpackConfig( { target: 'node'});
       expect(webpackConfig.target).to.equal('node');
     });
   });
@@ -96,6 +95,7 @@ describe('builder.test.js', () => {
 
     it('should getWebpackConfig dll test', () => {
       const webpackConfig = easywebpack.getWebpackConfig({ dll: ['vue', 'vuex']}, { dll: true });
+      console.log(webpackConfig.length);
       expect(webpackConfig.length).to.equal(3);
     });
   });
