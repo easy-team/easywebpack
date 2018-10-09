@@ -64,12 +64,12 @@ describe('builder.test.js', () => {
     });
 
     it('should type:client test', () => {
-      const webpackConfig = easywebpack.getWebpackConfig( { type: 'client'});
+      const webpackConfig = easywebpack.getWebpackConfig( { target: 'web'});
       expect(webpackConfig.target).to.equal('web');
     });
 
     it('should type:server test', () => {
-      const webpackConfig = easywebpack.getWebpackConfig( { type: 'server'});
+      const webpackConfig = easywebpack.getWebpackConfig( { target: 'node'});
       expect(webpackConfig.target).to.equal('node');
     });
   });
