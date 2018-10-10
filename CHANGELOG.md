@@ -1,3 +1,24 @@
+<a name="4.8.2"></a>
+## [4.8.2](https://github.com/hubcarl/easywebpack/compare/4.8.0-rc.6...4.8.2) (2018-10-10)
+
+
+### Bug Fixes
+
+* isEgg valid params ([160a7c3](https://github.com/hubcarl/easywebpack/commit/160a7c3))
+* windows entryName path error, use path.posix ([dcbacd4](https://github.com/hubcarl/easywebpack/commit/dcbacd4))
+
+
+
+<a name="4.7.1"></a>
+## [4.7.1](https://github.com/hubcarl/easywebpack/compare/4.7.0...4.7.1) (2018-09-19)
+
+
+### Bug Fixes
+
+* css not mini-> minicss: optimize-css-assets-webpack-plugin ([ebe38f9](https://github.com/hubcarl/easywebpack/commit/ebe38f9))
+
+
+
 <a name="4.7.1"></a>
 ## [4.7.1](https://github.com/hubcarl/easywebpack/compare/4.7.0...4.7.1) (2018-09-19)
 
