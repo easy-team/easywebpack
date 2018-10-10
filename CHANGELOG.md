@@ -1,3 +1,13 @@
+<a name="4.7.4"></a>
+## [4.7.4](https://github.com/hubcarl/easywebpack/compare/4.7.3...4.7.4) (2018-10-10)
+
+
+### Bug Fixes
+
+* entry filter invalid on window by path sep ([17c894a](https://github.com/hubcarl/easywebpack/commit/17c894a))
+
+
+
 <a name="4.7.3"></a>
 ## [4.7.3](https://github.com/hubcarl/easywebpack/compare/4.7.2...4.7.3) (2018-09-30)
 
