@@ -147,7 +147,7 @@ utils.getGlobEntry = (config, type) => {
     const entries = {};
     files.forEach(file => {
       const ext = path.extname(file);
-      const entryName = path.relative(root, file).replace(ext, '');
+      const entryName = path.posix.relative(root, file).replace(ext, '');
       entries[entryName] = utils.normalizePath(file, baseDir);
     });
     return entries;
