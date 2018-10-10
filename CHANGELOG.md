@@ -1,3 +1,13 @@
+<a name="4.8.3"></a>
+## [4.8.3](https://github.com/hubcarl/easywebpack/compare/4.8.2...4.8.3) (2018-10-10)
+
+
+### Bug Fixes
+
+* entry filter invalid on window ([fc0d8c4](https://github.com/hubcarl/easywebpack/commit/fc0d8c4))
+
+
+
 <a name="4.8.2"></a>
 ## [4.8.2](https://github.com/hubcarl/easywebpack/compare/4.8.0-rc.6...4.8.2) (2018-10-10)
 
