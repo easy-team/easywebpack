@@ -182,8 +182,9 @@ utils.isMatch = (regexArray, strMatch) => {
   if (!regexArray) {
     return false;
   }
+  const normalizeStrMatch = strMatch.replace(/\\/g, '/');
   regexArray = Array.isArray(regexArray) ? regexArray : [regexArray];
-  return regexArray.some(item => new RegExp(item, '').test(strMatch));
+  return regexArray.some(item => new RegExp(item, '').test(normalizeStrMatch));
 };
 
 utils.assetsPath = (prefix, filepath) => path.posix.join(prefix, filepath);
