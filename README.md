@@ -8,12 +8,12 @@
 
 [npm-image]: https://img.shields.io/npm/v/easywebpack.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/easywebpack
-[travis-image]: https://img.shields.io/travis/hubcarl/easywebpack.svg?style=flat-square
-[travis-url]: https://travis-ci.org/hubcarl/easywebpack
-[codecov-image]: https://codecov.io/gh/hubcarl/easywebpack/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/hubcarl/easywebpack
-[david-image]: https://img.shields.io/david/hubcarl/easywebpack.svg?style=flat-square
-[david-url]: https://david-dm.org/hubcarl/easywebpack
+[travis-image]: https://img.shields.io/travis/easy-team/easywebpack.svg?style=flat-square
+[travis-url]: https://travis-ci.org/easy-team/easywebpack
+[codecov-image]: https://codecov.io/gh/easy-team/easywebpack/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/easy-team/easywebpack
+[david-image]: https://img.shields.io/david/easy-team/easywebpack.svg?style=flat-square
+[david-url]: https://david-dm.org/easy-team/easywebpack
 [snyk-image]: https://snyk.io/test/npm/easywebpack/badge.svg?style=flat-square
 [snyk-url]: https://snyk.io/test/npm/easywebpack
 [download-image]: https://img.shields.io/npm/dm/easywebpack.svg?style=flat-square
@@ -22,10 +22,15 @@
 
 基于 Webpack 的前端构建工程化解决方案 [easywebpack](https://zhuanlan.zhihu.com/p/28322014)
 
+## 安装
+
+```bash
+npm install easywebpack-vue --save-dev
+```
 
 ## 文档与总结
 
-- http://hubcarl.github.io/easywebpack
+- https://www.yuque.com/easy-team/easywebpack
 - https://zhuanlan.zhihu.com/easywebpack
 
 ## 版本说明
@@ -33,15 +38,10 @@
 - easywebpack 4.x.x > webpack 4.x.x
 - easywebpack 3.x.x > webpack 3.x.x
 
-对应的 Vue/React/Weex/HTML/JS 解决方案也分别有对应的版本。 以 Vue 稳定版和开发版本安装举例：
-
-```bash
-npm install easywebpack-vue --save-dev
-```
 
 ## 基础功能
 
-![easywebpack](https://github.com/hubcarl/easywebpack/blob/master/docs/images/easywebpack.png)
+![easywebpack](https://github.com/easy-team/easywebpack/blob/master/docs/images/easywebpack.png)
 
 - 支持服务端渲染, 前端渲染, 静态页面渲染三种构建方式
 - 支持单页面, 多页面服务端渲染构建模式
@@ -65,21 +65,21 @@ npm install easywebpack-vue --save-dev
 
 ## 工程化
 
-![easywebpack](https://github.com/hubcarl/easywebpack/blob/master/docs/images/easywebpack.solution.png)
+![easywebpack](https://github.com/easy-team/easywebpack/blob/master/docs/images/easywebpack.solution.png)
 
 ### 解决方案
 
 基于 `easywebpack` 基础骨架，目前已扩展 `Vue` `React` `Weex`, `HTML`, `Javascript` 五种解决方案：
-- [easywebpack-js](https://github.com/hubcarl/easywebpack-js.git)  支持纯 javascript 文件构建模式
-- [easywebpack-vue](https://github.com/hubcarl/easywebpack-vue.git)  支持 Vue 纯前端构建和Node端构建模式
-- [easywebpack-react](https://github.com/hubcarl/easywebpack-react.git) 支持 React 纯前端构建和Node端构建模式
-- [easywebpack-weex](https://github.com/hubcarl/easywebpack-weex.git) 支持 Native 和 Web 构建模式
-- [easywebpack-html](https://github.com/hubcarl/easywebpack-html.git) 支持 HTML静态页面模式，支持 nunjucks 引擎
+- [easywebpack-js](https://github.com/easy-team/easywebpack-js.git)  支持纯 javascript 文件构建模式
+- [easywebpack-vue](https://github.com/easy-team/easywebpack-vue.git)  支持 Vue 纯前端构建和Node端构建模式
+- [easywebpack-react](https://github.com/easy-team/easywebpack-react.git) 支持 React 纯前端构建和Node端构建模式
+- [easywebpack-weex](https://github.com/easy-team/easywebpack-weex.git) 支持 Native 和 Web 构建模式
+- [easywebpack-html](https://github.com/easy-team/easywebpack-html.git) 支持 HTML静态页面模式，支持 nunjucks 引擎
 
 
 ### 命令行工具
 
-[easywebpack-cli](https://github.com/hubcarl/easywebpack-cli.git) 基于 easywebpack 前端工程化解决方案构建的脚手架命令行工具。
+[easywebpack-cli](https://github.com/easy-team/easywebpack-cli.git) 基于 easywebpack 前端工程化解决方案构建的脚手架命令行工具。
 
 - 支持 Vue/React/Weex/HTML 框架项目的初始化，包括 SPA 应用，多页面应用，Server Side Render(Egg)项目
 - 支持命令行 Webpack 构建，包括 Webpack 配置信息打印(调试)和获取
@@ -88,27 +88,27 @@ npm install easywebpack-vue --save-dev
 
 ### 项目骨架
 
-- [easywebpack-cli-template](https://github.com/hubcarl/easywebpack-cli-template) Vue/React/Weex 纯前端项目目标
+- [easywebpack-cli-template](https://github.com/easy-team/easywebpack-cli-template) Vue/React/Weex 纯前端项目目标
 
-- [egg-vue-webpack-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate) Egg + Vue 服务端渲染骨架
+- [egg-vue-webpack-boilerplate](https://github.com/easy-team/egg-vue-webpack-boilerplate) Egg + Vue 服务端渲染骨架
 
-- [egg-vue-webpack-spa-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate/tree/feature/green/spa) Egg + Vue 单页面服务端渲染骨架
+- [egg-vue-webpack-spa-boilerplate](https://github.com/easy-team/egg-vue-webpack-boilerplate/tree/feature/green/spa) Egg + Vue 单页面服务端渲染骨架
 
-- [egg-vue-webpack-mpa-boilerplate](https://github.com/hubcarl/egg-vue-webpack-boilerplate/tree/feature/green/multi) Egg + Vue 多页面服务端渲染骨架
+- [egg-vue-webpack-mpa-boilerplate](https://github.com/easy-team/egg-vue-webpack-boilerplate/tree/feature/green/multi) Egg + Vue 多页面服务端渲染骨架
 
-- [egg-vue-typescript-boilerplate](https://github.com/hubcarl/egg-vue-typescript-boilerplate) Egg + Vue + TypeScript + Webpack 服务端渲染骨架
+- [egg-vue-typescript-boilerplate](https://github.com/easy-team/egg-vue-typescript-boilerplate) Egg + Vue + TypeScript + Webpack 服务端渲染骨架
 
-- [egg-react-webpack-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate) Egg + React 服务端渲染骨架
+- [egg-react-webpack-boilerplate](https://github.com/easy-team/egg-react-webpack-boilerplate) Egg + React 服务端渲染骨架
 
-- [egg-react-webpack-spa-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/feature/green/spa) Egg + React 单页面服务端渲染骨架
+- [egg-react-webpack-spa-boilerplate](https://github.com/easy-team/egg-react-webpack-boilerplate/tree/feature/green/spa) Egg + React 单页面服务端渲染骨架
 
-- [egg-react-webpack-mpa-boilerplate](https://github.com/hubcarl/egg-react-webpack-boilerplate/tree/feature/green/multi) Egg + React 多页面服务端渲染骨架
+- [egg-react-webpack-mpa-boilerplate](https://github.com/easy-team/egg-react-webpack-boilerplate/tree/feature/green/multi) Egg + React 多页面服务端渲染骨架
 
-- [egg-react-typescript-boilerplate](https://github.com/hubcarl/egg-react-typescript-boilerplate) Egg + React + TypeScript + Webpack 服务端渲染骨架
+- [egg-react-typescript-boilerplate](https://github.com/easy-team/egg-react-typescript-boilerplate) Egg + React + TypeScript + Webpack 服务端渲染骨架
 
-- [easywebpack-weex-boilerplate](https://github.com/hubcarl/easywebpack-weex-boilerplate) Weex Native 和 Web 构建骨架项目
+- [easywebpack-weex-boilerplate](https://github.com/easy-team/easywebpack-weex-boilerplate) Weex Native 和 Web 构建骨架项目
 
-- [easywebpack-multiple-html-boilerplate](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate) 静态页面构建方案骨架，支持纯 HTML 构建 和 nunjucks 构建。 
+- [easywebpack-multiple-html-boilerplate](https://github.com/easy-team/easywebpack-multiple-html-boilerplate) 静态页面构建方案骨架，支持纯 HTML 构建 和 nunjucks 构建。 
 
 **以上骨架可以通过 easywebpack-cli 初始化**
 

@@ -1,388 +1,388 @@
 <a name="4.8.3"></a>
-## [4.8.3](https://github.com/hubcarl/easywebpack/compare/4.8.2...4.8.3) (2018-10-10)
+## [4.8.3](https://github.com/easy-team/easywebpack/compare/4.8.2...4.8.3) (2018-10-10)
 
 
 ### Bug Fixes
 
-* entry filter invalid on window ([fc0d8c4](https://github.com/hubcarl/easywebpack/commit/fc0d8c4))
+* entry filter invalid on window ([fc0d8c4](https://github.com/easy-team/easywebpack/commit/fc0d8c4))
 
 
 
 <a name="4.8.2"></a>
-## [4.8.2](https://github.com/hubcarl/easywebpack/compare/4.8.0-rc.6...4.8.2) (2018-10-10)
+## [4.8.2](https://github.com/easy-team/easywebpack/compare/4.8.0-rc.6...4.8.2) (2018-10-10)
 
 
 ### Bug Fixes
 
-* isEgg valid params ([160a7c3](https://github.com/hubcarl/easywebpack/commit/160a7c3))
-* windows entryName path error, use path.posix ([dcbacd4](https://github.com/hubcarl/easywebpack/commit/dcbacd4))
+* isEgg valid params ([160a7c3](https://github.com/easy-team/easywebpack/commit/160a7c3))
+* windows entryName path error, use path.posix ([dcbacd4](https://github.com/easy-team/easywebpack/commit/dcbacd4))
 
 
 
 <a name="4.7.1"></a>
-## [4.7.1](https://github.com/hubcarl/easywebpack/compare/4.7.0...4.7.1) (2018-09-19)
+## [4.7.1](https://github.com/easy-team/easywebpack/compare/4.7.0...4.7.1) (2018-09-19)
 
 
 ### Bug Fixes
 
-* css not mini-> minicss: optimize-css-assets-webpack-plugin ([ebe38f9](https://github.com/hubcarl/easywebpack/commit/ebe38f9))
+* css not mini-> minicss: optimize-css-assets-webpack-plugin ([ebe38f9](https://github.com/easy-team/easywebpack/commit/ebe38f9))
 
 
 
 <a name="4.7.1"></a>
-## [4.7.1](https://github.com/hubcarl/easywebpack/compare/4.7.0...4.7.1) (2018-09-19)
+## [4.7.1](https://github.com/easy-team/easywebpack/compare/4.7.0...4.7.1) (2018-09-19)
 
 
 ### Bug Fixes
 
-* css not mini-> minicss: optimize-css-assets-webpack-plugin ([ebe38f9](https://github.com/hubcarl/easywebpack/commit/ebe38f9))
+* css not mini-> minicss: optimize-css-assets-webpack-plugin ([ebe38f9](https://github.com/easy-team/easywebpack/commit/ebe38f9))
 
 
 
 <a name="4.7.0"></a>
-# [4.7.0](https://github.com/hubcarl/easywebpack/compare/4.6.0...4.7.0) (2018-09-05)
+# [4.7.0](https://github.com/easy-team/easywebpack/compare/4.6.0...4.7.0) (2018-09-05)
 
 
 ### Bug Fixes
 
-* css hot ([13fc036](https://github.com/hubcarl/easywebpack/commit/13fc036))
+* css hot ([13fc036](https://github.com/easy-team/easywebpack/commit/13fc036))
 
 
 ### Features
 
-* support BABEL_ENV node and web single config ([61df5fb](https://github.com/hubcarl/easywebpack/commit/61df5fb))
+* support BABEL_ENV node and web single config ([61df5fb](https://github.com/easy-team/easywebpack/commit/61df5fb))
 
 
 
 <a name="4.6.0"></a>
-# [4.6.0](https://github.com/hubcarl/easywebpack/compare/4.5.2...4.6.0) (2018-08-31)
+# [4.6.0](https://github.com/easy-team/easywebpack/compare/4.5.2...4.6.0) (2018-08-31)
 
 
 ### Features
 
-* add clean-webpack-plugin config support ([ce50e67](https://github.com/hubcarl/easywebpack/commit/ce50e67))
-* dev mode not use cdn config ([70bcae1](https://github.com/hubcarl/easywebpack/commit/70bcae1))
-* 如果存在同名 html 模板文件, 全局 template 配置非必须 ([7ec20aa](https://github.com/hubcarl/easywebpack/commit/7ec20aa))
+* add clean-webpack-plugin config support ([ce50e67](https://github.com/easy-team/easywebpack/commit/ce50e67))
+* dev mode not use cdn config ([70bcae1](https://github.com/easy-team/easywebpack/commit/70bcae1))
+* 如果存在同名 html 模板文件, 全局 template 配置非必须 ([7ec20aa](https://github.com/easy-team/easywebpack/commit/7ec20aa))
 
 
 
 <a name="4.5.2"></a>
-## [4.5.2](https://github.com/hubcarl/easywebpack/compare/4.5.1...4.5.2) (2018-08-22)
+## [4.5.2](https://github.com/easy-team/easywebpack/compare/4.5.1...4.5.2) (2018-08-22)
 
 
 ### Bug Fixes
 
-* support set manifest filepath and default outputPath ([d41de3f](https://github.com/hubcarl/easywebpack/commit/d41de3f))
+* support set manifest filepath and default outputPath ([d41de3f](https://github.com/easy-team/easywebpack/commit/d41de3f))
 
 
 
 <a name="4.5.1"></a>
-## [4.5.1](https://github.com/hubcarl/easywebpack/compare/4.5.0...4.5.1) (2018-08-21)
+## [4.5.1](https://github.com/easy-team/easywebpack/compare/4.5.0...4.5.1) (2018-08-21)
 
 
 ### Bug Fixes
 
-* multiple process lead build slow, set default 2 ([a8f4d6e](https://github.com/hubcarl/easywebpack/commit/a8f4d6e))
+* multiple process lead build slow, set default 2 ([a8f4d6e](https://github.com/easy-team/easywebpack/commit/a8f4d6e))
 
 
 
 <a name="4.5.0"></a>
-# [4.5.0](https://github.com/hubcarl/easywebpack/compare/4.4.6...4.5.0) (2018-06-29)
+# [4.5.0](https://github.com/easy-team/easywebpack/compare/4.4.6...4.5.0) (2018-06-29)
 
 
 ### Features
 
-* extract-text-webpack-plugin to mini-css-extract-plugin ([54b6c54](https://github.com/hubcarl/easywebpack/commit/54b6c54))
+* extract-text-webpack-plugin to mini-css-extract-plugin ([54b6c54](https://github.com/easy-team/easywebpack/commit/54b6c54))
 
 
 
 <a name="4.4.6"></a>
-## [4.4.6](https://github.com/hubcarl/easywebpack/compare/4.4.5...4.4.6) (2018-06-29)
+## [4.4.6](https://github.com/easy-team/easywebpack/compare/4.4.5...4.4.6) (2018-06-29)
 
 
 ### Bug Fixes
 
-* test env use production, scan code ([f617f6e](https://github.com/hubcarl/easywebpack/commit/f617f6e))
+* test env use production, scan code ([f617f6e](https://github.com/easy-team/easywebpack/commit/f617f6e))
 
 
 
 <a name="4.4.4"></a>
-## [4.4.4](https://github.com/hubcarl/easywebpack/compare/4.4.2...4.4.4) (2018-06-09)
+## [4.4.4](https://github.com/easy-team/easywebpack/compare/4.4.2...4.4.4) (2018-06-09)
 
 
 ### Bug Fixes
 
-* set host, proxy false ([4e09a2c](https://github.com/hubcarl/easywebpack/commit/4e09a2c))
-* 修复html-webpack无法查找entryTemplate ([815b33c](https://github.com/hubcarl/easywebpack/commit/815b33c))
+* set host, proxy false ([4e09a2c](https://github.com/easy-team/easywebpack/commit/4e09a2c))
+* 修复html-webpack无法查找entryTemplate ([815b33c](https://github.com/easy-team/easywebpack/commit/815b33c))
 
 
 
 <a name="4.4.3"></a>
-## [4.4.3](https://github.com/hubcarl/easywebpack/compare/4.2.5...4.4.3) (2018-06-07)
+## [4.4.3](https://github.com/easy-team/easywebpack/compare/4.2.5...4.4.3) (2018-06-07)
 
 
 ### Bug Fixes
 
-* add thread-loader ([a35a0d7](https://github.com/hubcarl/easywebpack/commit/a35a0d7))
-* build prod css not compressed ([7703b0b](https://github.com/hubcarl/easywebpack/commit/7703b0b))
-* remove repeat cache config ([8e00d12](https://github.com/hubcarl/easywebpack/commit/8e00d12))
-* 修复html-webpack无法查找entryTemplate ([815b33c](https://github.com/hubcarl/easywebpack/commit/815b33c))
+* add thread-loader ([a35a0d7](https://github.com/easy-team/easywebpack/commit/a35a0d7))
+* build prod css not compressed ([7703b0b](https://github.com/easy-team/easywebpack/commit/7703b0b))
+* remove repeat cache config ([8e00d12](https://github.com/easy-team/easywebpack/commit/8e00d12))
+* 修复html-webpack无法查找entryTemplate ([815b33c](https://github.com/easy-team/easywebpack/commit/815b33c))
 
 
 ### Features
 
-* auto set sourceMap when devtool set ([708cce8](https://github.com/hubcarl/easywebpack/commit/708cce8))
+* auto set sourceMap when devtool set ([708cce8](https://github.com/easy-team/easywebpack/commit/708cce8))
 
 
 
 <a name="4.4.2"></a>
-## [4.4.2](https://github.com/hubcarl/easywebpack/compare/4.4.1...4.4.2) (2018-05-31)
+## [4.4.2](https://github.com/easy-team/easywebpack/compare/4.4.1...4.4.2) (2018-05-31)
 
 
 ### Bug Fixes
 
-* remove repeat cache config ([8e00d12](https://github.com/hubcarl/easywebpack/commit/8e00d12))
+* remove repeat cache config ([8e00d12](https://github.com/easy-team/easywebpack/commit/8e00d12))
 
 
 
 <a name="4.4.1"></a>
-## [4.4.1](https://github.com/hubcarl/easywebpack/compare/4.4.0...4.4.1) (2018-05-22)
+## [4.4.1](https://github.com/easy-team/easywebpack/compare/4.4.0...4.4.1) (2018-05-22)
 
 
 ### Bug Fixes
 
-* add thread-loader ([a35a0d7](https://github.com/hubcarl/easywebpack/commit/a35a0d7))
-* build prod css not compressed ([7703b0b](https://github.com/hubcarl/easywebpack/commit/7703b0b))
+* add thread-loader ([a35a0d7](https://github.com/easy-team/easywebpack/commit/a35a0d7))
+* build prod css not compressed ([7703b0b](https://github.com/easy-team/easywebpack/commit/7703b0b))
 
 
 
 <a name="4.2.5"></a>
-## [4.2.5](https://github.com/hubcarl/easywebpack/compare/4.2.4...4.2.5) (2018-04-09)
+## [4.2.5](https://github.com/easy-team/easywebpack/compare/4.2.4...4.2.5) (2018-04-09)
 
 
 ### Bug Fixes
 
-* array merge repeat ([abbf382](https://github.com/hubcarl/easywebpack/commit/abbf382))
+* array merge repeat ([abbf382](https://github.com/easy-team/easywebpack/commit/abbf382))
 
 <a name="4.2.4"></a>
-## [4.2.4](https://github.com/hubcarl/easywebpack/compare/4.2.3...4.2.4) (2018-04-09)
+## [4.2.4](https://github.com/easy-team/easywebpack/compare/4.2.3...4.2.4) (2018-04-09)
 
 
 ### Bug Fixes
 
-* client and server cache dir separation ([856f7e0](https://github.com/hubcarl/easywebpack/commit/856f7e0))
+* client and server cache dir separation ([856f7e0](https://github.com/easy-team/easywebpack/commit/856f7e0))
 
 
 <a name="4.2.3"></a>
-## [4.2.3](https://github.com/hubcarl/easywebpack/compare/4.2.2...4.2.3) (2018-03-30)
+## [4.2.3](https://github.com/easy-team/easywebpack/compare/4.2.2...4.2.3) (2018-03-30)
 
 
 ### Bug Fixes
 
-* eval use production, jsbundle file size large, limit use eval in production ([4a32c4f](https://github.com/hubcarl/easywebpack/commit/4a32c4f))
+* eval use production, jsbundle file size large, limit use eval in production ([4a32c4f](https://github.com/easy-team/easywebpack/commit/4a32c4f))
 
 
 ### Features
 
-* support thread-loader and cache-loader for babel and ts ([ae5d444](https://github.com/hubcarl/easywebpack/commit/ae5d444))
+* support thread-loader and cache-loader for babel and ts ([ae5d444](https://github.com/easy-team/easywebpack/commit/ae5d444))
 
 
 
 <a name="4.2.2"></a>
-## [4.2.2](https://github.com/hubcarl/easywebpack/compare/4.2.1...4.2.2) (2018-03-29)
+## [4.2.2](https://github.com/easy-team/easywebpack/compare/4.2.1...4.2.2) (2018-03-29)
 
 
 ### Bug Fixes
 
-* stats port ([ede98df](https://github.com/hubcarl/easywebpack/commit/ede98df))
+* stats port ([ede98df](https://github.com/easy-team/easywebpack/commit/ede98df))
 
 
 
 <a name="4.2.0"></a>
-# [4.2.0](https://github.com/hubcarl/easywebpack/compare/4.1.3...4.2.0) (2018-03-29)
+# [4.2.0](https://github.com/easy-team/easywebpack/compare/4.1.3...4.2.0) (2018-03-29)
 
 
 
 <a name="4.1.3"></a>
-## [4.1.3](https://github.com/hubcarl/easywebpack/compare/4.1.2...4.1.3) (2018-03-27)
+## [4.1.3](https://github.com/easy-team/easywebpack/compare/4.1.2...4.1.3) (2018-03-27)
 
 
 ### Bug Fixes
 
-* ts-loader exclude array to object for override ([647d963](https://github.com/hubcarl/easywebpack/commit/647d963))
+* ts-loader exclude array to object for override ([647d963](https://github.com/easy-team/easywebpack/commit/647d963))
 
 
 
 <a name="4.1.2"></a>
-## [4.1.2](https://github.com/hubcarl/easywebpack/compare/4.1.1...4.1.2) (2018-03-22)
+## [4.1.2](https://github.com/easy-team/easywebpack/compare/4.1.1...4.1.2) (2018-03-22)
 
 
 ### Bug Fixes
 
-* loader options merge ([69e14f2](https://github.com/hubcarl/easywebpack/commit/69e14f2))
+* loader options merge ([69e14f2](https://github.com/easy-team/easywebpack/commit/69e14f2))
 
 
 
 <a name="4.1.1"></a>
-## [4.1.1](https://github.com/hubcarl/easywebpack/compare/4.1.0...4.1.1) (2018-03-20)
+## [4.1.1](https://github.com/easy-team/easywebpack/compare/4.1.0...4.1.1) (2018-03-20)
 
 
 ### Bug Fixes
 
-* client and server cache dir separation ([856f7e0](https://github.com/hubcarl/easywebpack/commit/856f7e0))
+* client and server cache dir separation ([856f7e0](https://github.com/easy-team/easywebpack/commit/856f7e0))
 
 
 
 <a name="4.1.0"></a>
-# [4.1.0](https://github.com/hubcarl/easywebpack/compare/4.0.7...4.1.0) (2018-03-20)
+# [4.1.0](https://github.com/easy-team/easywebpack/compare/4.0.7...4.1.0) (2018-03-20)
 
 
 ### Features
 
-* mp4|webm|ogg|mp3|wav|flac|aac for url-loader ([76a597a](https://github.com/hubcarl/easywebpack/commit/76a597a))
-* support babel cache and typescript cache, default true ([f3db2cc](https://github.com/hubcarl/easywebpack/commit/f3db2cc))
+* mp4|webm|ogg|mp3|wav|flac|aac for url-loader ([76a597a](https://github.com/easy-team/easywebpack/commit/76a597a))
+* support babel cache and typescript cache, default true ([f3db2cc](https://github.com/easy-team/easywebpack/commit/f3db2cc))
 
 
 
 <a name="4.0.7"></a>
-## [4.0.7](https://github.com/hubcarl/easywebpack/compare/4.0.6...4.0.7) (2018-03-19)
+## [4.0.7](https://github.com/easy-team/easywebpack/compare/4.0.6...4.0.7) (2018-03-19)
 
 
 ### Bug Fixes
 
-* loader options extend config ([a6df7b0](https://github.com/hubcarl/easywebpack/commit/a6df7b0))
+* loader options extend config ([a6df7b0](https://github.com/easy-team/easywebpack/commit/a6df7b0))
 
 
 
 <a name="4.0.6"></a>
-## [4.0.6](https://github.com/hubcarl/easywebpack/compare/4.0.5...4.0.6) (2018-03-19)
+## [4.0.6](https://github.com/easy-team/easywebpack/compare/4.0.5...4.0.6) (2018-03-19)
 
 
 ### Bug Fixes
 
-* dll not support typescript and postcss-loader not invalid options config ([a2ba0ee](https://github.com/hubcarl/easywebpack/commit/a2ba0ee))
+* dll not support typescript and postcss-loader not invalid options config ([a2ba0ee](https://github.com/easy-team/easywebpack/commit/a2ba0ee))
 
 
 
 <a name="4.0.5"></a>
-## [4.0.5](https://github.com/hubcarl/easywebpack/compare/4.0.3...4.0.5) (2018-03-15)
+## [4.0.5](https://github.com/easy-team/easywebpack/compare/4.0.3...4.0.5) (2018-03-15)
 
 
 ### Bug Fixes
 
-* less loader not include ([9d42768](https://github.com/hubcarl/easywebpack/commit/9d42768))
-* set prefix support with easywebpack 3 ([ffb14a6](https://github.com/hubcarl/easywebpack/commit/ffb14a6))
+* less loader not include ([9d42768](https://github.com/easy-team/easywebpack/commit/9d42768))
+* set prefix support with easywebpack 3 ([ffb14a6](https://github.com/easy-team/easywebpack/commit/ffb14a6))
 
 
 
 <a name="4.0.3"></a>
-## [4.0.3](https://github.com/hubcarl/easywebpack/compare/4.0.2...4.0.3) (2018-03-13)
+## [4.0.3](https://github.com/easy-team/easywebpack/compare/4.0.2...4.0.3) (2018-03-13)
 
 
 ### Bug Fixes
 
-* dynamic load componet extract css not require, must use allChunk ([6255a79](https://github.com/hubcarl/easywebpack/commit/6255a79))
-* npm cnpm warn ([c6f038b](https://github.com/hubcarl/easywebpack/commit/c6f038b))
+* dynamic load componet extract css not require, must use allChunk ([6255a79](https://github.com/easy-team/easywebpack/commit/6255a79))
+* npm cnpm warn ([c6f038b](https://github.com/easy-team/easywebpack/commit/c6f038b))
 
 
 
 <a name="4.0.1"></a>
-## [4.0.1](https://github.com/hubcarl/easywebpack/compare/4.0.0...4.0.1) (2018-03-09)
+## [4.0.1](https://github.com/easy-team/easywebpack/compare/4.0.0...4.0.1) (2018-03-09)
 
 
 ### Bug Fixes
 
-* less loader not add preloaders ([6d373bc](https://github.com/hubcarl/easywebpack/commit/6d373bc))
-* uglifyjs-webpack-plugin repeat and open cache ([256f679](https://github.com/hubcarl/easywebpack/commit/256f679))
+* less loader not add preloaders ([6d373bc](https://github.com/easy-team/easywebpack/commit/6d373bc))
+* uglifyjs-webpack-plugin repeat and open cache ([256f679](https://github.com/easy-team/easywebpack/commit/256f679))
 
 
 
 <a name="4.0.0"></a>
-# [4.0.0](https://github.com/hubcarl/easywebpack/compare/3.7.1...4.0.0) (2018-03-07)
+# [4.0.0](https://github.com/easy-team/easywebpack/compare/3.7.1...4.0.0) (2018-03-07)
 
 
 ### Bug Fixes
 
-* dll resolveLoader.module config for easywebpack in framework ([031672b](https://github.com/hubcarl/easywebpack/commit/031672b))
-* egg buildPath dir must be app/view ([8c7b3ef](https://github.com/hubcarl/easywebpack/commit/8c7b3ef))
-* egg config server path: app/view ([8ba0720](https://github.com/hubcarl/easywebpack/commit/8ba0720))
-* es6 to es5 ([6d8100f](https://github.com/hubcarl/easywebpack/commit/6d8100f))
-* proxy publicPath ([f988c1b](https://github.com/hubcarl/easywebpack/commit/f988c1b))
+* dll resolveLoader.module config for easywebpack in framework ([031672b](https://github.com/easy-team/easywebpack/commit/031672b))
+* egg buildPath dir must be app/view ([8c7b3ef](https://github.com/easy-team/easywebpack/commit/8c7b3ef))
+* egg config server path: app/view ([8ba0720](https://github.com/easy-team/easywebpack/commit/8ba0720))
+* es6 to es5 ([6d8100f](https://github.com/easy-team/easywebpack/commit/6d8100f))
+* proxy publicPath ([f988c1b](https://github.com/easy-team/easywebpack/commit/f988c1b))
 
 
 ### Features
 
 * [BREAK_CHANGE] webpack 4 support
-* adjust error msg when plugin missing ([927e63a](https://github.com/hubcarl/easywebpack/commit/927e63a))
-* commonsChunk for webpack4 ([21be7f9](https://github.com/hubcarl/easywebpack/commit/21be7f9))
-* disable commonsChunk config and directoryName plugin ([277ebb4](https://github.com/hubcarl/easywebpack/commit/277ebb4))
-* use proxy, not need dev host ([95a348a](https://github.com/hubcarl/easywebpack/commit/95a348a))
+* adjust error msg when plugin missing ([927e63a](https://github.com/easy-team/easywebpack/commit/927e63a))
+* commonsChunk for webpack4 ([21be7f9](https://github.com/easy-team/easywebpack/commit/21be7f9))
+* disable commonsChunk config and directoryName plugin ([277ebb4](https://github.com/easy-team/easywebpack/commit/277ebb4))
+* use proxy, not need dev host ([95a348a](https://github.com/easy-team/easywebpack/commit/95a348a))
 
 
 
 <a name="3.6.6"></a>
-## [3.6.6](https://github.com/hubcarl/easywebpack/compare/3.6.3...3.6.6) (2018-02-09)
+## [3.6.6](https://github.com/easy-team/easywebpack/compare/3.6.3...3.6.6) (2018-02-09)
 
 
 ### Bug Fixes
 
-* easy build dll --size ([be5053f](https://github.com/hubcarl/easywebpack/commit/be5053f))
+* easy build dll --size ([be5053f](https://github.com/easy-team/easywebpack/commit/be5053f))
 
 
 <a name="3.6.5"></a>
-## [3.6.5](https://github.com/hubcarl/easywebpack/compare/3.6.3...3.6.5) (2018-02-03)
+## [3.6.5](https://github.com/easy-team/easywebpack/compare/3.6.3...3.6.5) (2018-02-03)
 
 
 ### Features
 
-* support config.template for html ([1da9c36](https://github.com/hubcarl/easywebpack/commit/1da9c36))
+* support config.template for html ([1da9c36](https://github.com/easy-team/easywebpack/commit/1da9c36))
 
 
 
 <a name="3.6.4"></a>
-## [3.6.4](https://github.com/hubcarl/easywebpack/compare/3.6.3...3.6.4) (2018-01-25)
+## [3.6.4](https://github.com/easy-team/easywebpack/compare/3.6.3...3.6.4) (2018-01-25)
 
 
 ### Features
 
-* support config.template for html ([1da9c36](https://github.com/hubcarl/easywebpack/commit/1da9c36))
+* support config.template for html ([1da9c36](https://github.com/easy-team/easywebpack/commit/1da9c36))
 
 
 
 <a name="3.6.3"></a>
-## [3.6.3](https://github.com/hubcarl/easywebpack/compare/3.6.2...3.6.3) (2018-01-17)
+## [3.6.3](https://github.com/easy-team/easywebpack/compare/3.6.2...3.6.3) (2018-01-17)
 
 
 ### Bug Fixes
 
-* default config merge repeat ([79939ae](https://github.com/hubcarl/easywebpack/commit/79939ae))
+* default config merge repeat ([79939ae](https://github.com/easy-team/easywebpack/commit/79939ae))
 
 
 
 <a name="3.6.2"></a>
-## [3.6.2](https://github.com/hubcarl/easywebpack/compare/3.5.18...3.6.2) (2018-01-17)
+## [3.6.2](https://github.com/easy-team/easywebpack/compare/3.5.18...3.6.2) (2018-01-17)
 
 
 ### Features
 
-* add getWebWebpackConfig and getNodeWebpackConfig method ([bfd33d6](https://github.com/hubcarl/easywebpack/commit/bfd33d6))
-* auto set typescript configFile ([349a4af](https://github.com/hubcarl/easywebpack/commit/349a4af))
-* use typescript, auto add resolve.extendsions: .ts ([8139010](https://github.com/hubcarl/easywebpack/commit/8139010))
+* add getWebWebpackConfig and getNodeWebpackConfig method ([bfd33d6](https://github.com/easy-team/easywebpack/commit/bfd33d6))
+* auto set typescript configFile ([349a4af](https://github.com/easy-team/easywebpack/commit/349a4af))
+* use typescript, auto add resolve.extendsions: .ts ([8139010](https://github.com/easy-team/easywebpack/commit/8139010))
 
 
 3.6.0 / 2018-01-16
 ==================
 
-  * feat: add getWebWebpackConfig and getNodeWebpackConfig method ([bfd33d6](https://github.com/hubcarl/easywebpack/commit/bfd33d6))
-  * feat: add typescript support ([2692213](https://github.com/hubcarl/easywebpack/commit/2692213))
-  * fix: support postcss loader options config and auto set sourceMap:true when devtool set ([271f4cc](https://github.com/hubcarl/easywebpack/commit/271f4cc))
-  * feat: use typescript, auto add resolve.extendsions: .ts ([8139010](https://github.com/hubcarl/easywebpack/commit/8139010))
+  * feat: add getWebWebpackConfig and getNodeWebpackConfig method ([bfd33d6](https://github.com/easy-team/easywebpack/commit/bfd33d6))
+  * feat: add typescript support ([2692213](https://github.com/easy-team/easywebpack/commit/2692213))
+  * fix: support postcss loader options config and auto set sourceMap:true when devtool set ([271f4cc](https://github.com/easy-team/easywebpack/commit/271f4cc))
+  * feat: use typescript, auto add resolve.extendsions: .ts ([8139010](https://github.com/easy-team/easywebpack/commit/8139010))
 
 
 3.5.18 / 2018-01-15
 ===================
 
-  * fix:https://github.com/hubcarl/egg-vue-webpack-boilerplate/issues/51
+  * fix:https://github.com/easy-team/egg-vue-webpack-boilerplate/issues/51
 
 3.5.13 / 2018-01-06
 ===================
