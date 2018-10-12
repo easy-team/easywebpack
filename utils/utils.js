@@ -235,7 +235,7 @@ utils.isMatch = (regexArray, strMatch) => {
     return false;
   }
   // fix window path seperate \\
-  const normalizeStrMatch = strMatch.replace(/\\/g, '/');
+  const normalizeStrMatch = strMatch.replace(/\\/g, '/').replace(/\/\//g, '/');
   regexArray = Array.isArray(regexArray) ? regexArray : [regexArray];
   return regexArray.some(item => new RegExp(item, '').test(normalizeStrMatch));
 };
