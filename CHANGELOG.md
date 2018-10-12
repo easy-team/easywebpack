@@ -1,3 +1,19 @@
+<a name="4.8.4"></a>
+## [4.8.4](https://github.com/easy-team/easywebpack/compare/4.8.3...4.8.4) (2018-10-12)
+
+
+### Bug Fixes
+
+* fix window path seperate // ([461f599](https://github.com/easy-team/easywebpack/commit/461f599))
+
+
+### Features
+
+* return init zero config ([bb35f38](https://github.com/easy-team/easywebpack/commit/bb35f38))
+* set html default template and doc ([d13d0a7](https://github.com/easy-team/easywebpack/commit/d13d0a7))
+
+
+
 <a name="4.8.3"></a>
 ## [4.8.3](https://github.com/easy-team/easywebpack/compare/4.8.2...4.8.3) (2018-10-10)
 
