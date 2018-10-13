@@ -1,9 +1,11 @@
 'use strict';
 const expect = require('chai').expect;
 const WebpackTool = require('webpack-tool');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = WebpackTool.webpack;
 const WebpackBaseBuilder = require('../lib/base');
 const path = require('path').posix;
+const utils = require('../utils/utils');
 
 // http://chaijs.com/api/bdd/
 function createBuilder(config) {
@@ -172,6 +174,32 @@ describe('plugin.test.js', () => {
       expect(!!dll).to.be.true;
     });
 
+    it('should merge apply plugin test', () => {
+      const builder = createBuilder({
+        plugins: {
+          copy: new CopyWebpackPlugin([{ from: 'asset', to: 'public' }])
+        }
+      });
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const copy = getPluginByLabel('copy', plugins);
+      expect(!!copy).to.be.true;
+    });
+
+    it('should merge array plugin test', () => {
+      const plugin = new CopyWebpackPlugin([{ from: 'asset', to: 'public' }]); 
+      const builder = createBuilder({
+        plugins: [
+          plugin
+        ]
+      });
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const lable = utils.getPluginLabel(plugin);
+      const copy = getPluginByLabel(lable, plugins);
+      expect(!!copy).to.be.true;
+    });
+
     it('should add webpack plugin test', () => {
       const builder = createBuilder({});
       builder.addPlugin(new webpack.DllPlugin({
@@ -237,15 +265,17 @@ describe('plugin.test.js', () => {
     });
     it('should merge array extend key plugin test', () => {
       const builder = createBuilder({});
-      builder.mergePlugin([{ dll : {
-        enable: true,
-        name: webpack.DllPlugin,
-        args: {
-          path: 'manifest.json',
-          name: '[name]_[chunkhash]',
-          context: __dirname
+      builder.mergePlugin([{
+        dll: {
+          enable: true,
+          name: webpack.DllPlugin,
+          args: {
+            path: 'manifest.json',
+            name: '[name]_[chunkhash]',
+            context: __dirname
+          }
         }
-      }}]);
+      }]);
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
       const dll = getPluginByLabel('DllPlugin', plugins);

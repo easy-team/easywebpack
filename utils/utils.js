@@ -12,6 +12,7 @@ const uniq = require('lodash.uniq');
 const _ = require('lodash.get');
 const install = require('./install');
 const glob = require('glob');
+const md5 = require('md5');
 const shell = require('shelljs');
 const utils = Object.assign({}, {
   _,
@@ -514,6 +515,10 @@ utils.isEgg = config => {
   }
   const pkg = require(path.join(config.baseDir, 'package.json'));
   return pkg.dependencies['egg-view-vue-ssr'] || pkg.dependencies['egg-view-react-ssr'];
+};
+
+utils.getPluginLabel = plugin => {
+  return md5(plugin.apply.toString());
 };
 
 module.exports = utils;
