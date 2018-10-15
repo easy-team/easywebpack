@@ -329,10 +329,10 @@ exports.cssmini = {
   env: 'prod',
   type: 'client',
   name: 'optimize-css-assets-webpack-plugin'
-}
+};
 
 exports.case = {
   enable: true,
   name: 'case-sensitive-paths-webpack-plugin',
-  args:{}
+  args: {}
 };
