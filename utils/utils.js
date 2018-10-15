@@ -113,7 +113,6 @@ utils.getCustomEntry = (config, type) => {
       }
     } else if (entry instanceof RegExp) {
       const dirEntry = utils.walkFile(entry, configEntry.exclude, extMatch, config.baseDir);
-      console.log('...entry', dirEntry);
       Object.assign(entries, utils.createEntry(config, entryLoader, dirEntry, false));
     } else if (utils.isObject(entry)) {
       Object.assign(entries, utils.createEntry(config, entryLoader, entry, true));

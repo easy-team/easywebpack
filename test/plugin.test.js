@@ -8,7 +8,7 @@ const path = require('path').posix;
 const utils = require('../utils/utils');
 
 // http://chaijs.com/api/bdd/
-function createBuilder(config) {
+const createBuilder = config => {
   const builder = new WebpackBaseBuilder(config);
   if (config && config.type) {
     builder.type = config.type;
@@ -19,13 +19,13 @@ function createBuilder(config) {
     include: path.join(__dirname, '../test')
   });
   return builder;
-}
+};
 
-function getPluginByLabel(label, plugins) {
+const getPluginByLabel = (label, plugins) => {
   return plugins.find(plugin => {
     return plugin.__lable__ === label || plugin.__plugin__ === label;
   });
-}
+};
 
 describe('plugin.test.js', () => {
   before(() => {});
@@ -186,19 +186,19 @@ describe('plugin.test.js', () => {
       expect(!!copy).to.be.true;
     });
 
-    // it('should merge array plugin test', () => {
-    //   const plugin = new CopyWebpackPlugin([{ from: 'asset', to: 'public' }]); 
-    //   const builder = createBuilder({
-    //     plugins: [
-    //       plugin
-    //     ]
-    //   });
-    //   const webpackConfig = builder.create();
-    //   const plugins = webpackConfig.plugins;
-    //   const lable = utils.getPluginLabel(plugin);
-    //   const copy = getPluginByLabel(lable, plugins);
-    //   expect(!!copy).to.be.true;
-    // });
+    it('should merge array plugin test', () => {
+      const plugin = new CopyWebpackPlugin([{ from: 'asset', to: 'public' }]);
+      const builder = createBuilder({
+        plugins: [
+          plugin
+        ]
+      });
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const lable = utils.getPluginLabel(plugin);
+      const copy = getPluginByLabel(lable, plugins);
+      expect(!!copy).to.be.true;
+    });
 
     it('should add webpack plugin test', () => {
       const builder = createBuilder({});

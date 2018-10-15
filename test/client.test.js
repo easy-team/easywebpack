@@ -580,30 +580,30 @@ describe('client.test.js', () => {
         devtool: 'source-map',
         loaders: {
           css: {
-            options:{
-              sourceMap: false,
+            options: {
+              sourceMap: false
             }
           },
-          scss:  {
-            options:{
-              sourceMap: false,
+          scss: {
+            options: {
+              sourceMap: false
             }
           },
-          sass:  {
-            options:{
-              sourceMap: false,
+          sass: {
+            options: {
+              sourceMap: false
             }
           },
-          less:  {
-            options:{
-              sourceMap: false,
+          less: {
+            options: {
+              sourceMap: false
             }
           },
-          stylus:  {
-            options:{
-              sourceMap: false,
+          stylus: {
+            options: {
+              sourceMap: false
             }
-          },
+          }
         }
       });
       const webpackConfig = builder.create();
@@ -615,7 +615,7 @@ describe('client.test.js', () => {
       expect(cssLoader.use[1].options.sourceMap).to.be.false;
       expect(sassLoader.use[1].options.sourceMap).to.be.false;
       expect(sassLoader.use[3].options.sourceMap).to.be.false;
-      
+
       expect(scssLoader.use[1].options.sourceMap).to.be.false;
       expect(scssLoader.use[3].options.sourceMap).to.be.false;
 
@@ -625,5 +625,18 @@ describe('client.test.js', () => {
       expect(stylusLoader.use[1].options.sourceMap).to.be.false;
       expect(stylusLoader.use[3].options.sourceMap).to.be.false;
     });
+
+    it('should merge plugin array params test', () => {
+      const builder = createBuilder({
+        plugins: {
+          copy: [{ from: 'asset', to: 'public' }]
+        }
+      });
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const copy = getPluginByLabel('copy', plugins);
+      expect(!!copy).to.be.true;
+    });
+
   });
 });
