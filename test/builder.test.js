@@ -43,13 +43,13 @@ describe('builder.test.js', () => {
     it('should param file test', () => {
       const builderConfig = WebpackBuilder.getBuilderConfig(path.resolve(__dirname, '../config/config.js'));
       expect(builderConfig.baseDir).to.equal(process.cwd());
-      expect(builderConfig).to.include.keys(['devConfig','testConfig']);
+      expect(builderConfig).to.include.keys(['devConfig', 'testConfig']);
     });
 
     it('should param webpack.config.js test', () => {
       const configFile = path.resolve(process.cwd(), 'webpack.config.js');
-      if(!fs.existsSync(configFile)){
-        utils.writeFile(configFile, "module.exports={ baseDir: '/test'}");
+      if (!fs.existsSync(configFile)) {
+        utils.writeFile(configFile, 'module.exports={ baseDir: "/test"}');
       }
       const builderConfig = WebpackBuilder.getBuilderConfig();
       expect(builderConfig.baseDir).to.equal('/test');
@@ -64,12 +64,12 @@ describe('builder.test.js', () => {
     });
 
     it('should type:client test', () => {
-      const webpackConfig = easywebpack.getWebpackConfig( { target: 'web'});
+      const webpackConfig = easywebpack.getWebpackConfig({ target: 'web' });
       expect(webpackConfig.target).to.equal('web');
     });
 
     it('should type:server test', () => {
-      const webpackConfig = easywebpack.getWebpackConfig( { target: 'node'});
+      const webpackConfig = easywebpack.getWebpackConfig({ target: 'node' });
       expect(webpackConfig.target).to.equal('node');
     });
   });
@@ -80,7 +80,7 @@ describe('builder.test.js', () => {
       expect(webpackConfig).to.be.null;
     });
     it('should one dll test', () => {
-      const webpackConfig = easywebpack.getDllWebpackConfig({ dll: ['vue', 'vuex']});
+      const webpackConfig = easywebpack.getDllWebpackConfig({ dll: ['vue', 'vuex'] });
       const dllPlugin = getPluginByLabel('DllPlugin', webpackConfig.plugins);
       expect(webpackConfig.target).to.equal('web');
       expect(dllPlugin).to.include.keys(['__lable__']);

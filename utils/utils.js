@@ -29,7 +29,7 @@ utils.has = value => {
 
 utils.isFunction = value => typeof value === 'function';
 
-utils.isObject = value => typeof value === 'object';
+utils.isObject = value => Object.prototype.toString.call(value) === '[object Object]';
 
 utils.isString = value => typeof value === 'string';
 
@@ -76,7 +76,7 @@ utils.joinPath = function() {
 
 utils.getEntry = (config, type) => {
   const entry = config.entry;
-  if (utils.isObject(entry) && (entry instanceof RegExp || entry.loader || entry.include)) {
+  if (utils.isObject(entry) && (entry.loader || entry.include) || entry instanceof RegExp) {
     return utils.getCustomEntry(config, type);
   }
   return utils.getGlobEntry(config, type);
@@ -113,6 +113,7 @@ utils.getCustomEntry = (config, type) => {
       }
     } else if (entry instanceof RegExp) {
       const dirEntry = utils.walkFile(entry, configEntry.exclude, extMatch, config.baseDir);
+      console.log('...entry', dirEntry);
       Object.assign(entries, utils.createEntry(config, entryLoader, dirEntry, false));
     } else if (utils.isObject(entry)) {
       Object.assign(entries, utils.createEntry(config, entryLoader, entry, true));

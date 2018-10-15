@@ -134,8 +134,7 @@ exports.manifest = {
       assets: false,
       writeToFileEmit: true
     };
-    const plugins = this.config.plugins || {};
-    const manifestConfig = plugins.manifest || {};
+    const manifestConfig = this.getConfigPlugin('mainifest');
     const configManifestFileName = manifestConfig.fileName || (manifestConfig.args && manifestConfig.args.fileName);
     const manifestName = configManifestFileName || (this.egg ? 'config/manifest.json' : 'manifest.json');
     const manifestDir = this.egg ? this.baseDir : this.buildPath;
@@ -143,7 +142,7 @@ exports.manifest = {
     // 兼容旧 manifest 配置
     const fileName = path.relative(this.config.buildPath, filepath);
     const dllConfig = utils.getDllConfig(this.config.dll);
-    const dllDir =  utils.getDllManifestDir(this.env);
+    const dllDir = utils.getDllManifestDir(this.env);
     const dllChunk = this.getDLLChunk();
     const commonsChunk = this.getCommonsChunk();
     // 如果开启了dll 功能, 则读取 dll manifest 配置, 然后与项目 manifest 合并
