@@ -514,7 +514,21 @@ utils.isEgg = config => {
     return true;
   }
   const pkg = require(path.join(config.baseDir, 'package.json'));
-  return pkg.dependencies['egg-view-vue-ssr'] || pkg.dependencies['egg-view-react-ssr'];
+  const vuePKGName = 'egg-view-vue-ssr';
+  const reactPKGName = 'egg-view-react-ssr';
+  const hasDeps = pkg.dependencies[vuePKGName] || pkg.dependencies[reactPKGName];
+  if (hasDeps) {
+    return true;
+  }
+  const vuePKGPath = path.join(config.baseDir, 'node_modules', vuePKGName);
+  if (fs.existsSync(vuePKGPath)) {
+    return true;
+  }
+  const reactPKGPath = path.join(config.baseDir, 'node_modules', reactPKGName);
+  if (fs.existsSync(reactPKGPath)) {
+    return true;
+  }
+  return false;
 };
 
 utils.getPluginLabel = plugin => {

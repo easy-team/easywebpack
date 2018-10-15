@@ -60,7 +60,7 @@ describe('builder.test.js', () => {
   describe('#webpack builder.getWebpackConfig test', () => {
     it('should default test', () => {
       const webpackConfig = easywebpack.getWebpackConfig();
-      expect(webpackConfig.length).to.equal(2);
+      expect(webpackConfig.target).to.equal('web');
     });
 
     it('should type:client test', () => {
@@ -75,7 +75,7 @@ describe('builder.test.js', () => {
   });
 
   describe('#webpack builder.getDllWebpackConfig test', () => {
-    it('should default test', () => {
+    it('should default dll test', () => {
       const webpackConfig = easywebpack.getDllWebpackConfig();
       expect(webpackConfig).to.be.null;
     });
@@ -87,16 +87,15 @@ describe('builder.test.js', () => {
     });
 
     it('should getWebpackConfig onlyDll test', () => {
-      const webpackConfig = easywebpack.getWebpackConfig({ dll: ['vue', 'vuex']}, { onlyDll: true });
+      const webpackConfig = easywebpack.getWebpackConfig({ dll: ['vue', 'vuex'] }, { onlyDll: true });
       const dllPlugin = getPluginByLabel('DllPlugin', webpackConfig.plugins);
       expect(webpackConfig.target).to.equal('web');
       expect(dllPlugin).to.include.keys(['__lable__']);
     });
 
     it('should getWebpackConfig dll test', () => {
-      const webpackConfig = easywebpack.getWebpackConfig({ dll: ['vue', 'vuex']}, { dll: true });
-      console.log(webpackConfig.length);
-      expect(webpackConfig.length).to.equal(3);
+      const webpackConfig = easywebpack.getWebpackConfig({ dll: ['vue', 'vuex'] }, { dll: true });
+      expect(webpackConfig.length).to.equal(2);
     });
   });
 });
