@@ -1,3 +1,22 @@
+<a name="4.8.5"></a>
+## [4.8.5](https://github.com/easy-team/easywebpack/compare/4.8.4...4.8.5) (2018-10-15)
+
+
+### Bug Fixes
+
+* config merge ([b76aca6](https://github.com/easy-team/easywebpack/commit/b76aca6))
+* plugin array args merge ([78af03e](https://github.com/easy-team/easywebpack/commit/78af03e))
+* plugin config is Array ([04c36d8](https://github.com/easy-team/easywebpack/commit/04c36d8))
+* webpack plugin only apply method ([b1e7cb2](https://github.com/easy-team/easywebpack/commit/b1e7cb2))
+
+
+### Features
+
+* auto set target by deps and node_modules ([3c0962a](https://github.com/easy-team/easywebpack/commit/3c0962a))
+* support plugins array config ([7257d9b](https://github.com/easy-team/easywebpack/commit/7257d9b))
+
+
+
 <a name="4.8.4"></a>
 ## [4.8.4](https://github.com/easy-team/easywebpack/compare/4.8.3...4.8.4) (2018-10-12)
 
