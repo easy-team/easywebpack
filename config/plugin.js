@@ -313,7 +313,7 @@ exports.tschecker = {
 
 exports.clean = {
   enable: true,
-  env: ['test','prod'],
+  env: ['test', 'prod'],
   type: 'client',
   name: 'clean-webpack-plugin',
   args() {
@@ -335,4 +335,10 @@ exports.case = {
   enable: true,
   name: 'case-sensitive-paths-webpack-plugin',
   args: {}
+};
+
+exports.copy = {
+  enable: false,
+  type: 'client',
+  name: 'copy-webpack-plugin'
 };

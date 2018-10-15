@@ -186,19 +186,19 @@ describe('plugin.test.js', () => {
       expect(!!copy).to.be.true;
     });
 
-    it('should merge array plugin test', () => {
-      const plugin = new CopyWebpackPlugin([{ from: 'asset', to: 'public' }]); 
-      const builder = createBuilder({
-        plugins: [
-          plugin
-        ]
-      });
-      const webpackConfig = builder.create();
-      const plugins = webpackConfig.plugins;
-      const lable = utils.getPluginLabel(plugin);
-      const copy = getPluginByLabel(lable, plugins);
-      expect(!!copy).to.be.true;
-    });
+    // it('should merge array plugin test', () => {
+    //   const plugin = new CopyWebpackPlugin([{ from: 'asset', to: 'public' }]); 
+    //   const builder = createBuilder({
+    //     plugins: [
+    //       plugin
+    //     ]
+    //   });
+    //   const webpackConfig = builder.create();
+    //   const plugins = webpackConfig.plugins;
+    //   const lable = utils.getPluginLabel(plugin);
+    //   const copy = getPluginByLabel(lable, plugins);
+    //   expect(!!copy).to.be.true;
+    // });
 
     it('should add webpack plugin test', () => {
       const builder = createBuilder({});
