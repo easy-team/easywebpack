@@ -140,8 +140,8 @@ describe('server.test.js', () => {
     const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
     expect(eslint).to.be.undefined;
     expect(tslint.use[0].loader).to.equal('tslint-loader');
-    expect(tsLoader.use[0].loader).to.equal('ts-loader');
-    expect(tsLoader.use[0].options.configFile).to.equal(configFile);
+    expect(tsLoader.use[2].loader).to.equal('ts-loader');
+    expect(tsLoader.use[2].options.configFile).to.equal(configFile);
   });
 
   it('should server service worker disable test', () => {

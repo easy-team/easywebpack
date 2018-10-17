@@ -34,13 +34,13 @@ exports.typescript = {
     };
     const compile = this.config.compile;
     if (compile.thread) {
-      loaders.unshift(this.createThreadLoader(this.config.thread));
+      loaders.unshift(this.createThreadLoader(compile.thread));
       loaders.push(createTsLoader({ happyPackMode: true }));
     } else {
       loaders.push(createTsLoader());
     }
     if (compile.cache) {
-      loaders.unshift(this.createCacheLoader(this.config.cache));
+      loaders.unshift(this.createCacheLoader(compile.cache));
     }
     return loaders;
   }

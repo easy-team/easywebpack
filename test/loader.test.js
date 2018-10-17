@@ -87,9 +87,23 @@ describe('loader.test.js', () => {
       expect(getLoaderByName(/\.(woff2?|eot|ttf|otf)(\?.*)?$/, rules2)).to.be.undefined;
     });
 
+    it('should loader merge no options test', () => {
+      const config = {
+        loaders: {
+          eslint: {
+            fix: true
+          },
+        }
+      };
+      const builder = createBuilder(config);
+      const webpackConfig = builder.create();
+      const rules = webpackConfig.module.rules;
+      const eslint = getLoaderByName('eslint', rules);
+      expect(eslint.use[0].options.fix).to.be.true;
+    });
+
     it('should loader merge options test', () => {
       const config = {
-        cache: false,
         loaders: {
           eslint: {
             options: {
@@ -105,6 +119,10 @@ describe('loader.test.js', () => {
               comments: false
             }
           }
+        },
+        compile: {
+          cache: false,
+          thread: false
         }
       };
       const builder = createBuilder(config);
@@ -346,14 +364,14 @@ describe('loader.test.js', () => {
       const builder = createBuilder();
       const webpackConfig = builder.create();
       const babelLoader = getLoaderByName('babel', webpackConfig.module.rules);
-      expect(babelLoader.use.length).to.equal(1);
-      expect(babelLoader.use[0].options.cacheDirectory).to.be.undefined
+      expect(babelLoader.use.length).to.equal(2);
+      expect(babelLoader.use[1].options.cacheDirectory).to.equal(cacheDirectory);
     });
     it('should config cache undefined config', () => {
       const cacheDirectory = utils.getCacheLoaderInfoPath('babel-loader', 'dev');
       const builder = createBuilder({
         compile:{
-          cache: true
+          thread: false
         }
       });
       const webpackConfig = builder.create();

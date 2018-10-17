@@ -347,7 +347,7 @@ describe('client.test.js', () => {
           typescript: true
         },
         compile:{
-          cache: true
+          thread: false
         }
       });
       const webpackConfig = builder.create();
@@ -367,10 +367,6 @@ describe('client.test.js', () => {
           eslint: true,
           tslint: true,
           typescript: true
-        },
-        compile:{
-          cache: true,
-          thread: true
         }
       });
       const webpackConfig = builder.create();
@@ -396,7 +392,7 @@ describe('client.test.js', () => {
           }
         },
         compile:{
-          cache: true
+          thread: false
         }
       });
       const webpackConfig = builder.create();
@@ -425,7 +421,6 @@ describe('client.test.js', () => {
       const configFile = path.resolve(process.cwd(), './app/web/tsconfig.json');
       const builder = createBuilder({
         egg: true,
-        cache: false,
         loaders:{
           typescript: true
         }
@@ -435,8 +430,8 @@ describe('client.test.js', () => {
       }
       const webpackConfig = builder.create();
       const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
-      expect(tsLoader.use[0].loader).to.equal('ts-loader');
-      expect(tsLoader.use[0].options.configFile).to.equal(configFile);
+      expect(tsLoader.use[2].loader).to.equal('ts-loader');
+      expect(tsLoader.use[2].options.configFile).to.equal(configFile);
       fs.unlinkSync(configFile);
     });
 

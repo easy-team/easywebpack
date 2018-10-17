@@ -113,6 +113,7 @@ describe('base.test.js', () => {
       expect(webpackConfig.output.filename).to.equal('static/js/[name].js');
       expect(webpackConfig.output.chunkFilename).to.equal('static/js/chunk/[name].js');
   });
+
   describe('#webpack cache loader test', () => {
     it('should create babel cache loader disable test', () => {
       const builder = createBuilder();
@@ -120,14 +121,10 @@ describe('base.test.js', () => {
       const cacheLoader = getLoaderByName('cache', webpackConfig.module.rules);
       expect(cacheLoader.length).to.equal(0);
     });
+
     it('should create babel-loader cache and thread test', () => {
       const cacheDirectory = utils.getCacheLoaderInfoPath('babel-loader')
-      const builder = createBuilder({
-        compile:{
-          cache: true,
-          thread: true
-        }
-      });
+      const builder = createBuilder({});
       const webpackConfig = builder.create();
       const babelLoader = getLoaderByName('babel', webpackConfig.module.rules);
       expect(babelLoader[0].use.length).to.equal(2);
@@ -135,17 +132,15 @@ describe('base.test.js', () => {
       expect(babelLoader[0].use[1].loader).to.equal('babel-loader');
       expect(babelLoader[0].use[1].options.cacheDirectory).to.equal(cacheDirectory);
     });
+
     it('should create ts-loader cache and thread test', () => {
       const cacheDirectory = utils.getCacheLoaderInfoPath('cache-loader')
       const builder = createBuilder({
         loaders:{
           typescript: true
-        },
-        compile:{
-          cache: true,
-          thread: true
         }
       });
+
       const webpackConfig = builder.create();
       const cacheLoader = getLoaderByName('cache', webpackConfig.module.rules);
       expect(cacheLoader.length).to.equal(1);
@@ -155,6 +150,7 @@ describe('base.test.js', () => {
       expect(cacheLoader[0].use[1].loader).to.equal('thread-loader');
       expect(cacheLoader[0].use[2].loader).to.equal('ts-loader');
     });
+
     it('should create babel typescript config test', () => {
       const cacheDirectory = utils.getCacheLoaderInfoPath('cache-loader')
       const builder = createBuilder({
@@ -166,7 +162,8 @@ describe('base.test.js', () => {
           }
         },
         compile:{
-          cache: true
+          cache: true,
+          thread: false
         }
       });
       const webpackConfig = builder.create();
