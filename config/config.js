@@ -20,8 +20,8 @@ exports.config = {
     minimize: false
   },
   compile:{
-    cache: false,
-    thread: false
+    cache: true,
+    thread: true
   }
 };
 
