@@ -155,4 +155,14 @@ describe('server.test.js', () => {
     const serviceworker = getPluginByLabel('serviceworker', plugins);
     expect(!!serviceworker).to.be.false;
   });
+  it('should node console env dev test', () => {
+    const builder = createBuilder({ env: 'dev' });
+    const webpackConfig = builder.create();
+    expect(webpackConfig.node.console).to.be.true;
+  });
+  it('should node console env prod test', () => {
+    const builder = createBuilder({ env: 'prod' });
+    const webpackConfig = builder.create();
+    expect(webpackConfig.node.console).to.be.undefined;
+  });
 });

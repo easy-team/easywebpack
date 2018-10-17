@@ -115,7 +115,8 @@
     "utils",
     "lib",
     "config",
-    "tool"
+    "tool",
+    "config/.babelrc"
   ],
   "nyc": {
     "exclude": [

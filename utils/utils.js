@@ -351,7 +351,7 @@ utils.readFile = filepath => {
   } catch (e) {
     /* istanbul ignore next */
   }
-  return null;
+  return undefined;
 };
 
 

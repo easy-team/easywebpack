@@ -30,6 +30,9 @@ exports.devConfig = {
   cssExtract: false,
   plugins:{
     hot: true,
+  },
+  node: {
+    console: true
   }
 };
 

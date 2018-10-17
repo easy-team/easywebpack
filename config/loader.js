@@ -8,13 +8,9 @@ exports.babel = {
     const loaders = [];
     const compile = this.config.compile;
     if (compile.thread) {
-      loaders.unshift(this.createThreadLoader(this.config.thread));
+      loaders.unshift(this.createThreadLoader(compile.thread));
     }
-    if (compile.cache) {
-      loaders.push(this.createCacheLoader(this.config.cache, 'babel-loader'));
-    } else {
-      loaders.push({ loader: 'babel-loader', options: {} });
-    }
+    loaders.push(this.createBabelLoader());
     return loaders;
   }
 };
