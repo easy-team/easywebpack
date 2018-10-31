@@ -633,5 +633,24 @@ describe('client.test.js', () => {
       expect(!!copy).to.be.true;
     });
 
+    it('should customize webpack config test one', () => {
+      const builder = createBuilder({
+        customize(webpackConfig) {
+          webpackConfig.externals.jquery = 'jquery';
+          return webpackConfig;
+        }
+      });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.externals.jquery).to.equal('jquery');
+    });
+    it('should customize webpack config test two', () => {
+      const builder = createBuilder({
+        customize(webpackConfig) {
+          webpackConfig.externals.jquery = 'jquery';
+        }
+      });
+      const webpackConfig = builder.create();
+      expect(webpackConfig.externals.jquery).to.equal('jquery');
+    });
   });
 });
