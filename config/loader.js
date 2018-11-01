@@ -16,7 +16,7 @@ exports.babel = {
 };
 
 exports.eslint = {
-  enable: true,
+  enable: false,
   test: /\.jsx?$/,
   use: ['eslint-loader'],
   exclude: /node_modules/,
