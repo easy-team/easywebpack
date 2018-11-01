@@ -68,7 +68,7 @@ describe('loader.test.js', () => {
       const builder1 = createBuilder();
       const webpackConfig1 = builder1.create();
       const rules1 = webpackConfig1.module.rules;
-      expect(getLoaderByName('eslint', rules1)).to.include.all.keys(['test', 'use']);
+      expect(getLoaderByName('eslint', rules1)).to.be.undefined;
       expect(getLoaderByName('babel', rules1)).to.include.all.keys(['test', 'use']);
       expect(getLoaderByTest(/\.(woff2?|eot|ttf|otf)(\?.*)?$/, rules1)).to.include.all.keys(['test', 'use']);
 

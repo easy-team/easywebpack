@@ -333,10 +333,8 @@ describe('client.test.js', () => {
       const webpackConfig = builder.create();
       const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
       const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
-      const eslint = getLoaderByName('eslint', webpackConfig.module.rules);
       expect(tsLoader).to.be.undefined;
       expect(tslint).to.be.undefined;
-      expect(eslint.use[0].loader).to.equal('eslint-loader');
     });
 
     it('should typescript cache enable test', () => {
