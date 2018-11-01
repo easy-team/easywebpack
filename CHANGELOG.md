@@ -1,3 +1,13 @@
+<a name="4.9.1"></a>
+## [4.9.1](https://github.com/easy-team/easywebpack/compare/4.9.0...4.9.1) (2018-11-01)
+
+
+### Bug Fixes
+
+* client render entry error for babel-loader path ([c9c15fd](https://github.com/easy-team/easywebpack/commit/c9c15fd))
+
+
+
 <a name="4.9.0"></a>
 # [4.9.0](https://github.com/easy-team/easywebpack/compare/4.8.5...4.9.0) (2018-11-01)
 
