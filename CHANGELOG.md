@@ -1,3 +1,13 @@
+<a name="4.9.2"></a>
+## [4.9.2](https://github.com/easy-team/easywebpack/compare/4.9.1...4.9.2) (2018-11-01)
+
+
+### Bug Fixes
+
+* loader merge invalid options ([71399c5](https://github.com/easy-team/easywebpack/commit/71399c5))
+
+
+
 <a name="4.9.1"></a>
 ## [4.9.1](https://github.com/easy-team/easywebpack/compare/4.9.0...4.9.1) (2018-11-01)
 
