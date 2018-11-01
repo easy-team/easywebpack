@@ -1,3 +1,25 @@
+<a name="4.9.0"></a>
+# [4.9.0](https://github.com/easy-team/easywebpack/compare/4.8.5...4.9.0) (2018-11-01)
+
+
+### Bug Fixes
+
+* default babelrc ([ec40b67](https://github.com/easy-team/easywebpack/commit/ec40b67))
+* loader no options merge ([c3a7923](https://github.com/easy-team/easywebpack/commit/c3a7923))
+* mutil compiler babel env invalid ([5dfc4ed](https://github.com/easy-team/easywebpack/commit/5dfc4ed))
+* vue entry file babel compile error ([eeeaeb7](https://github.com/easy-team/easywebpack/commit/eeeaeb7))
+
+
+### Features
+
+* add webpack config customize hook ([d04abf0](https://github.com/easy-team/easywebpack/commit/d04abf0))
+* default open compile.cache and compile.thread ([ff3a663](https://github.com/easy-team/easywebpack/commit/ff3a663))
+* dev mode node.console: true ([1e4fa56](https://github.com/easy-team/easywebpack/commit/1e4fa56))
+* eslint default disabled ([c51f42c](https://github.com/easy-team/easywebpack/commit/c51f42c))
+* support babel default config ([df9bb78](https://github.com/easy-team/easywebpack/commit/df9bb78))
+
+
+
 <a name="4.8.5"></a>
 ## [4.8.5](https://github.com/easy-team/easywebpack/compare/4.8.4...4.8.5) (2018-10-15)
 
