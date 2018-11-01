@@ -1,3 +1,13 @@
+<a name="4.9.3"></a>
+## [4.9.3](https://github.com/easy-team/easywebpack/compare/4.9.2...4.9.3) (2018-11-01)
+
+
+### Bug Fixes
+
+* support babel-7 and babel-loader-8 ([8228f23](https://github.com/easy-team/easywebpack/commit/8228f23))
+
+
+
 <a name="4.9.2"></a>
 ## [4.9.2](https://github.com/easy-team/easywebpack/compare/4.9.1...4.9.2) (2018-11-01)
 
