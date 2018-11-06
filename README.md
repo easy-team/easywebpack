@@ -67,9 +67,9 @@ const webpackConfig = easywebpack.getWebpackConfig({
 
 ## Application Boilerplate
 
-- [vue-webpack-boilerplate](https://github.com/hubcarl/easywebpack-cli-template/boilerplate/vue) Vue Front-End Application
+- [vue-webpack-boilerplate](https://github.com/hubcarl/easywebpack-cli-template/tree/master/boilerplate/vue) Vue Front-End Application
 
-- [react-webpack-boilerplate](https://github.com/hubcarl/easywebpack-cli-template/boilerplate/vue) React Front-End Application
+- [react-webpack-boilerplate](https://github.com/hubcarl/easywebpack-cli-template/tree/master/boilerplate/react) React Front-End Application
 
 - [weex-webpack-boilerplate](https://github.com/easy-team/easywebpack-weex-boilerplate) Weex Front-End Application
 
