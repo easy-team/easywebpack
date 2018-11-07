@@ -25,7 +25,7 @@ exports.eslint = {
 
 exports.typescript = {
   enable: false,
-  test: /\.ts$/,
+  test: /\.tsx?$/,
   exclude: /node_modules/,
   use() {
     const loaders = [];
