@@ -1,3 +1,13 @@
+<a name="4.9.4"></a>
+## [4.9.4](https://github.com/easy-team/easywebpack/compare/4.9.3...4.9.4) (2018-11-07)
+
+
+### Bug Fixes
+
+* babel7 not support forceEnv, use envName replace ([5e6f49d](https://github.com/easy-team/easywebpack/commit/5e6f49d))
+
+
+
 <a name="4.9.3"></a>
 ## [4.9.3](https://github.com/easy-team/easywebpack/compare/4.9.2...4.9.3) (2018-11-01)
 
