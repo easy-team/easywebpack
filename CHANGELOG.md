@@ -1,3 +1,13 @@
+<a name="4.9.5"></a>
+## [4.9.5](https://github.com/easy-team/easywebpack/compare/4.9.4...4.9.5) (2018-11-07)
+
+
+### Bug Fixes
+
+* no babelrc options merge error ([e647ca6](https://github.com/easy-team/easywebpack/commit/e647ca6))
+
+
+
 <a name="4.9.4"></a>
 ## [4.9.4](https://github.com/easy-team/easywebpack/compare/4.9.3...4.9.4) (2018-11-07)
 
