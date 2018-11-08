@@ -29,7 +29,7 @@ exports.typescript = {
   exclude: /node_modules/,
   use() {
     const loaders = [];
-    const createTsLoader = options =>{
+    const createTsLoader = options => {
       return { loader: 'ts-loader', options };
     };
     const compile = this.config.compile;
@@ -41,6 +41,10 @@ exports.typescript = {
     }
     if (compile.cache) {
       loaders.unshift(this.createCacheLoader(compile.cache));
+    }
+    // react typescript need to dynamic import
+    if (this.typescript && this.framework === 'react') {
+      loaders.unshift(this.createBabelLoader());
     }
     return loaders;
   }

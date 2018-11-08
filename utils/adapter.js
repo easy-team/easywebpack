@@ -14,7 +14,7 @@ module.exports = class WebpackAdapter {
     const configLoaders = config.loaders;
     if (utils.isObject(configLoaders)) {
       // 默认 typescript 开启, tslint 开启，eslint 禁用
-      if (configLoaders.typescript) {
+      if (this.builder.typescript) {
         if (utils.isObject(loaders.eslint) && configLoaders.eslint === undefined) {
           this.builder.mergeLoader({ eslint: false });
         }
