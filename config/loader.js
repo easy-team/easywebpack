@@ -48,7 +48,7 @@ exports.typescript = {
 
 exports.tslint = {
   enable: false,
-  test: /\.ts$/,
+  test: /\.tsx?$/,
   exclude: /node_modules/,
   enforce: 'pre',
   use: ['tslint-loader'],

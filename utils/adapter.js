@@ -23,7 +23,7 @@ module.exports = class WebpackAdapter {
         }
         // egg project, auto set client typescript tsconfig.json config
         const tsConfigFile = g(config, 'typescript.options.configFile');
-        if (config.egg && !tsConfigFile) {
+        if (this.builder.egg && !tsConfigFile) {
           const configFile = path.join(this.baseDir, './app/web/tsconfig.json');
           if (fs.existsSync(configFile)) {
             this.builder.mergeConfig({
