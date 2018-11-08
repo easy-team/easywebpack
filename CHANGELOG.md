@@ -1,3 +1,14 @@
+<a name="4.9.6"></a>
+## [4.9.6](https://github.com/easy-team/easywebpack/compare/4.9.5...4.9.6) (2018-11-08)
+
+
+### Bug Fixes
+
+* ts cache and auto check egg ([150d925](https://github.com/easy-team/easywebpack/commit/150d925))
+* typescript compile react mode ([2d9ce36](https://github.com/easy-team/easywebpack/commit/2d9ce36))
+
+
+
 <a name="4.9.5"></a>
 ## [4.9.5](https://github.com/easy-team/easywebpack/compare/4.9.4...4.9.5) (2018-11-07)
 
