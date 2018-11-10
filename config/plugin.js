@@ -55,69 +55,69 @@ exports.define = {
   }
 };
 
-exports.commonsChunk = {
-  enable() {
-    const config = this.config;
-    return !config.dll && !(config.optimization && config.optimization.splitChunks);
-  },
-  type: 'client',
-  name: webpack.optimize.SplitChunksPlugin,
-  action: 'merge',
-  args() {
-    const packKeys = Object.keys(this.packs || {});
-    const chunks = Object.keys(this.webpackConfig.entry || {}).filter(entry => {
-      return !packKeys.includes(entry);
-    });
-    const lib = this.utils.isObject(this.config.lib) ? this.config.lib : {};
-    const name = lib.name || 'common';
-    return {
-      name,
-      chunks
-    };
-  }
-};
+// exports.commonsChunk = {
+//   enable() {
+//     const config = this.config;
+//     return !config.dll && !(config.optimization && config.optimization.splitChunks);
+//   },
+//   type: 'client',
+//   name: webpack.optimize.SplitChunksPlugin,
+//   action: 'merge',
+//   args() {
+//     const packKeys = Object.keys(this.packs || {});
+//     const chunks = Object.keys(this.webpackConfig.entry || {}).filter(entry => {
+//       return !packKeys.includes(entry);
+//     });
+//     const lib = this.utils.isObject(this.config.lib) ? this.config.lib : {};
+//     const name = lib.name || 'common';
+//     return {
+//       name,
+//       chunks
+//     };
+//   }
+// };
 
-exports.runtime = {
-  enable() {
-    return this.isUse('commonsChunk');
-  },
-  type: 'client',
-  name: webpack.optimize.RuntimeChunkPlugin,
-  action: 'merge',
-  args() {
-    const config = this.config;
-    const runtimeChunk = config.optimization && config.optimization.runtimeChunk;
-    const name = this.utils.isObject(runtimeChunk) && runtimeChunk.name;
-    return {
-      name: name || 'runtime'
-    };
-  }
-};
+// exports.runtime = {
+//   enable() {
+//     return this.isUse('commonsChunk');
+//   },
+//   type: 'client',
+//   name: webpack.optimize.RuntimeChunkPlugin,
+//   action: 'merge',
+//   args() {
+//     const config = this.config;
+//     const runtimeChunk = config.optimization && config.optimization.runtimeChunk;
+//     const name = this.utils.isObject(runtimeChunk) && runtimeChunk.name;
+//     return {
+//       name: name || 'runtime'
+//     };
+//   }
+// };
 
-exports.uglifyJs = {
-  enable() {
-    const config = this.config;
-    return !(config.optimization && config.optimization.minimize);
-  },
-  env: ['prod'],
-  name: 'uglifyjs-webpack-plugin',
-  args: {
-    cache: true,
-    parallel: 2,
-    sourceMap: true,
-    uglifyOptions: {
-      warnings: false,
-      compress: {
-        dead_code: true,
-        drop_console: true,
-        drop_debugger: true
-      },
-      output: {
-        comments: false
-      }
-    }
-  }
-};
+// exports.uglifyJs = {
+//   enable() {
+//     const config = this.config;
+//     return !(config.optimization && config.optimization.minimize);
+//   },
+//   env: ['prod'],
+//   name: 'uglifyjs-webpack-plugin',
+//   args: {
+//     cache: true,
+//     parallel: 2,
+//     sourceMap: true,
+//     uglifyOptions: {
+//       warnings: false,
+//       compress: {
+//         dead_code: true,
+//         drop_console: true,
+//         drop_debugger: true
+//       },
+//       output: {
+//         comments: false
+//       }
+//     }
+//   }
+// };
 
 exports.manifest = {
   enable: true,
