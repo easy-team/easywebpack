@@ -71,7 +71,6 @@ describe('plugin.test.js', () => {
       const plugins = webpackConfig1.plugins;
       expect(!!getPluginByLabel('hot', plugins)).to.be.true;
       expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
-      expect(!!getPluginByLabel('commonsChunk', plugins)).to.be.true;
     });
 
     it('should plugin client test enable test', () => {
@@ -82,7 +81,6 @@ describe('plugin.test.js', () => {
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
       expect(!!getPluginByLabel('hot', plugins)).to.be.false;
-      expect(!!getPluginByLabel('uglifyJs', plugins)).to.be.false;
       expect(!!getPluginByLabel('cssmini', plugins)).to.be.false;
       expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
       expect(!!getPluginByLabel('ignore', plugins)).to.be.false;
@@ -100,7 +98,6 @@ describe('plugin.test.js', () => {
       const plugins = webpackConfig1.plugins;
 
       expect(!!getPluginByLabel('hot', plugins)).to.be.false;
-      expect(!!getPluginByLabel('uglifyJs', plugins)).to.be.true;
       expect(!!getPluginByLabel('cssmini', plugins)).to.be.true;
       expect(!!getPluginByLabel('imagemini', plugins)).to.be.true;
       expect(!!getPluginByLabel('ignore', plugins)).to.be.false;
@@ -117,7 +114,6 @@ describe('plugin.test.js', () => {
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
       expect(!!getPluginByLabel('hot', plugins)).to.be.false;
-      expect(!!getPluginByLabel('uglifyJs', plugins)).to.be.false;
       expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
       expect(!!getPluginByLabel('ignore', plugins)).to.be.false;
       expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.false;
@@ -132,7 +128,6 @@ describe('plugin.test.js', () => {
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
       expect(!!getPluginByLabel('hot', plugins)).to.be.false;
-      expect(!!getPluginByLabel('uglifyJs', plugins)).to.be.false;
       expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
       expect(!!getPluginByLabel('ignore', plugins)).to.be.true;
       expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.true;
@@ -147,7 +142,6 @@ describe('plugin.test.js', () => {
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
       expect(!!getPluginByLabel('hot', plugins)).to.be.false;
-      expect(!!getPluginByLabel('uglifyJs', plugins)).to.be.true;
       expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
       expect(!!getPluginByLabel('ignore', plugins)).to.be.true;
       expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.true;

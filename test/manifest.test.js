@@ -50,8 +50,6 @@ describe('manifest.test.js', () => {
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
       expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
-      expect(!!getPluginByLabel('commonsChunk', plugins)).to.be.true;
-      expect(!!getPluginByLabel('runtime', plugins)).to.be.true;
     });
   });
 

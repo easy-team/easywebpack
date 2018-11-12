@@ -16,9 +16,6 @@ exports.config = {
   },
   loaders: {},
   plugins: {},
-  optimization: {
-    minimize: false
-  },
   compile:{
     cache: true,
     thread: true

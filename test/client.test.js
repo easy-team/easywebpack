@@ -268,36 +268,34 @@ describe('client.test.js', () => {
   });
 
 
-  describe('#webpack commonsChunk test', () => {
+  describe('#webpack optimization test', () => {
     it('should dev SplitChunks config test', () => {
       const builder = createBuilder({ env: 'dev', lib: ['mocha'] });
       const webpackConfig = builder.create();
-      const commonsChunks = webpackConfig.plugins.filter(plugin =>{
-        return plugin.constructor.name === 'SplitChunksPlugin' || plugin.constructor.name === 'RuntimeChunkPlugin';
-      });
-      expect(webpackConfig.entry).to.have.property('common');
-      expect(commonsChunks.length).to.equal(2);
+      expect(webpackConfig.optimization.runtimeChunk.name).to.equal('runtime');
+      expect(webpackConfig.optimization.splitChunks.cacheGroups.vendors.test.toString()).to.equal(new RegExp(`node_modules/(mocha)\\.js`).toString());
     });
 
     it('should optimization splitChunks and runtimeChunk config test', () => {
       const builder = createBuilder({
         env: 'dev', 
         optimization: {
-          splitChunks: {
-            name: 'common',
-          },
           runtimeChunk: {
-            name: 'runtime',
+            name: 'runtime1',
           },
+          splitChunks: {
+            cacheGroups: {
+              vendors: {
+                name: 'common1'
+              }
+            }
+            
+          }
         }
       });
       const webpackConfig = builder.create();
-      const commonsChunks = webpackConfig.plugins.filter(plugin =>{
-        return plugin.constructor.name === 'SplitChunksPlugin' || plugin.constructor.name === 'RuntimeChunkPlugin';
-      });
-      expect(commonsChunks.length).to.equal(0);
-      expect(webpackConfig.optimization.splitChunks.name).to.equal('common');
-      expect(webpackConfig.optimization.runtimeChunk.name).to.equal('runtime');
+      expect(webpackConfig.optimization.runtimeChunk.name).to.equal('runtime1');
+      expect(webpackConfig.optimization.splitChunks.cacheGroups.vendors.name).to.equal('common1');
     });
   });
 
@@ -310,20 +308,6 @@ describe('client.test.js', () => {
       });
       expect(webpackConfig.entry).to.have.not.property('common');
       expect(commonsChunks.length).to.equal(0);
-    });
-  });
-
-  describe('#webpack commonsChunk dll exist test', () => {
-    it('should dev cdn config test', () => {
-      const builder = createBuilder({ env: 'dev', dll: ['mocha'], plugins:{
-        commonsChunk: true
-      }});
-      const webpackConfig = builder.create();
-      const commonsChunks = webpackConfig.plugins.filter(plugin =>{
-        return plugin.constructor.name === 'SplitChunksPlugin' || plugin.constructor.name === 'RuntimeChunkPlugin';
-      });
-      expect(webpackConfig.entry).to.have.not.property('common');
-      expect(commonsChunks.length).to.equal(2);
     });
   });
 

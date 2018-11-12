@@ -55,8 +55,6 @@ describe('vue.test.js', () => {
       expect(webpackConfig.output.publicPath).to.equal(`/public/dist/`);
 
       expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
-      expect(!!getPluginByLabel('commonsChunk', plugins)).to.be.true;
-      expect(!!getPluginByLabel('runtime', plugins)).to.be.true;
     });
 
     it('should vue solution client render solution config override by custom config', () => {
@@ -78,8 +76,6 @@ describe('vue.test.js', () => {
       expect(webpackConfig.output.publicPath).to.equal(`/public/dist/override/`);
 
       expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
-      expect(!!getPluginByLabel('commonsChunk', plugins)).to.be.true;
-      expect(!!getPluginByLabel('runtime', plugins)).to.be.true;
     });
 
     it('should egg test', () => {
