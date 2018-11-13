@@ -19,6 +19,13 @@ exports.config = {
   compile:{
     cache: true,
     thread: true
+  },
+  node: {
+    console: false,
+    global: false,
+    process: false,
+    Buffer: false,
+    setImmediate: false
   }
 };
 
