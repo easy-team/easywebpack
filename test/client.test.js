@@ -273,7 +273,6 @@ describe('client.test.js', () => {
       const builder = createBuilder({ env: 'dev', lib: ['mocha'] });
       const webpackConfig = builder.create();
       expect(webpackConfig.optimization.runtimeChunk.name).to.equal('runtime');
-      expect(webpackConfig.optimization.splitChunks.cacheGroups.vendors.test.toString()).to.equal(new RegExp(`node_modules/(mocha)\\.js`).toString());
     });
 
     it('should optimization splitChunks and runtimeChunk config test', () => {

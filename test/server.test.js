@@ -163,6 +163,6 @@ describe('server.test.js', () => {
   it('should node console env prod test', () => {
     const builder = createBuilder({ env: 'prod' });
     const webpackConfig = builder.create();
-    expect(webpackConfig.node.console).to.be.undefined;
+    expect(webpackConfig.node.console).to.be.false;
   });
 });
