@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "4.10.0-rc.4",
+  "version": "4.10.0",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
@@ -60,7 +60,7 @@
     "webpack-manifest-resource-plugin": "^4.0.0",
     "webpack-filter-warnings-plugin": "^1.2.0",
     "webpack-node-externals": "^1.6.0",
-    "webpack-tool": "next"
+    "webpack-tool": "^4.2.0"
   },
   "devDependencies": {
     "chai": "^4.0.0",

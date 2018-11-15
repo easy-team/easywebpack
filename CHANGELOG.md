@@ -1,3 +1,24 @@
+<a name="4.10.0"></a>
+# [4.10.0](https://github.com/easy-team/easywebpack/compare/4.9.6...4.10.0-rc.4) (2018-11-15)
+
+
+### Bug Fixes
+
+* add webpack plugin filter: webpack-filter-warnings-plugin https://github.com/webpack-contrib/mini-css-extract-plugin/issues/250 ([b19ee30](https://github.com/easy-team/easywebpack/commit/b19ee30))
+* split for lib ([06eed40](https://github.com/easy-team/easywebpack/commit/06eed40))
+* webpack-tool proxy ([fa11a07](https://github.com/easy-team/easywebpack/commit/fa11a07))
+
+
+### Features
+
+* disable node polyfill ([1c4e556](https://github.com/easy-team/easywebpack/commit/1c4e556))
+* namedModules and namedChunks default set true ([b5bc5d3](https://github.com/easy-team/easywebpack/commit/b5bc5d3))
+* not need set entry for lib ([177ed1a](https://github.com/easy-team/easywebpack/commit/177ed1a))
+* support uglifyJs config for optimization ([b968cdd](https://github.com/easy-team/easywebpack/commit/b968cdd))
+* use optimization config ([6dc571b](https://github.com/easy-team/easywebpack/commit/6dc571b))
+
+
+
 <a name="4.9.6"></a>
 ## [4.9.6](https://github.com/easy-team/easywebpack/compare/4.9.5...4.9.6) (2018-11-08)
 
