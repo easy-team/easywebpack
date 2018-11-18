@@ -272,6 +272,7 @@ exports.copy = {
 };
 
 exports.filter = {
+  enable: false,
   name: 'webpack-filter-warnings-plugin',
   args: {
     exclude: /\[mini-css-extract-plugin]\nConflicting order between:/
