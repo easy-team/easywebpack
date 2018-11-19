@@ -23,7 +23,7 @@ exports.eslint = {
   enforce: 'pre'
 };
 
-exports.typescript = {
+exports.ts = {
   enable: false,
   test: /\.tsx?$/,
   exclude: /node_modules/,
