@@ -285,6 +285,8 @@ utils.getLoaderLabel = loader => {
         }
         return name;
       }, '');
+    } else if (Object.keys(loader).length === 1) {
+      loaderName = Object.keys(loader)[0];
     }
   }
   return loaderName.replace(/-loader$/, '');

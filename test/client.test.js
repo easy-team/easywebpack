@@ -564,6 +564,7 @@ describe('client.test.js', () => {
       const scssLoader = helper.getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
       const lessLoader = helper.getLoaderByName('less', webpackConfig.module.rules, /\.less/);
       const stylusLoader = helper.getLoaderByName('stylus', webpackConfig.module.rules, /\.stylus/);
+
       expect(cssLoader.use[1].options.sourceMap).to.be.false;
       expect(sassLoader.use[1].options.sourceMap).to.be.false;
       expect(sassLoader.use[3].options.sourceMap).to.be.false;

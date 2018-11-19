@@ -14,6 +14,7 @@ exports.base = {
     install:{
       check: false
     },
+    postcss: true,
     compile:{
       cache: true,
       thread: true

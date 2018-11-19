@@ -41,5 +41,24 @@ describe('rules.test.js', () => {
       expect(helper.getLoaderByName('babel', rules)).to.be.undefined;
       expect(helper.getLoaderByName(/\.(woff2?|eot|ttf|otf)(\?.*)?$/, rules)).to.be.undefined;
     });
+
+    it('should webpack rules options test', () => {
+      const config = {
+        module: {
+          rules: [
+            {
+              eslint: {
+                fix: true
+              }
+            }
+          ]
+        }
+      };
+      const builder = helper.createBuilder(config);
+      const webpackConfig = builder.create();
+      const rules = webpackConfig.module.rules;
+      const eslint = helper.getLoaderByName('eslint', rules);
+      expect(eslint.use[0].options.fix).to.be.true;
+    });
   });
 });
