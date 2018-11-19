@@ -56,7 +56,7 @@ describe('client.test.js', () => {
           use: ['vue-html-loader']
         }
       };
-      const builder = createBuilder({});
+      const builder = createBuilder({ loaders: { typescript: true }});
       builder.mergeLoader(vueLoaderConfig);
       const webpackConfig = builder.create();
       const rules = webpackConfig.module.rules;
