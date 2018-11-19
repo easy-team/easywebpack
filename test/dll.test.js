@@ -1,8 +1,7 @@
 'use strict';
 const fs = require('fs');
 const expect = require('chai').expect;
-const WebpackTool = require('webpack-tool');
-const webpack = WebpackTool.webpack;
+const helper = require('./helper');
 const utils = require('../utils/utils');
 const WebpackDllBuilder = require('../lib/dll');
 const WebpackClientBuilder = require('../lib/client');
@@ -17,12 +16,6 @@ class DllBuilder extends WebpackDllBuilder {
       publicPath: 'public/dist'
     });
   }
-}
-
-function getPluginByLabel(label, plugins) {
-  return plugins.find(plugin => {
-    return plugin.__lable__ === label || plugin.__plugin__ === label;
-  });
 }
 
 describe('dll.test.js', () => {
@@ -47,7 +40,7 @@ describe('dll.test.js', () => {
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
       expect(webpackConfig.entry).to.to.have.property('vendor');
-      expect(!!getPluginByLabel('DllPlugin', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('DllPlugin', plugins)).to.be.true;
     });
 
     it('should dll refrence plugin test', () => {
@@ -72,7 +65,7 @@ describe('dll.test.js', () => {
         dll: ['mocha']
       });
       const webpackConfig = builder.createWebpackConfig();
-      const dllReferencePlugin = getPluginByLabel('DllReferencePlugin', webpackConfig.plugins);
+      const dllReferencePlugin = helper.getPluginByLabel('DllReferencePlugin', webpackConfig.plugins);
       expect(!!dllReferencePlugin).to.be.true;
       fs.unlinkSync(filename);
     });

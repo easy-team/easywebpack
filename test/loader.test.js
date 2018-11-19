@@ -1,8 +1,6 @@
 'use strict';
 const expect = require('chai').expect;
-const WebpackTool = require('webpack-tool');
-const webpack = WebpackTool.webpack;
-const merge = WebpackTool.merge;
+const helper = require('./helper');
 const utils = require('../utils/utils');
 const WebpackBaseBuilder = require('../lib/base');
 const WebpackClientBuilder = require('../lib/client');
@@ -28,14 +26,7 @@ function createClientBuilder(config) {
   });
   return builder;
 }
-function getLoaderByName(name, rules) {
-  const loaderName = `${name}-loader`;
-  return rules.find(rule => {
-    return rule.use.some(loader => {
-      return loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
-    });
-  });
-}
+
 function getLoadersByName(name, rules) {
   const loaderName = `${name}-loader`;
   return rules.filter(rule => {
@@ -68,8 +59,8 @@ describe('loader.test.js', () => {
       const builder1 = createBuilder();
       const webpackConfig1 = builder1.create();
       const rules1 = webpackConfig1.module.rules;
-      expect(getLoaderByName('eslint', rules1)).to.be.undefined;
-      expect(getLoaderByName('babel', rules1)).to.include.all.keys(['test', 'use']);
+      expect(helper.getLoaderByName('eslint', rules1)).to.be.undefined;
+      expect(helper.getLoaderByName('babel', rules1)).to.include.all.keys(['test', 'use']);
       expect(getLoaderByTest(/\.(woff2?|eot|ttf|otf)(\?.*)?$/, rules1)).to.include.all.keys(['test', 'use']);
 
       const builder2 = createBuilder({
@@ -82,9 +73,9 @@ describe('loader.test.js', () => {
 
       const webpackConfig2 = builder2.create();
       const rules2 = webpackConfig2.module.rules;
-      expect(getLoaderByName('eslint', rules2)).to.equal(undefined);
-      expect(getLoaderByName('babel', rules2)).to.be.undefined;
-      expect(getLoaderByName(/\.(woff2?|eot|ttf|otf)(\?.*)?$/, rules2)).to.be.undefined;
+      expect(helper.getLoaderByName('eslint', rules2)).to.equal(undefined);
+      expect(helper.getLoaderByName('babel', rules2)).to.be.undefined;
+      expect(helper.getLoaderByName(/\.(woff2?|eot|ttf|otf)(\?.*)?$/, rules2)).to.be.undefined;
     });
 
     it('should loader merge no options test', () => {
@@ -98,7 +89,7 @@ describe('loader.test.js', () => {
       const builder = createBuilder(config);
       const webpackConfig = builder.create();
       const rules = webpackConfig.module.rules;
-      const eslint = getLoaderByName('eslint', rules);
+      const eslint = helper.getLoaderByName('eslint', rules);
       expect(eslint.use[0].options.fix).to.be.true;
     });
 
@@ -129,8 +120,8 @@ describe('loader.test.js', () => {
 
       const webpackConfig = builder.create();
       const rules = webpackConfig.module.rules;
-      const eslint = getLoaderByName('eslint', rules);
-      const babel = getLoaderByName('babel', rules);
+      const eslint = helper.getLoaderByName('eslint', rules);
+      const babel = helper.getLoaderByName('babel', rules);
       expect(eslint.use[0].options.fix).to.be.true;
       expect(babel.use[0].options).to.include.all.keys(['presets', 'plugins']);
       expect(babel.use[0].options.comments).to.be.false;
@@ -187,7 +178,7 @@ describe('loader.test.js', () => {
       const builder = createBuilder(config);
       const webpackConfig = builder.create();
       const rules = webpackConfig.module.rules;
-      const vuehtml = getLoaderByName('vue-html', rules);
+      const vuehtml = helper.getLoaderByName('vue-html', rules);
       expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
       expect(vuehtml.use[0].options.test).to.true;
     });
@@ -205,7 +196,7 @@ describe('loader.test.js', () => {
     });
     const webpackConfig = builder.create();
     const rules = webpackConfig.module.rules;
-    const vuehtml = getLoaderByName('vue-html', rules);
+    const vuehtml = helper.getLoaderByName('vue-html', rules);
     expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
     expect(vuehtml.use[0].options.test).to.true;
   });
@@ -220,7 +211,7 @@ describe('loader.test.js', () => {
     });
     const webpackConfig = builder.create();
     const rules = webpackConfig.module.rules;
-    const vuehtml = getLoaderByName('vue-html', rules);
+    const vuehtml = helper.getLoaderByName('vue-html', rules);
     expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
     expect(vuehtml.use[0].options.test).to.true;
   });
@@ -232,7 +223,7 @@ describe('loader.test.js', () => {
     });
     const webpackConfig = builder.create();
     const rules = webpackConfig.module.rules;
-    const vuehtml = getLoaderByName('vue-html', rules);
+    const vuehtml = helper.getLoaderByName('vue-html', rules);
     expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
   });
 
@@ -249,7 +240,7 @@ describe('loader.test.js', () => {
     });
     const webpackConfig = builder.create();
     const rules = webpackConfig.module.rules;
-    const vuehtml = getLoaderByName('vue-html', rules);
+    const vuehtml = helper.getLoaderByName('vue-html', rules);
     expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
     expect(vuehtml.use[0].options.test).to.true;
   });
@@ -267,7 +258,7 @@ describe('loader.test.js', () => {
     }]);
     const webpackConfig = builder.create();
     const rules = webpackConfig.module.rules;
-    const vuehtml = getLoaderByName('vue-html', rules);
+    const vuehtml = helper.getLoaderByName('vue-html', rules);
     expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
     expect(vuehtml.use[0].options.test).to.true;
   });
@@ -285,7 +276,7 @@ describe('loader.test.js', () => {
     }]);
     const webpackConfig = builder.create();
     const rules = webpackConfig.module.rules;
-    const vuehtml = getLoaderByName('vue-html', rules);
+    const vuehtml = helper.getLoaderByName('vue-html', rules);
     expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
     expect(vuehtml.use[0].options.test).to.true;
   });
@@ -295,7 +286,7 @@ describe('loader.test.js', () => {
     it('should postcss-loader default config', () => {
       const builder = createBuilder();
       const webpackConfig = builder.create();
-      const cssLoader = getLoaderByName('css', webpackConfig.module.rules);
+      const cssLoader = helper.getLoaderByName('css', webpackConfig.module.rules);
       const postcssLoader = cssLoader.use.find(loader => {
         return loader.loader === 'postcss-loader';
       });
@@ -305,7 +296,7 @@ describe('loader.test.js', () => {
     it('should postcss-loader devtool config', () => {
       const builder = createClientBuilder({ devtool: 'source-map'});
       const webpackConfig = builder.create();
-      const cssLoader = getLoaderByName('css', webpackConfig.module.rules);
+      const cssLoader = helper.getLoaderByName('css', webpackConfig.module.rules);
 
       const postcssLoader = cssLoader.use.find(loader => {
         return loader.loader === 'postcss-loader';
@@ -325,7 +316,7 @@ describe('loader.test.js', () => {
       });
     
       const webpackConfig = builder.create();
-      const cssLoader = getLoaderByName('css', webpackConfig.module.rules);
+      const cssLoader = helper.getLoaderByName('css', webpackConfig.module.rules);
 
       const postcssLoader = cssLoader.use.find(loader => {
         return loader.loader === 'postcss-loader';
@@ -354,7 +345,7 @@ describe('loader.test.js', () => {
         }
       });
       const webpackConfig = builder.create();
-      const urlLoader = getLoaderByName('url', webpackConfig.module.rules);
+      const urlLoader = helper.getLoaderByName('url', webpackConfig.module.rules);
       expect(urlLoader.use[0].options.limit).to.equal(10000);
     });
   });
@@ -363,7 +354,7 @@ describe('loader.test.js', () => {
       const cacheDirectory = utils.getCacheLoaderInfoPath('babel-loader', 'dev');
       const builder = createBuilder();
       const webpackConfig = builder.create();
-      const babelLoader = getLoaderByName('babel', webpackConfig.module.rules);
+      const babelLoader = helper.getLoaderByName('babel', webpackConfig.module.rules);
       expect(babelLoader.use.length).to.equal(2);
       expect(babelLoader.use[1].options.cacheDirectory).to.equal(cacheDirectory);
     });
@@ -375,7 +366,7 @@ describe('loader.test.js', () => {
         }
       });
       const webpackConfig = builder.create();
-      const babelLoader = getLoaderByName('babel', webpackConfig.module.rules);
+      const babelLoader = helper.getLoaderByName('babel', webpackConfig.module.rules);
       expect(babelLoader.use.length).to.equal(1);
       expect(babelLoader.use[0].options.cacheDirectory).to.equal(cacheDirectory);
     });

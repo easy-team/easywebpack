@@ -6,7 +6,7 @@ const webpack = WebpackTool.webpack;
 const WebpackBaseBuilder = require('../lib/base');
 const path = require('path').posix;
 const utils = require('../utils/utils');
-
+const helper = require('./helper');
 // http://chaijs.com/api/bdd/
 const createBuilder = config => {
   const builder = new WebpackBaseBuilder(config);
@@ -19,12 +19,6 @@ const createBuilder = config => {
     include: path.join(__dirname, '../test')
   });
   return builder;
-};
-
-const getPluginByLabel = (label, plugins) => {
-  return plugins.find(plugin => {
-    return plugin.__lable__ === label || plugin.__plugin__ === label;
-  });
 };
 
 describe('plugin.test.js', () => {
@@ -41,11 +35,11 @@ describe('plugin.test.js', () => {
       const builder1 = createBuilder();
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
-      // expect(!!getPluginByLabel('module', plugins)).to.be.false;
-      // expect(!!getPluginByLabel('error', plugins)).to.be.true;
-      expect(!!getPluginByLabel('provide', plugins)).to.be.true;
-      expect(!!getPluginByLabel('define', plugins)).to.be.true;
-      expect(!!getPluginByLabel('progress', plugins)).to.be.true;
+      // expect(!!helper.getPluginByLabel('module', plugins)).to.be.false;
+      // expect(!!helper.getPluginByLabel('error', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('provide', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('define', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('progress', plugins)).to.be.true;
     });
 
     it('should plugin manifest enable test', () => {
@@ -58,9 +52,9 @@ describe('plugin.test.js', () => {
       builder1.setProvide('$', 'jquery');
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
-      const provide = getPluginByLabel('provide', plugins);
+      const provide = helper.getPluginByLabel('provide', plugins);
       expect(provide.definitions).to.have.property('$');
-      expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.true;
     });
 
     it('should plugin client dev enable test', () => {
@@ -69,8 +63,8 @@ describe('plugin.test.js', () => {
       });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
-      expect(!!getPluginByLabel('hot', plugins)).to.be.true;
-      expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('hot', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.true;
     });
 
     it('should plugin client test enable test', () => {
@@ -80,13 +74,13 @@ describe('plugin.test.js', () => {
       });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
-      expect(!!getPluginByLabel('hot', plugins)).to.be.false;
-      expect(!!getPluginByLabel('cssmini', plugins)).to.be.false;
-      expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
-      expect(!!getPluginByLabel('ignore', plugins)).to.be.false;
-      expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.false;
-      expect(!!getPluginByLabel('extract', plugins)).to.be.true;
-      expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('hot', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('cssmini', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('imagemini', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('ignore', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('modulereplacement', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('extract', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.true;
     });
 
     it('should plugin client prod enable test', () => {
@@ -97,13 +91,13 @@ describe('plugin.test.js', () => {
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
 
-      expect(!!getPluginByLabel('hot', plugins)).to.be.false;
-      expect(!!getPluginByLabel('cssmini', plugins)).to.be.true;
-      expect(!!getPluginByLabel('imagemini', plugins)).to.be.true;
-      expect(!!getPluginByLabel('ignore', plugins)).to.be.false;
-      expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.false;
-      expect(!!getPluginByLabel('extract', plugins)).to.be.true;
-      expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('hot', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('cssmini', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('imagemini', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('ignore', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('modulereplacement', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('extract', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.true;
     });
 
     it('should plugin server dev enable test', () => {
@@ -113,11 +107,11 @@ describe('plugin.test.js', () => {
       });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
-      expect(!!getPluginByLabel('hot', plugins)).to.be.false;
-      expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
-      expect(!!getPluginByLabel('ignore', plugins)).to.be.false;
-      expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.false;
-      expect(!!getPluginByLabel('extract', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('hot', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('imagemini', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('ignore', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('modulereplacement', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('extract', plugins)).to.be.false;
     });
 
     it('should plugin server test enable test', () => {
@@ -127,11 +121,11 @@ describe('plugin.test.js', () => {
       });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
-      expect(!!getPluginByLabel('hot', plugins)).to.be.false;
-      expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
-      expect(!!getPluginByLabel('ignore', plugins)).to.be.true;
-      expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.true;
-      expect(!!getPluginByLabel('extract', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('hot', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('imagemini', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('ignore', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('modulereplacement', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('extract', plugins)).to.be.false;
     });
 
     it('should plugin server prod enable test', () => {
@@ -141,11 +135,11 @@ describe('plugin.test.js', () => {
       });
       const webpackConfig1 = builder1.create();
       const plugins = webpackConfig1.plugins;
-      expect(!!getPluginByLabel('hot', plugins)).to.be.false;
-      expect(!!getPluginByLabel('imagemini', plugins)).to.be.false;
-      expect(!!getPluginByLabel('ignore', plugins)).to.be.true;
-      expect(!!getPluginByLabel('modulereplacement', plugins)).to.be.true;
-      expect(!!getPluginByLabel('extract', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('hot', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('imagemini', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('ignore', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('modulereplacement', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('extract', plugins)).to.be.false;
     });
 
     it('should merge plugin test', () => {
@@ -164,7 +158,7 @@ describe('plugin.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const dll = getPluginByLabel('DllPlugin', plugins);
+      const dll = helper.getPluginByLabel('DllPlugin', plugins);
       expect(!!dll).to.be.true;
     });
 
@@ -176,7 +170,7 @@ describe('plugin.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const copy = getPluginByLabel('copy', plugins);
+      const copy = helper.getPluginByLabel('copy', plugins);
       expect(!!copy).to.be.true;
     });
 
@@ -190,7 +184,7 @@ describe('plugin.test.js', () => {
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
       const lable = utils.getPluginLabel(plugin);
-      const copy = getPluginByLabel(lable, plugins);
+      const copy = helper.getPluginByLabel(lable, plugins);
       expect(!!copy).to.be.true;
     });
 
@@ -203,7 +197,7 @@ describe('plugin.test.js', () => {
       }));
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const dll = getPluginByLabel('DllPlugin', plugins);
+      const dll = helper.getPluginByLabel('DllPlugin', plugins);
       expect(!!dll).to.be.true;
     });
 
@@ -222,7 +216,7 @@ describe('plugin.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const dll = getPluginByLabel('DllPlugin', plugins);
+      const dll = helper.getPluginByLabel('DllPlugin', plugins);
       expect(!!dll).to.be.true;
     });
 
@@ -237,7 +231,7 @@ describe('plugin.test.js', () => {
       ]);
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const dll = getPluginByLabel('DllPlugin', plugins);
+      const dll = helper.getPluginByLabel('DllPlugin', plugins);
       expect(!!dll).to.be.true;
     });
 
@@ -254,7 +248,7 @@ describe('plugin.test.js', () => {
       }]);
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const dll = getPluginByLabel('DllPlugin', plugins);
+      const dll = helper.getPluginByLabel('DllPlugin', plugins);
       expect(!!dll).to.be.true;
     });
     it('should merge array extend key plugin test', () => {
@@ -272,7 +266,7 @@ describe('plugin.test.js', () => {
       }]);
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const dll = getPluginByLabel('DllPlugin', plugins);
+      const dll = helper.getPluginByLabel('DllPlugin', plugins);
       expect(!!dll).to.be.true;
     });
 
@@ -288,7 +282,7 @@ describe('plugin.test.js', () => {
       ]);
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const dll = getPluginByLabel('DllPlugin', plugins);
+      const dll = helper.getPluginByLabel('DllPlugin', plugins);
       expect(!!dll).to.be.true;
     });
   });

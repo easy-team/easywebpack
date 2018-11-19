@@ -1,8 +1,6 @@
 'use strict';
 const expect = require('chai').expect;
-const WebpackTool = require('webpack-tool');
-const webpack = WebpackTool.webpack;
-const utils = require('../utils/utils');
+const helper = require('./helper');
 const WebpackClientBuilder = require('../lib/client')
 const WebpackServerBuilder = require('../lib/server');
 const path = require('path').posix;
@@ -19,12 +17,6 @@ class VueClientBuilder extends WebpackClientBuilder {
       }
     });
   }
-}
-
-function getPluginByLabel(label, plugins) {
-  return plugins.find(plugin => {
-    return plugin.__lable__ === label;
-  });
 }
 
 describe('vue.test.js', () => {
@@ -54,7 +46,7 @@ describe('vue.test.js', () => {
       expect(webpackConfig.output.path).to.equal(path.join(baseDir, 'dist/vue'));
       expect(webpackConfig.output.publicPath).to.equal(`/public/dist/`);
 
-      expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.false;
     });
 
     it('should vue solution client render solution config override by custom config', () => {
@@ -75,7 +67,7 @@ describe('vue.test.js', () => {
       expect(webpackConfig.output.path).to.equal(path.join(baseDir, 'dist/vue/override'));
       expect(webpackConfig.output.publicPath).to.equal(`/public/dist/override/`);
 
-      expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.false;
     });
 
     it('should egg test', () => {

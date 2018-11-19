@@ -1,12 +1,9 @@
 'use strict';
 const expect = require('chai').expect;
-const WebpackTool = require('webpack-tool');
-const webpack = WebpackTool.webpack;
-const merge = WebpackTool.merge;
 const WebpackClientBuilder = require('../lib/client');
 const path = require('path').posix;
-const fs = require('fs');
-const utils = require('../utils/utils');
+const helper = require('./helper');
+
 // http://chaijs.com/api/bdd/
 function createBuilder(config) {
   const builder = new WebpackClientBuilder(config);
@@ -16,21 +13,6 @@ function createBuilder(config) {
   builder.setBuildPath(path.join(__dirname, 'dist/client'));
   builder.setPublicPath('/public');
   return builder;
-}
-
-function getLoaderByName(name, rules) {
-  const loaderName = `${name}-loader`;
-  return rules.find(rule => {
-    return rule.use.some(loader => {
-      return loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
-    });
-  });
-}
-
-function getPluginByLabel(label, plugins) {
-  return plugins.find(plugin => {
-    return plugin.__lable__ === label || plugin.__plugin__ === label;
-  });
 }
 
 function getAllPluginByLabel(label, plugins) {
@@ -62,7 +44,7 @@ describe('html.test.js', () => {
         template
       });
       const webpackConfig = builder.create();
-      const htmlPlugins = getPluginByLabel('html-webpack-plugin', webpackConfig.plugins);
+      const htmlPlugins = helper.getPluginByLabel('html-webpack-plugin', webpackConfig.plugins);
       expect(webpackConfig.entry).to.include.keys(['client']);
       expect(htmlPlugins.options.template).to.equal(template);
     });
@@ -74,7 +56,7 @@ describe('html.test.js', () => {
         template
       });
       const webpackConfig = builder.create();
-      const htmlPlugins = getPluginByLabel('html-webpack-plugin', webpackConfig.plugins);
+      const htmlPlugins = helper.getPluginByLabel('html-webpack-plugin', webpackConfig.plugins);
       expect(webpackConfig.entry).to.include.keys(['client.test']);
       expect(htmlPlugins.options.template).to.equal(template);
     });
@@ -86,7 +68,7 @@ describe('html.test.js', () => {
         template
       });
       const webpackConfig = builder.create();
-      const htmlPlugins = getPluginByLabel('html-webpack-plugin', webpackConfig.plugins);
+      const htmlPlugins = helper.getPluginByLabel('html-webpack-plugin', webpackConfig.plugins);
       expect(webpackConfig.entry).to.include.keys(['base.test', 'client.test']);
       expect(Object.keys(webpackConfig.entry).length).to.equal(getAllPluginByLabel('html-webpack-plugin',webpackConfig.plugins).length);
       expect(htmlPlugins.options.template).to.equal(template);

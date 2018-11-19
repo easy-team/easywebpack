@@ -1,10 +1,7 @@
 'use strict';
 const expect = require('chai').expect;
-const WebpackTool = require('webpack-tool');
-const webpack = WebpackTool.webpack;
-const merge = WebpackTool.merge;
 const WebpackBaseBuilder = require('../lib/base');
-const path = require('path').posix;
+const helper = require('./helper');
 const utils = require('../utils/utils');
 // http://chaijs.com/api/bdd/
 function createBuilder(config) {
@@ -16,14 +13,7 @@ function createBuilder(config) {
   });
   return builder;
 }
-function getLoaderByName(name, rules) {
-  const loaderName = `${name}-loader`;
-  return rules.filter(rule => {
-    return rule.use.some(loader => {
-      return loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
-    });
-  });
-}
+
 describe('base.test.js', () => {
   before(() => {
   });
@@ -118,19 +108,19 @@ describe('base.test.js', () => {
     it('should create babel cache loader disable test', () => {
       const builder = createBuilder();
       const webpackConfig = builder.create();
-      const cacheLoader = getLoaderByName('cache', webpackConfig.module.rules);
-      expect(cacheLoader.length).to.equal(0);
+      const cacheLoader = helper.getLoaderByName('cache', webpackConfig.module.rules);
+      expect(cacheLoader).to.be.undefined;
     });
 
     it('should create babel-loader cache and thread test', () => {
       const cacheDirectory = utils.getCacheLoaderInfoPath('babel-loader')
       const builder = createBuilder({});
       const webpackConfig = builder.create();
-      const babelLoader = getLoaderByName('babel', webpackConfig.module.rules);
-      expect(babelLoader[0].use.length).to.equal(2);
-      expect(babelLoader[0].use[0].loader).to.equal('thread-loader');
-      expect(babelLoader[0].use[1].loader).to.equal('babel-loader');
-      expect(babelLoader[0].use[1].options.cacheDirectory).to.equal(cacheDirectory);
+      const babelLoader = helper.getLoaderByName('babel', webpackConfig.module.rules);
+      expect(babelLoader.use.length).to.equal(2);
+      expect(babelLoader.use[0].loader).to.equal('thread-loader');
+      expect(babelLoader.use[1].loader).to.equal('babel-loader');
+      expect(babelLoader.use[1].options.cacheDirectory).to.equal(cacheDirectory);
     });
 
     it('should create ts-loader cache and thread test', () => {
@@ -142,13 +132,12 @@ describe('base.test.js', () => {
       });
 
       const webpackConfig = builder.create();
-      const cacheLoader = getLoaderByName('cache', webpackConfig.module.rules);
-      expect(cacheLoader.length).to.equal(1);
-      expect(cacheLoader[0].use.length).to.equal(3);
-      expect(cacheLoader[0].use[0].loader).to.equal('cache-loader');
-      expect(cacheLoader[0].use[0].options.cacheDirectory).to.equal(cacheDirectory);
-      expect(cacheLoader[0].use[1].loader).to.equal('thread-loader');
-      expect(cacheLoader[0].use[2].loader).to.equal('ts-loader');
+      const cacheLoader = helper.getLoaderByName('cache', webpackConfig.module.rules);
+      expect(cacheLoader.use.length).to.equal(3);
+      expect(cacheLoader.use[0].loader).to.equal('cache-loader');
+      expect(cacheLoader.use[0].options.cacheDirectory).to.equal(cacheDirectory);
+      expect(cacheLoader.use[1].loader).to.equal('thread-loader');
+      expect(cacheLoader.use[2].loader).to.equal('ts-loader');
     });
 
     it('should create babel typescript config test', () => {
@@ -167,13 +156,12 @@ describe('base.test.js', () => {
         }
       });
       const webpackConfig = builder.create();
-      const cacheLoader = getLoaderByName('cache', webpackConfig.module.rules);
-      expect(cacheLoader.length).to.equal(1);
-      expect(cacheLoader[0].use.length).to.equal(2);
-      expect(cacheLoader[0].use[0].loader).to.equal('cache-loader');
-      expect(cacheLoader[0].use[0].options.cacheDirectory).to.equal(cacheDirectory);
-      expect(cacheLoader[0].use[1].loader).to.equal('ts-loader');
-      expect(cacheLoader[0].use[1].options.configFile).to.equal(__dirname);
+      const cacheLoader = helper.getLoaderByName('cache', webpackConfig.module.rules);
+      expect(cacheLoader.use.length).to.equal(2);
+      expect(cacheLoader.use[0].loader).to.equal('cache-loader');
+      expect(cacheLoader.use[0].options.cacheDirectory).to.equal(cacheDirectory);
+      expect(cacheLoader.use[1].loader).to.equal('ts-loader');
+      expect(cacheLoader.use[1].options.configFile).to.equal(__dirname);
     });
   });
 });

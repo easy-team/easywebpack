@@ -6,6 +6,7 @@ const merge = WebpackTool.merge;
 const WebpackClientBuilder = require('../lib/client');
 const path = require('path').posix;
 const fs = require('fs');
+const helper = require('./helper');
 const utils = require('../utils/utils');
 // http://chaijs.com/api/bdd/
 function createBuilder(config) {
@@ -20,25 +21,6 @@ function createBuilder(config) {
   builder.setBuildPath(path.join(__dirname, 'dist/client'));
   builder.setPublicPath('/public');
   return builder;
-}
-
-function getLoaderByName(name, rules, test) {
-  const loaderName = `${name}-loader`;
-  return rules.find(rule => {
-    return rule.use.some(loader => {
-      const hasLoader = loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
-      if(test && rule.test && typeof loader === 'object') {
-        return rule.test.toString().indexOf(test)>-1 && hasLoader;
-      }
-      return hasLoader;
-    });
-  });
-}
-
-function getPluginByLabel(label, plugins) {
-  return plugins.find(plugin => {
-    return plugin.__lable__ === label || plugin.__plugin__ === label;
-  });
 }
 
 describe('client.test.js', () => {
@@ -78,8 +60,8 @@ describe('client.test.js', () => {
       builder.mergeLoader(vueLoaderConfig);
       const webpackConfig = builder.create();
       const rules = webpackConfig.module.rules;
-      const vueLoader = getLoaderByName('vue', rules);
-      const vuehtml = getLoaderByName('vue-html', rules);
+      const vueLoader = helper.getLoaderByName('vue', rules);
+      const vuehtml = helper.getLoaderByName('vue-html', rules);
       expect(vueLoader.use[0].loader).to.equal('vue-loader');
       expect(vueLoader.use[0].options).to.include.all.keys(['preLoaders', 'loaders']);
       expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
@@ -213,14 +195,14 @@ describe('client.test.js', () => {
     it('should dev image hash config test', () => {
       const builder = createBuilder({ env: 'dev' });
       const webpackConfig = builder.create();
-      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'png');
+      const imageLoader = helper.getLoaderByName('url', webpackConfig.module.rules, 'png');
       expect(imageLoader.use[0].options.name).to.equal('img/[name].[ext]');
     });
 
     it('should dev font hash config test', () => {
       const builder = createBuilder({ env: 'dev' });
       const webpackConfig = builder.create();
-      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'woff2');
+      const imageLoader = helper.getLoaderByName('url', webpackConfig.module.rules, 'woff2');
       expect(imageLoader.use[0].options.name).to.equal('font/[name].[ext]');
     });
 
@@ -234,14 +216,14 @@ describe('client.test.js', () => {
     it('should test image hash config test', () => {
       const builder = createBuilder({ env: 'test' });
       const webpackConfig = builder.create();
-      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'png');
+      const imageLoader = helper.getLoaderByName('url', webpackConfig.module.rules, 'png');
       expect(imageLoader.use[0].options.name).to.equal('img/[name].[hash:8].[ext]');
     });
 
     it('should test font hash config test', () => {
       const builder = createBuilder({ env: 'test' });
       const webpackConfig = builder.create();
-      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'woff2');
+      const imageLoader = helper.getLoaderByName('url', webpackConfig.module.rules, 'woff2');
       expect(imageLoader.use[0].options.name).to.equal('font/[name].[hash:8].[ext]');
     });
 
@@ -255,14 +237,14 @@ describe('client.test.js', () => {
     it('should prod image hash config test', () => {
       const builder = createBuilder({ env: 'prod' });
       const webpackConfig = builder.create();
-      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'png');
+      const imageLoader = helper.getLoaderByName('url', webpackConfig.module.rules, 'png');
       expect(imageLoader.use[0].options.name).to.equal('img/[name].[hash:8].[ext]');
     });
 
     it('should prod font hash config test', () => {
       const builder = createBuilder({ env: 'prod' });
       const webpackConfig = builder.create();
-      const imageLoader = getLoaderByName('url', webpackConfig.module.rules, 'woff2');
+      const imageLoader = helper.getLoaderByName('url', webpackConfig.module.rules, 'woff2');
       expect(imageLoader.use[0].options.name).to.equal('font/[name].[hash:8].[ext]');
     });
   });
@@ -314,8 +296,8 @@ describe('client.test.js', () => {
     it('should default typescript enable test', () => {
       const builder = createBuilder();
       const webpackConfig = builder.create();
-      const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
-      const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
+      const tsLoader = helper.getLoaderByName('ts', webpackConfig.module.rules);
+      const tslint = helper.getLoaderByName('tslint', webpackConfig.module.rules);
       expect(tsLoader).to.be.undefined;
       expect(tslint).to.be.undefined;
     });
@@ -332,9 +314,9 @@ describe('client.test.js', () => {
         }
       });
       const webpackConfig = builder.create();
-      const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
-      const eslint = getLoaderByName('eslint', webpackConfig.module.rules);
-      const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
+      const tsLoader = helper.getLoaderByName('ts', webpackConfig.module.rules);
+      const eslint = helper.getLoaderByName('eslint', webpackConfig.module.rules);
+      const tslint = helper.getLoaderByName('tslint', webpackConfig.module.rules);
       expect(tsLoader.use[0].loader).to.equal('cache-loader');
       expect(tsLoader.use[1].loader).to.equal('ts-loader');
       expect(eslint.use[0].loader).to.equal('eslint-loader');
@@ -351,9 +333,9 @@ describe('client.test.js', () => {
         }
       });
       const webpackConfig = builder.create();
-      const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
-      const eslint = getLoaderByName('eslint', webpackConfig.module.rules);
-      const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
+      const tsLoader = helper.getLoaderByName('ts', webpackConfig.module.rules);
+      const eslint = helper.getLoaderByName('eslint', webpackConfig.module.rules);
+      const tslint = helper.getLoaderByName('tslint', webpackConfig.module.rules);
       expect(tsLoader.use[0].loader).to.equal('cache-loader');
       expect(tsLoader.use[1].loader).to.equal('thread-loader');
       expect(tsLoader.use[2].loader).to.equal('ts-loader');
@@ -377,11 +359,11 @@ describe('client.test.js', () => {
         }
       });
       const webpackConfig = builder.create();
-      const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
-      const eslint = getLoaderByName('eslint', webpackConfig.module.rules);
-      const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
+      const tsLoader = helper.getLoaderByName('ts', webpackConfig.module.rules);
+      const eslint = helper.getLoaderByName('eslint', webpackConfig.module.rules);
+      const tslint = helper.getLoaderByName('tslint', webpackConfig.module.rules);
       expect(eslint).to.be.undefined;
-      expect(tslint.use[0].loader).to.equal('tslint-loader');
+      expect(tslint).to.be.undefined;
       expect(tsLoader.use[0].loader).to.equal('cache-loader');
       expect(tsLoader.use[1].loader).to.equal('ts-loader');
       expect(tsLoader.use[1].options.configFile).to.equal(configFile);
@@ -394,26 +376,20 @@ describe('client.test.js', () => {
         }
       });
       const webpackConfig = builder.create();
-      const tsLoader = getLoaderByName('tslint', webpackConfig.module.rules);
+      const tsLoader = helper.getLoaderByName('tslint', webpackConfig.module.rules);
       expect(tsLoader.use[0].loader).to.equal('tslint-loader');
     });
 
     it('should typescript egg configFile auto set test', () => {
-      const configFile = path.resolve(process.cwd(), './app/web/tsconfig.json');
       const builder = createBuilder({
         egg: true,
         loaders:{
           typescript: true
         }
       });
-      if(!fs.existsSync(configFile)){
-        utils.writeFile(configFile, {});
-      }
       const webpackConfig = builder.create();
-      const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
+      const tsLoader = helper.getLoaderByName('ts', webpackConfig.module.rules);
       expect(tsLoader.use[2].loader).to.equal('ts-loader');
-      expect(tsLoader.use[2].options.configFile).to.equal(configFile);
-      fs.unlinkSync(configFile);
     });
 
 
@@ -421,7 +397,7 @@ describe('client.test.js', () => {
       const builder = createBuilder({});
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const serviceworker = getPluginByLabel('serviceworker', plugins);
+      const serviceworker = helper.getPluginByLabel('serviceworker', plugins);
       expect(!!serviceworker).to.be.false;
     });
 
@@ -433,7 +409,7 @@ describe('client.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const serviceworker = getPluginByLabel('serviceworker', plugins);
+      const serviceworker = helper.getPluginByLabel('serviceworker', plugins);
       expect(!!serviceworker).to.be.true;
     });
 
@@ -446,7 +422,7 @@ describe('client.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const serviceworker = getPluginByLabel('serviceworker', plugins);
+      const serviceworker = helper.getPluginByLabel('serviceworker', plugins);
       expect(serviceworker.options.prefix).to.equal('sw');
       expect(serviceworker.options.hash).to.be.true;
       expect(serviceworker.options.minify).to.be.true;
@@ -465,7 +441,7 @@ describe('client.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const serviceworker = getPluginByLabel('serviceworker', plugins);
+      const serviceworker = helper.getPluginByLabel('serviceworker', plugins);
       expect(serviceworker.options.prefix).to.equal('');
       expect(serviceworker.options.hash).to.be.false;
       expect(serviceworker.options.minify).to.be.false;
@@ -516,7 +492,7 @@ describe('client.test.js', () => {
         }
       });
       const webpackConfig = builder.create();
-      const scssLoader = getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
+      const scssLoader = helper.getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
       expect(scssLoader.use[3].options.includePaths.length).to.equal(2);
     });
   });
@@ -532,11 +508,11 @@ describe('client.test.js', () => {
         }
       });
       const webpackConfig = builder.create();
-      const cssLoader = getLoaderByName('css', webpackConfig.module.rules, /\.css/);
-      const sassLoader = getLoaderByName('sass', webpackConfig.module.rules, /\.sass/);
-      const scssLoader = getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
-      const LessLoader = getLoaderByName('less', webpackConfig.module.rules, /\.less/);
-      const stylusLoader = getLoaderByName('stylus', webpackConfig.module.rules, /\.stylus/);
+      const cssLoader = helper.getLoaderByName('css', webpackConfig.module.rules, /\.css/);
+      const sassLoader = helper.getLoaderByName('sass', webpackConfig.module.rules, /\.sass/);
+      const scssLoader = helper.getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
+      const LessLoader = helper.getLoaderByName('less', webpackConfig.module.rules, /\.less/);
+      const stylusLoader = helper.getLoaderByName('stylus', webpackConfig.module.rules, /\.stylus/);
       expect(cssLoader.use[1].options.sourceMap).to.be.true;
 
       expect(sassLoader.use[1].options.sourceMap).to.be.true;
@@ -583,11 +559,11 @@ describe('client.test.js', () => {
         }
       });
       const webpackConfig = builder.create();
-      const cssLoader = getLoaderByName('css', webpackConfig.module.rules, /\.css/);
-      const sassLoader = getLoaderByName('sass', webpackConfig.module.rules, /\.sass/);
-      const scssLoader = getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
-      const lessLoader = getLoaderByName('less', webpackConfig.module.rules, /\.less/);
-      const stylusLoader = getLoaderByName('stylus', webpackConfig.module.rules, /\.stylus/);
+      const cssLoader = helper.getLoaderByName('css', webpackConfig.module.rules, /\.css/);
+      const sassLoader = helper.getLoaderByName('sass', webpackConfig.module.rules, /\.sass/);
+      const scssLoader = helper.getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
+      const lessLoader = helper.getLoaderByName('less', webpackConfig.module.rules, /\.less/);
+      const stylusLoader = helper.getLoaderByName('stylus', webpackConfig.module.rules, /\.stylus/);
       expect(cssLoader.use[1].options.sourceMap).to.be.false;
       expect(sassLoader.use[1].options.sourceMap).to.be.false;
       expect(sassLoader.use[3].options.sourceMap).to.be.false;
@@ -610,7 +586,7 @@ describe('client.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const copy = getPluginByLabel('copy', plugins);
+      const copy = helper.getPluginByLabel('copy', plugins);
       expect(!!copy).to.be.true;
     });
 

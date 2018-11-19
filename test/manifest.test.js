@@ -1,8 +1,6 @@
 'use strict';
 const expect = require('chai').expect;
-const WebpackTool = require('webpack-tool');
-const webpack = WebpackTool.webpack;
-const utils = require('../utils/utils');
+const helper = require('./helper');
 const WebpackClientBuilder = require('../lib/client')
 const WebpackServerBuilder = require('../lib/server');
 const path = require('path').posix;
@@ -17,12 +15,6 @@ class ClientBuilder extends WebpackClientBuilder {
       }
     });
   }
-}
-
-function getPluginByLabel(label, plugins) {
-  return plugins.find(plugin => {
-    return plugin.__lable__ === label;
-  });
 }
 
 describe('manifest.test.js', () => {
@@ -49,7 +41,7 @@ describe('manifest.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.false;
     });
   });
 
@@ -67,7 +59,7 @@ describe('manifest.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.true;
     });
   });
 
@@ -85,7 +77,7 @@ describe('manifest.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      expect(!!getPluginByLabel('manifest', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.true;
     });
   });
   describe('#webpack server manifest test', () => {
@@ -98,7 +90,7 @@ describe('manifest.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      expect(!!getPluginByLabel('manifest', plugins)).to.be.false;
+      expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.false;
     });
   });
 });

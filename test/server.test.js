@@ -3,6 +3,7 @@ const expect = require('chai').expect;
 const WebpackTool = require('webpack-tool');
 const webpack = WebpackTool.webpack;
 const merge = WebpackTool.merge;
+const helper = require('./helper');
 const WebpackServerBuilder = require('../lib/server');
 const path = require('path').posix;
 
@@ -19,21 +20,6 @@ function createBuilder(config) {
     builder.type = config.type;
   }
   return builder;
-}
-
-function getLoaderByName(name, rules) {
-  const loaderName = `${name}-loader`;
-  return rules.find(rule => {
-    return rule.use.some(loader => {
-      return loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
-    });
-  });
-}
-
-function getPluginByLabel(label, plugins) {
-  return plugins.find(plugin => {
-    return plugin.__lable__ === label || plugin.__plugin__ === label;
-  });
 }
 
 describe('server.test.js', () => {
@@ -73,8 +59,8 @@ describe('server.test.js', () => {
       builder.mergeLoader(vueLoaderConfig);
       const webpackConfig = builder.create();
       const rules = webpackConfig.module.rules;
-      const vueLoader = getLoaderByName('vue', rules);
-      const vuehtml = getLoaderByName('vue-html', rules);
+      const vueLoader = helper.getLoaderByName('vue', rules);
+      const vuehtml = helper.getLoaderByName('vue-html', rules);
       expect(vueLoader.use[0].loader).to.equal('vue-loader');
       expect(vueLoader.use[0].options).to.include.all.keys(['preLoaders', 'loaders']);
       expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
@@ -135,11 +121,11 @@ describe('server.test.js', () => {
       }
     });
     const webpackConfig = builder.create();
-    const tsLoader = getLoaderByName('ts', webpackConfig.module.rules);
-    const eslint = getLoaderByName('eslint', webpackConfig.module.rules);
-    const tslint = getLoaderByName('tslint', webpackConfig.module.rules);
+    const tsLoader = helper.getLoaderByName('ts', webpackConfig.module.rules);
+    const eslint = helper.getLoaderByName('eslint', webpackConfig.module.rules);
+    const tslint = helper.getLoaderByName('tslint', webpackConfig.module.rules);
     expect(eslint).to.be.undefined;
-    expect(tslint.use[0].loader).to.equal('tslint-loader');
+    expect(tslint).to.be.undefined;
     expect(tsLoader.use[2].loader).to.equal('ts-loader');
     expect(tsLoader.use[2].options.configFile).to.equal(configFile);
   });
@@ -152,7 +138,7 @@ describe('server.test.js', () => {
     });
     const webpackConfig = builder.create();
     const plugins = webpackConfig.plugins;
-    const serviceworker = getPluginByLabel('serviceworker', plugins);
+    const serviceworker = helper.getPluginByLabel('serviceworker', plugins);
     expect(!!serviceworker).to.be.false;
   });
   it('should node console env dev test', () => {
