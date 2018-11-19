@@ -3,8 +3,8 @@ const fs = require('fs');
 const expect = require('chai').expect;
 const helper = require('./helper');
 const utils = require('../utils/utils');
-const WebpackDllBuilder = require('../lib/dll');
-const WebpackClientBuilder = require('../lib/client');
+const WebpackDllBuilder = require('../lib/target/dll');
+const WebpackClientBuilder = require('../lib/target/client');
 const path = require('path').posix;
 const baseDir = path.join(__dirname, '..');
 

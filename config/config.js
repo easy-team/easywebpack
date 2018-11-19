@@ -1,56 +1,63 @@
 'use strict';
-const path = require('path');
 const baseDir = process.cwd();
 
-exports.config = {
-  baseDir,
-  port:9000,
-  buildPath: 'dist',
-  publicPath: '/',
-  hashLength: 8,
-  alias: {},
-  packs: {},
-  cdn: {},
-  install:{
-    check: false
+exports.base = {
+  config: {
+    baseDir,
+    port:9000,
+    buildPath: 'dist',
+    publicPath: '/',
+    hashLength: 8,
+    alias: {},
+    packs: {},
+    cdn: {},
+    install:{
+      check: false
+    },
+    compile:{
+      cache: true,
+      thread: true
+    },
+    node: {
+      console: false,
+      global: false,
+      process: false,
+      Buffer: false,
+      setImmediate: false
+    }
   },
   loaders: {},
   plugins: {},
-  compile:{
-    cache: true,
-    thread: true
-  },
-  node: {
-    console: false,
-    global: false,
-    process: false,
-    Buffer: false,
-    setImmediate: false
-  }
 };
 
-exports.devConfig = {
-  hash: false,
-  cssExtract: false,
-  plugins:{
+exports.dev = {
+  config: {
+    hash: false,
+    cssExtract: false,
+    node: {
+      console: true
+    }
+  },
+  plugins:[{
     hot: true,
+  }]
+};
+
+exports.test = {
+  config: {
+    hash: true,
+    cssExtract: true,
   },
-  node: {
-    console: true
-  }
-};
-
-exports.testConfig = {
-  hash: true,
-  cssExtract: true,
-  plugins:{
+  plugins:[{
     hot: false,
-  }
+  }]
 };
 
-exports.prodConfig = {
-  hash: true,
-  cssExtract: true,
+exports.prod = {
+  config: {
+    hash: true,
+    cssExtract: true
+  },
   loaders: {
     css: {
       options: {
@@ -63,8 +70,10 @@ exports.prodConfig = {
   }
 };
 
-exports.dllConfig = {
-  cssExtract: false,
+exports.dll = {
+  config: {
+    cssExtract: false,
+  },
   loaders: {
     eslint: false,
     scss: false,

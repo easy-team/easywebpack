@@ -43,7 +43,7 @@ describe('builder.test.js', () => {
     it('should param file test', () => {
       const builderConfig = WebpackBuilder.getBuilderConfig(path.resolve(__dirname, '../config/config.js'));
       expect(builderConfig.baseDir).to.equal(process.cwd());
-      expect(builderConfig).to.include.keys(['devConfig', 'testConfig']);
+      expect(builderConfig).to.include.keys(['dev', 'test']);
     });
 
     it('should param webpack.config.js test', () => {

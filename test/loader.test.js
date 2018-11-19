@@ -2,8 +2,8 @@
 const expect = require('chai').expect;
 const helper = require('./helper');
 const utils = require('../utils/utils');
-const WebpackBaseBuilder = require('../lib/base');
-const WebpackClientBuilder = require('../lib/client');
+const WebpackBaseBuilder = require('../lib/target/base');
+const WebpackClientBuilder = require('../lib/target/client');
 const path = require('path').posix;
 
 // http://chaijs.com/api/bdd/

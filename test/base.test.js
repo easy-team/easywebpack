@@ -1,6 +1,6 @@
 'use strict';
 const expect = require('chai').expect;
-const WebpackBaseBuilder = require('../lib/base');
+const WebpackBaseBuilder = require('../lib/target/base');
 const helper = require('./helper');
 const utils = require('../utils/utils');
 // http://chaijs.com/api/bdd/

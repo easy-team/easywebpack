@@ -92,7 +92,7 @@ describe('entry.test.js', () => {
         exclude: [/base\.test\.js/, 'builder']
       };
       const entries = utils.getEntry({ baseDir, entry });
-      expect(entries).to.include.keys('entry.test', 'dll','hot');
+      expect(entries).to.include.keys('entry.test', 'target/dll','hot');
       expect(entries['base.test']).to.be.undefined;
       expect(entries.builder).to.be.undefined;
     });
@@ -106,7 +106,7 @@ describe('entry.test.js', () => {
         }
       };
       const entries = utils.getEntry({ baseDir, entry }, 'client');
-      expect(entries).to.include.keys('entry.test', 'dll', 'hot', 'install');
+      expect(entries).to.include.keys('entry.test', 'target/dll', 'hot', 'install');
       expect(entries['entry.test']).to.include('babel-loader');
       expect(entries['entry.test']).to.include('utils/logger.js');
       expect(entries.install).to.not.include('babel-loader');

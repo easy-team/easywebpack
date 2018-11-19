@@ -4,7 +4,7 @@ const WebpackTool = require('webpack-tool');
 const webpack = WebpackTool.webpack;
 const merge = WebpackTool.merge;
 const helper = require('./helper');
-const WebpackServerBuilder = require('../lib/server');
+const WebpackServerBuilder = require('../lib/target/server');
 const path = require('path').posix;
 
 // http://chaijs.com/api/bdd/

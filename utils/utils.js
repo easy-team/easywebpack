@@ -9,18 +9,23 @@ const mkdirp = require('mkdirp');
 const cloneDeep = require('lodash.clonedeep');
 const cloneDeepWith = require('lodash.clonedeepwith');
 const uniq = require('lodash.uniq');
-const _ = require('lodash.get');
+const get = require('lodash.get');
+const set = require('lodash.set');
+const has = require('lodash.has');
 const install = require('./install');
 const glob = require('glob');
 const md5 = require('md5');
 const shell = require('shelljs');
 const utils = Object.assign({}, {
-  _,
+  _: get,
+  has,
+  get,
+  set,
   cloneDeep,
   cloneDeepWith,
+  queryString,
   uniq,
-  mkdirp,
-  queryString
+  mkdirp
 }, install);
 
 utils.has = value => {

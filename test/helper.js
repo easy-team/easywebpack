@@ -2,9 +2,20 @@
 
 const WebpackTool = require('webpack-tool');
 const merge = WebpackTool.merge;
-const WebpackClientBuilder = require('../lib/client');
+const WebpackBaseBuilder = require('../lib/target/base');
+const WebpackClientBuilder = require('../lib/target/client');
 const path = require('path').posix;
 // http://chaijs.com/api/bdd/
+
+exports.createBuilder = config => {
+  const builder = new WebpackBaseBuilder(config);
+  builder.setBuildPath(path.join(__dirname, '../dist/loader'));
+  builder.setPublicPath('/public');
+  builder.setEntry({
+    include: path.join(__dirname, '../test')
+  });
+  return builder;
+};
 
 exports.createClientBuilder = config => {
   const builder = new WebpackClientBuilder(merge({
@@ -19,6 +30,7 @@ exports.createClientBuilder = config => {
   builder.setPublicPath('/public');
   return builder;
 };
+
 
 exports.getLoaderByName = (name, rules, test) => {
   const loaderName = `${name}-loader`;

@@ -1,6 +1,6 @@
 'use strict';
 const expect = require('chai').expect;
-const WebpackClientBuilder = require('../lib/client');
+const WebpackClientBuilder = require('../lib/target/client');
 const path = require('path').posix;
 const helper = require('./helper');
 

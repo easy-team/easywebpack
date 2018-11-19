@@ -6,10 +6,10 @@ exports.webpack = WebpackTool.webpack;
 exports.merge = WebpackTool.merge;
 exports.Utils = require('./utils/utils');
 exports.WebpackBuilder = require('./lib/builder');
-exports.WebpackBaseBuilder = require('./lib/base');
-exports.WebpackClientBuilder = require('./lib/client');
-exports.WebpackServerBuilder = require('./lib/server');
-exports.WebpackDllBuilder = require('./lib/dll');
+exports.WebpackBaseBuilder = require('./lib/target/base');
+exports.WebpackClientBuilder = require('./lib/target/client');
+exports.WebpackServerBuilder = require('./lib/target/server');
+exports.WebpackDllBuilder = require('./lib/target/dll');
 
 
 exports.getConfig = (config = {}, option = {}) => {

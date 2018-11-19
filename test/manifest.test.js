@@ -1,19 +1,18 @@
 'use strict';
 const expect = require('chai').expect;
 const helper = require('./helper');
-const WebpackClientBuilder = require('../lib/client')
-const WebpackServerBuilder = require('../lib/server');
+const WebpackClientBuilder = require('../lib/target/client')
+const WebpackServerBuilder = require('../lib/target/server');
 const path = require('path').posix;
 const baseDir = path.join(__dirname, '..');
 
 class ClientBuilder extends WebpackClientBuilder {
   constructor(config) {
     super(config);
-    this.mergeConfig({
-      plugins: {
+    this.mergePlugin({
         manifest: false
       }
-    });
+    );
   }
 }
 
