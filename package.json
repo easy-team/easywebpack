@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "4.10.0",
+  "version": "4.10.1",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
@@ -54,11 +54,12 @@
     "shelljs": "^0.7.4",
     "style-loader": "^0.18.2",
     "thread-loader": "^1.1.5",
+    "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^0.5.8",
     "webpack-asset-file-plugin": "^1.0.0",
+    "webpack-filter-warnings-plugin": "^1.2.0",
     "webpack-hot-middleware": "^2.13.2",
     "webpack-manifest-resource-plugin": "^4.0.0",
-    "webpack-filter-warnings-plugin": "^1.2.0",
     "webpack-node-externals": "^1.6.0",
     "webpack-tool": "^4.2.0"
   },
