@@ -271,20 +271,23 @@ utils.getLoaderOptionString = (name, options) => {
   return optionStr;
 };
 
-utils.getLoaderLabel = loader => {
+utils.getLoaderLabel = (loader, ctx) => {
   let loaderName = loader;
   if (utils.isObject(loader)) {
-    if (loader.loader) {
+    if (loader.name) {
+      loaderName = loader.name;
+    } else if (loader.loader) {
       loaderName = loader.loader;
-    } else if (Array.isArray(loader.use)) {
-      loaderName = loader.use.reduce((name, item) => {
+    } else if (Array.isArray(loader.use) || utils.isFunction(loader.use)) {
+      const loaders = utils.isFunction(loader.use) ? loader.use.apply(ctx) : loader.use;
+      loaderName = loaders.reduce((names, item) => {
         if (utils.isString(item)) {
-          name += item;
-        } else {
-          name += item.loader;
+          names.push(item.replace(/-loader$/, ''));
+        } else if (item.loader) {
+          names.push(item.loader.replace(/-loader$/, ''));
         }
-        return name;
-      }, '');
+        return names;
+      }, []).join('-');
     } else if (Object.keys(loader).length === 1) {
       loaderName = Object.keys(loader)[0];
     }

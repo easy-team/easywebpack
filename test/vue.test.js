@@ -75,5 +75,136 @@ describe('vue.test.js', () => {
       const webpackConfig = builder.create();
       expect(webpackConfig.output.path).to.equal(path.join(__dirname, '../app/view'));
     });
+
+    it('should vue ts framework loaders test', () => {
+      const builder = new WebpackServerBuilder({
+        loaders: {
+          ts: true,
+          vue: {
+            test: /\.vue$/,
+            exclude: /node_modules/,
+            use() {
+              const options = this.createFrameworkLoader('vue-style-loader');
+              options.transformToRequire = { img: ['url', 'src'] };
+              return [
+                {
+                  loader: 'vue-loader',
+                  options
+                }
+              ];
+            }
+          }
+        }
+      });
+      const webpackConfig = builder.create();
+      const vueLoader = helper.getLoaderByName('vue', webpackConfig.module.rules);
+      expect(vueLoader.use[0].options.loaders).to.include.keys(['ts', 'js', 'css']);
+    });
+    it('should vue typescript loaders framework test', () => {
+      const builder = new WebpackServerBuilder({
+        loaders: {
+          typescript: true,
+          vue: {
+            test: /\.vue$/,
+            exclude: /node_modules/,
+            use() {
+              const options = this.createFrameworkLoader('vue-style-loader');
+              options.transformToRequire = { img: ['url', 'src'] };
+              return [
+                {
+                  loader: 'vue-loader',
+                  options
+                }
+              ];
+            }
+          }
+        }
+      });
+      const webpackConfig = builder.create();
+      const vueLoader = helper.getLoaderByName('vue', webpackConfig.module.rules);
+      expect(vueLoader.use[0].options.loaders).to.include.keys(['ts', 'js', 'css']);
+    });
+    it('should vue typescript module rules test', () => {
+      const builder = new WebpackServerBuilder({
+        module: {
+          rules: [
+            { typescript: true },
+            {
+              vue: {
+                test: /\.vue$/,
+                exclude: /node_modules/,
+                use() {
+                  const options = this.createFrameworkLoader('vue-style-loader');
+                  options.transformToRequire = { img: ['url', 'src'] };
+                  return [
+                    {
+                      loader: 'vue-loader',
+                      options
+                    }
+                  ];
+                }
+              }
+            }
+          ]
+        }
+      });
+      const webpackConfig = builder.create();
+      const vueLoader = helper.getLoaderByName('vue', webpackConfig.module.rules);
+      expect(vueLoader.use[0].options.loaders).to.include.keys(['ts', 'js', 'css']);
+    });
+    it('should vue ts module rules test', () => {
+      const builder = new WebpackServerBuilder({
+        module: {
+          rules: [
+            { ts: true },
+            {
+              vue: {
+                test: /\.vue$/,
+                exclude: /node_modules/,
+                use() {
+                  const options = this.createFrameworkLoader('vue-style-loader');
+                  options.transformToRequire = { img: ['url', 'src'] };
+                  return [
+                    {
+                      loader: 'vue-loader',
+                      options
+                    }
+                  ];
+                }
+              }
+            }
+          ]
+        }
+      });
+      const webpackConfig = builder.create();
+      const vueLoader = helper.getLoaderByName('vue', webpackConfig.module.rules);
+      expect(vueLoader.use[0].options.loaders).to.include.keys(['ts', 'js', 'css']);
+    });
+    it('should vue ts module rules native config test', () => {
+      const builder = new WebpackServerBuilder({
+        module: {
+          rules: [
+            { ts: true },
+            {
+              test: /\.vue$/,
+              exclude: /node_modules/,
+              use() {
+                const options = this.createFrameworkLoader('vue-style-loader');
+                options.transformToRequire = { img: ['url', 'src'] };
+                return [
+                  {
+                    loader: 'vue-loader',
+                    options
+                  }
+                ];
+              }
+            }
+          ]
+        }
+      });
+      const webpackConfig = builder.create();
+      const vueLoader = helper.getLoaderByName('vue', webpackConfig.module.rules);
+      expect(vueLoader.use[0].options.loaders).to.include.keys(['ts', 'js', 'css']);
+    });
   });
 });
