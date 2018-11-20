@@ -6,7 +6,7 @@ exports.babel = {
   exclude: /node_modules/,
   use() {
     const loaders = [];
-    const compile = this.config.compile;
+    const { compile = {} } = this.config;
     if (compile.thread) {
       loaders.unshift(this.createThreadLoader(compile.thread));
     }

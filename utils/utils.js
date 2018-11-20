@@ -79,6 +79,22 @@ utils.joinPath = function() {
   }).join('/');
 };
 
+utils.getOutputPath = config => {
+  const { output = {}, buildPath } = config;
+  if (output.path) {
+    return output.path;
+  }
+  return buildPath;
+};
+
+utils.getOutputPublicPath = config => {
+  const { output = {}, publicPath } = config;
+  if (output.publicPath) {
+    return output.publicPath.replace(/\/$/, '');
+  }
+  return publicPath.replace(/\/$/, '');
+};
+
 utils.getEntry = (config, type) => {
   const entry = config.entry;
   if (utils.isObject(entry) && (entry.loader || entry.include) || entry instanceof RegExp) {
@@ -278,9 +294,9 @@ utils.getLoaderLabel = (loader, ctx) => {
       loaderName = loader.name;
     } else if (loader.loader) {
       loaderName = loader.loader;
-    } else if (Array.isArray(loader.use) || utils.isFunction(loader.use)) {
-      const loaders = utils.isFunction(loader.use) ? loader.use.apply(ctx) : loader.use;
-      loaderName = loaders.reduce((names, item) => {
+    } else if (Array.isArray(loader.use)) {
+      // const loaders = utils.isFunction(loader.use) ? loader.use.apply(ctx) : loader.use;
+      loaderName = loader.use.reduce((names, item) => {
         if (utils.isString(item)) {
           names.push(item.replace(/-loader$/, ''));
         } else if (item.loader) {
@@ -292,7 +308,7 @@ utils.getLoaderLabel = (loader, ctx) => {
       loaderName = Object.keys(loader)[0];
     }
   }
-  return loaderName.replace(/-loader$/, '');
+  return utils.isString(loaderName) && loaderName.replace(/-loader$/, '');
 };
 
 utils.loadNodeModules = isCache => {

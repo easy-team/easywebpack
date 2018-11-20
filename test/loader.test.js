@@ -371,4 +371,57 @@ describe('loader.test.js', () => {
       expect(babelLoader.use[0].options.cacheDirectory).to.equal(cacheDirectory);
     });
   });
+
+  describe('#webpack loader options cache test', () => {
+    it('should loader options', () => {
+      const builder = createBuilder({ loaders: {
+        babel: {
+          include: __dirname,
+          exclude: [__dirname]
+        },
+        options: { // 扩展配置
+          babel: {
+            options: {
+              flag: 1
+            }
+          }
+        }
+      }});
+      const webpackConfig = builder.create();
+      const babelLoader = helper.getLoaderByName('babel', webpackConfig.module.rules);
+      expect(babelLoader.include).to.equal(__dirname);
+      expect(babelLoader.exclude[0]).to.equal(__dirname);
+      expect(babelLoader.use[1].options.flag).to.equal(1);
+    });
+  });
+  describe('#webpack loader options cache test', () => {
+    it('should loader options', () => {
+      const builder = createBuilder({
+        module: {
+          rules: [
+            { babel:
+              {
+                include: __dirname,
+                exclude: [__dirname]
+              }
+            },
+            { 
+              options: { // 扩展配置
+                babel: {
+                  options: {
+                    flag: 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      });
+      const webpackConfig = builder.create();
+      const babelLoader = helper.getLoaderByName('babel', webpackConfig.module.rules);
+      expect(babelLoader.include).to.equal(__dirname);
+      expect(babelLoader.exclude[0]).to.equal(__dirname);
+      expect(babelLoader.use[1].options.flag).to.equal(1);
+    });
+  });
 });

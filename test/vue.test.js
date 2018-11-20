@@ -180,6 +180,7 @@ describe('vue.test.js', () => {
       const vueLoader = helper.getLoaderByName('vue', webpackConfig.module.rules);
       expect(vueLoader.use[0].options.loaders).to.include.keys(['ts', 'js', 'css']);
     });
+
     it('should vue ts module rules native config test', () => {
       const builder = new WebpackServerBuilder({
         module: {
@@ -206,5 +207,6 @@ describe('vue.test.js', () => {
       const vueLoader = helper.getLoaderByName('vue', webpackConfig.module.rules);
       expect(vueLoader.use[0].options.loaders).to.include.keys(['ts', 'js', 'css']);
     });
+
   });
 });
