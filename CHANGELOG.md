@@ -1,3 +1,13 @@
+<a name="4.10.2"></a>
+## [4.10.2](https://github.com/easy-team/easywebpack/compare/4.10.1...4.10.2) (2018-11-20)
+
+
+### Bug Fixes
+
+* Uncaught ReferenceError: global is not defined ([d7d8454](https://github.com/easy-team/easywebpack/commit/d7d8454))
+
+
+
 <a name="4.10.0"></a>
 # [4.10.0](https://github.com/easy-team/easywebpack/compare/4.9.6...4.10.0-rc.4) (2018-11-15)
 
