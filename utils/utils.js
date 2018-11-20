@@ -12,6 +12,7 @@ const uniq = require('lodash.uniq');
 const get = require('lodash.get');
 const set = require('lodash.set');
 const has = require('lodash.has');
+const merge = require('lodash.merge');
 const install = require('./install');
 const glob = require('glob');
 const md5 = require('md5');
@@ -21,6 +22,7 @@ const utils = Object.assign({}, {
   has,
   get,
   set,
+  merge,
   cloneDeep,
   cloneDeepWith,
   queryString,

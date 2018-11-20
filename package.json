@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "4.11.0-rc.1",
+  "version": "4.11.0-rc.2",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
@@ -42,6 +42,7 @@
     "lodash.clonedeepwith": "^4.5.0",
     "lodash.get": "^4.4.2",
     "lodash.has": "^4.5.2",
+    "lodash.merge": "^4.6.1",
     "lodash.set": "^4.3.2",
     "lodash.uniq": "^4.5.0",
     "md5": "^2.2.1",
