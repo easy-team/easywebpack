@@ -4,6 +4,7 @@ const WebpackTool = require('webpack-tool');
 const merge = WebpackTool.merge;
 const WebpackBaseBuilder = require('../lib/target/base');
 const WebpackClientBuilder = require('../lib/target/client');
+const WebpackServerBuilder = require('../lib/target/server');
 const path = require('path').posix;
 // http://chaijs.com/api/bdd/
 
@@ -27,6 +28,20 @@ exports.createClientBuilder = config => {
     builder.type = config.type;
   }
   builder.setBuildPath(path.join(__dirname, 'dist/client'));
+  builder.setPublicPath('/public');
+  return builder;
+};
+
+exports.createServerBuilder = config => {
+  const builder = new WebpackServerBuilder(merge({
+    entry: {
+      include: path.join(__dirname)
+    }
+  }, config));
+  if (config && config.type) {
+    builder.type = config.type;
+  }
+  builder.setBuildPath(path.join(__dirname, 'dist/server'));
   builder.setPublicPath('/public');
   return builder;
 };
