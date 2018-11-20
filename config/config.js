@@ -22,7 +22,6 @@ exports.config = {
   },
   node: {
     console: false,
-    global: false,
     process: false,
     Buffer: false,
     setImmediate: false
