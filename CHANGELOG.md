@@ -1,11 +1,17 @@
-<a name="4.10.2"></a>
-## [4.10.2](https://github.com/easy-team/easywebpack/compare/4.10.1...4.10.2) (2018-11-20)
+
+<a name="4.11.0"></a>
+# [4.11.0](https://github.com/easy-team/easywebpack/compare/4.10.1...4.11.0) (2018-11-21)
 
 
 ### Bug Fixes
 
 * Uncaught ReferenceError: global is not defined ([d7d8454](https://github.com/easy-team/easywebpack/commit/d7d8454))
+* https://github.com/TypeStrong/ts-loader/pull/7820 ([b22ee53](https://github.com/easy-team/easywebpack/commit/b22ee53))
 
+### Features
+
+* loader.options support ([61886d5](https://github.com/easy-team/easywebpack/commit/61886d5))
+* support module.rules config ([e37d181](https://github.com/easy-team/easywebpack/commit/e37d181)) and ([3226ede](https://github.com/easy-team/easywebpack/commit/3226ede))
 
 
 <a name="4.10.0"></a>
