@@ -21,14 +21,13 @@ exports.base = {
     },
     node: {
       console: false,
-      global: false,
       process: false,
       Buffer: false,
       setImmediate: false
     }
   },
   loaders: {},
-  plugins: {},
+  plugins: {}
 };
 
 exports.dev = {
