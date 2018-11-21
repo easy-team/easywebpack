@@ -1,3 +1,13 @@
+<a name="4.11.1"></a>
+## [4.11.1](https://github.com/easy-team/easywebpack/compare/4.11.0...4.11.1) (2018-11-21)
+
+
+### Bug Fixes
+
+* ScriptExtHtmlWebpackPlugin not use dll ([32c5ca9](https://github.com/easy-team/easywebpack/commit/32c5ca9))
+
+
+
 
 <a name="4.11.0"></a>
 # [4.11.0](https://github.com/easy-team/easywebpack/compare/4.10.1...4.11.0) (2018-11-21)
