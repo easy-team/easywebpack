@@ -354,8 +354,13 @@ describe('client.test.js', () => {
       const webpackConfig = builder.create();
       expect(webpackConfig.devtool).to.equal('source-map');
     });
+    it('should test eval devtool test', () => {
+      const builder = createBuilder({ env: 'test', devtool: 'eval'});
+      const webpackConfig = builder.create();
+      expect(webpackConfig.devtool).to.be.false;
+    });
     it('should prod devtool test', () => {
-      const builder = createBuilder({ env: 'prod', cliDevtool: 'source-map'});
+      const builder = createBuilder({ env: 'prod', cli: { devtool: 'source-map' }});
       const webpackConfig = builder.create();
       expect(webpackConfig.devtool).to.equal('source-map');
     });
@@ -365,17 +370,17 @@ describe('client.test.js', () => {
       expect(webpackConfig.devtool).to.equal('eval');
     });
     it('should prod eval devtool test', () => {
-      const builder = createBuilder({ env: 'prod', cliDevtool: 'eval'});
+      const builder = createBuilder({ env: 'prod', cli: { devtool: 'eval' }});
       const webpackConfig = builder.create();
       expect(webpackConfig.devtool).to.equal('eval');
     });
     it('should dev cli eval devtool test', () => {
-      const builder = createBuilder({ env: 'prod', devtool: 'eval', cliDevtool: true});
+      const builder = createBuilder({ env: 'prod', devtool: 'eval', cli: { devtool: true }});
       const webpackConfig = builder.create();
       expect(webpackConfig.devtool).to.equal('source-map');
     });
     it('should prod cli eval devtool test', () => {
-      const builder = createBuilder({ env: 'prod', devtool: 'eval', cliDevtool: true });
+      const builder = createBuilder({ env: 'prod', devtool: 'eval', cli: { devtool: true } });
       const webpackConfig = builder.create();
       expect(webpackConfig.devtool).to.equal('source-map');
     });

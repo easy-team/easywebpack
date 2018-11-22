@@ -284,13 +284,13 @@ describe('loader.test.js', () => {
 
   describe('#webpack feature loader test', () => {
     it('should postcss-loader default config', () => {
-      const builder = createBuilder();
+      const builder = createBuilder({ env: 'dev' });
       const webpackConfig = builder.create();
       const cssLoader = helper.getLoaderByName('css', webpackConfig.module.rules);
       const postcssLoader = cssLoader.use.find(loader => {
         return loader.loader === 'postcss-loader';
       });
-      expect(postcssLoader.options.sourceMap).to.be.undefined;
+      expect(postcssLoader.options.sourceMap).to.be.true;
     });
 
     it('should postcss-loader devtool config', () => {
