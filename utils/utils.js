@@ -563,4 +563,14 @@ utils.getPluginLabel = plugin => {
   return md5(plugin.apply.toString());
 };
 
+utils.getConfigPlugin = (plugins = {}, label) => {
+  if (Array.isArray(plugins)) {
+    const plugin = plugins.find(item => {
+      return item.hasOwnProperty(label);
+    });
+    return plugin && plugin[label];
+  }
+  return plugins[label];
+};
+
 module.exports = utils;

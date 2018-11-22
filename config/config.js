@@ -21,7 +21,6 @@ exports.base = {
     },
     node: {
       console: false,
-      process: false,
       Buffer: false,
       setImmediate: false
     }
