@@ -62,7 +62,7 @@ exports.manifest = {
       assets: false,
       writeToFileEmit: true
     };
-    const manifestConfig = this.getConfigPlugin('mainifest');
+    const manifestConfig = this.getConfigPlugin('mainifest') || {};
     const configManifestFileName = manifestConfig.fileName || (manifestConfig.args && manifestConfig.args.fileName);
     const manifestName = configManifestFileName || (this.egg ? 'config/manifest.json' : 'manifest.json');
     const manifestDir = this.egg ? this.baseDir : this.buildPath;
