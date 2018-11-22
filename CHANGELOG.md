@@ -1,3 +1,14 @@
+<a name="4.11.3"></a>
+## [4.11.3](https://github.com/easy-team/easywebpack/compare/4.11.2...4.11.3) (2018-11-22)
+
+
+### Bug Fixes
+
+* devtool and sourceMap, dev: eval ([446bdbb](https://github.com/easy-team/easywebpack/commit/446bdbb))
+* dll missing uglifyJs config ([34a5b4a](https://github.com/easy-team/easywebpack/commit/34a5b4a))
+* node build for es6 ([6acfaf8](https://github.com/easy-team/easywebpack/commit/6acfaf8))
+
+
 <a name="4.11.2"></a>
 ## [4.11.2](https://github.com/easy-team/easywebpack/compare/4.11.1...4.11.2) (2018-11-22)
 
