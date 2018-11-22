@@ -56,6 +56,7 @@
     "service-worker-precache-webpack-plugin": "^1.0.0",
     "shelljs": "^0.7.4",
     "style-loader": "^0.18.2",
+    "terser-webpack-plugin": "^1.1.0",
     "thread-loader": "^1.1.5",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^0.5.8",
