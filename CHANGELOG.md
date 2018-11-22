@@ -1,3 +1,14 @@
+<a name="4.11.2"></a>
+## [4.11.2](https://github.com/easy-team/easywebpack/compare/4.11.1...4.11.2) (2018-11-22)
+
+
+### Bug Fixes
+
+* minimize not set ([068003f](https://github.com/easy-team/easywebpack/commit/068003f))
+* uglifyJs merge with object and array mode ([95e2e71](https://github.com/easy-team/easywebpack/commit/95e2e71))
+
+
+
 <a name="4.11.1"></a>
 ## [4.11.1](https://github.com/easy-team/easywebpack/compare/4.11.0...4.11.1) (2018-11-21)
 
