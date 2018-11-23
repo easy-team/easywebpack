@@ -1,3 +1,13 @@
+<a name="3.10.4"></a>
+## [3.10.4](https://github.com/hubcarl/easywebpack/compare/3.10.3...3.10.4) (2018-11-23)
+
+
+### Features
+
+* add customize hook ([f8f9999](https://github.com/hubcarl/easywebpack/commit/f8f9999))
+
+
+
 <a name="3.10.3"></a>
 ## [3.10.3](https://github.com/hubcarl/easywebpack/compare/3.10.2...3.10.3) (2018-09-30)
 
