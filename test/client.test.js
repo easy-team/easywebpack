@@ -472,5 +472,17 @@ describe('client.test.js', () => {
       expect(stylusLoader.use[1].options.sourceMap).to.be.false;
       expect(stylusLoader.use[3].options.sourceMap).to.be.false;
     });
+    describe('#webpack customize test', () => {
+      it('should customize publicPath test', () => {
+        const builder = createBuilder({
+          customize(webpackConfig) {
+            webpackConfig.output.publicPath = './';
+            return webpackConfig;
+          }
+        });
+        const webpackConfig = builder.create();
+        expect(webpackConfig.output.publicPath).to.equal('./');
+      });
+    });
   });
 });
