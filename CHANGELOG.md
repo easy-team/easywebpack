@@ -1,3 +1,13 @@
+<a name="4.11.4"></a>
+## [4.11.4](https://github.com/easy-team/easywebpack/compare/4.11.3...4.11.4) (2019-01-10)
+
+
+### Bug Fixes
+
+* manifest key word error ([29ac2de](https://github.com/easy-team/easywebpack/commit/29ac2de))
+
+
+
 <a name="4.11.3"></a>
 ## [4.11.3](https://github.com/easy-team/easywebpack/compare/4.11.2...4.11.3) (2018-11-22)
 
