@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "3.10.4",
+  "version": "3.10.5",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
