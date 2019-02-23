@@ -1,3 +1,11 @@
+<a name="3.10.5"></a>
+## [3.10.5](https://github.com/hubcarl/easywebpack/compare/3.10.4...3.10.5) (2018-11-23)
+
+
+### Bug Fixes
+
+* resolve.extesions merge missing ([7df37e9](https://github.com/hubcarl/easywebpack/commit/7df37e9))
+
 <a name="3.10.4"></a>
 ## [3.10.4](https://github.com/hubcarl/easywebpack/compare/3.10.3...3.10.4) (2018-11-23)
 
