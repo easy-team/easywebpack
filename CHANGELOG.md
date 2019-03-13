@@ -1,3 +1,12 @@
+## [4.11.5](https://github.com/easy-team/easywebpack/compare/4.11.4...4.11.5) (2019-03-13)
+
+
+### Bug Fixes
+
+* common css  miniChunks 2 ([92af3d9](https://github.com/easy-team/easywebpack/commit/92af3d9))
+
+
+
 <a name="4.11.4"></a>
 ## [4.11.4](https://github.com/easy-team/easywebpack/compare/4.11.3...4.11.4) (2019-01-10)
 
