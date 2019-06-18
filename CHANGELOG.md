@@ -1,3 +1,12 @@
+## [4.11.6](https://github.com/easy-team/easywebpack/compare/4.11.5...4.11.6) (2019-06-18)
+
+
+### Bug Fixes
+
+* https://github.com/easy-team/easywebpack/issues/56 ([5ad7d23](https://github.com/easy-team/easywebpack/commit/5ad7d23))
+
+
+
 ## [4.11.5](https://github.com/easy-team/easywebpack/compare/4.11.4...4.11.5) (2019-03-13)
 
 
