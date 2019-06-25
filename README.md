@@ -8,7 +8,7 @@
 
 [npm-image]: https://img.shields.io/npm/v/easywebpack.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/easywebpack
-[travis-image]: https://img.shields.io/travis/easy-team/easywebpack.svg?style=flat-square
+[travis-image]: https://travis-ci.org/easy-team/easywebpack.svg?branch=master
 [travis-url]: https://travis-ci.org/easy-team/easywebpack
 [codecov-image]: https://codecov.io/gh/easy-team/easywebpack/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/easy-team/easywebpack
