@@ -1,3 +1,13 @@
+<a name="4.11.7"></a>
+## [4.11.7](https://github.com/easy-team/easywebpack/compare/4.11.6...4.11.7) (2019-07-17)
+
+
+### Bug Fixes
+
+* add renderMode for entry template loader ([bcfe8c5](https://github.com/easy-team/easywebpack/commit/bcfe8c5))
+
+
+
 ## [4.11.6](https://github.com/easy-team/easywebpack/compare/4.11.5...4.11.6) (2019-06-18)
 
 
