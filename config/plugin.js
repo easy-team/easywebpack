@@ -168,9 +168,7 @@ exports.directoryname = {
 exports.extract = {
   type: 'client',
   name: 'mini-css-extract-plugin',
-  enable() {
-    return this.config.cssExtract;
-  },
+  env: ['test', 'prod'],
   args() {
     return {
       filename: this.webpackInfo.cssName,
@@ -182,7 +180,7 @@ exports.extract = {
 
 exports.modulereplacement = {
   enable() {
-    return this.config.cssExtract;
+    return this.isUsePlugin('extract', false);
   },
   type: 'server',
   name: webpack.NormalModuleReplacementPlugin,
@@ -191,7 +189,7 @@ exports.modulereplacement = {
 
 exports.ignore = {
   enable() {
-    return this.config.cssExtract;
+    return this.isUsePlugin('extract', false);
   },
   type: 'server',
   name: webpack.IgnorePlugin,

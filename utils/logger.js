@@ -1,6 +1,6 @@
 'use strict';
 const chalk = require('chalk');
-
+const TAG = 'easywebpack';
 class Logger {
   constructor(option = {}, builder) {
     this.option = option;
@@ -12,8 +12,16 @@ class Logger {
     this.option = option;
   }
 
-  info(info, tag = '') {
+  info(info, tag = TAG) {
     console.log(chalk.blue(`[${this.name}] ${tag}:`), typeof info === 'object' ? info : chalk.green(info));
+  }
+
+  warn(info, tag = TAG) {
+    console.log(chalk.blue(`[${tag}]:`), typeof info === 'object' ? info : chalk.yellow(info));
+  }
+
+  deprecated(info, tag = TAG) {
+    console.log(chalk.blue(`[${tag}]:`), typeof info === 'object' ? info : chalk.yellow(info));
   }
 
   print(tag, info) {

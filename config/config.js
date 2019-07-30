@@ -32,7 +32,6 @@ exports.base = {
 exports.dev = {
   config: {
     hash: false,
-    cssExtract: false,
     node: {
       console: true
     }
@@ -45,7 +44,6 @@ exports.dev = {
 exports.test = {
   config: {
     hash: true,
-    cssExtract: true,
   },
   plugins:[{
     hot: false,
@@ -55,7 +53,6 @@ exports.test = {
 exports.prod = {
   config: {
     hash: true,
-    cssExtract: true
   },
   loaders: {
     css: {
@@ -70,9 +67,6 @@ exports.prod = {
 };
 
 exports.dll = {
-  config: {
-    cssExtract: false,
-  },
   loaders: {
     eslint: false,
     scss: false,
@@ -81,6 +75,7 @@ exports.dll = {
     stylus: false
   },
   plugins: {
+    extract: false,
     html: false,
     runtime: false,
     commonsChunk: false,
