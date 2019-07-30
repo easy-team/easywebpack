@@ -36,7 +36,7 @@
 ## Install
 
 ```bash
-$ npm i easywebpack --save-dev
+$ npm i @easy-team/easywebpack --save-dev
 ```
 
 ## Usage

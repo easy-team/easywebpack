@@ -1,17 +1,16 @@
 {
   "presets": [
-    ["env", {
+    ["@babel/preset-env", {
       "modules": false,
       "targets": {
-        "browsers": ["last 2 versions", "safari >= 7"]
+        "browsers": ["last 2 versions", "safari >= 8"]
       }
     }]
   ],
   "plugins": [
-    "transform-object-rest-spread",
-    "syntax-dynamic-import",
-    "transform-object-assign",
-    "transform-runtime"
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-syntax-dynamic-import"
   ],
   "comments": false
 }

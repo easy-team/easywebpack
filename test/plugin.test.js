@@ -183,7 +183,7 @@ describe('plugin.test.js', () => {
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const lable = utils.getPluginLabel(plugin);
+      const lable = plugin.constructor.name;;
       const copy = helper.getPluginByLabel(lable, plugins);
       expect(!!copy).to.be.true;
     });
