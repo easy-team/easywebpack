@@ -269,6 +269,15 @@ exports.copy = {
   name: 'copy-webpack-plugin'
 };
 
+exports.write = {
+  enable: false,
+  type: 'client',
+  name: 'write-file-webpack-plugin',
+  args: {
+    test: /\.(tpl|html)$/
+  }
+};
+
 exports.filter = {
   enable: true,
   name: 'webpack-filter-warnings-plugin',
