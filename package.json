@@ -110,7 +110,8 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "test": "nyc --reporter=html --reporter=text mocha --timeout=1000000",
     "cov": "nyc report --reporter=lcov > coverage.lcov && codecov --token=e8eba710-8df2-4a1c-bb50-ccd15a2079e6",
-    "ii": "npm install --registry https://registry.npm.taobao.org"
+    "ii": "npm install --registry https://registry.npm.taobao.org",
+    "publish": "npm publish --access=public"
   },
   "files": [
     "index.js",
