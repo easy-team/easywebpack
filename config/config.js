@@ -54,13 +54,6 @@ exports.prod = {
   config: {
     hash: true,
   },
-  loaders: {
-    css: {
-      options: {
-        minimize: true
-      }
-    }
-  },
   plugins:{
     hot: false,
   }
