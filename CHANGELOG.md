@@ -1,3 +1,12 @@
+## [4.11.8](https://github.com/easy-team/easywebpack/compare/4.11.7...4.11.8) (2019-08-12)
+
+
+### Bug Fixes
+
+* multile same plugin config override ([afff869](https://github.com/easy-team/easywebpack/commit/afff869))
+
+
+
 <a name="4.11.7"></a>
 ## [4.11.7](https://github.com/easy-team/easywebpack/compare/4.11.6...4.11.7) (2019-07-17)
 
