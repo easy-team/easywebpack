@@ -2,6 +2,7 @@
 const expect = require('chai').expect;
 const WebpackTool = require('webpack-tool');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = WebpackTool.webpack;
 const WebpackBaseBuilder = require('../lib/target/base');
 const path = require('path').posix;
@@ -174,18 +175,50 @@ describe('plugin.test.js', () => {
       expect(!!copy).to.be.true;
     });
 
-    it('should merge array plugin test', () => {
-      const plugin = new CopyWebpackPlugin([{ from: 'asset', to: 'public' }]);
+    it('should multile same webpack plugin test', () => {
       const builder = createBuilder({
         plugins: [
-          plugin
+          new HtmlWebpackPlugin({
+            chunks: ['runtime','common', 'app'],
+            filename: '../view/app.tpl',
+            template: './app/web/view/layout.tpl'
+          }),
+          new HtmlWebpackPlugin({
+            chunks: ['runtime','common', 'test'],
+            filename: '../view/test.tpl',
+            template: './app/web/view/layout.tpl'
+          }),
         ]
       });
       const webpackConfig = builder.create();
       const plugins = webpackConfig.plugins;
-      const lable = utils.getPluginLabel(plugin);
-      const copy = helper.getPluginByLabel(lable, plugins);
-      expect(!!copy).to.be.true;
+      const htmls = helper.getPluginsByLabel('HtmlWebpackPlugin', plugins);
+      expect(htmls.length).to.equal(2);
+    });
+
+    it('should multile same webpack plugin key config test', () => {
+      const builder = createBuilder({
+        plugins: [
+          {
+            app: new HtmlWebpackPlugin({
+              chunks: ['runtime','common', 'app'],
+              filename: '../view/app.tpl',
+              template: './app/web/view/layout.tpl'
+            }),
+          },
+          {
+            test: new HtmlWebpackPlugin({
+              chunks: ['runtime','common', 'test'],
+              filename: '../view/test.tpl',
+              template: './app/web/view/layout.tpl'
+            }),
+          }
+        ]
+      });
+      const webpackConfig = builder.create();
+      const plugins = webpackConfig.plugins;
+      const htmls = helper.getPluginsByLabel('HtmlWebpackPlugin', plugins);
+      expect(htmls.length).to.equal(2);
     });
 
     it('should add webpack plugin test', () => {

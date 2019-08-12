@@ -65,3 +65,8 @@ exports.getPluginByLabel = (label, plugins) => {
     return plugin.__lable__ === label || plugin.__plugin__ === label;
   });
 };
+exports.getPluginsByLabel = (label, plugins) => {
+  return plugins.filter(plugin => {
+    return plugin.__lable__ === label || plugin.__plugin__ === label;
+  });
+};
