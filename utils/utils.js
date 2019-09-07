@@ -544,7 +544,8 @@ utils.isEgg = config => {
   const pkg = require(path.join(config.baseDir, 'package.json'));
   const vuePKGName = 'egg-view-vue-ssr';
   const reactPKGName = 'egg-view-react-ssr';
-  const hasDeps = pkg.dependencies[vuePKGName] || pkg.dependencies[reactPKGName];
+  const dependencies = pkg.dependencies || {} ;
+  const hasDeps = dependencies[vuePKGName] || dependencies[reactPKGName];
   if (hasDeps) {
     return true;
   }
