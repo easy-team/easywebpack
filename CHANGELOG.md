@@ -1,3 +1,13 @@
+<a name="4.11.9"></a>
+## [4.11.9](https://github.com/easy-team/easywebpack/compare/4.11.8...4.11.9) (2019-09-07)
+
+
+### Bug Fixes
+
+* package.json no dependencies or devdependencies ([05cee63](https://github.com/easy-team/easywebpack/commit/05cee63))
+
+
+
 ## [4.11.8](https://github.com/easy-team/easywebpack/compare/4.11.7...4.11.8) (2019-08-12)
 
 
