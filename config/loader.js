@@ -79,7 +79,7 @@ exports.less = {
 
 exports.stylus = {
   enable: false,
-  test: /\.stylus/,
+  test: /\.(stylus|styl)/,
   use: ['css-loader', 'stylus-loader'],
   postcss: true,
   framework: true
