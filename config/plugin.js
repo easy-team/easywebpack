@@ -270,7 +270,8 @@ exports.copy = {
 };
 
 exports.write = {
-  enable: false,
+  enable: true,
+  env: ['dev'],
   type: 'client',
   name: 'write-file-webpack-plugin',
   args: {

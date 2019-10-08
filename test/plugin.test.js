@@ -65,6 +65,7 @@ describe('plugin.test.js', () => {
       const plugins = webpackConfig1.plugins;
       expect(!!helper.getPluginByLabel('hot', plugins)).to.be.true;
       expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('write', plugins)).to.be.true;
     });
 
     it('should plugin client test enable test', () => {
@@ -81,6 +82,7 @@ describe('plugin.test.js', () => {
       expect(!!helper.getPluginByLabel('modulereplacement', plugins)).to.be.false;
       expect(!!helper.getPluginByLabel('extract', plugins)).to.be.true;
       expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('write', plugins)).to.be.false;
     });
 
     it('should plugin client prod enable test', () => {
@@ -98,6 +100,7 @@ describe('plugin.test.js', () => {
       expect(!!helper.getPluginByLabel('modulereplacement', plugins)).to.be.false;
       expect(!!helper.getPluginByLabel('extract', plugins)).to.be.true;
       expect(!!helper.getPluginByLabel('manifest', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('write', plugins)).to.be.false;
     });
 
     it('should plugin server dev enable test', () => {
