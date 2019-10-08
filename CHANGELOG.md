@@ -1,3 +1,12 @@
+## [4.0.5](https://github.com/easy-team/easywebpack/compare/4.0.4...4.0.5) (2019-10-08)
+
+
+### Bug Fixes
+
+* write plugin dev default true ([16dba04](https://github.com/easy-team/easywebpack/commit/16dba04))
+
+
+
 <a name="4.0.4"></a>
 ## [4.0.4](https://github.com/easy-team/easywebpack/compare/4.11.7...4.0.4) (2019-09-27)
 
