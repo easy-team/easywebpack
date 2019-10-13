@@ -25,7 +25,7 @@
 ## 安装
 
 ```bash
-npm install easywebpack-vue --save-dev
+npm install @easy-team/easywebpack-vue --save-dev
 ```
 
 ## 文档与总结

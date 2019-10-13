@@ -47,7 +47,7 @@ $ npm i @easy-team/easywebpack --save-dev
 ## Usage
 
 ```js
-const easywebpack = requier('easywebpack');
+const easywebpack = requier('@easy-team/easywebpack');
 const env = process.env.BUILD_ENV; // support dev/test/prod
 const webpackConfig = easywebpack.getWebpackConfig({
   env,
