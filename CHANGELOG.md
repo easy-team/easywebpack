@@ -1,3 +1,19 @@
+# [4.1.0-beta.1](https://github.com/easy-team/easywebpack/compare/4.0.4...4.1.0-beta.1) (2019-10-13)
+
+
+### Bug Fixes
+
+* babel 7 global babel.config.js ([525ea9d](https://github.com/easy-team/easywebpack/commit/525ea9d))
+* plugins type error ([d8ee1b6](https://github.com/easy-team/easywebpack/commit/d8ee1b6))
+* write plugin dev default true ([16dba04](https://github.com/easy-team/easywebpack/commit/16dba04))
+
+
+### Features
+
+* babel config optimization, use babel.config.js ([fc199dc](https://github.com/easy-team/easywebpack/commit/fc199dc))
+
+
+
 ## [4.0.7](https://github.com/easy-team/easywebpack/compare/4.0.4...4.0.7) (2019-10-12)
 
 
