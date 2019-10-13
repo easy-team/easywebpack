@@ -26,6 +26,11 @@
 
 ![easywebpack](https://github.com/easy-team/easywebpack/blob/master/docs/images/easywebpack.png)
 
+## Version
+
+- @easy-team/easywebpack ^4.x.x > Webpack 4.x.x + Babel 7 
+- easywebpack ^4.x.x > Webpack 4.x.x + Babel 6
+- easywebpack ^3.x.x > Webpack 3.x.x + Babel 6
 
 ## Document
 
@@ -36,7 +41,7 @@
 ## Install
 
 ```bash
-$ npm i easywebpack --save-dev
+$ npm i @easy-team/easywebpack --save-dev
 ```
 
 ## Usage
@@ -55,9 +60,9 @@ const webpackConfig = easywebpack.getWebpackConfig({
 
 ## Usage Solution
 
-- [easywebpack-js](https://github.com/easy-team/easywebpack-js.git) 
 - [easywebpack-vue](https://github.com/easy-team/easywebpack-vue.git) 
 - [easywebpack-react](https://github.com/easy-team/easywebpack-react.git)
+- [easywebpack-js](https://github.com/easy-team/easywebpack-js.git) 
 - [easywebpack-weex](https://github.com/easy-team/easywebpack-weex.git)
 - [easywebpack-html](https://github.com/easy-team/easywebpack-html.git) 
 

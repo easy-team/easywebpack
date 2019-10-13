@@ -35,8 +35,9 @@ npm install easywebpack-vue --save-dev
 
 ## 版本说明
 
-- easywebpack 4.x.x > webpack 4.x.x
-- easywebpack 3.x.x > webpack 3.x.x
+- @easy-team/easywebpack ^4.x.x > Webpack 4.x.x + Babel 7 
+- easywebpack ^4.x.x > Webpack 4.x.x + Babel 6
+- easywebpack ^3.x.x > Webpack 3.x.x + Babel 6
 
 
 ## 基础功能
