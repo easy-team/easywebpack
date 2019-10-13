@@ -1,4 +1,4 @@
-# [4.1.0-beta.1](https://github.com/easy-team/easywebpack/compare/4.0.4...4.1.0-beta.1) (2019-10-13)
+# [4.1.0](https://github.com/easy-team/easywebpack/compare/4.0.4...4.1.0-beta.1) (2019-10-13)
 
 
 ### Bug Fixes
