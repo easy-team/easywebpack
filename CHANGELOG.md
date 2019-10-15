@@ -1,3 +1,18 @@
+## [4.1.1](https://github.com/easy-team/easywebpack/compare/4.0.4...4.1.1) (2019-10-15)
+
+
+### Bug Fixes
+
+* loader use override ([88873b4](https://github.com/easy-team/easywebpack/commit/88873b4e923fecc8eb1a58ec61d8fd8c8c92c46e))
+* fix postcss-loader insert position; ([#63](https://github.com/easy-team/easywebpack/issues/63)) ([72477e5](https://github.com/easy-team/easywebpack/commit/72477e57d242a61bed2328dce353d99d76333b0d))
+
+
+### Features
+
+* babel config optimization, use babel.config.js ([fc199dc](https://github.com/easy-team/easywebpack/commit/fc199dcf4857552795628d9850af6979d56a8ebd))
+
+
+
 # [4.1.0](https://github.com/easy-team/easywebpack/compare/4.0.4...4.1.0-beta.1) (2019-10-13)
 
 
