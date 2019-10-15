@@ -418,7 +418,7 @@ describe('client.test.js', () => {
       const sassLoader = helper.getLoaderByName('sass', webpackConfig.module.rules, /\.sass/);
       const scssLoader = helper.getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
       const LessLoader = helper.getLoaderByName('less', webpackConfig.module.rules, /\.less/);
-      const stylusLoader = helper.getLoaderByName('stylus', webpackConfig.module.rules, /\.stylus/);
+      const stylusLoader = helper.getLoaderByName('stylus', webpackConfig.module.rules, /\.(stylus|styl)/);
       expect(cssLoader.use[1].options.sourceMap).to.be.true;
 
       expect(sassLoader.use[1].options.sourceMap).to.be.true;
@@ -469,7 +469,7 @@ describe('client.test.js', () => {
       const sassLoader = helper.getLoaderByName('sass', webpackConfig.module.rules, /\.sass/);
       const scssLoader = helper.getLoaderByName('sass', webpackConfig.module.rules, /\.scss/);
       const lessLoader = helper.getLoaderByName('less', webpackConfig.module.rules, /\.less/);
-      const stylusLoader = helper.getLoaderByName('stylus', webpackConfig.module.rules, /\.stylus/);
+      const stylusLoader = helper.getLoaderByName('stylus', webpackConfig.module.rules, /\.(stylus|styl)/);
 
       expect(cssLoader.use[1].options.sourceMap).to.be.false;
       expect(sassLoader.use[1].options.sourceMap).to.be.false;

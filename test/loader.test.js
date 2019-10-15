@@ -280,6 +280,25 @@ describe('loader.test.js', () => {
     expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
     expect(vuehtml.use[0].options.test).to.true;
   });
+
+  it('should merge loader override test', () => {
+    const builder = createClientBuilder({
+      loaders: {
+        scss: { // 覆盖原来的 loader use 配置
+          use: ['style-loader','css-loader', 'sass-loader', {
+            loader: 'sass-resources-loader',
+            options: {}
+          }],
+        },
+      }
+    });
+    const webpackConfig = builder.create();
+    const rules = webpackConfig.module.rules;
+    const sassResources = helper.getLoaderByName('sass-resources', rules);
+    expect(sassResources.use[0].loader).to.equal('style-loader');
+    expect(sassResources.use[1].loader).to.equal('css-loader');
+    expect(sassResources.use[2].loader).to.equal('postcss-loader');
+  });
   
 
   describe('#webpack feature loader test', () => {
