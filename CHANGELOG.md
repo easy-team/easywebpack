@@ -1,3 +1,14 @@
+<a name="4.11.11"></a>
+## [4.11.11](https://github.com/easy-team/easywebpack/compare/4.11.10...4.11.11) (2019-10-15)
+
+
+### Bug Fixes
+
+* loader override config ([f0af82c](https://github.com/easy-team/easywebpack/commit/f0af82c))
+* 修正postcss-loader 的插入位置; ([2eb2693](https://github.com/easy-team/easywebpack/commit/2eb2693))
+
+
+
 <a name="4.11.9"></a>
 ## [4.11.9](https://github.com/easy-team/easywebpack/compare/4.11.8...4.11.9) (2019-09-07)
 
