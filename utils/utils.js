@@ -81,6 +81,10 @@ utils.joinPath = function() {
   }).join('/');
 };
 
+utils.getLoaderIndex = (loaders, loaderName) => {
+  return loaders.findIndex(loader => loaderName === (utils.isObject(loader) ? loader.loader : loader)) + 1;
+}
+
 utils.getOutputPath = config => {
   const { output = {}, buildPath } = config;
   if (output.path) {
