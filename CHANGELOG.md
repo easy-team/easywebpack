@@ -1,3 +1,22 @@
+# [4.2.0](https://github.com/easy-team/easywebpack/compare/4.0.4...4.2.0) (2019-11-04)
+
+
+### Bug Fixes
+
+* babel 7 global babel.config.js ([525ea9d](https://github.com/easy-team/easywebpack/commit/525ea9d05e2cffc3ffdf9aabb79c679511c62a4b))
+* loader use override ([88873b4](https://github.com/easy-team/easywebpack/commit/88873b4e923fecc8eb1a58ec61d8fd8c8c92c46e))
+* plugins type error ([d8ee1b6](https://github.com/easy-team/easywebpack/commit/d8ee1b6eab4a5fa68ba71e00dc489f67070b1647))
+* write plugin dev default true ([16dba04](https://github.com/easy-team/easywebpack/commit/16dba04ab144ec42d48d4a6a2d43e88dc6f8dd3e))
+* 修正postcss-loader 的插入位置; ([#63](https://github.com/easy-team/easywebpack/issues/63)) ([72477e5](https://github.com/easy-team/easywebpack/commit/72477e57d242a61bed2328dce353d99d76333b0d))
+
+
+### Features
+
+* add vconsole-webpack-plugin, you can use vconsole: true enable ([af954db](https://github.com/easy-team/easywebpack/commit/af954db449b5259656938e142b95ffc3905cc83e))
+* babel config optimization, use babel.config.js ([fc199dc](https://github.com/easy-team/easywebpack/commit/fc199dcf4857552795628d9850af6979d56a8ebd))
+
+
+
 ## [4.1.1](https://github.com/easy-team/easywebpack/compare/4.0.4...4.1.1) (2019-10-15)
 
 
