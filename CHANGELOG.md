@@ -1,3 +1,13 @@
+<a name="4.12.0"></a>
+## [4.12.0](https://github.com/easy-team/easywebpack/compare/4.11.11...4.12.0) (2019-10-15)
+
+
+### Features
+
+* add vconsole-webpack-plugin, default disable ([800898b](https://github.com/easy-team/easywebpack/commit/800898b))
+
+
+
 <a name="4.11.11"></a>
 ## [4.11.11](https://github.com/easy-team/easywebpack/compare/4.11.10...4.11.11) (2019-10-15)
 
