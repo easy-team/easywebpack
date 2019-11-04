@@ -516,5 +516,30 @@ describe('client.test.js', () => {
       const webpackConfig = builder.create();
       expect(webpackConfig.externals.jquery).to.equal('jquery');
     });
+    it('should vconsole webpack plugin dev test', () => {
+      const builder = createBuilder({
+        plugins:[
+          {
+            vconsole: true
+          }
+        ]
+      });
+      const webpackConfig = builder.create();
+      const vconsole = helper.getPluginByLabel('vconsole', webpackConfig.plugins);
+      expect(vconsole.options.enable).to.be.true;
+    });
+    it('should vconsole webpack plugin prod test', () => {
+      const builder = createBuilder({
+        env: 'prod',
+        plugins:[
+          {
+            vconsole: true
+          }
+        ]
+      });
+      const webpackConfig = builder.create();
+      const vconsole = helper.getPluginByLabel('vconsole', webpackConfig.plugins);
+      expect(vconsole.options.enable).to.be.false;
+    });
   });
 });

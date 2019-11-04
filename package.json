@@ -60,6 +60,7 @@
     "thread-loader": "^1.1.5",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^0.5.8",
+    "vconsole-webpack-plugin": "^1.4.2",
     "webpack-asset-file-plugin": "^1.0.0",
     "webpack-filter-warnings-plugin": "^1.2.0",
     "webpack-hot-middleware": "^2.13.2",
