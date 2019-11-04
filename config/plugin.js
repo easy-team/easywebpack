@@ -286,3 +286,13 @@ exports.filter = {
     exclude: /\[mini-css-extract-plugin]\nConflicting order between:/
   }
 };
+
+exports.vconsole = {
+  enable: false,
+  type: 'client',
+  name: 'vconsole-webpack-plugin',
+  args() {
+    const enable = ['dev', 'test'].indexOf(this.env) > -1;
+    return { enable };
+  }
+};
