@@ -542,5 +542,20 @@ describe('client.test.js', () => {
       const vconsole = helper.getPluginByLabel('vconsole', webpackConfig.plugins);
       expect(vconsole.options.enable).to.be.false;
     });
+    it('should vconsole webpack plugin enable config test', () => {
+      const builder = createBuilder({
+        env: 'prod',
+        plugins:[
+          {
+            vconsole: {
+              enable: true
+            }
+          }
+        ]
+      });
+      const webpackConfig = builder.create();
+      const vconsole = helper.getPluginByLabel('vconsole', webpackConfig.plugins);
+      expect(vconsole.options.enable).to.be.true;
+    });
   });
 });
