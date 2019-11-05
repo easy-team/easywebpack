@@ -1,3 +1,11 @@
+## [4.2.2](https://github.com/easy-team/easywebpack/compare/4.2.1...4.2.2) (2019-11-05)
+
+
+### Bug Fixes
+
+* minChunks default value  for one entry ([a7c1e3b](https://github.com/easy-team/easywebpack/commit/a7c1e3b5957f47d9f5013217239cfb6e677ec1b4))
+
+
 # [4.2.1](https://github.com/easy-team/easywebpack/compare/4.2.0...4.2.1) (2019-11-05)
 
 
