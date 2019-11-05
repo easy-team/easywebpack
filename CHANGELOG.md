@@ -1,3 +1,12 @@
+## [4.12.1](https://github.com/easy-team/easywebpack/compare/4.12.0...4.12.1) (2019-11-05)
+
+
+### Bug Fixes
+
+* webpack plugin option include enable property ([dad3b7e](https://github.com/easy-team/easywebpack/commit/dad3b7e7339b4b8e665a76b268f73cb6962812c8))
+
+
+
 <a name="4.12.0"></a>
 ## [4.12.0](https://github.com/easy-team/easywebpack/compare/4.11.11...4.12.0) (2019-10-15)
 
