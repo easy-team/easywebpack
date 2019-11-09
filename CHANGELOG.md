@@ -1,4 +1,12 @@
-## [4.2.2](https://github.com/easy-team/easywebpack/compare/4.2.1...4.2.2) (2019-11-05)
+## [4.2.3](https://github.com/easy-team/easywebpack/compare/4.2.2...4.2.3) (2019-11-09)
+
+
+### Bug Fixes
+
+* get common miniChunks error ([810b452](https://github.com/easy-team/easywebpack/commit/810b4527dfabacd019b8c082e65d926a83fe4d0f))
+
+
+## [4.2.2](https://github.com/easy-team/easywebpack/compare/4.2.1...4.2.2) (2019-11-08)
 
 
 ### Bug Fixes
@@ -6,7 +14,7 @@
 * minChunks default value  for one entry ([a7c1e3b](https://github.com/easy-team/easywebpack/commit/a7c1e3b5957f47d9f5013217239cfb6e677ec1b4))
 
 
-# [4.2.1](https://github.com/easy-team/easywebpack/compare/4.2.0...4.2.1) (2019-11-05)
+## [4.2.1](https://github.com/easy-team/easywebpack/compare/4.2.0...4.2.1) (2019-11-05)
 
 
 ### Bug Fixes
