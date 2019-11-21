@@ -111,14 +111,22 @@ utils.getCustomEntry = (config, type) => {
   let extMatch = '.js';
   const configEntry = config.entry;
   const entries = {};
-  if (configEntry && configEntry.include) {
+  if (configEntry && (configEntry.include || configEntry.loader)) {
     entryLoader = type && configEntry.loader && configEntry.loader[type];
     if (entryLoader) {
       entryLoader = utils.normalizePath(entryLoader, config.baseDir);
     }
     const extMapping = { vue: '.vue', react: '.jsx', weex: '.vue' };
     extMatch = entryLoader ? configEntry.extMatch || extMapping[config.framework] : configEntry.extMatch;
-    entryArray = Array.isArray(configEntry.include) ? configEntry.include : [configEntry.include];
+    if (configEntry.include) {
+      entryArray = Array.isArray(configEntry.include) ? configEntry.include : [configEntry.include];
+    } else if (configEntry.loader) {
+      entryArray = Object.keys(configEntry).filter(key => {
+        return key !== 'loader'
+      }).map(key => {
+        return { [key]: configEntry[key] };
+      });
+    }
   } else {
     entryArray.push(configEntry);
   }
