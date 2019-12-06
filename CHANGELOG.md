@@ -1,3 +1,12 @@
+## [4.12.2](https://github.com/easy-team/easywebpack/compare/4.12.1...4.12.2) (2019-12-06)
+
+
+### Bug Fixes
+
+* not show fullpath when templateFile set ([3c2f08a](https://github.com/easy-team/easywebpack/commit/3c2f08a282bf9c0a1414383ed2c508b82e0b5eb7))
+
+
+
 ## [4.12.1](https://github.com/easy-team/easywebpack/compare/4.12.0...4.12.1) (2019-11-05)
 
 
