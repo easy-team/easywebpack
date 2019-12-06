@@ -1,3 +1,51 @@
+## [4.2.4](https://github.com/easy-team/easywebpack/compare/4.0.4...4.2.4) (2019-12-06)
+
+
+### Bug Fixes
+
+* babel 7 global babel.config.js ([525ea9d](https://github.com/easy-team/easywebpack/commit/525ea9d05e2cffc3ffdf9aabb79c679511c62a4b))
+* get common miniChunks error ([810b452](https://github.com/easy-team/easywebpack/commit/810b4527dfabacd019b8c082e65d926a83fe4d0f))
+* loader use override ([88873b4](https://github.com/easy-team/easywebpack/commit/88873b4e923fecc8eb1a58ec61d8fd8c8c92c46e))
+* minChunks default value  for one entry ([a7c1e3b](https://github.com/easy-team/easywebpack/commit/a7c1e3b5957f47d9f5013217239cfb6e677ec1b4))
+* not show fullpath for entry loader templateFile ([6414b9b](https://github.com/easy-team/easywebpack/commit/6414b9b6ba4535359ce1ef2c59bb68fe807dce5e))
+* plugins type error ([d8ee1b6](https://github.com/easy-team/easywebpack/commit/d8ee1b6eab4a5fa68ba71e00dc489f67070b1647))
+* webpack plugin option include enable property ([dbf90d8](https://github.com/easy-team/easywebpack/commit/dbf90d82c780985988617763d3e458ca45a692e6))
+* write plugin dev default true ([16dba04](https://github.com/easy-team/easywebpack/commit/16dba04ab144ec42d48d4a6a2d43e88dc6f8dd3e))
+* 修正postcss-loader 的插入位置; ([#63](https://github.com/easy-team/easywebpack/issues/63)) ([72477e5](https://github.com/easy-team/easywebpack/commit/72477e57d242a61bed2328dce353d99d76333b0d))
+
+
+### Features
+
+* add vconsole-webpack-plugin, you can use vconsole: true enable ([af954db](https://github.com/easy-team/easywebpack/commit/af954db449b5259656938e142b95ffc3905cc83e))
+* babel config optimization, use babel.config.js ([fc199dc](https://github.com/easy-team/easywebpack/commit/fc199dcf4857552795628d9850af6979d56a8ebd))
+* support webpack entry loader mode ([de85f3e](https://github.com/easy-team/easywebpack/commit/de85f3ef4ab94269784d84ccbae2ee149ae6bf6b))
+
+
+
+## [4.2.3](https://github.com/easy-team/easywebpack/compare/4.0.4...4.2.3) (2019-12-06)
+
+
+### Bug Fixes
+
+* babel 7 global babel.config.js ([525ea9d](https://github.com/easy-team/easywebpack/commit/525ea9d05e2cffc3ffdf9aabb79c679511c62a4b))
+* get common miniChunks error ([810b452](https://github.com/easy-team/easywebpack/commit/810b4527dfabacd019b8c082e65d926a83fe4d0f))
+* loader use override ([88873b4](https://github.com/easy-team/easywebpack/commit/88873b4e923fecc8eb1a58ec61d8fd8c8c92c46e))
+* minChunks default value  for one entry ([a7c1e3b](https://github.com/easy-team/easywebpack/commit/a7c1e3b5957f47d9f5013217239cfb6e677ec1b4))
+* not show fullpath for entry loader templateFile ([6414b9b](https://github.com/easy-team/easywebpack/commit/6414b9b6ba4535359ce1ef2c59bb68fe807dce5e))
+* plugins type error ([d8ee1b6](https://github.com/easy-team/easywebpack/commit/d8ee1b6eab4a5fa68ba71e00dc489f67070b1647))
+* webpack plugin option include enable property ([dbf90d8](https://github.com/easy-team/easywebpack/commit/dbf90d82c780985988617763d3e458ca45a692e6))
+* write plugin dev default true ([16dba04](https://github.com/easy-team/easywebpack/commit/16dba04ab144ec42d48d4a6a2d43e88dc6f8dd3e))
+* 修正postcss-loader 的插入位置; ([#63](https://github.com/easy-team/easywebpack/issues/63)) ([72477e5](https://github.com/easy-team/easywebpack/commit/72477e57d242a61bed2328dce353d99d76333b0d))
+
+
+### Features
+
+* add vconsole-webpack-plugin, you can use vconsole: true enable ([af954db](https://github.com/easy-team/easywebpack/commit/af954db449b5259656938e142b95ffc3905cc83e))
+* babel config optimization, use babel.config.js ([fc199dc](https://github.com/easy-team/easywebpack/commit/fc199dcf4857552795628d9850af6979d56a8ebd))
+* support webpack entry loader mode ([de85f3e](https://github.com/easy-team/easywebpack/commit/de85f3ef4ab94269784d84ccbae2ee149ae6bf6b))
+
+
+
 ## [4.2.3](https://github.com/easy-team/easywebpack/compare/4.2.2...4.2.3) (2019-11-09)
 
 
