@@ -1,6 +1,6 @@
 # easywebpack
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![NPM version][npm-image]][npm-url]
@@ -180,6 +180,9 @@ Please open an issue [here](https://github.com/easy-team/easywebpack/issues).
     <td align="center"><a href="https://github.com/HiuYanChong"><img src="https://avatars0.githubusercontent.com/u/15319816?v=4" width="100px;" alt=""/><br /><sub><b>HiuYanChong</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=HiuYanChong" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=HiuYanChong" title="Documentation">📖</a></td>
     <td align="center"><a href="https://easyjs.cn"><img src="https://avatars2.githubusercontent.com/u/4983042?v=4" width="100px;" alt=""/><br /><sub><b>sky</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=hubcarl" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=hubcarl" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/mice33"><img src="https://avatars2.githubusercontent.com/u/4945433?v=4" width="100px;" alt=""/><br /><sub><b>Mice</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=mice33" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=mice33" title="Documentation">📖</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/jacksky007"><img src="https://avatars3.githubusercontent.com/u/2378915?v=4" width="100px;" alt=""/><br /><sub><b>小杰</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=jacksky007" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=jacksky007" title="Documentation">📖</a></td>
   </tr>
 </table>
 
