@@ -1,6 +1,6 @@
 # easywebpack
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![NPM version][npm-image]][npm-url]
@@ -178,6 +178,7 @@ Please open an issue [here](https://github.com/easy-team/easywebpack/issues).
     <td align="center"><a href="https://github.com/jasonjcpeng"><img src="https://avatars0.githubusercontent.com/u/13363216?v=4" width="100px;" alt=""/><br /><sub><b>jasonjcpeng</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=jasonjcpeng" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=jasonjcpeng" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/willworks"><img src="https://avatars2.githubusercontent.com/u/5542777?v=4" width="100px;" alt=""/><br /><sub><b>Kevin Zhong</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=willworks" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=willworks" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/HiuYanChong"><img src="https://avatars0.githubusercontent.com/u/15319816?v=4" width="100px;" alt=""/><br /><sub><b>HiuYanChong</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=HiuYanChong" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=HiuYanChong" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://easyjs.cn"><img src="https://avatars2.githubusercontent.com/u/4983042?v=4" width="100px;" alt=""/><br /><sub><b>sky</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=hubcarl" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=hubcarl" title="Documentation">📖</a></td>
   </tr>
 </table>
 

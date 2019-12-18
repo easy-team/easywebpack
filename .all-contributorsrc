@@ -59,6 +59,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "hubcarl",
+      "name": "sky",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/4983042?v=4",
+      "profile": "https://easyjs.cn",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
