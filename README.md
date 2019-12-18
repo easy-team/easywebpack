@@ -1,4 +1,7 @@
 # easywebpack
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
@@ -162,6 +165,26 @@ npm install easy-team/easywebpack-cli -g
 ## Questions & Suggestions
 
 Please open an issue [here](https://github.com/easy-team/easywebpack/issues).
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://www.thonatos.com"><img src="https://avatars2.githubusercontent.com/u/958063?v=4" width="100px;" alt=""/><br /><sub><b>Suyi</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=thonatos" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=thonatos" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
 
