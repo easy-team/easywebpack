@@ -39,6 +39,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "willworks",
+      "name": "Kevin Zhong",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/5542777?v=4",
+      "profile": "https://github.com/willworks",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
