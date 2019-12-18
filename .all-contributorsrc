@@ -69,6 +69,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "mice33",
+      "name": "Mice",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/4945433?v=4",
+      "profile": "https://github.com/mice33",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
