@@ -1,6 +1,6 @@
 # easywebpack
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![NPM version][npm-image]][npm-url]
@@ -183,6 +183,7 @@ Please open an issue [here](https://github.com/easy-team/easywebpack/issues).
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/jacksky007"><img src="https://avatars3.githubusercontent.com/u/2378915?v=4" width="100px;" alt=""/><br /><sub><b>小杰</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=jacksky007" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=jacksky007" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://nootn.com/"><img src="https://avatars3.githubusercontent.com/u/898354?v=4" width="100px;" alt=""/><br /><sub><b>asins</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=asins" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=asins" title="Documentation">📖</a></td>
   </tr>
 </table>
 

@@ -89,6 +89,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "asins",
+      "name": "asins",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/898354?v=4",
+      "profile": "http://nootn.com/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
