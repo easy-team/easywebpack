@@ -30,6 +30,7 @@ npm install @easy-team/easywebpack --save-dev
 
 ## 文档与总结
 
+- https://easyjs.cn
 - https://www.yuque.com/easy-team/easywebpack
 - https://zhuanlan.zhihu.com/easywebpack
 
@@ -77,6 +78,21 @@ npm install @easy-team/easywebpack --save-dev
 - [easywebpack-weex](https://github.com/easy-team/easywebpack-weex.git) 支持 Native 和 Web 构建模式
 - [easywebpack-html](https://github.com/easy-team/easywebpack-html.git) 支持 HTML静态页面模式，支持 nunjucks 引擎
 
+## 使用
+
+```js
+// ${root}/webpack.config.js
+const easywebpack = requier('@easy-team/easywebpack-react');
+const env = process.env.BUILD_ENV; // support dev/test/prod
+const webpackConfig = easywebpack.getWebpackConfig({
+  env,
+  target: 'web',
+  entry: {
+    index: 'src/app.js'
+  }
+});
+module.exports = webpackConfig;
+```
 
 ### 命令行工具
 
