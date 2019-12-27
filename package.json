@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "4.12.2",
+  "version": "4.12.3",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
@@ -46,7 +46,7 @@
     "lodash.set": "^4.3.2",
     "lodash.uniq": "^4.5.0",
     "md5": "^2.2.1",
-    "mini-css-extract-plugin": "^0.4.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "node-noop": "^1.0.0",
     "node-tool-utils": "^1.0.0",
     "npm-install-webpack-plugin": "^4.0.5",

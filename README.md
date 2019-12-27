@@ -41,8 +41,8 @@
 
 ## Document
 
+- https://easyjs.cn
 - https://www.yuque.com/easy-team/easywebpack
-- https://easy-team.github.io/
 - https://zhuanlan.zhihu.com/easywebpack
 
 
