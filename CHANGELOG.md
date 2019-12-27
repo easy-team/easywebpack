@@ -1,3 +1,12 @@
+## [4.12.3](https://github.com/easy-team/easywebpack/compare/4.12.2...4.12.3) (2019-12-27)
+
+
+### Bug Fixes
+
+* mutil npm module deps mini-css-extract-plugin ([8bc3a83](https://github.com/easy-team/easywebpack/commit/8bc3a83b2dd44ce0fe8ca339bd678e46984e44d4))
+
+
+
 ## [4.12.2](https://github.com/easy-team/easywebpack/compare/4.12.1...4.12.2) (2019-12-06)
 
 
