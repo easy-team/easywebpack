@@ -38,8 +38,8 @@
 
 ## Document
 
+- https://easyjs.cn
 - https://www.yuque.com/easy-team/easywebpack
-- https://easy-team.github.io/
 - https://zhuanlan.zhihu.com/easywebpack
 
 
@@ -162,6 +162,36 @@ npm install easy-team/easywebpack-cli -g
 ## Questions & Suggestions
 
 Please open an issue [here](https://github.com/easy-team/easywebpack/issues).
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://easyjs.cn"><img src="https://avatars2.githubusercontent.com/u/4983042?v=4" width="100px;" alt=""/><br /><sub><b>sky</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=hubcarl" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=hubcarl" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/jasonjcpeng"><img src="https://avatars0.githubusercontent.com/u/13363216?v=4" width="100px;" alt=""/><br /><sub><b>jasonjcpeng</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=jasonjcpeng" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=jasonjcpeng" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/willworks"><img src="https://avatars2.githubusercontent.com/u/5542777?v=4" width="100px;" alt=""/><br /><sub><b>Kevin Zhong</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=willworks" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=willworks" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/HiuYanChong"><img src="https://avatars0.githubusercontent.com/u/15319816?v=4" width="100px;" alt=""/><br /><sub><b>HiuYanChong</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=HiuYanChong" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=HiuYanChong" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.thonatos.com"><img src="https://avatars2.githubusercontent.com/u/958063?v=4" width="100px;" alt=""/><br /><sub><b>Suyi</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=thonatos" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=thonatos" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://blog.dada.li"><img src="https://avatars0.githubusercontent.com/u/3274850?v=4" width="100px;" alt=""/><br /><sub><b>Roy Li</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=geekdada" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=geekdada" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/mice33"><img src="https://avatars2.githubusercontent.com/u/4945433?v=4" width="100px;" alt=""/><br /><sub><b>Mice</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=mice33" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=mice33" title="Documentation">📖</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/jacksky007"><img src="https://avatars3.githubusercontent.com/u/2378915?v=4" width="100px;" alt=""/><br /><sub><b>小杰</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=jacksky007" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=jacksky007" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://nootn.com/"><img src="https://avatars3.githubusercontent.com/u/898354?v=4" width="100px;" alt=""/><br /><sub><b>asins</b></sub></a><br /><a href="https://github.com/hubcarl/easywebpack/commits?author=asins" title="Code">💻</a> <a href="https://github.com/hubcarl/easywebpack/commits?author=asins" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
 
