@@ -1,3 +1,7 @@
+## [4.12.5](https://github.com/easy-team/easywebpack/compare/4.12.4...4.12.5) (2020-02-25)
+
+
+
 ## [4.12.4](https://github.com/easy-team/easywebpack/compare/4.12.3...4.12.4) (2020-02-25)
 
 
