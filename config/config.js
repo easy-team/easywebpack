@@ -60,7 +60,7 @@ exports.prod = {
   loaders: {
     css: {
       options: {
-        minimize: true
+        // minimize: true
       }
     }
   },
