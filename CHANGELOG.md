@@ -1,3 +1,12 @@
+## [4.12.4](https://github.com/easy-team/easywebpack/compare/4.12.3...4.12.4) (2020-02-25)
+
+
+### Bug Fixes
+
+* new version css-loader not need minimize config ([036a501](https://github.com/easy-team/easywebpack/commit/036a50122031bda30eb485150a352831214037cf))
+
+
+
 ## [4.12.3](https://github.com/easy-team/easywebpack/compare/4.12.2...4.12.3) (2019-12-27)
 
 
