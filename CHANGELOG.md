@@ -1,3 +1,13 @@
+<a name="4.12.6"></a>
+## [4.12.6](https://github.com/easy-team/easywebpack/compare/4.12.5...4.12.6) (2020-04-11)
+
+
+### Bug Fixes
+
+* child process running port had used ([34229ad](https://github.com/easy-team/easywebpack/commit/34229ad))
+
+
+
 ## [4.12.5](https://github.com/easy-team/easywebpack/compare/4.12.4...4.12.5) (2020-02-25)
 
 
