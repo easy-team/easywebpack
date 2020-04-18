@@ -1,3 +1,12 @@
+<a name="4.12.7"></a>
+## [4.12.7](https://github.com/easy-team/easywebpack/compare/4.12.6...4.12.7) (2020-04-18)
+
+
+### Bug Fixes
+
+* ssr ignore style missing styl ([d632027](https://github.com/easy-team/easywebpack/commit/d632027))
+
+
 <a name="4.12.6"></a>
 ## [4.12.6](https://github.com/easy-team/easywebpack/compare/4.12.5...4.12.6) (2020-04-11)
 
