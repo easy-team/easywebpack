@@ -184,7 +184,7 @@ exports.modulereplacement = {
   },
   type: 'server',
   name: webpack.NormalModuleReplacementPlugin,
-  args: [/\.(css|less|scss|sass)$/, require.resolve('node-noop')]
+  args: [/\.(css|less|scss|sass|styl|stylus)$/, require.resolve('node-noop')]
 };
 
 exports.ignore = {
@@ -193,7 +193,7 @@ exports.ignore = {
   },
   type: 'server',
   name: webpack.IgnorePlugin,
-  args: /\.(css|less|scss|sass)$/
+  args: /\.(css|less|scss|sass|styl|stylus)$/
 };
 
 exports.html = {
