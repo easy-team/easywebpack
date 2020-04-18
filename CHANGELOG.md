@@ -1,4 +1,12 @@
-## [4.2.6](https://github.com/easy-team/easywebpack/compare/4.2.6...4.2.5) (2020-03-10)
+## [4.2.7](https://github.com/easy-team/easywebpack/compare/4.2.6...4.2.7) (2020-4-18)
+
+
+### Bug Fixes
+
+* ssr ignore style missing stylus ([ab98fa4](https://github.com/easy-team/easywebpack/commit/ab98fa4))
+
+
+## [4.2.6](https://github.com/easy-team/easywebpack/compare/4.2.5...4.2.6) (2020-03-10)
 
 
 ### Bug Fixes
