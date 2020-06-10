@@ -1,3 +1,12 @@
+## [4.2.8](https://github.com/easy-team/easywebpack/compare/4.0.4...4.2.8) (2020-06-10)
+
+
+### Bug Fixes
+
+* https://github.com/easy-team/easywebpack/issues/76 ([0d88a29](https://github.com/easy-team/easywebpack/commit/0d88a296c5dd221e4c0b3eaed137eee9c534f06d))
+
+
+
 ## [4.2.7](https://github.com/easy-team/easywebpack/compare/4.2.6...4.2.7) (2020-4-18)
 
 
