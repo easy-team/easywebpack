@@ -1,14 +1,12 @@
 {
-  "name": "@easy-team/easywebpack",
-  "version": "4.2.8",
+  "name": "easywebpack",
+  "version": "5.0.0-beta.1",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
-    "webpack4",
-    "webpack 4",
-    "hot reload",
-    "webpack-tool",
-    "server side render",
+    "webpack5",
+    "webpack 5",
+    "webpack build",
     "webpack-generator"
   ],
   "dependencies": {
@@ -26,19 +24,19 @@
     "babel-loader": "^8.0.6",
     "cache-loader": "^4.1.0",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
-    "chalk": "^2.0.1",
-    "clean-webpack-plugin": "^1.0.0",
-    "copy-webpack-plugin": "^5.0.4",
-    "cross-spawn": "^6.0.5",
-    "css-loader": "^3.1.0",
+    "chalk": "^4.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.1.0",
+    "cross-spawn": "^7.0.3",
+    "css-loader": "^4.2.2",
     "detect-port": "^1.2.3",
     "directory-named-webpack-plugin": "^4.0.1",
-    "eslint": "^6.1.0",
-    "eslint-config-egg": "^7.1.0",
-    "eslint-loader": "^2.0.0",
-    "file-loader": "^4.1.0",
+    "eslint": "^7.8.1",
+    "eslint-config-egg": "^8.1.2",
+    "eslint-loader": "^4.0.2",
+    "file-loader": "^6.1.0",
     "glob": "^7.1.3",
-    "html-webpack-plugin": "^3.0.6",
+    "html-webpack-plugin": "^4.4.1",
     "lodash.clonedeep": "^4.5.0",
     "lodash.clonedeepwith": "^4.5.0",
     "lodash.get": "^4.4.2",
@@ -47,26 +45,26 @@
     "lodash.set": "^4.3.2",
     "lodash.uniq": "^4.5.0",
     "md5": "^2.2.1",
-    "mini-css-extract-plugin": "^0.8.0",
+    "mini-css-extract-plugin": "^0.11.0",
     "node-noop": "^1.0.0",
     "node-tool-utils": "^1.0.0",
     "npm-install-webpack-plugin": "^4.0.5",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
-    "progress-bar-webpack-plugin": "^1.10.0",
+    "progress-bar-webpack-plugin": "^2.1.0",
     "service-worker-precache-webpack-plugin": "^1.0.0",
     "shelljs": "^0.8.3",
-    "style-loader": "^0.23.1",
-    "terser-webpack-plugin": "^1.1.0",
+    "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^4.1.0",
     "thread-loader": "^2.1.2",
     "uglifyjs-webpack-plugin": "^2.0.1",
-    "url-loader": "^2.1.0",
+    "url-loader": "^4.1.0",
     "vconsole-webpack-plugin": "^1.4.2",
     "webpack-asset-file-plugin": "^1.0.0",
     "webpack-filter-warnings-plugin": "^1.2.0",
     "webpack-hot-middleware": "^2.13.2",
     "webpack-manifest-resource-plugin": "^4.0.0",
-    "webpack-node-externals": "^1.6.0",
+    "webpack-node-externals": "^2.5.2",
     "webpack-tool": "^4.2.0",
     "write-file-webpack-plugin": "^4.5.1"
   },
@@ -75,13 +73,12 @@
     "codecov": "^3.5.0",
     "conventional-changelog-cli": "^2.0.23",
     "coveralls": "^3.0.5",
-    "eslint-config-eslint": "^5.0.1",
-    "imagemin-webpack-plugin": "^2.4.2",
+    "eslint-config-eslint": "^6.0.0",
     "less": "^3.9.0",
-    "less-loader": "^5.0.0",
-    "mocha": "^6.2.0",
-    "nyc": "^14.1.1",
-    "sass-loader": "^7.1.0"
+    "less-loader": "^7.0.1",
+    "mocha": "^8.1.3",
+    "nyc": "^15.1.0",
+    "sass-loader": "^10.0.2"
   },
   "fullDependencies": {
     "babel-eslint": "latest",
@@ -135,11 +132,14 @@
     ]
   },
   "ci": {
-    "version": "6, 8, 9"
+    "version": "8, 10, 12, 14"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/easy-team/easywebpack.git"
+  },
+  "publishConfig": {
+    "tag": "next"
   },
   "bugs": {
     "url": "https://github.com/easy-team/easywebpack/issues"

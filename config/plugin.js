@@ -126,7 +126,7 @@ exports.progress = {
 };
 
 exports.imagemini = {
-  enable: true,
+  enable: false,
   env: ['prod'],
   type: 'client',
   name: 'imagemin-webpack-plugin',
