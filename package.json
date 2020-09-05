@@ -46,6 +46,7 @@
     "lodash.uniq": "^4.5.0",
     "md5": "^2.2.1",
     "mini-css-extract-plugin": "^0.11.0",
+    "mkdirp": "^1.0.4",
     "node-noop": "^1.0.0",
     "node-tool-utils": "^1.0.0",
     "npm-install-webpack-plugin": "^4.0.5",
@@ -65,7 +66,7 @@
     "webpack-hot-middleware": "^2.13.2",
     "webpack-manifest-resource-plugin": "^4.0.0",
     "webpack-node-externals": "^2.5.2",
-    "webpack-tool": "^4.2.0",
+    "webpack-tool": "^5.0.0-beta.1",
     "write-file-webpack-plugin": "^4.5.1"
   },
   "devDependencies": {
@@ -139,7 +140,7 @@
     "url": "git+https://github.com/easy-team/easywebpack.git"
   },
   "publishConfig": {
-    "tag": "next"
+    "tag": "5x"
   },
   "bugs": {
     "url": "https://github.com/easy-team/easywebpack/issues"

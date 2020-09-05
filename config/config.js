@@ -18,11 +18,6 @@ exports.base = {
     compile:{
       cache: true,
       thread: true
-    },
-    node: {
-      console: false,
-      Buffer: false,
-      setImmediate: false
     }
   },
   loaders: {},
@@ -31,10 +26,7 @@ exports.base = {
 
 exports.dev = {
   config: {
-    hash: false,
-    node: {
-      console: true
-    }
+    hash: false
   },
   plugins:[{
     hot: true,
