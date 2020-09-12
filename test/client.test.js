@@ -489,7 +489,7 @@ describe('client.test.js', () => {
     it('should merge plugin array params test', () => {
       const builder = createBuilder({
         plugins: {
-          copy: [{ from: 'asset', to: 'public' }]
+          copy: { patterns: [{ from: 'asset', to: 'public' }] }
         }
       });
       const webpackConfig = builder.create();

@@ -95,7 +95,7 @@ describe('plugin.test.js', () => {
 
       expect(!!helper.getPluginByLabel('hot', plugins)).to.be.false;
       expect(!!helper.getPluginByLabel('cssmini', plugins)).to.be.true;
-      expect(!!helper.getPluginByLabel('imagemini', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('imagemini', plugins)).to.be.false;
       expect(!!helper.getPluginByLabel('ignore', plugins)).to.be.false;
       expect(!!helper.getPluginByLabel('modulereplacement', plugins)).to.be.false;
       expect(!!helper.getPluginByLabel('extract', plugins)).to.be.true;
@@ -168,7 +168,7 @@ describe('plugin.test.js', () => {
     it('should merge apply plugin test', () => {
       const builder = createBuilder({
         plugins: {
-          copy: new CopyWebpackPlugin([{ from: 'asset', to: 'public' }])
+          copy: new CopyWebpackPlugin({ patterns: [{ from: 'asset', to: 'public' }] })
         }
       });
       const webpackConfig = builder.create();
@@ -178,7 +178,7 @@ describe('plugin.test.js', () => {
     });
 
     it('should merge array plugin test', () => {
-      const plugin = new CopyWebpackPlugin([{ from: 'asset', to: 'public' }]);
+      const plugin = new CopyWebpackPlugin({ patterns: [{ from: 'asset', to: 'public' }] });
       const builder = createBuilder({
         plugins: [
           plugin

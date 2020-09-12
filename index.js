@@ -44,10 +44,10 @@ exports.getDllWebpackConfig = (config = {}, option = {}) => {
   return exports.WebpackBuilder.getDllWebpackConfig(config);
 };
 
-exports.build = (webpackConfig, config, callback) => {
+exports.build = async (webpackConfig, config, callback) => {
   return new WebpackTool(config).build(webpackConfig, config, callback);
 };
 
-exports.server = (webpackConfig, config, callback) => {
+exports.server = async (webpackConfig, config, callback) => {
   return new WebpackTool(config).server(webpackConfig, config, callback);
 };
