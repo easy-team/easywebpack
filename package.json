@@ -66,7 +66,7 @@
     "webpack-hot-middleware": "^2.13.2",
     "webpack-manifest-resource-plugin": "^4.0.0",
     "webpack-node-externals": "^2.5.2",
-    "webpack-tool": "^5.0.0-beta.1",
+    "webpack-tool": "^5.0.0",
     "write-file-webpack-plugin": "^4.5.1"
   },
   "devDependencies": {
