@@ -1,6 +1,6 @@
 {
   "name": "easywebpack",
-  "version": "5.0.0-beta.2",
+  "version": "5.0.0",
   "description": "基于 Webpack 的前端构建工程化解决方案",
   "keywords": [
     "webpack",
@@ -101,7 +101,7 @@
     "stylus-loader": "latest"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "scripts": {
     "start": "node index.js",
@@ -133,7 +133,7 @@
     ]
   },
   "ci": {
-    "version": "8, 10, 12, 14"
+    "version": "10, 12, 14"
   },
   "repository": {
     "type": "git",

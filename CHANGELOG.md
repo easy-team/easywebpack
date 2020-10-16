@@ -1,14 +1,11 @@
-# [5.0.0-beta.2](https://github.com/easy-team/easywebpack/compare/4.12.8...5.0.0-beta.2) (2020-09-12)
+# [5.0.0](https://github.com/easy-team/easywebpack/compare/5.0.0-beta.2...5.0.0) (2020-10-16)
 
 
 ### Features
 
+* not need set css hot for webpack 5 ([facaff6](https://github.com/easy-team/easywebpack/commit/facaff6d99fcf8671c8d500b2f9ef311cfa260dc))
+* plugin env override support ([2d7ceb4](https://github.com/easy-team/easywebpack/commit/2d7ceb49785e629c63eb9c9e64b9c66bf83a8e9b))
 * webpack 5 ([dc18547](https://github.com/easy-team/easywebpack/commit/dc185478a2f93aa348edef7abd461fd9695b2ecb))
-* add plugin write-file-webpack-plugin, babel name: write ([404d977](https://github.com/easy-team/easywebpack/commit/404d977b23a8439c8c71b9931d6caa448721e5df))
-* add vconsole-webpack-plugin, you can use vconsole: true enable ([af954db](https://github.com/easy-team/easywebpack/commit/af954db449b5259656938e142b95ffc3905cc83e))
-* babel config optimization, use babel.config.js ([fc199dc](https://github.com/easy-team/easywebpack/commit/fc199dcf4857552795628d9850af6979d56a8ebd))
-* upgrade babel 6 to babel 7 [@babel](https://github.com/babel) and deps npm package ([4ce09d8](https://github.com/easy-team/easywebpack/commit/4ce09d8d61742a47941df626f75ffdbcfb0e4dca))
-
 
 
 ## [4.11.7](https://github.com/easy-team/easywebpack/compare/4.11.6...4.11.7) (2019-07-17)
