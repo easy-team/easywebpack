@@ -1,0 +1,67 @@
+{
+  "name": "webpack-tool",
+  "version": "5.0.0",
+  "description": "webpack build and webpack build result web view",
+  "keywords": [
+    "webpack",
+    "webpack3",
+    "webpack4",
+    "webpack build",
+    "webpack hot reload"
+  ],
+  "dependencies": {
+    "art-template": "^4.11.0",
+    "chalk": "^4.1.0",
+    "detect-port": "^1.2.3",
+    "easy-helper": "^1.0.2",
+    "http-proxy": "^1.17.0",
+    "http-proxy-middleware": "^1.0.5",
+    "kcors": "^2.2.2",
+    "koa": "^2.13.0",
+    "koa2-connect": "^1.0.2",
+    "node-tool-utils": "^1.0.0",
+    "opn": "^6.0.0",
+    "webpack": "^5.0.0",
+    "webpack-dev-middleware": "4.0.0-rc.3",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^4.0.0"
+  },
+  "devDependencies": {
+    "conventional-changelog-cli": "^2.1.0",
+    "eslint": "^7.8.1",
+    "eslint-config-eslint": "^6.0.0",
+    "mocha": "^8.2.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "fix": "eslint --fix .",
+    "test": "mocha test",
+    "ci": "npm run lint && npm run cov",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+  },
+  "files": [
+    "index.js",
+    "utils",
+    "lib",
+    "tool"
+  ],
+  "ci": {
+    "version": "10, 12, 14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/easy-team/webpack-tool.git"
+  },
+  "publishConfig": {
+    "tag": "5x"
+  },
+  "bugs": {
+    "url": "https://github.com/easy-team/webpack-tool/issues"
+  },
+  "homepage": "https://github.com/easy-team/webpack-tool#readme",
+  "author": "hubcarl@126.com",
+  "license": "MIT"
+}

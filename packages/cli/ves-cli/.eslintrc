@@ -1,0 +1,47 @@
+{
+  "extends": "eslint",
+  "env": {
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "indent": [
+      "error",
+      2,
+      { "SwitchCase": 1 }
+    ],
+    "no-underscore-dangle": "off",
+    "consistent-return": "off",
+    "no-cond-assign": "off",
+    "lines-around-comment": "off",
+    "arrow-body-style": "off",
+    "no-confusing-arrow": "off",
+    "class-methods-use-this": "off",
+    "newline-after-var": "off",
+    "no-invalid-this": "off",
+    "no-nested-ternary": "off",
+    "no-unused-vars": "off",
+    "eol-last": "off",
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "guard-for-in": "off",
+    "no-console": "off",
+    "no-undefined": "off",
+    "array-bracket-spacing": "off",
+    "no-unused-expressions": "off",
+    "func-style": [
+      "error",
+      "expression"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ]
+  }
+}

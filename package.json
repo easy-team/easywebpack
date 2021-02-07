@@ -1,0 +1,17 @@
+{
+  "name": "easywebpack",
+  "version": "5.0.0",
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  },
+  "scripts": {
+    "boot": "lerna bootstrap",
+    "clean": "lerna clean",
+    "test": "lerna run test",
+    "test:easy": "lerna run test --scope easywebpack",
+    "test:vue": "lerna run test --scope easywebpack-vue",
+    "test:react": "lerna run test --scope easywebpack-react",
+    "test:cli": "lerna run test --scope easywebpack-cli",
+    "test:server": "lerna run test --scope webpack-tool"
+  }
+}
