@@ -1,0 +1,14 @@
+logs/
+npm-debug.log
+node_modules/
+coverage/
+.idea/
+run/
+.DS_Store
+*.swp
+.vscode
+*.iml
+dist
+public/
+.nyc_output
+package-lock.json

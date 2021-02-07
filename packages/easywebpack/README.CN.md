@@ -19,12 +19,13 @@
 [download-image]: https://img.shields.io/npm/dm/easywebpack.svg?style=flat-square
 [download-url]: https://npmjs.org/package/easywebpack
 
+
 基于 Webpack 的前端构建工程化解决方案 [easywebpack](https://zhuanlan.zhihu.com/p/28322014)
 
 ## 安装
 
 ```bash
-npm install easywebpack --save-dev
+npm install @easy-team/easywebpack --save-dev
 ```
 
 ## 文档与总结
@@ -35,10 +36,10 @@ npm install easywebpack --save-dev
 
 ## 版本说明
 
-- easywebpack 5.x.x > Webpack 5.x.x + Babel 7
+- @easy-team/easywebpack 4.x.x > Webpack 4.x.x + Babel 7
 - easywebpack 4.x.x > Webpack 4.x.x + Babel 6
-  - @easy-team/easywebpack 4.x.x > Webpack 4.x.x + Babel 7
 - easywebpack 3.x.x > Webpack 3.x.x + Babel 6
+
 
 ## 基础功能
 
@@ -63,6 +64,7 @@ npm install easywebpack --save-dev
 
 **easywebpack不与任何框架耦合， 你需要基于现有的解决方案使用或者扩展解决方案使用**
 
+
 ## 工程化
 
 ![easywebpack](https://github.com/easy-team/easywebpack/blob/master/docs/images/easywebpack.solution.png)
@@ -80,7 +82,7 @@ npm install easywebpack --save-dev
 
 ```js
 // ${root}/webpack.config.js
-const easywebpack = requier('easywebpack-react');
+const easywebpack = requier('@easy-team/easywebpack-react');
 const env = process.env.BUILD_ENV; // support dev/test/prod
 const webpackConfig = easywebpack.getWebpackConfig({
   env,
@@ -100,15 +102,30 @@ module.exports = webpackConfig;
 - 支持命令行 Webpack 构建，包括 Webpack 配置信息打印(调试)和获取
 - 提供构建结果 UI 导航展现和访问。
 
+
 ### 项目骨架
 
+- [easywebpack-cli-template](https://github.com/easy-team/easywebpack-cli-template) Vue/React/Weex 纯前端项目骨架
+
 - [egg-vue-webpack-boilerplate](https://github.com/easy-team/egg-vue-webpack-boilerplate) Egg + Vue 服务端渲染骨架
+
+- [egg-vue-webpack-spa-boilerplate](https://github.com/easy-team/egg-vue-webpack-boilerplate/tree/feature/green/spa) Egg + Vue 单页面服务端渲染骨架
+
+- [egg-vue-webpack-mpa-boilerplate](https://github.com/easy-team/egg-vue-webpack-boilerplate/tree/feature/green/multi) Egg + Vue 多页面服务端渲染骨架
 
 - [egg-vue-typescript-boilerplate](https://github.com/easy-team/egg-vue-typescript-boilerplate) Egg + Vue + TypeScript + Webpack 服务端渲染骨架
 
 - [egg-react-webpack-boilerplate](https://github.com/easy-team/egg-react-webpack-boilerplate) Egg + React 服务端渲染骨架
 
+- [egg-react-webpack-spa-boilerplate](https://github.com/easy-team/egg-react-webpack-boilerplate/tree/feature/green/spa) Egg + React 单页面服务端渲染骨架
+
+- [egg-react-webpack-mpa-boilerplate](https://github.com/easy-team/egg-react-webpack-boilerplate/tree/feature/green/multi) Egg + React 多页面服务端渲染骨架
+
 - [egg-react-typescript-boilerplate](https://github.com/easy-team/egg-react-typescript-boilerplate) Egg + React + TypeScript + Webpack 服务端渲染骨架
+
+- [easywebpack-weex-boilerplate](https://github.com/easy-team/easywebpack-weex-boilerplate) Weex Native 和 Web 构建骨架项目
+
+- [easywebpack-multiple-html-boilerplate](https://github.com/easy-team/easywebpack-multiple-html-boilerplate) 静态页面构建方案骨架，支持纯 HTML 构建 和 nunjucks 构建。 
 
 **以上骨架可以通过 easywebpack-cli 初始化**
 

@@ -1,0 +1,23 @@
+{
+  "name": "easy-vue-common-lib-test",
+  "version": "1.0.0",
+  "description": "Vue Project Common Lib Test",
+  "scripts": {
+    "dev": "easy clean && easy dev",
+    "start": "easy build --server",
+    "test": "easy build test",
+    "build": "easy build prod",
+    "deploy": "easy build prod",
+    "lint": "eslint .",
+    "fix": "eslint --fix .",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@easy-team/easywebpack-cli": "^4.0.0",
+    "@easy-team/easywebpack-vue": "^4.0.0",
+    "cross-env": "^5.0.5",
+    "imagemin-webpack-plugin": "^2.4.2",
+    "vue-template-compiler": "^2.6.10"
+  }
+}

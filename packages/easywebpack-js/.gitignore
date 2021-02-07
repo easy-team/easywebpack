@@ -1,0 +1,17 @@
+logs/
+npm-debug.log
+node_modules/
+coverage/
+.idea/
+run/
+.DS_Store
+*.swp
+.vscode
+*.iml
+public/
+config/manifest.json
+package-lock.json
+yarn.lock
+coverage.lcov
+.nyc_output
+example/*/test/dist

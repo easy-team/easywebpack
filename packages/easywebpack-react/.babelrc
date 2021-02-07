@@ -1,0 +1,8 @@
+{
+  "presets": [
+    "react",
+    "env"
+  ],
+  "plugins": ["transform-object-assign", 'add-module-exports'],
+  "comments": false
+}
