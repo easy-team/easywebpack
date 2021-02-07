@@ -12,6 +12,7 @@
     "test:vue": "lerna run test --scope easywebpack-vue",
     "test:react": "lerna run test --scope easywebpack-react",
     "test:cli": "lerna run test --scope easywebpack-cli",
-    "test:server": "lerna run test --scope webpack-tool"
+    "test:server": "lerna run test --scope webpack-tool",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   }
 }

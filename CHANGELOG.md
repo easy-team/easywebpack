@@ -1,4 +1,10 @@
-## [4.12.8](https://github.com/easy-team/easywebpack/compare/4.12.7...4.12.8) (2020-06-10)
+# [5.0.0](https://github.com/easy-team/easywebpack/compare/4.12.8...5.0.0) (2021-02-07)
+
+### Features
+
+* webpack5 ([5a7fba6](https://github.com/easy-team/easywebpack/commit/5a7fba6))
+
+## [5.0.0](https://github.com/easy-team/easywebpack/compare/4.12.7...5.0.0) (2020-10-10)
 
 
 ### Bug Fixes
