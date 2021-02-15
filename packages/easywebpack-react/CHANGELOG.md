@@ -1,3 +1,11 @@
+## [5.0.1](https://github.com/easy-team/easywebpack-react/compare/4.12.8...5.0.1) (2021-02-15)
+
+
+### Bug Fixes
+
+* react css test and prod mode no extract css ([174fa2c](https://github.com/easy-team/easywebpack-react/commit/174fa2c1092433c14204ceec0fd6ff0bad164804))
+
+
 # [5.0.0](https://github.com/easy-team/easywebpack-react/compare/4.4.3...5.0.0) (2020-10-16)
 
 
