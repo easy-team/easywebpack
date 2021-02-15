@@ -1,0 +1,44 @@
+{
+  "name": "simple-html",
+  "version": "5.0.0",
+  "description": "HTML 静态多页面 Webpack 构建工程化解决方案骨架",
+  "keywords": [
+    "webpack",
+    "webpack-html",
+    "easywebpack",
+    "nunjucks"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.0.0",
+    "cross-env": "^5.0.1",
+    "easywebpack-cli": "^5.0.0",
+    "easywebpack-html": "^5.0.0",
+    "eslint": "^4.18.2",
+    "mocha": "^3.4.2",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6"
+  },
+  "scripts": {
+    "build": "easy build",
+    "start": "easy dev",
+    "lint": "eslint .",
+    "fix": "eslint --fix .",
+    "test": "mocha test",
+    "ci": "npm run lint && npm run cov",
+    "ii": "npm install --registry https://registry.npm.taobao.org"
+  },
+  "ci": {
+    "version": "10, 12, 14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/easy-team/easywebpack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/easy-team/easywebpack/issues"
+  },
+  "homepage": "https://github.com/easy-team/easywebpack#readme",
+  "author": "hubcarl@126.com",
+  "license": "MIT"
+}

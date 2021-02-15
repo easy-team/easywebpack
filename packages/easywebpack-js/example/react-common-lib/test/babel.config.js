@@ -1,11 +1,11 @@
-'use script';
+'use strict';
 module.exports = {
-  'presets': [
+  presets: [
     '@babel/preset-react',
     ['@babel/preset-env', {
-      'modules': false,
+      modules: false,
       // 'debug': true,
-      'useBuiltIns': false
+      useBuiltIns: false
     }]
   ]
-}
+};

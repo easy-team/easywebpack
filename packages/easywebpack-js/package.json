@@ -43,12 +43,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hubcarl/easywebpack-js.git"
+    "url": "git+https://github.com/easy-team/easywebpack.git"
   },
   "bugs": {
-    "url": "https://github.com/hubcarl/easywebpack-js/issues"
+    "url": "https://github.com/easy-team/easywebpack/issues"
   },
-  "homepage": "https://github.com/hubcarl/easywebpack-js#readme",
+  "homepage": "https://github.com/easy-team/easywebpack#readme",
   "author": "hubcarl@126.com",
   "license": "MIT"
 }

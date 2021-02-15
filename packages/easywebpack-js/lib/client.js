@@ -1,7 +1,6 @@
 'use strict';
 const path = require('path');
-const EasyWebpack = require('@easy-team/easywebpack');
-const merge = EasyWebpack.merge;
+const EasyWebpack = require('easywebpack');
 class WebpackClientBuilder extends EasyWebpack.WebpackClientBuilder {
   constructor(config) {
     super(config);

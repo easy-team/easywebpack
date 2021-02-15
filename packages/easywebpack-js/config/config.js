@@ -11,7 +11,6 @@ module.exports = {
   plugins: {
     manifest: false,
     manifestDeps: false,
-    imagemini: false,
     commonsChunk: false
   }
 };

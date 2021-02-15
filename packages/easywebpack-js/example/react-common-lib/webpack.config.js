@@ -5,14 +5,14 @@ const SCRIPT_TAG = process.env.SCRIPT_TAG;
 module.exports = {
   framework: 'js',
   entry: {
-    [`react-mobx-lib-${version}.${SCRIPT_TAG}`] : 'lib/react-mobx.js',
+    [`react-core-lib-${version}.${SCRIPT_TAG}`]: 'lib/react-core.js',
   },
   output: {
-    library: 'ReactMobxLib'
+    library: 'ReactCoreLib'
   },
-  plugins:[
+  plugins: [
     {
       clean: false
     }
   ]
-}
+};

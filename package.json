@@ -11,6 +11,8 @@
     "test:easy": "lerna run test --scope easywebpack",
     "test:vue": "lerna run test --scope easywebpack-vue",
     "test:react": "lerna run test --scope easywebpack-react",
+    "test:html": "lerna run test --scope easywebpack-html",
+    "test:js": "lerna run test --scope easywebpack-js",
     "test:cli": "lerna run test --scope easywebpack-cli",
     "test:server": "lerna run test --scope webpack-tool",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"

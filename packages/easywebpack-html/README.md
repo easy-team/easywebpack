@@ -79,4 +79,4 @@ npm start
 
 - [easywebpack-multiple-html-boilerplate](https://github.com/hubcarl/easywebpack-multiple-html-boilerplate) Multiple static html build boilerplate.
 
-- you can use [easywebpack-cli](https://github.com/hubcarl/easywebpack-cli) create multiple static html build boilerplate.
+- you can use [easywebpack-cli](https://github.com/easy-team/easywebpack) create multiple static html build boilerplate.

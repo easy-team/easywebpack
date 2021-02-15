@@ -1,11 +1,7 @@
 'use strict';
 const expect = require('chai').expect;
-const WebpackTool = require('webpack-tool');
-const webpack = WebpackTool.webpack;
-const merge = WebpackTool.merge;
 const WebpackClientBuilder = require('../lib/client');
 const path = require('path');
-const fs = require('fs');
 
 describe('client.test.js', () => {
   before(() => {
