@@ -9,15 +9,15 @@ class WebpackClientBuilder extends WebpackReactBaseBuilder(EasyWebpack.WebpackCl
       this.setAlias('react-dom', '@hot-loader/react-dom', false)
     }
     this.setBabelrc(babelrc);
-    this.normalizeExtract(config);
+    // this.normalizeExtract(config);
   }
 
-  normalizeExtract(config) {
-    // default ssr dev extract true
-    if (this.egg && !config.target) {
-      this.mergePlugin({ extract: { env: ['dev'] } });
-    }
-  }
+  // normalizeExtract(config) {
+  //   // default ssr dev extract true
+  //   if (this.egg && !config.target) {
+  //     this.mergePlugin({ extract: { env: ['dev'] } });
+  //   }
+  // }
 
   createHotEntry() {
     if (this.hot) {
