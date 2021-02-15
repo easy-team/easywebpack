@@ -32,25 +32,25 @@ module.exports = (baseDir, options ={} )=> {
   ];
   const upgradePackages = {
     'easywebpack-cli': {
-      version: '^4.0.0'
+      version: '^5.0.0'
     },
     'easywebpack-vue': {
-      version: '^4.0.0'
+      version: '^5.0.0'
     },
     'easywebpack-react': {
-      version: '^4.0.0'
+      version: '^5.0.0'
     },
     'easywebpack-html': {
-      version: '^4.0.0'
+      version: '^5.0.0'
     },
     'easywebpack-js': {
-      version: '^4.0.0'
+      version: '^5.0.0'
     },
     'egg-webpack': {
-      version: '^4.0.0'
+      version: '^5.0.0'
     },
     'ts-loader': {
-      version: '^4.0.0'
+      version: '^8.0.0'
     }
   };
 
@@ -114,5 +114,5 @@ module.exports = (baseDir, options ={} )=> {
     fs.unlinkSync(yarnLockFile);
   }
   fs.writeFileSync(pkgFile, JSON.stringify(pkgJSON, null, 2));
-  Logger.getLogger().green('upgrade .babelrc and package.json successfully! Please reinstall the dependencies with npm install or yarn install');
+  Logger.getLogger().green('upgrade babel.config.js and package.json successfully! Please reinstall the dependencies with npm install or yarn install');
 }
