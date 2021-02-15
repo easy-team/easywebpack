@@ -1,6 +1,5 @@
 # easywebpack-js
 
-
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
 [![Test coverage][codecov-image]][codecov-url]
@@ -9,12 +8,12 @@
 
 [npm-image]: https://img.shields.io/npm/v/easywebpack-js.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/easywebpack-js
-[travis-image]: https://img.shields.io/travis/hubcarl/easywebpack-js.svg?style=flat-square
-[travis-url]: https://travis-ci.org/hubcarl/easywebpack-js
-[codecov-image]: https://codecov.io/gh/hubcarl/easywebpack-js/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/hubcarl/easywebpack-js
-[david-image]: https://img.shields.io/david/hubcarl/easywebpack-js-js.svg?style=flat-square
-[david-url]: https://david-dm.org/hubcarl/easywebpack-js
+[travis-image]: https://img.shields.io/travis/easy-team/easywebpack-js.svg?style=flat-square
+[travis-url]: https://travis-ci.org/easy-team/easywebpack-js
+[codecov-image]: https://codecov.io/gh/easy-team/easywebpack-js/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/easy-team/easywebpack-js
+[david-image]: https://img.shields.io/david/easy-team/easywebpack-js-js.svg?style=flat-square
+[david-url]: https://david-dm.org/easy-team/easywebpack-js
 [snyk-image]: https://snyk.io/test/npm/easywebpack-js/badge.svg?style=flat-square
 [snyk-url]: https://snyk.io/test/npm/easywebpack-js
 [download-image]: https://img.shields.io/npm/dm/easywebpack-js.svg?style=flat-square
@@ -23,6 +22,10 @@
 Buiding JavaScript Lib for Webpack
 
 ## Install
+
+- Webpack 5
+
+$ npm i easywebpack-js --save-dev                 // babel 7
 
 - Webpack 4
 
@@ -175,14 +178,13 @@ module.exports = {
 
 ## Example
 
- - [react-common-lib](/example/react-common-lib) React common lib and example 
+- [react-common-lib](/packages/easywebpack-js/example/react-common-lib) React common lib and example 
 
-    ![](/doc/images/react-lib.png)
+![](/packages/easywebpack-js/doc/images/react-lib.png)
 
- - [vue-common-lib](/example/vue-common-lib) Vue common lib and example
+- [vue-common-lib](/packages/easywebpack-js/example/vue-common-lib) Vue common lib and example
 
-    ![](/doc/images/vue-lib.png)
-
+![](/packages/easywebpack-js/doc/images/vue-lib.png)
 
 ## License
 

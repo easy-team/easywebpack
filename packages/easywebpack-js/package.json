@@ -1,5 +1,5 @@
 {
-  "name": "@easy-team/easywebpack-js",
+  "name": "easywebpack-js",
   "version": "5.0.0",
   "description": "Webpack Javascript Lib Building for easywebpack",
   "keywords": [
@@ -22,7 +22,7 @@
     "nyc": "^11.1.0"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "scripts": {
     "lint": "eslint .",
@@ -39,7 +39,7 @@
     "tool"
   ],
   "ci": {
-    "version": "8, 10, 12, 14"
+    "version": "10, 12, 14"
   },
   "repository": {
     "type": "git",
