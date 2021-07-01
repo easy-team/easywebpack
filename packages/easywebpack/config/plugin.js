@@ -247,7 +247,7 @@ exports.clean = {
 };
 
 exports.cssmini = {
-  enable: true,
+  enable: false,
   env: 'prod',
   type: 'client',
   name: 'optimize-css-assets-webpack-plugin'

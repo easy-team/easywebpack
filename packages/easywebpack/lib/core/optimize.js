@@ -1,6 +1,6 @@
 'use strict';
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 module.exports = class WebpackOptimize {
   constructor(ctx) {
     this.ctx = ctx;
@@ -74,12 +74,14 @@ module.exports = class WebpackOptimize {
   }
 
   normalizeMinimizer(minimizer) {
+    if (minimizer) {
+      this.optimization.minimizer = [new CssMinimizerPlugin()].concat(minimizer);
+    } else {
+      this.optimization.minimizer = [new CssMinimizerPlugin(), createTerserMinimizer()];
+    }
     if (!this.ctx.prod && this.optimization.minimizer) {
       delete this.optimization.minimizer;
-    }
-    if (minimizer) {
-      this.optimization.minimizer = [].concat(minimizer);
-    }
+    } 
     return this.optimization;
   }
 
@@ -96,44 +98,12 @@ module.exports = class WebpackOptimize {
     return null;
   }
 
-  createUglifyJsMinimizer() {
-    const options = this.getMinimizerOptions();
-    if (options) {
-      delete options.terserOptions;
-      return this.createUglifyJsPlguin(options);
-    }
-    return null;
-  }
-
   createTerserMinimizer() {
     const options = this.getMinimizerOptions();
     if (options) {
-      delete options.uglifyOptions;
       return this.createTerserPlugin(options);
     }
-    return null;
-  }
-
-  createUglifyJsPlguin(options) {
-    const opt = this.ctx.merge({
-      cache: true,
-      parallel: 2,
-      sourceMap: !!this.ctx.devtool,
-      uglifyOptions: {
-        ie8: false,
-        safari10: false,
-        warnings: false,
-        compress: {
-          dead_code: true,
-          drop_console: true,
-          drop_debugger: true
-        },
-        output: {
-          comments: false
-        }
-      }
-    }, options);
-    return new UglifyJsPlugin(opt);
+    return new TerserPlugin();
   }
 
   createTerserPlugin(options) {
@@ -159,12 +129,12 @@ module.exports = class WebpackOptimize {
   }
 
   getOptimization() {
-    return this.normalizeMinimizer(this.createUglifyJsMinimizer());
+    return this.normalizeMinimizer(this.createTerserMinimizer());
   }
 
   getDLLOptimization() {
     this.normalizeChunks();
-    return this.normalizeMinimizer(this.createUglifyJsMinimizer());
+    return this.normalizeMinimizer(this.createTerserMinimizer());
   }
 
   getMinChunks() {
@@ -180,7 +150,7 @@ module.exports = class WebpackOptimize {
 
   getWebOptimization() {
     const minChunks = this.getMinChunks();
-    const minimizer = this.createUglifyJsMinimizer();
+    const minimizer = this.createTerserMinimizer();
     const optimization = this.normalizeMinimizer(minimizer);
     return this.ctx.merge({
       runtimeChunk: {
@@ -202,6 +172,6 @@ module.exports = class WebpackOptimize {
 
   getNodeOptimization() {
     this.normalizeChunks();
-    return this.normalizeMinimizer(process.env.BABEL_ENV ? this.createTerserMinimizer() : this.createUglifyJsMinimizer());
+    return this.normalizeMinimizer(this.createTerserMinimizer());
   }
 };
