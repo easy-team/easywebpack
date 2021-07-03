@@ -7,18 +7,25 @@ const os = require('os');
 const spawn = require('cross-spawn');
 const PEERS = /UNMET PEER DEPENDENCY ([a-z\-0-9.]+)@(.+)/gm;
 
-exports.requireModule = (name, modules) => {
+exports.requireModule = (name, modules, resolve = false) => {
   if (typeof name === 'object') {
     return name;
   }
   if (path.isAbsolute(name)) {
-    return require(name);
+    return resolve ? name : require(name);
   }
   const module = modules.find(m => {
     const modulepath = path.join(m, name);
     return fs.existsSync(modulepath);
   });
-  return module ? require(path.join(module, name)) : null;
+  if (module) {
+    const modulepath = path.join(module, name);
+    if (resolve) {
+      return modulepath;
+    }
+    return require(modulepath);
+  }
+  return resolve ? name : null;
 };
 
 exports.isInstalled = (name, modules) => {

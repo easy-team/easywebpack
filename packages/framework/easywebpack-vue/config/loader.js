@@ -2,9 +2,10 @@
 exports.vue = {
   test: /\.vue$/,
   exclude: /node_modules/,
-  use: [
-    { loader: 'vue-loader' }
-  ]
+  use() {
+    const loader = this.resolveModule('vue-loader');
+    return [{ loader }];
+  }
 };
 
 exports.vuehtml = {

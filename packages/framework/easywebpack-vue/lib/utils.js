@@ -27,12 +27,3 @@ exports.isVue3 = baseDir => {
   }
   return false;
 };
-
-exports.getVueLoadPlugin = () => {
-  try {
-    return require('vue-loader/lib/plugin');
-  } catch (e) { // vue3
-    const { VueLoaderPlugin } = require('vue-loader');
-    return VueLoaderPlugin;
-  }
-};

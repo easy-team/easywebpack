@@ -282,6 +282,14 @@ class Config {
     }
   }
 
+  requireModule(name) {
+    return this.utils.requireModule(name, this.modules);
+  }
+
+  resolveModule(name) {
+    return this.utils.requireModule(name, this.modules, true);
+  }
+
   // merge base config, not include loaders and plugins
   mergeBaseConfig(config, override = false) {
     if (override) {
