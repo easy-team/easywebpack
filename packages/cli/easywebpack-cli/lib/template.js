@@ -1,4 +1,4 @@
-
+'use strict';
 const path = require('path');
 const fs = require('fs');
 const inquirer = require('inquirer');
@@ -91,21 +91,6 @@ const allChoices = [
   new inquirer.Separator()
 ];
 
-const initPrompt = async (cli, options, choices) => {
-  const anwser = await inquirer.prompt([{
-    loop: false,
-    type: 'list',
-    name: 'template',
-    default: '',
-    message: 'What choice do you need?',
-    choices
-  }]);
-  const templateItem = componentTemplate.componentAllChoice.find(item => {
-    return item.name === anwser.template;
-  });
-  await downloadTemplate(cli, templateItem, options);
-}
-
 const downloadTemplate = async (cli, templateInfo, options) => {
   const d = new Download(options, cli);
   const pkgName = 'easyjs-awesome-template';
@@ -128,16 +113,31 @@ const downloadTemplate = async (cli, templateInfo, options) => {
       d.green(`create ${d.chalk.yellow(templateInfo.name)} successfully [${d.chalk.yellow(filepath)}]`);
     }
   });
-}
+};
+
+const initPrompt = async (cli, options, choices) => {
+  const anwser = await inquirer.prompt([{
+    loop: false,
+    type: 'list',
+    name: 'template',
+    default: '',
+    message: 'What choice do you need?',
+    choices
+  }]);
+  const templateItem = componentTemplate.componentAllChoice.find(item => {
+    return item.name === anwser.template;
+  });
+  await downloadTemplate(cli, templateItem, options);
+};
 
 module.exports = function initTemplateList(cli, options = {}) {
-  const { template} = options;
+  const { template } = options;
   if (template) {
     const templateItem = allChoices.find(item => {
       return item.name === template;
     });
     if (templateItem) {
-      downloadTemplate(cli, templateItem, options)
+      downloadTemplate(cli, templateItem, options);
     } else {
       const matchChoices = allChoices.filter(item => {
         return item.name && item.name.indexOf(template) > -1;
@@ -149,4 +149,4 @@ module.exports = function initTemplateList(cli, options = {}) {
   } else {
     initPrompt(cli, options, allChoices);
   }
-}
+};

@@ -20,11 +20,11 @@ describe('tool.test.js', () => {
   afterEach(() => {});
 
   describe('#tool test', () => {
-    it('should utils deleteFile test', function* () {
+    it('should utils deleteFile test', function *() {
       const dist = path.join(baseDir, 'dist');
       const target = path.posix.join(dist, 'test/test/test.json');
       yield mkdirp(path.dirname(target));
-      fs.writeFileSync(target, 'clearManifest')
+      fs.writeFileSync(target, 'clearManifest');
       expect(fs.existsSync(target)).to.be.true;
       tool.deleteFile(dist);
       expect(fs.existsSync(target)).to.be.false;

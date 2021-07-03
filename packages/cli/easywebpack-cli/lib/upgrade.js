@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
 const Logger = require('./logger');
-module.exports = (baseDir, options ={} )=> {
+module.exports = (baseDir, options = {}) => {
   const pkgFile = path.join(baseDir, 'package.json');
   const pkgJSON = require(pkgFile);
   const removePackages = [
@@ -59,21 +59,21 @@ module.exports = (baseDir, options ={} )=> {
 
   // remove and update dependencies
   Object.keys(pkgJSON.dependencies).forEach(name => {
-    if(removePackages.indexOf(name) > -1) {
+    if (removePackages.indexOf(name) > -1) {
       delete pkgJSON.dependencies[name];
     }
-    if(upgradePackages[name]) {
-      pkgJSON.dependencies[name] = upgradePackages[name].version ;
+    if (upgradePackages[name]) {
+      pkgJSON.dependencies[name] = upgradePackages[name].version;
     }
   });
 
   // remove and update devDependencies
   Object.keys(pkgJSON.devDependencies).forEach(name => {
-    if(removePackages.indexOf(name) > -1) {
+    if (removePackages.indexOf(name) > -1) {
       delete pkgJSON.devDependencies[name];
     }
-    if(upgradePackages[name]) {
-      pkgJSON.devDependencies[name] = upgradePackages[name].version ;
+    if (upgradePackages[name]) {
+      pkgJSON.devDependencies[name] = upgradePackages[name].version;
     }
   });
 
@@ -85,7 +85,7 @@ module.exports = (baseDir, options ={} )=> {
     pkgJSON.scripts.start = 'egg-scripts start';
     pkgJSON.scripts.clean = 'easy clean';
     pkgJSON.scripts.build = 'easy build';
-    delete pkgJSON.scripts['dll'];
+    delete pkgJSON.scripts.dll;
     delete pkgJSON.scripts['build:dev'];
     delete pkgJSON.scripts['build:test'];
     delete pkgJSON.scripts['build:prod'];
@@ -95,7 +95,7 @@ module.exports = (baseDir, options ={} )=> {
     // remove ${root}/index.js
     const indexFile = path.join(baseDir, 'index.js');
     /* istanbul ignore next */
-    if(fs.existsSync(indexFile)) {
+    if (fs.existsSync(indexFile)) {
       fs.unlinkSync(indexFile);
     }
   }
@@ -103,16 +103,16 @@ module.exports = (baseDir, options ={} )=> {
   // remove npm lock file
   const packageLockFile = path.join(baseDir, 'package-lock.json');
   /* istanbul ignore next */
-  if(fs.existsSync(packageLockFile)) {
+  if (fs.existsSync(packageLockFile)) {
     fs.unlinkSync(packageLockFile);
   }
 
   // remove yarn lock file
   const yarnLockFile = path.join(baseDir, 'yarn.lock');
   /* istanbul ignore next */
-  if(fs.existsSync(yarnLockFile)) {
+  if (fs.existsSync(yarnLockFile)) {
     fs.unlinkSync(yarnLockFile);
   }
   fs.writeFileSync(pkgFile, JSON.stringify(pkgJSON, null, 2));
   Logger.getLogger().green('upgrade .babelrc and package.json successfully! Please reinstall the dependencies with npm install or yarn install');
-}
+};

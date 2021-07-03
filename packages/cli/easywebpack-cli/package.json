@@ -17,6 +17,7 @@
     "ii": "npm install --registry https://registry.npm.taobao.org"
   },
   "dependencies": {
+    "art-template": "^4.0.0",
     "archive-tool": "^1.0.0",
     "babel-upgrade": "^1.0.1",
     "chalk": "^4.1.0",

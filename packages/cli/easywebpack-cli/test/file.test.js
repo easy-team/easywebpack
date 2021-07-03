@@ -10,7 +10,7 @@ const expect = require('chai').expect;
 
 describe('file.test.js', () => {
   before(() => {
-   
+
   });
   after(() => {
   });

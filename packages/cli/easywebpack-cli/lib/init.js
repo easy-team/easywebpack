@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const Download = require('./download');
 
 module.exports = class Boilerplate {
-  constructor(config = {}, cli= {}) {
+  constructor(config = {}, cli = {}) {
     this.config = config;
     this.cli = cli;
     this.projectDir = process.cwd();
@@ -41,7 +41,7 @@ module.exports = class Boilerplate {
     this.projectAskChoice = projectAskChoice;
   }
 
-  getProjectAskChoices(ranges){
+  getProjectAskChoices(ranges) {
     if (ranges === undefined) {
       return this.projectAskChoice;
     }
@@ -70,7 +70,7 @@ module.exports = class Boilerplate {
         message: 'please choose the boilerplate project mode?',
         choices: this.boilerplateDetailChoice[boilerplateName]
       }];
-      const boilerplateDetailAnswer = await inquirer.prompt(boilerplateDetailAsk)
+      const boilerplateDetailAnswer = await inquirer.prompt(boilerplateDetailAsk);
       const project = boilerplateDetailAnswer.project;
       const bilerplateInfo = this.getBoilerplateDetailInfo(boilerplateName, project);
       const projectInfoChoice = this.getProjectAskChoices(bilerplateInfo.choices || choices);
@@ -83,5 +83,5 @@ module.exports = class Boilerplate {
       const specialBoilerplateInfo = { pkgName, run: boilerplateInfo.run };
       await download.init(this.projectDir, specialBoilerplateInfo, projectInfoAnswer);
     }
-  };
+  }
 };

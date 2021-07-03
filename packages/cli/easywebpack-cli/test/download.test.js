@@ -31,7 +31,7 @@ describe('download.test.js', () => {
     });
 
     it('should init egg-react-webpack-boilerplate test', async () => {
-      await download.init(projectDir, { pkgName : 'egg-react-webpack-boilerplate'} );
+      await download.init(projectDir, { pkgName: 'egg-react-webpack-boilerplate' });
     });
   });
 

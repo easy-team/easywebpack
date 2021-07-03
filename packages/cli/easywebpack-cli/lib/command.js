@@ -22,15 +22,15 @@ module.exports = class Command extends Logger {
     this.builder = builder;
     this.boilerplate = {};
     this.context = path.resolve(__dirname, '..');
-    this.commands = ['init', 'install', 'dev', 'start', 'build', 'debug', 'test', 
-      'cov', 'print', 'add', 'server', 'dll', 'zip', 'tar', 'deploy', 'clean', 
+    this.commands = ['init', 'install', 'dev', 'start', 'build', 'debug', 'test',
+      'cov', 'print', 'add', 'server', 'dll', 'zip', 'tar', 'deploy', 'clean',
       'open', 'doc', 'kill', 'upgrade', 'puppeteer'];
 
     this.cli = new Proxy(EASY_CLI, {
-      get: function (target, key, receiver) {
+      get(target, key, receiver) {
         return Reflect.get(target, key, receiver);
       },
-      set: function (target, key, value, receiver) {
+      set(target, key, value, receiver) {
         global.EASY_CLI[key] = value;
         return Reflect.set(target, key, value, receiver);
       }
@@ -305,14 +305,15 @@ module.exports = class Command extends Logger {
   }
 
   register(cmd) {
-    if (this.commands.some(key => { key === cmd })) {
+    const c = this.commands.some(key => key === cmd);
+    if (c) {
       this.red(`The command ${cmd} already exists. Please overwrite the command action method implement directly.`);
     } else {
       this.commands.push(cmd);
     }
   }
 
-  command(commands=[]) {
+  command(commands = []) {
     commands.forEach(cmd => {
       this.register(cmd);
     });
@@ -335,4 +336,4 @@ module.exports = class Command extends Logger {
     this.command();
     this.parse();
   }
-}
+};

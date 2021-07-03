@@ -4,4 +4,3 @@
 
 const Command = require('../lib/command');
 new Command().run();
-

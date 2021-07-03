@@ -1,47 +1,17 @@
 {
-  "extends": "eslint",
-  "env": {
-    "node": true,
-    "es6": true,
-    "mocha": true
-  },
-  "parserOptions": {
-    "ecmaVersion": 6
-  },
+  "extends": "eslint:recommended",
+  "parserOptions": { "ecmaVersion": 8 },
   "rules": {
-    "indent": [
-      "error",
-      2,
-      { "SwitchCase": 1 }
-    ],
-    "no-underscore-dangle": "off",
-    "consistent-return": "off",
-    "no-cond-assign": "off",
-    "lines-around-comment": "off",
-    "arrow-body-style": "off",
-    "no-confusing-arrow": "off",
-    "class-methods-use-this": "off",
-    "newline-after-var": "off",
-    "no-invalid-this": "off",
-    "no-nested-ternary": "off",
+    "default-param-last": "off",
+    "require-unicode-regexp": "off",
+    "prefer-regex-literals": "off",
+    "jsdoc/implements-on-classes": "off",
+    "padding-line-between-statements": "off",
+    "no-param-reassign": "off",
     "no-unused-vars": "off",
-    "eol-last": "off",
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "guard-for-in": "off",
-    "no-console": "off",
-    "no-undefined": "off",
-    "array-bracket-spacing": "off",
-    "no-unused-expressions": "off",
-    "func-style": [
-      "error",
-      "expression"
-    ],
-    "comma-dangle": [
-      "error",
-      "never"
-    ]
+    "no-prototype-builtins": "off",
+    "camelcase":"off",
+    "func-style": "off",
+    "jsdoc/require-jsdoc": "off"
   }
 }

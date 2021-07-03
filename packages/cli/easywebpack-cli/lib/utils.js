@@ -99,36 +99,36 @@ module.exports = {
     const config = merge(option, {
       target: option.target || this.getCompileTempDir(baseDir)
     });
-    if(this.isString(option.filename)) {
+    if (this.isString(option.filename)) {
       config.filename = option.filename;
-    } else if(option.parent && this.isString(option.parent.filename)) {
+    } else if (option.parent && this.isString(option.parent.filename)) {
       config.filename = option.parent.filename;
     }
-    if(option.source) {
+    if (option.source) {
       config.source = option.source;
     }
-    if(option.deps || option.mode || option.registry) {
+    if (option.deps || option.mode || option.registry) {
       config.installDeps = {};
-      if(option.mode) {
+      if (option.mode) {
         config.installDeps.mode = option.mode;
       }
-      if(option.registry) {
+      if (option.registry) {
         config.installDeps.registry = option.registry;
       }
     }
-    if(option.alinode) {
+    if (option.alinode) {
       let installAlinode = { installAlinode: true };
       if (this.isString(option.alinode) && /\.\d/.test(option.alinode)) {
         installAlinode.version = option.alinode;
-      } else if (this.isObject(option.alinode)){
+      } else if (this.isObject(option.alinode)) {
         installAlinode = merge(installAlinode, option.alinode);
       }
       config.installNode = installAlinode;
-    } else if(option.nodejs) {
+    } else if (option.nodejs) {
       let installNode = { installNode: true };
       if (this.isString(option.nodejs) && /\.\d/.test(option.nodejs)) {
         installNode.version = option.nodejs;
-      } else if (this.isObject(option.nodejs)){
+      } else if (this.isObject(option.nodejs)) {
         installNode = merge(installNode, option.nodejs);
       }
       config.installNode = installNode;
@@ -154,6 +154,7 @@ module.exports = {
 
   initWebpackConfig(program, option = {}, cliConfig = {}) {
     const { baseDir = process.cwd(), env, configured = true } = option;
+    // eslint-disable-next-line no-shadow
     const { filename, port, framework, type, devtool, size, watch, build, hash, compress, dll, web, node, webpack } = program;
     const target = web ? 'web' : (node ? 'node' : undefined);
     const cli = merge({ env, filename, port, size, dll, web, node, webpack, devtool }, cliConfig);
@@ -166,7 +167,7 @@ module.exports = {
     };
     cfg.config.baseDir = baseDir;
     cfg.config.plugins = cfg.config.plugins || {};
-    
+
     if (cfg.config.port) {
       cfg.config.debugPort = cfg.config.debugPort || cfg.config.port - 1;
     }
@@ -221,7 +222,7 @@ module.exports = {
 
   clearManifest(baseDir) {
     const manifestDir = path.join(baseDir, 'config');
-    const manifestFile = path.join(manifestDir, 'manifest.json')
+    const manifestFile = path.join(manifestDir, 'manifest.json');
     tool.rm(manifestFile);
   },
 

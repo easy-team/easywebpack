@@ -1,3 +1,4 @@
+'use strict';
 const chalk = require('chalk');
 const { EASY_CLI } = require('./constant');
 class Logger {
