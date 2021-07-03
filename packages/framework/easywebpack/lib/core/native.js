@@ -1,7 +1,7 @@
 'use strict';
 const path = require('path');
 const baseDir = process.cwd();
-module.exports = {
+const webpackConfig = {
   context: baseDir,
   entry: {},
   output: {},
@@ -12,7 +12,6 @@ module.exports = {
   resolveLoader: {
     modules: [
       path.join(baseDir, 'node_modules'),
-      path.join(__dirname, '../node_modules')
     ]
   },
   stats: {
@@ -24,3 +23,10 @@ module.exports = {
     entrypoints: false
   }
 };
+
+const currentModulePath = path.join(__dirname, '../../node_modules');
+if (!webpackConfig.resolveLoader.modules.some(m => m === currentModulePath )) {
+  webpackConfig.resolveLoader.modules.push(currentModulePath);
+}
+
+module.exports = webpackConfig;
