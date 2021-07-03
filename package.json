@@ -8,7 +8,9 @@
     "eslint-config-eslint": "^7.0.0"
   },
   "workspaces": [
-    "packages/*"
+    "packages/framework/*",
+    "packages/plugin/*",
+    "packages/cli/*"
   ],
   "scripts": {
     "boot": "lerna workspace",
