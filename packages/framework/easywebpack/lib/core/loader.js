@@ -10,7 +10,10 @@ module.exports = {
   },
 
   getLoaderIndex(loaders, name) {
-    return loaders.findIndex(loader => name === (this.utils.isObject(loader) ? loader.loader : loader));
+    return loaders.findIndex(loader => {
+      const loaderName = this.utils.isObject(loader) ? loader.loader : loader;
+      return loaderName.endsWith(name);
+    });
   },
 
   getConfigLoader(config) {

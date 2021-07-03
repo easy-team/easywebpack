@@ -7,12 +7,6 @@ const merge = easywebpack.merge;
 const WebpackClientBuilder = require('../lib/client');
 
 // http://chaijs.com/api/bdd/
-function createBaseBuilder(config) {
-  const builder = new WebpackClientBuilder(config);
-  builder.setBuildPath(path.join(__dirname, 'dist/client'));
-  builder.setPublicPath('/public');
-  return builder;
-}
 function createBuilder(config) {
   const builder = new WebpackClientBuilder(merge({
     entry: {
@@ -31,7 +25,7 @@ function getLoaderByName(name, rules) {
   const loaderName = `${name}-loader`;
   return rules.find(rule => {
     return rule.use.some(loader => {
-      return loaderName === loader || (typeof loader === 'object' && loader.loader === loaderName);
+      return loaderName === loader || (typeof loader === 'object' && loader.loader.endsWith(loaderName));
     });
   });
 }
@@ -62,8 +56,29 @@ describe('client.test.js', () => {
       const rules = webpackConfig.module.rules;
       const vueLoader = getLoaderByName('vue', rules);
       const vuehtml = getLoaderByName('vue-html', rules);
-      expect(vueLoader.use[0].loader).to.equal('vue-loader');
+      expect(vueLoader.use[0].loader.endsWith('vue-loader')).to.be.true;
       expect(vuehtml.use[0].loader).to.equal('vue-html-loader');
+    });
+
+    it('should vue loader options test', () => {
+      const builder = createBuilder({
+        module: {
+          rules:[
+            {
+              vue: {
+                a: 1,
+                b: 2
+              }
+            }
+          ]
+        }
+      });
+      const webpackConfig = builder.create();
+      const rules = webpackConfig.module.rules;
+      const vueLoader = getLoaderByName('vue', rules);
+      expect(vueLoader.use[0].loader.endsWith('vue-loader')).to.be.true;
+      expect(vueLoader.use[0].options.a).to.equal(1);
+      expect(vueLoader.use[0].options.b).to.equal(2);
     });
 
     it('should egg test', () => {

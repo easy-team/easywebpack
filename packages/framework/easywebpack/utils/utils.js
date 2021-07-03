@@ -320,7 +320,7 @@ utils.getLoaderLabel = (loader, ctx) => {
       loaderName = Object.keys(loader)[0];
     }
   }
-  return utils.isString(loaderName) && loaderName.replace(/-loader$/, '');
+  return utils.isString(loaderName) && path.basename(loaderName.replace(/-loader$/, ''));
 };
 
 utils.loadNodeModules = isCache => {
