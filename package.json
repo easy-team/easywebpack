@@ -2,11 +2,14 @@
   "name": "easywebpack",
   "version": "5.0.0",
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "lerna": "^3.22.1",
+    "eslint": "^7.30.0",
+    "eslint-config-eslint": "^7.0.0"
   },
   "scripts": {
     "boot": "lerna bootstrap",
     "clean": "lerna clean",
+    "eslint": "lerna run lint",
     "test": "lerna run test",
     "test:easy": "lerna run test --scope easywebpack",
     "test:vue": "lerna run test --scope easywebpack-vue",

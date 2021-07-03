@@ -1,6 +1,8 @@
 'use strict';
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { getVueLoadPlugin } = require('../lib/utils');
+const VueLoaderPlugin = getVueLoadPlugin();
 const VueSSRDynamicChunkPlugin = require('./plugin/vue-ssr-dynamic-chunk-webpack-plugin');
+
 exports.vuessrchunk = {
   type: ['server'],
   name: new VueSSRDynamicChunkPlugin(),

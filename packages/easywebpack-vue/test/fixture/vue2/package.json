@@ -1,0 +1,8 @@
+{
+  "name": "vue-test",
+  "version": "1.0.0",
+  "devDependencies": {
+    "vue": "^2.6.10",
+    "vue-loader": "^15.0.0"
+  }
+}
