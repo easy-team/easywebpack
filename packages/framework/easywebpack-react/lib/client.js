@@ -2,11 +2,12 @@
 const EasyWebpack = require('easywebpack');
 const WebpackReactBaseBuilder = require('./base');
 const babelrc = require('../config/babel.web');
+// eslint-disable-next-line new-cap
 class WebpackClientBuilder extends WebpackReactBaseBuilder(EasyWebpack.WebpackClientBuilder) {
   constructor(config = {}) {
     super(config);
     if (this.dev) {
-      this.setAlias('react-dom', '@hot-loader/react-dom', false)
+      this.setAlias('react-dom', '@hot-loader/react-dom', false);
     }
     this.setBabelrc(babelrc);
     this.normalizeExtract(config);
@@ -22,7 +23,7 @@ class WebpackClientBuilder extends WebpackReactBaseBuilder(EasyWebpack.WebpackCl
   createHotEntry() {
     if (this.hot) {
       super.createHotEntry();
-      Object.keys(this.webpackConfig.entry).forEach(name => {        
+      Object.keys(this.webpackConfig.entry).forEach(name => {
         this.webpackConfig.entry[name] = ['react-hot-loader/patch'].concat(this.webpackConfig.entry[name]);
       });
     }

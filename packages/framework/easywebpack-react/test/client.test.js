@@ -6,18 +6,10 @@ const webpack = easywebpack.webpack;
 const merge = easywebpack.merge;
 const WebpackClientBuilder = require('../lib/client');
 
-// http://chaijs.com/api/bdd/
-function createBaseBuilder(config) {
-  const builder = new WebpackClientBuilder(config);
-  builder.setBuildPath(path.join(__dirname, 'dist/client'));
-  builder.setPublicPath('/public');
-  return builder;
-}
-
 function createBuilder(config) {
   const builder = new WebpackClientBuilder(merge({
     entry: {
-      'client.test' : path.join(__dirname, 'test/client.test.js')
+      'client.test': path.join(__dirname, 'test/client.test.js')
     }
   }, config));
   if (config && config.type) {
@@ -66,16 +58,16 @@ describe('client.test.js', () => {
   it('should default react .jsx extensions test', () => {
     const builder = createBuilder();
     const webpackConfig = builder.create();
-    expect(webpackConfig.resolve.extensions).to.have.members(['.js','.jsx']);
+    expect(webpackConfig.resolve.extensions).to.have.members(['.js', '.jsx']);
   });
 
   describe('#webpack hook test', () => {
     it('should create test', () => {
       const builder = createBuilder({
-        create(){
+        create() {
           this.addEntry('config', path.join(__dirname, '../config/config.js'));
         },
-        onClient(){
+        onClient() {
           this.addEntry('configplugin', path.join(__dirname, '../config/plugin.js'));
         }
       });
@@ -105,27 +97,27 @@ describe('client.test.js', () => {
   describe('#webpack publicPath test', () => {
     const cdnUrl = 'http://easywebpack.cn';
     it('should dev cdn config test', () => {
-      const builder = createBuilder({ debug: true, env: 'dev', cdn: { url: cdnUrl} });
+      const builder = createBuilder({ debug: true, env: 'dev', cdn: { url: cdnUrl } });
       const webpackConfig = builder.create();
       expect(webpackConfig.output.publicPath).to.equal('/public/');
     });
     it('should test cdn dynamicDir config test', () => {
-      const builder = createBuilder({ debug: true, env: 'test', cdn: { url: cdnUrl, dynamicDir: 'cdn'} });
+      const builder = createBuilder({ debug: true, env: 'test', cdn: { url: cdnUrl, dynamicDir: 'cdn' } });
       const webpackConfig = builder.create();
-      expect(webpackConfig.output.publicPath).to.equal(cdnUrl + '/cdn/public/');
+      expect(webpackConfig.output.publicPath).to.equal(`${cdnUrl}/cdn/public/`);
     });
     it('should test cdn config test', () => {
-      const builder = createBuilder({ debug: true, env: 'test', cdn: { url: cdnUrl} });
+      const builder = createBuilder({ debug: true, env: 'test', cdn: { url: cdnUrl } });
       const webpackConfig = builder.create();
-      expect(webpackConfig.output.publicPath).to.equal(cdnUrl + '/public/');
+      expect(webpackConfig.output.publicPath).to.equal(`${cdnUrl}/public/`);
     });
 
     it('should dev publicPath abspath config test', () => {
       const builder = createBuilder({ debug: true, env: 'dev', publicPath: cdnUrl });
       const webpackConfig = builder.create();
-      expect(webpackConfig.output.publicPath).to.equal(cdnUrl + '/');
+      expect(webpackConfig.output.publicPath).to.equal(`${cdnUrl}/`);
     });
-    
+
     it('should dev publicPath config test', () => {
       const builder = createBuilder({ debug: true, env: 'dev', publicPath: '/static' });
       const webpackConfig = builder.create();
@@ -161,7 +153,7 @@ describe('client.test.js', () => {
 
     it('should typescript enable test', () => {
       const builder = createBuilder({
-        loaders:{
+        loaders: {
           typescript: true
         }
       });
@@ -173,9 +165,9 @@ describe('client.test.js', () => {
     it('should typescript config test', () => {
       const configFile = path.resolve(__dirname, './app/web/tsconfig.json');
       const builder = createBuilder({
-        loaders:{
+        loaders: {
           typescript: {
-            options:{
+            options: {
               configFile
             }
           }
@@ -190,7 +182,7 @@ describe('client.test.js', () => {
 
     it('should tslint enable test', () => {
       const builder = createBuilder({
-        loaders:{
+        loaders: {
           tslint: true
         }
       });
@@ -202,14 +194,14 @@ describe('client.test.js', () => {
 
   describe('#native webpack test', () => {
     it('should default getWebpackConfig client test', () => {
-      const easywebpack = require('../');
-      const webpackConfig = easywebpack.getWebpackConfig({ target: 'web' });
+      const easy = require('../');
+      const webpackConfig = easy.getWebpackConfig({ target: 'web' });
       expect(webpackConfig.target).to.equal('web');
     });
 
     it('should default getWebpackConfig server test', () => {
-      const easywebpack = require('../');
-      const webpackConfig = easywebpack.getWebpackConfig({ target: 'node' });
+      const easy = require('../');
+      const webpackConfig = easy.getWebpackConfig({ target: 'node' });
       expect(webpackConfig.target).to.equal('node');
     });
   });

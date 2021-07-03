@@ -2,6 +2,7 @@
 const EasyWebpack = require('easywebpack');
 const WebpackBaseBuilder = require('./base');
 const babelrc = require('../config/babel.node');
+// eslint-disable-next-line new-cap
 class WebpackServerBuilder extends WebpackBaseBuilder(EasyWebpack.WebpackServerBuilder) {
   constructor(config) {
     super(config);

@@ -15,7 +15,8 @@ exports.getPkgVersion = (baseDir, pkgName) => {
     if (fs.existsSync(pkgFilePath)) {
       return require(pkgFilePath).version;
     }
-  } catch (e) { }
+  // eslint-disable-next-line no-empty
+  } catch (e) {}
   return null;
 };
 
@@ -29,9 +30,9 @@ exports.isVue3 = baseDir => {
 
 exports.getVueLoadPlugin = () => {
   try {
-    return require(`vue-loader/lib/plugin`);
+    return require('vue-loader/lib/plugin');
   } catch (e) { // vue3
-    const { VueLoaderPlugin } = require(`vue-loader`);
+    const { VueLoaderPlugin } = require('vue-loader');
     return VueLoaderPlugin;
   }
 };

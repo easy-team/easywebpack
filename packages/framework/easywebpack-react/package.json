@@ -13,6 +13,7 @@
     "babel-plugin-import": "^1.12.0",
     "easywebpack": "^5.0.0",
     "eslint-plugin-react": "^7.1.0",
+    "mkdirp": "^1.0.0",
     "isomorphic-style-loader": "^5.0.0",
     "react-entry-template-loader": "^1.0.0",
     "react-hot-loader": "^4.3.5"

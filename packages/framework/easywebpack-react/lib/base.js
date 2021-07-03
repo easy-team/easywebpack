@@ -50,9 +50,9 @@ const WebpackReactBaseBuilder = WebpackBuilder => class extends WebpackBuilder {
             } else if (this.utils.isBoolean(cssModule)) {
               itemLoader.enable = false;
             }
-          } else { 
+          } else {
             // not fix: https://github.com/webpack-contrib/mini-css-extract-plugin/issues/126
-            // /\.module\.scss/ 模式 
+            // /\.module\.scss/ 模式
             const test = cssModuleLoader.test;
             const testStr = test instanceof RegExp ? test.toString() : test;
             //  /\.scss/ to /\.module\.scss/

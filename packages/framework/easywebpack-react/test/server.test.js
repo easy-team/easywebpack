@@ -13,7 +13,7 @@ function createBuilder(config) {
     buildPath: 'dist/client',
     publicPath: '/public',
     entry: {
-      'client.test' : path.join(__dirname, 'test/client.test.js')
+      'client.test': path.join(__dirname, 'test/client.test.js')
     }
   }, config));
   if (config && config.type) {
@@ -49,14 +49,14 @@ describe('server.test.js', () => {
 
   afterEach(() => {
   });
-  
+
   describe('#webpack hook test', () => {
     it('should create test', () => {
       const builder = createBuilder({
-        create(){
+        create() {
           this.addEntry('config', path.join(__dirname, '../config/config.js'));
         },
-        onServer(){
+        onServer() {
           this.addEntry('plugin', path.join(__dirname, '../utils/plugin.js'));
         }
       });
@@ -75,7 +75,7 @@ describe('server.test.js', () => {
 
     it('should externals not use default config test', () => {
       const builder = createBuilder({
-        nodeExternals : {
+        nodeExternals: {
           useDefault: false
         }
       });
