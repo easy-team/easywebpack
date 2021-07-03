@@ -14,7 +14,6 @@ exports.requireModule = (name, modules) => {
   if (path.isAbsolute(name)) {
     return require(name);
   }
-
   const module = modules.find(m => {
     const modulepath = path.join(m, name);
     return fs.existsSync(modulepath);

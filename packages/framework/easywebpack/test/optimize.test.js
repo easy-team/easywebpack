@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const helper = require('./helper');
 // http://chaijs.com/api/bdd/
 
-describe('optimize.test.js', () => {
+describe('test/optimize.test.js', () => {
   before(() => {
   });
 
@@ -50,7 +50,7 @@ describe('optimize.test.js', () => {
         }
       });
       const webpackConfig = builder.create();
-      expect(webpackConfig.optimization.minimizer[0].constructor.name).to.equal('UglifyJsPlugin');
+      expect(webpackConfig.optimization.minimizer[0].constructor.name).to.equal('CssMinimizerPlugin');
     });
   });
 });

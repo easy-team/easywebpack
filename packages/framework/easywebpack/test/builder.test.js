@@ -15,7 +15,7 @@ function getPluginByLabel(label, plugins) {
   });
 }
 
-describe('builder.test.js', () => {
+describe('test/builder.test.js', () => {
   before(() => {
   });
 

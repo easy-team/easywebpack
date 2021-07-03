@@ -92,7 +92,12 @@ module.exports = class WebpackOptimize {
         return {};
       }
       if (this.ctx.utils.isObject(uglifyJs)) {
-        return uglifyJs.args || uglifyJs;
+        const options = uglifyJs.args || uglifyJs;
+        if (options && options.uglifyOptions) {
+          options.terserOptions = options.uglifyOptions;
+          delete options.uglifyOptions;
+          return options;
+        }
       }
     }
     return null;
@@ -108,13 +113,11 @@ module.exports = class WebpackOptimize {
 
   createTerserPlugin(options) {
     const opt = this.ctx.merge({
-      cache: true,
       parallel: 2,
-      sourceMap: !!this.ctx.devtool,
       terserOptions: {
+        sourceMap: !!this.ctx.devtool,
         ie8: false,
         safari10: false,
-        warnings: false,
         compress: {
           dead_code: true,
           drop_console: true,

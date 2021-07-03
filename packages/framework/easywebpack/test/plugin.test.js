@@ -21,7 +21,7 @@ const createBuilder = config => {
   return builder;
 };
 
-describe('plugin.test.js', () => {
+describe('test/plugin.test.js', () => {
   before(() => {});
 
   after(() => {});
@@ -94,7 +94,7 @@ describe('plugin.test.js', () => {
       const plugins = webpackConfig1.plugins;
 
       expect(!!helper.getPluginByLabel('hot', plugins)).to.be.false;
-      expect(!!helper.getPluginByLabel('cssmini', plugins)).to.be.true;
+      expect(!!helper.getPluginByLabel('cssmini', plugins)).to.be.false;
       expect(!!helper.getPluginByLabel('imagemini', plugins)).to.be.false;
       expect(!!helper.getPluginByLabel('ignore', plugins)).to.be.false;
       expect(!!helper.getPluginByLabel('modulereplacement', plugins)).to.be.false;

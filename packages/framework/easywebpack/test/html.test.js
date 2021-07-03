@@ -21,7 +21,7 @@ function getAllPluginByLabel(label, plugins) {
   });
 }
 
-describe('html.test.js', () => {
+describe('test/html.test.js', () => {
   before(() => {
   });
 
@@ -46,7 +46,7 @@ describe('html.test.js', () => {
       const webpackConfig = builder.create();
       const htmlPlugins = helper.getPluginByLabel('html-webpack-plugin', webpackConfig.plugins);
       expect(webpackConfig.entry).to.include.keys(['client']);
-      expect(htmlPlugins.options.template).to.equal(template);
+      expect(htmlPlugins.userOptions.template).to.equal(template);
     });
 
     it('should entry string and html template test', () => {
@@ -58,7 +58,7 @@ describe('html.test.js', () => {
       const webpackConfig = builder.create();
       const htmlPlugins = helper.getPluginByLabel('html-webpack-plugin', webpackConfig.plugins);
       expect(webpackConfig.entry).to.include.keys(['client.test']);
-      expect(htmlPlugins.options.template).to.equal(template);
+      expect(htmlPlugins.userOptions.template).to.equal(template);
     });
 
     it('should entry dir html template test', () => {
@@ -71,7 +71,7 @@ describe('html.test.js', () => {
       const htmlPlugins = helper.getPluginByLabel('html-webpack-plugin', webpackConfig.plugins);
       expect(webpackConfig.entry).to.include.keys(['base.test', 'client.test']);
       expect(Object.keys(webpackConfig.entry).length).to.equal(getAllPluginByLabel('html-webpack-plugin',webpackConfig.plugins).length);
-      expect(htmlPlugins.options.template).to.equal(template);
+      expect(htmlPlugins.userOptions.template).to.equal(template);
     });
   });
 });
