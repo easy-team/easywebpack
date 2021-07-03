@@ -40,7 +40,7 @@ describe('client.test.js', () => {
       const webpackConfig = builder.create();
       expect(webpackConfig.entry).to.have.keys(['index']);
       expect(webpackConfig.mode).to.equal('production');
-      expect(JSON.stringify(webpackConfig.optimization)).to.equal('{}');
+      expect(webpackConfig.optimization.minimizer.length).to.equal(2);
     });
   });
 });

@@ -80,7 +80,8 @@ describe('client.test.js', () => {
     it('should dev hot test', () => {
       const builder = createBuilder({ env: 'dev', log: true });
       const webpackConfig = builder.create();
-      expect(webpackConfig.entry['client.test'].length).to.equal(4);
+      console.log(webpackConfig.entry);
+      expect(webpackConfig.entry['client.test'].length).to.equal(3);
     });
     it('should html test', () => {
       const builder = createBuilder({
