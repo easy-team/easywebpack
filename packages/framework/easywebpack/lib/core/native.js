@@ -11,7 +11,7 @@ const webpackConfig = {
   externals: [],
   resolveLoader: {
     modules: [
-      path.join(baseDir, 'node_modules'),
+      path.join(baseDir, 'node_modules')
     ]
   },
   stats: {
@@ -27,14 +27,14 @@ const webpackConfig = {
 // yarn workspace / lerna
 if (process.env.INIT_CWD) {
   const initCwdModulePath = path.join(process.env.INIT_CWD, 'node_modules');
-  if (!webpackConfig.resolveLoader.modules.some(m => m === initCwdModulePath )) {
+  if (!webpackConfig.resolveLoader.modules.some(m => m === initCwdModulePath)) {
     webpackConfig.resolveLoader.modules.push(initCwdModulePath);
   }
 }
 
 // current pkg module
 const currentModulePath = path.join(__dirname, '../../node_modules');
-if (!webpackConfig.resolveLoader.modules.some(m => m === currentModulePath )) {
+if (!webpackConfig.resolveLoader.modules.some(m => m === currentModulePath)) {
   webpackConfig.resolveLoader.modules.push(currentModulePath);
 }
 

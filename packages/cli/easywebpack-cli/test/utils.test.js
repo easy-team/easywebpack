@@ -74,7 +74,7 @@ describe('utils.test.js', () => {
       expect(option.proxy).to.be.undefined;
     });
 
-    it('should utils initOption set test', function () {
+    it('should utils initOption set test', () => {
       const program = require('commander');
       program.web = true;
       const option = utils.initOption(program, undefined, {
