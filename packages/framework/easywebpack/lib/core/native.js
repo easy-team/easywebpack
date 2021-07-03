@@ -21,6 +21,6 @@ module.exports = {
     modules: false,
     chunks: false,
     chunkModules: false,
-    entrypoints: false,
+    entrypoints: false
   }
 };

@@ -61,7 +61,7 @@ class Config {
     this.initBabelrc();
     this.initLoader();
   }
-  
+
 
   get egg() {
     if (this._isEgg) {
@@ -237,7 +237,7 @@ class Config {
     this.loaders = this.utils.cloneDeep(require('../../config/loader'));
     this.plugins = this.utils.cloneDeep(require('../../config/plugin'));
     const pkgFile = path.join(this.baseDir, 'package.json');
-    const defaultPkgInfo = { name: 'webpack-project', version: '1.0.0'};
+    const defaultPkgInfo = { name: 'webpack-project', version: '1.0.0' };
     if (fs.existsSync(pkgFile)) {
       this.pkgInfo = Object.assign({}, defaultPkgInfo, require(pkgFile));
       const devDependencies = this.pkgInfo.devDependencies || {};
@@ -389,7 +389,7 @@ class Config {
     return this.isUseConfig(configInfo, isMatchType);
   }
 
-  isUseConfig(configInfo, isMatchType = true ) {
+  isUseConfig(configInfo, isMatchType = true) {
     if (isMatchType) {
       return configInfo && this.isType(configInfo.type) && this.isEnv(configInfo.env) && this.isEnable(configInfo.enable);
     }
@@ -440,7 +440,8 @@ class Config {
   safeMerge(value, newValue) {
     if (this.utils.isObject(value) || Array.isArray(value)) {
       return this.merge(value, newValue);
-    } else if (this.utils.has(newValue)) {
+    }
+    if (this.utils.has(newValue)) {
       return newValue;
     }
     return value;

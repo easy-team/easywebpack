@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
@@ -71,6 +71,7 @@ utils.mixin = (target, source) => {
 };
 
 utils.joinPath = function() {
+  // eslint-disable-next-line prefer-rest-params
   return [].slice.call(arguments, 0).map((arg, index) => {
     let tempArg = arg.replace(/\/$/, '');
     if (index > 0) {
@@ -121,7 +122,7 @@ utils.getCustomEntry = (config, type) => {
       entryArray = Array.isArray(configEntry.include) ? configEntry.include : [configEntry.include];
     } else if (configEntry.loader) {
       entryArray = Object.keys(configEntry).filter(key => {
-        return key !== 'loader'
+        return key !== 'loader';
       }).map(key => {
         return { [key]: configEntry[key] };
       });
@@ -199,6 +200,7 @@ utils.createEntry = (config, entryLoader, entryConfig, isParseUrl) => {
     let targetFile = entryConfig[entryName];
     let useLoader = !!entryLoader;
     if (isParseUrl && utils.isString(targetFile)) {
+      // eslint-disable-next-line node/no-deprecated-api
       const fileInfo = url.parse(targetFile);
       const params = queryString.parse(fileInfo.query);
       useLoader = utils.isTrue(params.loader);
@@ -217,7 +219,7 @@ utils.createEntry = (config, entryLoader, entryConfig, isParseUrl) => {
 
 utils.getDirByRegex = (regex, baseDir) => {
   const strRegex = String(regex).replace(/^\//, '').replace(/\/$/, '').replace(/\\/g, '');
-  const entryDir = strRegex.split('\/').reduce((dir, item) => {
+  const entryDir = strRegex.split('/').reduce((dir, item) => {
     if (/^[A-Za-z0-9]*$/.test(item)) {
       return dir ? `${dir}/${item}` : item;
     }
@@ -237,7 +239,8 @@ utils.walkFile = (dirs, excludeRegex, extMatch = '.js', baseDir) => {
       // console.log('----walkFile', entryDir, filePath);
       if (fs.statSync(filePath).isDirectory()) {
         walk(filePath, include, exclude);
-      } else if (include.length > 0 && utils.isMatch(include, filePath) && !utils.isMatch(exclude, filePath) || include.length === 0 && !utils.isMatch(exclude, filePath)) {
+      } else if (include.length > 0 && utils.isMatch(include, filePath) && !utils.isMatch(exclude, filePath) ||
+        include.length === 0 && !utils.isMatch(exclude, filePath)) {
         if (filePath.endsWith(extMatch)) {
           const entryName = filePath.replace(entryDir, '').replace(/^\//, '').replace(extMatch, '');
           entries[entryName] = filePath;
@@ -425,11 +428,14 @@ utils.getDllManifestPath = (name, env = 'dev') => {
 utils.getDllConfig = dll => {
   if (utils.isString(dll)) {
     return [{ name: 'vendor', lib: [dll] }];
-  } else if (utils.isObject(dll) && dll.name && dll.lib) {
+  }
+  if (utils.isObject(dll) && dll.name && dll.lib) {
     return [dll];
-  } else if (Array.isArray(dll) && dll.length && utils.isString(dll[0])) {
+  }
+  if (Array.isArray(dll) && dll.length && utils.isString(dll[0])) {
     return [{ name: 'vendor', lib: dll }];
-  } else if (Array.isArray(dll) && dll.length && utils.isObject(dll[0]) && dll[0].name) {
+  }
+  if (Array.isArray(dll) && dll.length && utils.isObject(dll[0]) && dll[0].name) {
     return dll;
   }
   return [];
@@ -515,7 +521,7 @@ utils.checkDllUpdate = (config, dll) => {
     const stat = fs.statSync(filepath);
     const lastModifyTime = stat.mtimeMs;
     // 判断 webpack.config.js 修改时间
-    const webpackConfigFileLastModifyTime = dllCacheInfo.webpackConfigFileLastModifyTime
+    const webpackConfigFileLastModifyTime = dllCacheInfo.webpackConfigFileLastModifyTime;
     if (webpackConfigFileLastModifyTime && webpackConfigFileLastModifyTime !== lastModifyTime) {
       utils.saveDllCacheInfo(config, filepath, dllCachePath, dll, lastModifyTime);
       return true;

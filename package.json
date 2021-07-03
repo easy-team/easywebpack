@@ -3,9 +3,9 @@
   "version": "5.0.0",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.22.1",
     "eslint": "^7.30.0",
-    "eslint-config-eslint": "^7.0.0"
+    "eslint-config-eslint": "^7.0.0",
+    "lerna": "^3.22.1"
   },
   "workspaces": [
     "packages/framework/*",
@@ -15,7 +15,11 @@
   "scripts": {
     "boot": "lerna workspace",
     "clean": "lerna clean",
-    "eslint": "lerna run lint",
+    "fix": "lerna run fix",
+    "fix:easy": "lerna run fix --scope easywebpack",
+    "fix:vue": "lerna run fix --scope easywebpack-vue",
+    "fix:react": "lerna run fix --scope easywebpack-react",
+    "fix:js": "lerna run fix --scope easywebpack-js",
     "test": "lerna run test",
     "test:easy": "lerna run test --scope easywebpack",
     "test:vue": "lerna run test --scope easywebpack-vue",

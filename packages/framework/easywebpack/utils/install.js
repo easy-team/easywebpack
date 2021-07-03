@@ -1,11 +1,11 @@
-﻿'use strict';
+'use strict';
 const util = require('util');
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
 const os = require('os');
 const spawn = require('cross-spawn');
-const PEERS = /UNMET PEER DEPENDENCY ([a-z\-0-9\.]+)@(.+)/gm;
+const PEERS = /UNMET PEER DEPENDENCY ([a-z\-0-9.]+)@(.+)/gm;
 
 exports.requireModule = (name, modules) => {
   if (typeof name === 'object') {
@@ -55,6 +55,7 @@ exports.install = (deps, modules, options, type) => {
   const peersDeps = [];
   if (os.platform() === 'regex_test') { // windows not match PEERS
     // RegExps track return a single result each time
+    // eslint-disable-next-line no-cond-assign
     while (matches = PEERS.exec(output.stdout)) {
       const dep = matches[1];
       const version = matches[2];

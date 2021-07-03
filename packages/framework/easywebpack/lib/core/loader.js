@@ -9,7 +9,7 @@ module.exports = {
     return this.utils.getLoaderLabel(loader, this);
   },
 
-  getLoaderIndex (loaders, name) {
+  getLoaderIndex(loaders, name) {
     return loaders.findIndex(loader => name === (this.utils.isObject(loader) ? loader.loader : loader));
   },
 
@@ -264,12 +264,12 @@ module.exports = {
             itemLoader.use[index] = this.utils.merge(itemLoader.use[index], options);
           }
         });
-       
+
         if (this.postcss && itemLoader.postcss) {
           const cssLoaderIndex = this.getLoaderIndex(itemLoader.use, CSS_LOADER);
           const styleLoaderIndex = this.getLoaderIndex(itemLoader.use, STYLE_LOADER);
           const postcssIndex = cssLoaderIndex > -1 ? cssLoaderIndex : styleLoaderIndex;
-          if (postcssIndex > -1 ) {
+          if (postcssIndex > -1) {
             const postcssLoader = this.createPostCssLoader(loaderOptions && loaderOptions.postcss);
             itemLoader.use.splice(postcssIndex + 1, 0, postcssLoader);
           }

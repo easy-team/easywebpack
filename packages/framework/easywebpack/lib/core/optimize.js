@@ -77,11 +77,11 @@ module.exports = class WebpackOptimize {
     if (minimizer) {
       this.optimization.minimizer = [new CssMinimizerPlugin()].concat(minimizer);
     } else {
-      this.optimization.minimizer = [new CssMinimizerPlugin(), createTerserMinimizer()];
+      this.optimization.minimizer = [new CssMinimizerPlugin(), this.createTerserMinimizer()];
     }
     if (!this.ctx.prod && this.optimization.minimizer) {
       delete this.optimization.minimizer;
-    } 
+    }
     return this.optimization;
   }
 
@@ -142,7 +142,7 @@ module.exports = class WebpackOptimize {
     if (this.ctx.utils.isObject(webpackConfig.entry)) {
       const count = Object.keys(webpackConfig.entry).length;
       if (count > 1) {
-        return Math.ceil(count/2);
+        return Math.ceil(count / 2);
       }
     }
     return 1;

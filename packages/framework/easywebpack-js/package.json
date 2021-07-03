@@ -1,5 +1,5 @@
 {
-  "name": "@easy-team/easywebpack-js",
+  "name": "easywebpack-js",
   "version": "5.0.0",
   "description": "Webpack Javascript Lib Building for easywebpack",
   "keywords": [

@@ -35,7 +35,7 @@ module.exports = {
     const count = Object.keys(target).length;
     const clonePlugins = this.utils.cloneDeep(plugins);
     if (Array.isArray(clonePlugins)) {
-      clonePlugins.forEach((plugin,index) => {
+      clonePlugins.forEach((plugin, index) => {
         if (this.isWebpackPlugin(plugin)) {
           plugin.label = plugin.constructor.name + (count + index);
         }
@@ -92,7 +92,7 @@ module.exports = {
 
           // override default env config
           if (configPlugin.env) {
-            const env = Array.isArray(configPlugin.env) ? configPlugin.env : [env] ;
+            const env = Array.isArray(configPlugin.env) ? configPlugin.env : [configPlugin.env];
             target[name].env = env;
           }
 
@@ -100,7 +100,7 @@ module.exports = {
           delete cloneConfigPlugin.enable;
           delete cloneConfigPlugin.args;
           delete cloneConfigPlugin.env;
-          
+
           target[name] = this.merge(target[name], cloneConfigPlugin);
         }
       } else if (this.isWebpackPlugin(configPlugin) || this.isWebpackApplyPlugin(configPlugin) || this.isConfigPlugin(configPlugin)) {
@@ -175,8 +175,7 @@ module.exports = {
             ${chalk.green('npm')}: npm install ${pluginName} --save-dev\r\n
             ${chalk.green('cnpm')}: cnpm install ${pluginName} --save-dev\r\n
             ${chalk.green('tnpm')}: tnpm install ${pluginName} --save-dev\r\n
-            ${chalk.green('yarn')}: yarn install ${pluginName} --save-dev\r\n`
-          ));
+            ${chalk.green('yarn')}: yarn install ${pluginName} --save-dev\r\n`));
           if (configInfo.entry) {
             Clazz = Clazz[configInfo.entry];
           }

@@ -16,7 +16,8 @@ class WebpackServerBuilder extends WebpackBaseBuilder {
     const notUseDefault = this.config.nodeExternals && this.config.nodeExternals.useDefault === false;
     /* istanbul ignore next */
     const defaultNodeExternals = notUseDefault ? { importType: 'commonjs' } : {
-      importType: 'commonjs', allowlist: [moduleName => {
+      importType: 'commonjs',
+      allowlist: [moduleName => {
         const moduleDir = path.join(this.baseDir, 'node_modules', moduleName);
         const pkgFile = path.join(moduleDir, 'package.json');
         let moduleFile = 'index.js';
