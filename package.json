@@ -16,7 +16,7 @@
     "boot": "lerna workspace",
     "clean": "lerna clean",
     "fix": "lerna run fix",
-    "fix:res": "lerna run fix --scope res-cli",
+    "fix:res": "lerna run fix --scope @easy-team/res-cli",
     "fix:ves": "lerna run fix --scope ves-cli",
     "fix:tool": "lerna run fix --scope webpack-tool",
     "fix:cli": "lerna run fix --scope easywebpack-cli",

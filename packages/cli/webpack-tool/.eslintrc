@@ -1,0 +1,17 @@
+{
+  "extends": "eslint:recommended",
+  "parserOptions": { "ecmaVersion": 8 },
+  "rules": {
+    "default-param-last": "off",
+    "require-unicode-regexp": "off",
+    "prefer-regex-literals": "off",
+    "jsdoc/implements-on-classes": "off",
+    "padding-line-between-statements": "off",
+    "no-param-reassign": "off",
+    "no-unused-vars": "off",
+    "no-prototype-builtins": "off",
+    "camelcase":"off",
+    "func-style": "off",
+    "jsdoc/require-jsdoc": "off"
+  }
+}

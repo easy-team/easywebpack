@@ -1,3 +1,5 @@
+'use strict';
+const path = require('path');
 const artTemplate = require('art-template');
 const easyHelper = require('easy-helper');
 const utils = require('./utils');
@@ -12,10 +14,12 @@ class NavigationPage {
   getName() {
     const modules = this.stat.compilation.modules;
     const target = this.compiler.options.target;
+
     if (target === 'node') {
       return 'Server';
     }
     const isWeex = modules.some(m => /weex-vue-loader/.test(m.request));
+
     if (isWeex) {
       return 'Weex';
     }
@@ -27,6 +31,7 @@ class NavigationPage {
       return publicPath.replace(/:\d{2,6}\//, `:${port}/`);
     }
     const ip = utils.getIp(2);
+
     return `http://${ip}:${port}/${publicPath.replace(/^\//, '')}`;
   }
 
@@ -48,7 +53,8 @@ class NavigationPage {
     const port = easyInfo[target].port || this.config.port - 1;
     const publicPath = this.normalizePublicPath(webpackConfig.output.publicPath, port);
     const assets = Object.keys(this.stat.compilation.assets).sort().map(name => {
-      const url = publicPath.replace(/\/$/, '') + '/' + name.replace(/^\//, '');
+      const url = `${publicPath.replace(/\/$/, '')}/${name.replace(/^\//, '')}`;
+
       return {
         name,
         url
@@ -62,15 +68,16 @@ class NavigationPage {
       return !/\.hot-update\.(js|json)$/.test(item.name) && /\.js$/.test(item.name);
     });
     const files = html.length > 0 ? html : js;
+
     return { name, files, html, js };
   }
 
   create() {
     const item = this.resolve();
-    return artTemplate(`${__dirname}/view.html`, {
+
+    return artTemplate(path.join(__dirname, 'view.html'), {
       result: [item]
-    }
-    );
+    });
   }
 }
 

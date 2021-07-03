@@ -1,3 +1,6 @@
+/* eslint-disable node/callback-return */
+/* eslint-disable prefer-spread */
+/* eslint-disable prefer-rest-params */
 'use strict';
 
 const expressMiddleware = require('webpack-dev-middleware').default;
@@ -5,7 +8,7 @@ const expressMiddleware = require('webpack-dev-middleware').default;
 function middleware(doIt, req, res) {
   const { send: originalSend, end: originalEnd } = res;
 
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     res.end = function end() {
       originalEnd.apply(this, arguments);
       resolve(0);
@@ -16,7 +19,7 @@ function middleware(doIt, req, res) {
     };
     doIt(req, res, () => {
       resolve(1);
-    })
+    });
   });
 }
 

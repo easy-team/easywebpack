@@ -1,17 +1,19 @@
-'use strict'
+/* eslint-disable node/callback-return */
+'use strict';
 
-var url = require('url');
+const url = require('url');
 
 function evaluateRewriteRule(parsedUrl, match, rule) {
   if (typeof rule === 'string') {
     return rule;
-  } else if (typeof rule !== 'function') {
+  }
+  if (typeof rule !== 'function') {
     throw new Error('Rewrite rule can only be of type string of function.');
   }
 
   return rule({
-    parsedUrl: parsedUrl,
-    match: match
+    parsedUrl,
+    match
   });
 }
 
@@ -22,18 +24,19 @@ function acceptsHtml(header) {
 function getLogger(options) {
   if (options && options.logger) {
     return options.logger;
-  } else if (options && options.verbose) {
+  }
+  if (options && options.verbose) {
     return console.log.bind(console);
   }
-  return function(){};
+  return function() {};
 }
 
 module.exports = function koaFallbackApiMiddleware(options) {
   options = options || {};
-  var logger = getLogger(options);
+  const logger = getLogger(options);
 
-  return async function (ctx, next) {
-    var headers = ctx.headers,
+  return async function(ctx, next) {
+    const headers = ctx.headers,
       reqUrl = ctx.url,
       method = ctx.method;
 
@@ -71,14 +74,15 @@ module.exports = function koaFallbackApiMiddleware(options) {
       await next();
     }
 
-    var parsedUrl = url.parse(reqUrl);
-    var rewriteTarget;
+    // eslint-disable-next-line node/no-deprecated-api
+    const parsedUrl = url.parse(reqUrl);
+    let rewriteTarget;
 
     options.rewrites = options.rewrites || [];
 
-    for (var i = 0; i < options.rewrites.length; i++) {
-      var rewrite = options.rewrites[i];
-      var match = parsedUrl.pathname.match(rewrite.from);
+    for (let i = 0; i < options.rewrites.length; i++) {
+      const rewrite = options.rewrites[i];
+      const match = parsedUrl.pathname.match(rewrite.from);
       if (match !== null) {
         rewriteTarget = evaluateRewriteRule(parsedUrl, match, rewrite.to);
         logger('Rewriting', method, reqUrl, 'to', rewriteTarget);
@@ -102,5 +106,5 @@ module.exports = function koaFallbackApiMiddleware(options) {
     ctx.url = rewriteTarget;
 
     await next();
-  }
+  };
 };
