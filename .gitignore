@@ -18,3 +18,4 @@ app
 .vscode
 yarn.lock
 *.log
+package.json.lerna_backup

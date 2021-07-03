@@ -1,13 +1,17 @@
 {
   "name": "easywebpack",
   "version": "5.0.0",
+  "private": true,
   "devDependencies": {
     "lerna": "^3.22.1",
     "eslint": "^7.30.0",
     "eslint-config-eslint": "^7.0.0"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "boot": "lerna bootstrap",
+    "boot": "lerna workspace",
     "clean": "lerna clean",
     "eslint": "lerna run lint",
     "test": "lerna run test",
