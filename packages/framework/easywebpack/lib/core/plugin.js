@@ -175,7 +175,7 @@ module.exports = {
             ${chalk.green('npm')}: npm install ${pluginName} --save-dev\r\n
             ${chalk.green('cnpm')}: cnpm install ${pluginName} --save-dev\r\n
             ${chalk.green('tnpm')}: tnpm install ${pluginName} --save-dev\r\n
-            ${chalk.green('yarn')}: yarn install ${pluginName} --save-dev\r\n`));
+            ${chalk.green('yarn')}: yarn add ${pluginName} --save-dev\r\n`));
           if (configInfo.entry) {
             Clazz = Clazz[configInfo.entry];
           }
