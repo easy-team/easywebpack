@@ -1,3 +1,19 @@
+# [5.1.0](https://github.com/easy-team/easywebpack/compare/4.12.8...5.1.0) (2021-07-03)
+
+
+### Bug Fixes
+
+* adpater vue-loader for vue2,vue3 ([c9a1cd5](https://github.com/easy-team/easywebpack/commit/c9a1cd5a803358896ba3fe15a8fbdc4a5d575ce5))
+* support vue 3 ([ab31ccc](https://github.com/easy-team/easywebpack/commit/ab31cccace87d6c577d701858e4b6bae1ff6e49b))
+* use terser-webpack-plugin and css-minimizer-webpack-plugin ([e8034de](https://github.com/easy-team/easywebpack/commit/e8034dee5ee490aef02aa3bda92022ccd8c04d21))
+* webpack resolve module repeat ([be6e9b9](https://github.com/easy-team/easywebpack/commit/be6e9b998714ec409736e4da9c6eba2b9fde846a))
+
+
+### Features
+
+* setting vue3 webpack build alias ([a971d7c](https://github.com/easy-team/easywebpack/commit/a971d7cbdc19ba65b9875c42d8a30e9730af3efb))
+* vue 3 support ([a820e02](https://github.com/easy-team/easywebpack/commit/a820e02a2db378fd388074a186d47620327c0cec))
+
 # [5.0.0](https://github.com/easy-team/easywebpack-vue/compare/4.5.0...5.0.0) (2020-09-12)
 
 ### Features

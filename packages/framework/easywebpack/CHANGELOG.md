@@ -1,4 +1,4 @@
-# [5.1.0-beta.2](https://github.com/easy-team/easywebpack/compare/4.12.8...5.1.0-beta.2) (2021-07-03)
+# [5.1.0](https://github.com/easy-team/easywebpack/compare/4.12.8...5.1.0) (2021-07-03)
 
 
 ### Bug Fixes
