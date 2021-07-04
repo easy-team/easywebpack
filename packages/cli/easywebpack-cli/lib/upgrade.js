@@ -32,25 +32,25 @@ module.exports = (baseDir, options = {}) => {
   ];
   const upgradePackages = {
     'easywebpack-cli': {
-      version: '^4.0.0'
+      version: '^5.0.0'
     },
     'easywebpack-vue': {
-      version: '^4.0.0'
+      version: '^5.0.0'
     },
     'easywebpack-react': {
-      version: '^4.0.0'
+      version: '^5.0.0'
     },
     'easywebpack-html': {
       version: '^4.0.0'
     },
     'easywebpack-js': {
-      version: '^4.0.0'
+      version: '^5.0.0'
     },
     'egg-webpack': {
-      version: '^4.0.0'
+      version: '^5.0.0'
     },
     'ts-loader': {
-      version: '^4.0.0'
+      version: '^9.0.0'
     }
   };
 
