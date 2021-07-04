@@ -42,11 +42,14 @@
     ]
   },
   "ci": {
-    "version": "8, 9"
+    "version": "10, 12, 14"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hubcarl/vue-entry-loader.git"
+  },
+  "publishConfig": {
+    "tag": "next"
   },
   "bugs": {
     "url": "https://github.com/hubcarl/vue-entry-loader/issues"

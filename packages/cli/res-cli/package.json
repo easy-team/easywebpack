@@ -67,7 +67,10 @@
     ]
   },
   "ci": {
-    "version": "8, 10, 12"
+    "version": "10, 12, 14"
+  },
+  "publishConfig": {
+    "tag": "next"
   },
   "repository": {
     "type": "git",

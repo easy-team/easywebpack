@@ -40,11 +40,14 @@
     ]
   },
   "ci": {
-    "version": "6, 8, 10"
+    "version": "10, 12, 14"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hubcarl/react-entry-template-loader.git"
+  },
+  "publishConfig": {
+    "tag": "next"
   },
   "bugs": {
     "url": "https://github.com/hubcarl/react-entry-template-loader/issues"
