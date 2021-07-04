@@ -1,6 +1,6 @@
 {
   "name": "easywebpack-vue",
-  "version": "5.1.0-beta.2",
+  "version": "5.1.0",
   "description": "vue webpack building solution for easywebpack",
   "keywords": [
     "webpack",
@@ -8,7 +8,7 @@
     "vue"
   ],
   "dependencies": {
-    "easywebpack": "5x",
+    "easywebpack": "^5.1.0",
     "semver": "^7.3.5",
     "vue-entry-loader": "^1.1.2",
     "vue-html-loader": "^1.2.4",
