@@ -1,3 +1,11 @@
+## [5.0.3](https://github.com/easy-team/webpack-tool/compare/5.1.1...5.0.3) (2021-07-10)
+
+
+### Bug Fixes
+
+* historyApiFallback middleware not return ([1ac6f3c](https://github.com/easy-team/webpack-tool/commit/1ac6f3cde5018fb369c8d29e039360b7d801bc43))
+
+
 ## [5.0.2](https://github.com/easy-team/webpack-tool/compare/5.1.1...5.0.2) (2021-07-10)
 
 
