@@ -29,7 +29,7 @@ const WebpackBaseBuilder = WebpackBuilder => class extends WebpackBuilder {
         }
       }
     } else {
-      const VueLoaderPlugin = this.requireModule('vue-loader/lib/plugin', this.modules);
+      const VueLoaderPlugin = this.requireModule('vue-loader/lib/plugin.js', this.modules);
       this.addPlugin({ vueloader: { name: VueLoaderPlugin } });
     }
   }
