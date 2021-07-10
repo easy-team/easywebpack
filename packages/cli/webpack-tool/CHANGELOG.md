@@ -1,3 +1,12 @@
+## [5.0.1](https://github.com/easy-team/webpack-tool/compare/5.1.1...5.0.1) (2021-07-10)
+
+
+### Bug Fixes
+
+* webpack dev historyApiFallback not support ([cc33f57](https://github.com/easy-team/webpack-tool/commit/cc33f57fa3a69f720e539a35c033ebd46ff23eae))
+
+
+
 # [5.0.0](https://github.com/easy-team/webpack-tool/compare/4.5.4...5.0.0) (2020-10-16)
 
 
