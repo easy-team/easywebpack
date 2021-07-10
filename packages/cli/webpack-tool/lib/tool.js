@@ -1,4 +1,3 @@
-/* eslint-disable node/callback-return */
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -18,14 +17,14 @@ class WebpackTool {
   constructor(config) {
     this.config = merge({
       debugPort: 8888,
-      hot: false
+      hot: false,
     }, config);
     this.ready = false;
     this.startTime = Date.now();
     this.cli = utils.getCLI(this.config.cli);
     this.baseDir = this.config.baseDir || process.cwd();
     const pkgFile = path.join(this.baseDir, 'package.json');
-    const defaultPkgInfo = { name: 'webpack-project', version: '1.0.0' };
+    const defaultPkgInfo = { name: 'webpack-project', version: '1.0.0'};
     if (fs.existsSync(pkgFile)) {
       this.pkgInfo = Object.assign({}, defaultPkgInfo, require(pkgFile));
     } else {
@@ -39,7 +38,7 @@ class WebpackTool {
     console.log(chalk.blueBright(`\r\n[${this.cli.name}] ${chalk.green(msg)}`), ex);
   }
 
-  /* istanbul ignore next */
+   /* istanbul ignore next */
   red(msg, ex = '') {
     /* istanbul ignore next */
     console.log(chalk.blueBright(`\r\n[${this.cli.name}] ${chalk.red(msg)}`), ex);
@@ -96,7 +95,7 @@ class WebpackTool {
 
   getPort(target = 'web', offset = 0) {
     const EASY_ENV_DEV_PORT = `EASY_ENV_DEV_PORT_${this.pkgInfo.name}`;
-    const port = this.config.port || Number(process.env[EASY_ENV_DEV_PORT]) || 9000;
+    const port =  this.config.port || Number(process.env[EASY_ENV_DEV_PORT]) || 9000;
     // https://github.com/easy-team/egg-webpack/issues/24
     if (!this.config.offsetPort && target === 'web') {
       return port;
@@ -107,7 +106,6 @@ class WebpackTool {
   // start webpack dev server and webapck build result view
   server(webpackConfig, options, callback) {
     return this.dev(webpackConfig, options, (compiler, compilation, webpackConfigItem) => {
-      // eslint-disable-next-line node/callback-return
       callback && callback(compiler, compilation, webpackConfigItem);
       // only one html file
       const htmls = Object.keys(compilation.compilation.assets).filter(url => {
@@ -115,7 +113,8 @@ class WebpackTool {
       }).sort();
       const port = this.getPort();
       if (htmls.length === 1) {
-        const publicPath = compiler.options.output.publicPath;
+        const webpackConfig = compiler.options;
+        const publicPath = webpackConfig.output.publicPath;
         const url = utils.normalizeURL(port, publicPath, htmls[0]);
         setTimeout(() => {
           this.green(`http visit url: ${url}`);
@@ -134,7 +133,7 @@ class WebpackTool {
     webpackConfigList.forEach((webpackConfigItem, index) => {
       this.normalizeHotEntry(webpackConfigItem);
       const compiler = webpack(webpackConfigItem);
-      this.createWebpackServer(compiler, { offset: index });
+      this.createWebpackServer(compiler, { offset : index });
       this.compilerHook(compiler, compilation => {
         readyCount++;
         if (!this.ready && readyCount % webpackConfigList.length === 0) {
@@ -156,7 +155,6 @@ class WebpackTool {
         if (err) {
           this.red(`[${__filename}] webpack build error`, err);
         }
-        // eslint-disable-next-line node/no-process-exit
         process.exit(1);
       }
     });
@@ -206,14 +204,20 @@ class WebpackTool {
     return compiler;
   }
 
-  createDevServerOptions(webpackConfig, devServer) {
+  createDevServerOptions(webpackConfig, devServer = {}) {
     const { output } = webpackConfig;
+    const { headers = {}, index, methods, mimeTypes, publicPath, writeToDisk } = devServer;
     return {
+      index,
+      writeToDisk,
+      mimeTypes,
+      methods,
+      publicPath: publicPath || output.publicPath,
       headers: {
         'x-webpack': 'easywebpack',
-        'cache-control': 'max-age=0'
+        'cache-control': 'max-age=0',
+        ...headers,
       },
-      publicPath: output.publicPath
     };
   }
 
