@@ -1,3 +1,12 @@
+## [5.1.1](https://github.com/easy-team/easywebpack-vue/compare/5.1.0...5.1.1) (2021-07-10)
+
+
+### Bug Fixes
+
+* vue-loader 15 require path ([6669eb7](https://github.com/easy-team/easywebpack-vue/commit/6669eb772ea8202dd8ab1c2ecfa5e4b9bb19f812))
+
+
+
 # [5.1.0](https://github.com/easy-team/easywebpack/compare/4.12.8...5.1.0) (2021-07-03)
 
 
