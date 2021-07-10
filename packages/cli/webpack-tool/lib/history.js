@@ -28,7 +28,7 @@ function getLogger(options) {
   if (options && options.verbose) {
     return console.log.bind(console);
   }
-  return function() {};
+  return function() { };
 }
 
 module.exports = function koaFallbackApiMiddleware(options) {
@@ -47,31 +47,34 @@ module.exports = function koaFallbackApiMiddleware(options) {
         reqUrl,
         'because the method is not GET.'
       );
-      await next();
-    } else if (!headers || typeof headers.accept !== 'string') {
+      return await next();
+    }
+    if (!headers || typeof headers.accept !== 'string') {
       logger(
         'Not rewriting',
         method,
         reqUrl,
         'because the client did not send an HTTP accept header.'
       );
-      await next();
-    } else if (headers.accept.indexOf('application/json') === 0) {
+      return await next();
+    }
+    if (headers.accept.indexOf('application/json') === 0) {
       logger(
         'Not rewriting',
         method,
         reqUrl,
         'because the client prefers JSON.'
       );
-      await next();
-    } else if (!acceptsHtml(headers.accept)) {
+      return await next();
+    }
+    if (!acceptsHtml(headers.accept)) {
       logger(
         'Not rewriting',
         method,
         reqUrl,
         'because the client does not accept HTML.'
       );
-      await next();
+      return await next();
     }
 
     // eslint-disable-next-line node/no-deprecated-api
@@ -87,7 +90,7 @@ module.exports = function koaFallbackApiMiddleware(options) {
         rewriteTarget = evaluateRewriteRule(parsedUrl, match, rewrite.to);
         logger('Rewriting', method, reqUrl, 'to', rewriteTarget);
         ctx.url = rewriteTarget;
-        await next();
+        return await next();
       }
     }
 
@@ -98,7 +101,7 @@ module.exports = function koaFallbackApiMiddleware(options) {
         reqUrl,
         'because the path includes a dot (.) character.'
       );
-      await next();
+      return await next();
     }
 
     rewriteTarget = options.index || '/index.html';
