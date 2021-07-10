@@ -70,11 +70,14 @@ utils.open = url => {
 };
 
 utils.normalizeURL = (port, publicPath, filename) => {
+  const isDefaultIndex = /^index\.html?$/.test(filename);
   if (/^(https?:|\/\/)/.test(publicPath)) {
-    return publicPath + filename;
+    return isDefaultIndex ? publicPath.replace(/\/$/, '') : publicPath + filename;
   }
   const host = utils.getHost(port);
-
+  if (isDefaultIndex) {
+    return `${host + publicPath.replace(/\/$/, '')}`;
+  }
   return `${host + publicPath + filename}`;
 };
 

@@ -239,8 +239,8 @@ class WebpackTool {
         app.use(proxyMiddleware(key, proxy[key]));
       });
       // https://webpack.docschina.org/configuration/dev-server/#devserver-historyapifallback
-      // const historyOptions = historyApiFallback === true ? {} : historyApiFallback;
-      // app.use(historyMiddleware(historyOptions));
+      const historyOptions = historyApiFallback === true ? {} : historyApiFallback;
+      app.use(historyMiddleware(historyOptions));
       app.use(hotMiddleware(compiler, { log: false, reload: true }));
     }
 
