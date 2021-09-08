@@ -57,7 +57,7 @@
     "shelljs": "^0.8.3",
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "^5.0.0",
-    "thread-loader": "^2.1.2",
+    "thread-loader": "^3.0.4",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^4.1.0",
     "vconsole-webpack-plugin": "^1.4.2",
