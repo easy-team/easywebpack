@@ -193,7 +193,7 @@ exports.ignore = {
   },
   type: 'server',
   name: webpack.IgnorePlugin,
-  args: /\.(css|less|scss|sass|styl|stylus)$/
+  args: { resourceRegExp: /\.(css|less|scss|sass|styl|stylus)$/ }
 };
 
 exports.html = {
