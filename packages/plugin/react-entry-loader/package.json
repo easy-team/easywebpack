@@ -31,7 +31,7 @@
     "test": "nyc --reporter=html --reporter=text mocha --timeout=1000000",
     "cov": "nyc report --reporter=lcov && codecov --token=e971d1e7-39e2-44b1-b1ee-f4345b0adbee",
     "ci": "npm run lint && npm run cov",
-    "ii": "npm install --registry https://registry.npm.taobao.org"
+    "ii": "npm install --registry https://registry.npmmirror.com"
   },
   "nyc": {
     "exclude": [
