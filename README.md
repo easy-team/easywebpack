@@ -34,12 +34,7 @@ npm install easywebpack --save-dev
 - https://zhuanlan.zhihu.com/easywebpack
 
 ## 版本说明
-
-- easywebpack 5.x.x > Webpack 5.x.x + Babel 7
-- easywebpack 4.x.x > Webpack 4.x.x + Babel 6
-  - @easy-team/easywebpack 4.x.x > Webpack 4.x.x + Babel 7
-- easywebpack 3.x.x > Webpack 3.x.x + Babel 6
-
+ 
 ## 基础功能
 
 ![easywebpack](https://github.com/easy-team/easywebpack/blob/master/docs/images/easywebpack.png)
