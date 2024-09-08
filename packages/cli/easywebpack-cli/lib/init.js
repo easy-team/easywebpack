@@ -53,6 +53,18 @@ module.exports = class Boilerplate {
   }
 
   async init(options) {
+    const download = new Download(options, this.cli);
+    // 直接下载
+    const pkgName = options.package;
+    if (pkgName) {
+      const choices = ['name', 'description', 'npm'];
+      const projectInfoChoice = this.getProjectAskChoices(choices);
+      inquirer.prompt(projectInfoChoice).then(projectInfoAnswer => {
+        const specialBoilerplateInfo = { pkgName };
+        download.init(this.projectDir, specialBoilerplateInfo, projectInfoAnswer);
+      });
+      return;
+    }
     const boilerplateAnswer = await inquirer.prompt([{
       type: 'list',
       name: 'boilerplateName',
@@ -62,7 +74,6 @@ module.exports = class Boilerplate {
     const boilerplateName = boilerplateAnswer.boilerplateName;
     const boilerplateInfo = this.getBoilerplateInfo(boilerplateName);
     const choices = boilerplateInfo.choices;
-    const download = new Download(options, this.cli);
     if (this.boilerplateDetailChoice[boilerplateName]) {
       const boilerplateDetailAsk = [{
         type: 'list',

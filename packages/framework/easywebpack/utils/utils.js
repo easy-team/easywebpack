@@ -70,7 +70,7 @@ utils.mixin = (target, source) => {
   });
 };
 
-utils.joinPath = function() {
+utils.joinPath = function () {
   // eslint-disable-next-line prefer-rest-params
   return [].slice.call(arguments, 0).map((arg, index) => {
     let tempArg = arg.replace(/\/$/, '');
@@ -405,7 +405,7 @@ utils.getCompileTempDir = (filename = '', baseDir) => {
   const pkgfile = path.join(baseDir || process.cwd(), 'package.json');
   const pkg = require(pkgfile);
   const project = pkg.name;
-  return path.join(os.tmpdir(), 'easywebpack', project, filename);
+  return path.join(process.env.EASY_COMPILE_TEMP_DIR || os.tmpdir(), 'easywebpack', project, filename);
 };
 
 utils.getDllFilePath = (name, env = 'dev') => {

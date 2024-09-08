@@ -63,9 +63,10 @@ module.exports = class Command extends Logger {
   init() {
     this.program
       .command('init')
-      .option('-r, --registry [url]', 'npm registry, default https://registry.npmjs.org, you can taobao registry: https://registry.npm.taobao.org')
+      .option('-r, --registry [url]', 'npm registry, default https://registry.npmjs.org, you can taobao registry: https://registry.npmmirror.com')
       .option('--sync [url]', 'sync easy init prompt template config')
-      .description('init webpack config or boilerplate for Vue/React/Weex')
+      .option('--package [name]', 'npm package name')
+      .description('init webpack config or boilerplate for Vue/React')
       .action(options => {
         this.action.init(this.boilerplate, options);
       });
@@ -120,7 +121,7 @@ module.exports = class Command extends Logger {
   add() {
     this.program
       .command('add')
-      .option('--registry [url]', 'npm registry, default https://registry.npmjs.org, you can taobao registry: https://registry.npm.taobao.org')
+      .option('--registry [url]', 'npm registry, default https://registry.npmjs.org, you can taobao registry: https://registry.npmmirror.com')
       .option('--template [template]', 'template name, such as egg-controller/react-component, you can run [easy add] select')
       .option('--output [filename]', 'output file name')
       .option('--classname [classname]', 'file code class name', 'Index')

@@ -30,7 +30,7 @@ module.exports = class Download extends Logger {
     super(cli);
     this.config = config;
     this.cli = cli;
-    this.tempDir = path.join(os.tmpdir(), `${this.cli.name}-init`);
+    this.tempDir = path.join(process.env.EASY_INIT_TEMP_DIR || os.tmpdir(), `${this.cli.name}-init`);
     this.registry = config.registry || 'https://registry.npmjs.org';
   }
 

@@ -51,7 +51,7 @@ module.exports = {
   },
 
   getCompileTempDir(baseDir, dir = '') {
-    const root = path.join(os.tmpdir(), 'easywebpack');
+    const root = path.join(process.env.EASY_COMPILE_TEMP_DIR || os.tmpdir(), 'easywebpack');
     const pkg = this.getPackageInfo(baseDir);
     if (pkg.name) {
       return path.join(root, pkg.name, dir);

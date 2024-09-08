@@ -1,6 +1,6 @@
 {
   "name": "easywebpack-cli",
-  "version": "5.0.0",
+  "version": "5.2.0-beta.1",
   "description": "Webpack Building Command Line And Boilerplate Init Tool",
   "bin": {
     "easywebpack": "bin/cli.js",
@@ -14,7 +14,7 @@
     "test": "nyc --reporter=html --reporter=text npm run test-mocha",
     "cov": "nyc report --reporter=lcov > coverage.lcov && codecov --token=d7567590-d31c-4c14-8707-574d8ab10c03",
     "ci": "npm run lint && npm run cov",
-    "ii": "npm install --registry https://registry.npm.taobao.org"
+    "ii": "npm install --registry https://registry.npmmirror.com"
   },
   "dependencies": {
     "art-template": "^4.0.0",
@@ -24,7 +24,7 @@
     "commander": "^6.1.0",
     "compressing": "^1.2.3",
     "easy-puppeteer-html": "^1.0.0",
-    "easy-template-config": "^1.0.0",
+    "easy-template-config": "^1.2.0",
     "execa": "^4.0.3",
     "inquirer": "^7.3.3",
     "jsdom": "^16.4.0",
@@ -34,7 +34,7 @@
     "node-tool-utils": "^1.0.0",
     "ora": "^5.0.0",
     "progress-bar-webpack-plugin": "^2.1.0",
-    "shelljs": "^0.8.4",
+    "shelljs": "^0.8.5",
     "speed-measure-webpack-plugin": "^1.2.2",
     "stats-webpack-plugin": "^0.7.0",
     "urllib": "^2.36.1",
@@ -70,10 +70,11 @@
     "node": ">=8.0.0"
   },
   "ci": {
-    "version": "8, 10, 12, 14"
+    "version": "8, 10, 12, 14, 16, 18, 20, 22"
   },
   "publishConfig": {
-    "tag": "5x"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "repository": {
     "type": "git",

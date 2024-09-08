@@ -39,7 +39,7 @@
     "test": "nyc --reporter=html --reporter=text mocha --timeout=1000000",
     "cov": "nyc report --reporter=lcov && codecov --token=71d430b6-cb87-49b2-a156-2c55cd181ba4",
     "ci": "npm run lint && npm run cov",
-    "ii": "yarn --registry https://registry.npm.taobao.org",
+    "ii": "yarn --registry https://registry.npmmirror.com",
     "pub": "npm publish --access=public"
   },
   "files": [
