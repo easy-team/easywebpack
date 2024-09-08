@@ -21,7 +21,7 @@ describe('upgrade.test.js', () => {
   afterEach(() => {});
 
   describe('#upgrade test', () => {
-    it('should utils deleteFile test', function *() {
+    it('should utils deleteFile test', function* () {
       const pkgFile = path.posix.join(baseDir, 'test/package.json');
       const target = path.join(baseDir, 'disttest/package.json');
       const targetDir = path.dirname(target);

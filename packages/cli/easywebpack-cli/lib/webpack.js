@@ -37,7 +37,7 @@ exports.normalizeWebpackConfig = cfg => {
     if (size === 'stats' && !exports.isRegisterPlugin(plugins, 'StatsPlugin')) {
       plugins.push(new StatsPlugin('stats.json', {
         chunkModules: true,
-        exclude: [/node_modules[\\/]react/]
+        exclude: [/node_modules[\\\/]react/]
       }));
     } else if (!exports.isRegisterPlugin(plugins, 'BundleAnalyzerPlugin')) {
       plugins.push(new BundleAnalyzerPlugin());
@@ -53,13 +53,13 @@ exports.normalizeWebpackConfig = cfg => {
   return webpackConfig;
 };
 
-exports.build = async cfg => {
+exports.build = async (cfg) => {
   const webpackTool = new WebpackTool();
   const webpackConfig = exports.normalizeWebpackConfig(cfg);
   return webpackTool.build(webpackConfig);
 };
 
-exports.server = async cfg => {
+exports.server = async (cfg) => {
   const { port } = cfg.cli;
   const webpackTool = new WebpackTool({ port });
   const webpackConfig = exports.normalizeWebpackConfig(cfg);

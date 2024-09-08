@@ -25,13 +25,13 @@ exports.getFramework = (filepath = 'webpack.config.js', baseDir) => {
   if (framework) {
     return framework;
   }
-  return BASE_FRAMEWORKS.find(name => {
-    const key = `${BASE_SOLUTION}-${name}`;
+  return BASE_FRAMEWORKS.find(framework => {
+    const key = `${BASE_SOLUTION}-${framework}`;
     const easyPkg = pkg.dependencies && pkg.dependencies[key] || pkg.devDependencies && pkg.devDependencies[key];
     if (easyPkg) {
       return easyPkg;
     }
-    const easyKey = `${EASY_BASE_SOLUTION}-${name}`;
+    const easyKey = `${EASY_BASE_SOLUTION}-${framework}`;
     return pkg.dependencies && pkg.dependencies[easyKey] || pkg.devDependencies && pkg.devDependencies[easyKey];
   });
 };

@@ -51,7 +51,7 @@ module.exports = {
   },
 
   getCompileTempDir(baseDir, dir = '') {
-    const root = path.join(os.tmpdir(), 'easywebpack');
+    const root = path.join(process.env.EASY_COMPILE_TEMP_DIR || os.tmpdir(), 'easywebpack');
     const pkg = this.getPackageInfo(baseDir);
     if (pkg.name) {
       return path.join(root, pkg.name, dir);
@@ -154,7 +154,6 @@ module.exports = {
 
   initWebpackConfig(program, option = {}, cliConfig = {}) {
     const { baseDir = process.cwd(), env, configured = true } = option;
-    // eslint-disable-next-line no-shadow
     const { filename, port, framework, type, devtool, size, watch, build, hash, compress, dll, web, node, webpack } = program;
     const target = web ? 'web' : (node ? 'node' : undefined);
     const cli = merge({ env, filename, port, size, dll, web, node, webpack, devtool }, cliConfig);
@@ -222,7 +221,7 @@ module.exports = {
 
   clearManifest(baseDir) {
     const manifestDir = path.join(baseDir, 'config');
-    const manifestFile = path.join(manifestDir, 'manifest.json');
+    const manifestFile = path.join(manifestDir, 'manifest.json')
     tool.rm(manifestFile);
   },
 

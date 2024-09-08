@@ -27,10 +27,10 @@ module.exports = class Command extends Logger {
       'open', 'doc', 'kill', 'upgrade', 'puppeteer'];
 
     this.cli = new Proxy(EASY_CLI, {
-      get(target, key, receiver) {
+      get: function (target, key, receiver) {
         return Reflect.get(target, key, receiver);
       },
-      set(target, key, value, receiver) {
+      set: function (target, key, value, receiver) {
         global.EASY_CLI[key] = value;
         return Reflect.set(target, key, value, receiver);
       }
@@ -63,8 +63,9 @@ module.exports = class Command extends Logger {
   init() {
     this.program
       .command('init')
-      .option('-r, --registry [url]', 'npm registry, default https://registry.npmjs.org, you can taobao registry: https://registry.npm.taobao.org')
+      .option('-r, --registry [url]', 'npm registry, default https://registry.npmjs.org, you can taobao registry: https://registry.npmmirror.com')
       .option('--sync [url]', 'sync easy init prompt template config')
+      .option('--package [name]', 'npm package name')
       .description('init webpack config or boilerplate for Vue/React/Weex')
       .action(options => {
         this.action.init(this.boilerplate, options);
@@ -120,7 +121,7 @@ module.exports = class Command extends Logger {
   add() {
     this.program
       .command('add')
-      .option('--registry [url]', 'npm registry, default https://registry.npmjs.org, you can taobao registry: https://registry.npm.taobao.org')
+      .option('--registry [url]', 'npm registry, default https://registry.npmjs.org, you can taobao registry: https://registry.npmmirror.com')
       .option('--template [template]', 'template name, such as egg-controller/react-component, you can run [easy add] select')
       .option('--output [filename]', 'output file name')
       .option('--classname [classname]', 'file code class name', 'Index')
@@ -305,8 +306,7 @@ module.exports = class Command extends Logger {
   }
 
   register(cmd) {
-    const c = this.commands.some(key => key === cmd);
-    if (c) {
+    if (this.commands.some(key => { key === cmd })) {
       this.red(`The command ${cmd} already exists. Please overwrite the command action method implement directly.`);
     } else {
       this.commands.push(cmd);
@@ -336,4 +336,4 @@ module.exports = class Command extends Logger {
     this.command();
     this.parse();
   }
-};
+}

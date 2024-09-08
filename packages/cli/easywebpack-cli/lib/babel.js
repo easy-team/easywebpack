@@ -2,7 +2,7 @@
 const path = require('path');
 const fs = require('fs');
 const Logger = require('./logger');
-module.exports = (baseDir, options = {}) => {
+module.exports = (baseDir, options ={} )=> {
   const pkgFile = path.join(baseDir, 'package.json');
   const pkgJSON = require(pkgFile);
   pkgJSON.dependencies = pkgJSON.dependencies || {};
@@ -44,11 +44,11 @@ module.exports = (baseDir, options = {}) => {
     'babel-preset-react': {
       name: '@babel/preset-react',
       version: '^7.0.0',
-      isAdd: !!(pkgJSON.dependencies.react || pkgJSON.devDependencies.react)
+      isAdd: !!(pkgJSON.dependencies['react'] || pkgJSON.devDependencies['react'])
     }
-  };
+  }
 
-
+ 
   const writePackageJSON = () => {
     const upgradePackageNameList = Object.keys(upgradePackages);
     // remove and update dependencies
@@ -56,10 +56,10 @@ module.exports = (baseDir, options = {}) => {
       const has = upgradePackageNameList.some(ukey => {
         return ukey === key;
       });
-      if (has) {
+      if(has) {
         delete pkgJSON.dependencies[key];
-        const { name, version } = upgradePackages[key];
-        pkgJSON.devDependencies[name] = version;
+        const { name, version } = upgradePackages[name];
+        pkgJSON.devDependencies[name] = version ;
       }
     });
 
@@ -68,27 +68,27 @@ module.exports = (baseDir, options = {}) => {
       const has = upgradePackageNameList.some(ukey => {
         return key === ukey;
       });
-      if (has) {
+      if(has) {
         delete pkgJSON.devDependencies[key];
       }
     });
 
     Object.keys(upgradePackages).forEach(key => {
       const { name, version, isAdd } = upgradePackages[key];
-      if (isAdd !== false) {
+      if (isAdd !== false ) {
         pkgJSON.devDependencies[name] = version;
       }
     });
 
     fs.writeFileSync(pkgFile, JSON.stringify(pkgJSON, null, 2));
-  };
-
+  }
+ 
   const babelrc = path.join(baseDir, '.babelrc');
   if (fs.existsSync(babelrc)) {
     const { writeBabelRC, installDeps } = require('babel-upgrade/src');
     writeBabelRC(babelrc, { write: true }).then(() => {
       writePackageJSON();
       Logger.getLogger().green('upgrade .babelrc and package.json successfully! Please reinstall the dependencies with npm install or yarn install');
-    });
+    })
   }
-};
+}

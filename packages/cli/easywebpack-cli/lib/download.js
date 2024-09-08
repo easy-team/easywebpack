@@ -16,11 +16,11 @@ const DEPS_MAPPING = {
     'sass-loader': '^10.0.2'
   },
   less: {
-    less: '^3.0.0',
+    'less': '^3.0.0',
     'less-loader': '^7.0.0'
   },
   stylus: {
-    stylus: '^0.54.5',
+    'stylus': '^0.54.5',
     'stylus-loader': '^3.0.0'
   }
 };
@@ -30,20 +30,25 @@ module.exports = class Download extends Logger {
     super(cli);
     this.config = config;
     this.cli = cli;
-    this.tempDir = path.join(os.tmpdir(), `${this.cli.name}-init`);
+    this.tempDir = path.join(process.env.EASY_INIT_TEMP_DIR || os.tmpdir(), `${this.cli.name}-init`);
     this.registry = config.registry || 'https://registry.npmjs.org';
   }
 
   async getPackageInfo(pkgName) {
     this.green(`query npm info of ${pkgName}`);
     const url = `${this.registry}/${pkgName}/latest`;
-    const result = await urllib.request(url, {
-      dataType: 'json',
-      followRedirect: true,
-      timeout: 30000
-    });
-    assert(result.status === 200, `npm info ${pkgName} got error: ${result.status}, ${result.data.reason}`);
-    return result.data;
+    try {
+      const result = await urllib.request(url, {
+        dataType: 'json',
+        followRedirect: true,
+        timeout: 30000
+      });
+      assert(result.status === 200, `npm info ${pkgName} got error: ${result.status}, ${result.data.reason}`);
+      return result.data;
+    } catch (err) {
+      /* istanbul ignore next */
+      throw err;
+    }
   }
 
   async download(pkgName, dir = '') {
@@ -112,7 +117,7 @@ module.exports = class Download extends Logger {
     if (npm) {
       const cmd = `${npm} install`;
       const spinner = ora(this.green(`start ${cmd}...`));
-      spinner.start();
+      spinner.start()
       const result = shell.exec(cmd, { cwd: projectDir, stdio: ['inherit'] });
       if (result) {
         if (result.code === 0) {

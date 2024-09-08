@@ -1,3 +1,12 @@
+# [5.1.0](https://github.com/easy-team/easywebpack-cli/compare/5.0.0...5.1.0) (2024-08-25)
+
+
+### Features
+
+* 支持 jest ts template ([6ae01a7](https://github.com/easy-team/easywebpack-cli/commit/6ae01a76787f244018400f746ada7bf37df0e1b5))
+
+
+
 # [5.0.0](https://github.com/easy-team/easywebpack-cli/compare/4.2.0...5.0.0) (2020-10-16)
 
 ### Features

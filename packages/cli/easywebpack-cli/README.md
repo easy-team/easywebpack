@@ -32,7 +32,7 @@ A Powerful Cross-platform Webpack CLI Tool
 - easywebpack-cli@5 -> easywebpack@5 (>=Node 8 + Babel 7)
 
 ```bash
-npm i easywebpack-cli@4 -g
+npm i easywebpack-cli -g
 ```
 
 - @easy-team/easywebpack-cli@4 -> @easy-team/easywebpack@4 (>=Node 6 + Babel 7)

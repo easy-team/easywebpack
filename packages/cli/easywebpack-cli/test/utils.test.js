@@ -37,17 +37,17 @@ describe('utils.test.js', () => {
       expect(utils.getInstallPackage('commander').name).to.be.string;
     });
 
-    it('should utils clearManifest test', function *() {
+    it('should utils clearManifest test', function* () {
       const dist = utils.getCompileTempDir();
       const target = path.posix.join(dist, 'config/manifest.json');
       yield mkdirp(path.dirname(target));
-      fs.writeFileSync(target, 'clearManifest');
+      fs.writeFileSync(target, 'clearManifest')
       expect(fs.existsSync(target)).to.be.true;
       utils.clearManifest(dist);
       expect(fs.existsSync(target)).to.be.false;
     });
 
-    it('should utils clearBuildDir test', function *() {
+    it('should utils clearBuildDir test', function* () {
       const dist = utils.getCompileTempDir();
       const target = path.posix.join(dist, 'public');
       yield mkdirp(target);
@@ -56,17 +56,17 @@ describe('utils.test.js', () => {
       expect(fs.existsSync(target)).to.be.false;
     });
 
-    it('should utils clearTempDir test', function *() {
+    it('should utils clearTempDir test', function* () {
       const dist = utils.getCompileTempDir();
-      const target = path.posix.join(dist, `${Math.floor(Math.random() * 100000)}_test.json`);
+      const target = path.posix.join(dist, `${Math.floor(Math.random()*100000)}_test.json`);
       yield mkdirp(path.dirname(dist));
-      fs.writeFileSync(target, 'clearTempDir', 'utf8');
+      fs.writeFileSync(target, 'clearTempDir', 'utf8')
       expect(fs.existsSync(target)).to.be.true;
       utils.clearTempDir();
       expect(fs.existsSync(target)).to.be.false;
     });
 
-    it('should utils initOption default test', () => {
+    it('should utils initOption default test', function* () {
       const program = require('commander');
       const option = utils.initOption(program);
       expect(option.target).to.be.undefined;
@@ -74,7 +74,7 @@ describe('utils.test.js', () => {
       expect(option.proxy).to.be.undefined;
     });
 
-    it('should utils initOption set test', () => {
+    it('should utils initOption set test', function* () {
       const program = require('commander');
       program.web = true;
       const option = utils.initOption(program, undefined, {
@@ -84,7 +84,7 @@ describe('utils.test.js', () => {
       expect(option.proxy).to.be.true;
     });
 
-    it('should utils initWebpackConfig default test', () => {
+    it('should utils initWebpackConfig default test', function* () {
       const program = require('commander');
       const option = utils.initWebpackConfig(program, {
         baseDir: path.join(baseDir, 'test')
@@ -94,7 +94,7 @@ describe('utils.test.js', () => {
       expect(option.env).to.be.undefined;
       expect(option.port).to.be.undefined;
     });
-    it('should utils initWebpackConfig set test', () => {
+    it('should utils initWebpackConfig set test', function* () {
       const program = require('commander');
       program.port = 9000;
       program.type = 'client';

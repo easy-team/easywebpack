@@ -74,7 +74,7 @@ module.exports = class Action extends Logger {
   }
 
   async build(env, options) {
-    const config = this.initConfig({ env, cliDevtool: options.devtool }, { speed: options.speed });
+    const config = this.initConfig({ env, cliDevtool : options.devtool}, { speed: options.speed });
     // 编译完成, 启动 HTTP Server 访问静态页面
     if (options.server) {
       const done = config.config.done;
@@ -189,7 +189,7 @@ module.exports = class Action extends Logger {
       tool.opn(url);
     }
     const keys = ['github', 'yuque', 'easy', 'webpack', 'react', 'vue', 'bug', 'entry', 'loader', 'plugin', 'babel'];
-    for (const key of keys) {
+    for(let key of keys) {
       if (options[key]) {
         tool.opn(options[key]);
         break;
